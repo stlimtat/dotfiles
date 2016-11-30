@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # Shell prompt based on the Solarized Dark theme.
 # Screenshot: http://i.imgur.com/EkEtphC.png
 # Heavily inspired by @necolas’s prompt: https://github.com/necolas/dotfiles
@@ -55,7 +53,7 @@ prompt_git() {
 
 		[ -n "${s}" ] && s=" [${s}]";
 
-		echo -e "${1}${branchName}${2}${s}";
+		echo -e "${1}${branchName}${blue}${s}";
 	else
 		return;
 	fi;
@@ -95,26 +93,32 @@ fi;
 if [[ "${USER}" == "root" ]]; then
 	userStyle="${red}";
 else
-	userStyle="${orange}";
+	userStyle="${bold}${purple}";
 fi;
 
 # Highlight the hostname when connected via SSH.
 if [[ "${SSH_TTY}" ]]; then
 	hostStyle="${bold}${red}";
 else
-	hostStyle="${yellow}";
+	hostStyle="${bold}${purple}";
 fi;
 
-# Set the terminal title and prompt.
-PS1="\[\033]0;\W\007\]"; # working directory base name
+# Set the terminal title to the current working directory.
+PS1="\[\033]0;\w\007\]";
 PS1+="\[${bold}\]\n"; # newline
+PS1+="\[${blue}\][";
 PS1+="\[${userStyle}\]\u"; # username
-PS1+="\[${white}\] at ";
-PS1+="\[${hostStyle}\]\h"; # host
-PS1+="\[${white}\] in ";
-PS1+="\[${green}\]\w"; # working directory full path
-PS1+="\$(prompt_git \"\[${white}\] on \[${violet}\]\" \"\[${blue}\]\")"; # Git repository details
-PS1+="\n";
+PS1+="\[${white}\]@";
+PS1+="\[${hostStyle}\]\h "; # host
+PS1+="\[${white}\](";
+PS1+="\[${bold}${green}\]\d ";
+PS1+="\[${bold}${yellow}\]\t";
+PS1+="\[${white}\])";
+PS1+="\[${blue}\]][";
+PS1+="\[${green}\]\w"; # working directory
+PS1+="\[${blue}\]]\n";
+# PS1+="\$(prompt_git \"${white} on ${violet}\")"; # Git repository details
+# PS1+="\n";
 PS1+="\[${white}\]\$ \[${reset}\]"; # `$` (and reset color)
 export PS1;
 
