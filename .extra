@@ -1,0 +1,19 @@
+# Git credentials
+# Not in the repository, to prevent people from accidentally committing under my name
+GIT_AUTHOR_NAME="Lim Swee Tat"
+GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
+git config --global user.name "$GIT_AUTHOR_NAME"
+GIT_AUTHOR_EMAIL="sweetat.lim@finantix.com"
+GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
+git config --global user.email "$GIT_AUTHOR_EMAIL"
+
+# Using nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+
+# Using jenv
+eval "$(/usr/local/bin/jenv init -)"
+
+# Alias
+alias gitall="git branch -r | grep -v \'\->\' | while read remote; do git branch --track \"${remote#origin/}\" \"$remote\"; done; git fetch --all; git pull --all"
+
