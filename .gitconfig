@@ -76,6 +76,16 @@
 		fi \
 	}; f"
 
+  # Fetch all remote branches
+	fetchall = "!f() { \
+    while $(git branch -r | grep origin | grep -v HEAD); do \
+      echo git branch --track '${remote#origin/}' '${remote}'; \
+      git branch --track '${remote#origin/}' '${remote}'; \
+    done; \
+    git fetch --all; \
+    git pull --all; \
+	}; "
+
 [apply]
 
 	# Detect whitespace errors when applying a patch
@@ -180,3 +190,15 @@
 [url "git://gist.github.com/"]
 
 	insteadOf = "gist:"
+
+[url "https://bitbucket.org/"]
+
+	insteadOf = "bb:"
+	pushInsteadOf = "https://bitbucket.org/"
+
+[user]
+	signingkey = 0B5E45C5
+	name = Lim Swee Tat
+	email = sweetat.lim@finantix.com
+[remote "origin"]
+	fetch = +refs/heads/*:refs/remotes/origin/*
