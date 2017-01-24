@@ -77,14 +77,16 @@
 	}; f"
 
   # Fetch all remote branches
-	fetchall = "!f() { \
-    while $(git branch -r | grep origin | grep -v HEAD); do \
-      echo git branch --track '${remote#origin/}' '${remote}'; \
-      git branch --track '${remote#origin/}' '${remote}'; \
+	fall = "!f() { \
+	  declare localBranches=\"$(git branch | grep -v master)\"; \
+	  for b in \"${localBranches}\"; do \
+		  git branch --quiet -d ${b}; \
+		done; \
+    for remote in $(git branch -r | sed -e 's/^ *//g' | grep origin | grep -v HEAD); do \
+      git branch --quiet --track \"${remote#origin/}\" \"${remote}\"; \
     done; \
     git fetch --all; \
-    git pull --all; \
-	}; "
+	}; f"
 
 [apply]
 
@@ -139,6 +141,7 @@
 
 	# https://help.github.com/articles/signing-commits-using-gpg/
 	gpgsign = true
+	template = /Users/st_lim/.gitmsg.txt
 
 [diff]
 
