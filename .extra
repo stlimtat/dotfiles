@@ -33,3 +33,10 @@ export PATH="$PATH:$HOME/.rvm/bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 test -e "${HOME}/.iterm2_shell_integration.$(basename $SHELL)" && source "${HOME}/.iterm2_shell_integration.$(basename $SHELL)"
+
+# For some odd ohmyzsh theme which gives jenv_prompt_info errors
+alias jenv_prompt_info="jenv version-name"
+
+# For some odd ohmyzsh theme which gives zsh_path errors
+#alias zsh_path="dirname $(which zsh)"
+alias zsh_path="pwd"
