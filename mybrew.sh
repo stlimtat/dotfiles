@@ -9,6 +9,7 @@ brew update
 brew upgrade
 
 # Install my packages that I need installed
+brew install gimp
 brew install gpg2
 brew install jenv 
 brew install maven
@@ -27,6 +28,7 @@ brew cask install iterm2
 brew cask install java6 
 brew cask install java7 
 brew cask install java 
+brew cask install kodi
 brew cask install onedrive
 brew cask install pgadmin4
 brew cask install skype
@@ -46,6 +48,10 @@ brew tap caskroom/fonts
 brew cask install font-arial
 brew cask install font-awesome-terminal-fonts 
 brew cask install font-fontawesome
+
+# Install garmin
+brew tap caskroom/drivers
+brew cask install garmin-express
 
 # Source for jenv from ~/.extra
 source ~/.extra
