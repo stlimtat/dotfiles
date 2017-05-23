@@ -1,18 +1,15 @@
+" Configuration for setting where the python programs are
 let g:python_host_prog = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
-" Use the Solarized Dark theme
-set background=dark
-"colorscheme solarized
-"let g:solarized_termtrans=1
 
 " Make Vim more useful
 set nocompatible
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
-set clipboard=unnamed
+"set clipboard=unnamed
 " Enhance command-line completion
 set wildmenu
 " Allow cursor keys in insert mode
-set esckeys
+"set esckeys
 " Allow backspace in insert mode
 set backspace=indent,eol,start
 " Optimize for fast terminal connections
@@ -105,4 +102,22 @@ if has("autocmd")
 	autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
 	" Treat .md files as Markdown
 	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+endif
+
+" Use the Solarized Dark theme
+set termguicolors
+set background=dark
+colorscheme solarized
+let g:solarized_termtrans=1
+
+" https://coderwall.com/p/yiot4q/setup-vim-powerline-and-iterm2-on-mac-os-x
+" set guifont=Inconsolata\ for\ Powerline:h15
+let g:Powerline_symbols = 'fancy'
+set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
+if has("gui_running")
+   let s:uname = system("uname")
+   if s:uname == "Darwin\n"
+      set guifont=Inconsolata\ for\ Powerline:h15
+   endif
 endif
