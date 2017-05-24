@@ -11,7 +11,6 @@ brew upgrade
 
 # Install my packages that I need installed
 brew install gpg2
-brew install jenv 
 brew install maven
 brew install maven-completion
 brew install nvm 
@@ -60,6 +59,9 @@ brew cask install font-microsoft-office
 # Install garmin
 brew tap caskroom/drivers
 brew cask install garmin-express
+
+# jenv requires java to be installed first
+brew install jenv 
 
 # Source for jenv from ~/.extra
 source ~/.extra
