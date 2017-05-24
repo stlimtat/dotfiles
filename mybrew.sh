@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # Install command-line tools using Homebrew.
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # Make sure we’re using the latest Homebrew.
 brew update
@@ -9,7 +10,6 @@ brew update
 brew upgrade
 
 # Install my packages that I need installed
-brew install gimp
 brew install gpg2
 brew install jenv 
 brew install maven
@@ -18,9 +18,13 @@ brew install nvm
 brew install postgresql
 brew install rbenv 
 
+# Ensure the tap is available
+brew tap caskroom/versions
+
 # Install from casks
 brew cask install docker
 brew cask install franz
+brew cask install gimp
 brew cask install google-chrome-beta
 brew cask install google-drive
 brew cask install gpgtools
@@ -48,6 +52,10 @@ brew tap caskroom/fonts
 brew cask install font-arial
 brew cask install font-awesome-terminal-fonts 
 brew cask install font-fontawesome
+
+# Install microsoft fonts
+brew tap colindean/fonts-nonfree
+brew cask install font-microsoft-officev
 
 # Install garmin
 brew tap caskroom/drivers
