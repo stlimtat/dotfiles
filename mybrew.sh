@@ -55,7 +55,7 @@ brew cask install font-fontawesome
 
 # Install microsoft fonts
 brew tap colindean/fonts-nonfree
-brew cask install font-microsoft-officev
+brew cask install font-microsoft-office
 
 # Install garmin
 brew tap caskroom/drivers
