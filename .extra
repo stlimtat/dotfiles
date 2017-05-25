@@ -15,9 +15,15 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(/usr/local/bin/jenv init -)"
 export JAVA_HOME=$(/usr/local/bin/jenv javahome)
 
-# Alias
-alias gitall='for v in $(git branch | grep -v " master"); do git branch -d ${v}; done;  git branch -r | grep -v -- -\> | sed -e "s/^ *//g" | while read remote; do echo git branch --track "${remote#origin/}" "${remote}"; git branch --track "${remote#origin/}" "${remote}"; done; git fetch --all; git pull --all'
-alias vim='/usr/local/bin/nvim'
+# Using pyenv
+eval "$(/usr/local/bin/pyenv init -)"
+export PATH=$(/usr/local/bin/pyenv root)/shims:${PATH}
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+# Load RVM into a shell session *as a function*
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # https://github.com/neovim/neovim/wiki/FAQ
 # Error with the way terminal is handling CTRL-H mapping for keyboard backspace
@@ -26,16 +32,15 @@ alias vim='/usr/local/bin/nvim'
 #fi
 #tic /tmp/$TERM.ti
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
-# Load RVM into a shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
+# iterm2 shell integration
 test -e "${HOME}/.iterm2_shell_integration.$(basename $SHELL)" && source "${HOME}/.iterm2_shell_integration.$(basename $SHELL)"
 
+# Alias
 # For some odd ohmyzsh theme which gives jenv_prompt_info errors
 alias jenv_prompt_info="jenv version-name"
+
+# For nvim
+alias vim='/usr/local/bin/nvim'
 
 # For some odd ohmyzsh theme which gives zsh_path errors
 #alias zsh_path="dirname $(which zsh)"

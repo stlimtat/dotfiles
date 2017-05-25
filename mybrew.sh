@@ -17,7 +17,6 @@ brew install maven
 brew install maven-completion
 brew install nvm 
 brew install postgresql
-brew install rbenv 
 
 # Ensure the tap is available
 brew tap caskroom/versions
@@ -63,13 +62,23 @@ brew tap caskroom/drivers
 brew cask install garmin-express
 
 # jenv requires java to be installed first
-brew install jenv 
+brew install jenv
 
 # Source for jenv from ~/.extra
 source ~/.extra
 jenv add /Library/Java/JavaVirtualMachines/$( ls /Library/Java/JavaVirtualMachines | grep 1.6 )/Contents/Home
 jenv add /Library/Java/JavaVirtualMachines/$( ls /Library/Java/JavaVirtualMachines | grep 1.7 )/Contents/Home
 jenv add /Library/Java/JavaVirtualMachines/$( ls /Library/Java/JavaVirtualMachines | grep 1.8 )/Contents/Home
+
+# Install rbenv
+#brew install rbenv
+# Install rvm
+[ ! -f ${HOME}/.rvm/scripts/rvm ] && curl -sSL https://get.rvm.io | bash -s -- --ignore-dotfiles
+
+# Install rbenv
+brew install pyenv
+eval "$(/usr/local/bin/pyenv init -)"
+export PATH=$(/usr/local/bin/pyenv root)/shims:${PATH}
 
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
