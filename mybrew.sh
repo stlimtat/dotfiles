@@ -74,11 +74,14 @@ jenv add /Library/Java/JavaVirtualMachines/$( ls /Library/Java/JavaVirtualMachin
 #brew install rbenv
 # Install rvm
 [ ! -f ${HOME}/.rvm/scripts/rvm ] && curl -sSL https://get.rvm.io | bash -s -- --ignore-dotfiles
+rvm install 2.4.1
+rvm use --default 2.4.1
 
 # Install rbenv
 brew install pyenv
-eval "$(/usr/local/bin/pyenv init -)"
-export PATH=$(/usr/local/bin/pyenv root)/shims:${PATH}
+eval "$(pyenv init -)"
+pyenv install "$(pyenv install --list | grep -v [a-z] | grep 2.7 | tail -n1)"
+pip install --upgrade pip setuptools
 
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
