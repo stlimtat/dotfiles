@@ -16,8 +16,7 @@ eval "$(/usr/local/bin/jenv init -)"
 export JAVA_HOME=$(/usr/local/bin/jenv javahome)
 
 # Using pyenv
-eval "$(/usr/local/bin/pyenv init -)"
-export PATH=$(/usr/local/bin/pyenv root)/shims:${PATH}
+eval "$(pyenv init -)"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
