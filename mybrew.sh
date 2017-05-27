@@ -81,6 +81,8 @@ rvm use --default 2.4.1
 brew install pyenv
 eval "$(pyenv init -)"
 pyenv install "$(pyenv install --list | grep -v [a-z] | grep 2.7 | tail -n1)"
+eval "$(pyenv init -)"
+curl -o- https://bootstrap.pypa.io/get-pip.py | python -
 pip install --upgrade pip setuptools
 
 # Install oh-my-zsh
