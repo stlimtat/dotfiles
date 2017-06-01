@@ -71,16 +71,19 @@ jenv add /Library/Java/JavaVirtualMachines/$( ls /Library/Java/JavaVirtualMachin
 jenv add /Library/Java/JavaVirtualMachines/$( ls /Library/Java/JavaVirtualMachines | grep 1.8 )/Contents/Home
 
 # Install rbenv
-#brew install rbenv
-# Install rvm
-[ ! -f ${HOME}/.rvm/scripts/rvm ] && curl -sSL https://get.rvm.io | bash -s -- --ignore-dotfiles
-rvm install 2.4.1
-rvm use --default 2.4.1
+brew install rbenv
+eval "$(rbenv init -)"
+RB_VERSION=$(rbenv install -l | grep -v [a-z] | sort -n | tail -n1)
+rbenv install ${RB_VERSION}
+rbenv global ${RB_VERSION}
+eval "$(rbenv init -)"
 
 # Install rbenv
 brew install pyenv
 eval "$(pyenv init -)"
-pyenv install "$(pyenv install --list | grep -v [a-z] | grep 2.7 | tail -n1)"
+PY_VER="$(pyenv install --list | grep -v [a-z] | grep 2.7 | tail -n1)"
+pyenv install ${PY_VER}
+pyenv global ${PY_VER}
 eval "$(pyenv init -)"
 curl -o- https://bootstrap.pypa.io/get-pip.py | python -
 pip install --upgrade pip setuptools
