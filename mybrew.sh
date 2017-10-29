@@ -11,6 +11,9 @@ brew update
 # Upgrade any already-installed formulae.
 brew upgrade
 
+# Ensure the tap is available
+brew tap caskroom/versions
+
 # Install java before installing maven
 brew cask install java6 
 brew cask install java7 
@@ -22,9 +25,6 @@ brew install maven
 brew install maven-completion
 brew install nvm 
 brew install postgresql
-
-# Ensure the tap is available
-brew tap caskroom/versions
 
 # Install from casks
 brew cask install docker
