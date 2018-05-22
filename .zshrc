@@ -2,25 +2,174 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/st_lim/.oh-my-zsh
+ export ZSH=/Users/st_lim/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="random"
 
+# Set list of themes to load
+# Setting this variable when ZSH_THEME=random
+# cause zsh load theme from this variable instead of
+# looking in ~/.oh-my-zsh/themes/
+# An empty array have no effect
+ZSH_THEME_RANDOM_CANDIDATES=( 
+  "3den"
+  "Soliah"
+  "adben"
+  "af-magic"
+  "afowler"
+  "agnoster"
+  "alanpeabody"
+  "amuse"
+  "apple"
+  "arrow"
+  "aussiegeek"
+  "avit"
+  "awesomepanda"
+  "bira"
+  "blinks"
+  "bureau"
+  "candy-kingdom"
+  "candy"
+  "clean"
+  "cloud"
+  "crcandy"
+  "crunch"
+  "cypher"
+  "dallas"
+  "darkblood"
+  "daveverwer"
+  "dieter"
+  "dogenpunk"
+  "dpoggi"
+  "dst"
+  "dstufft"
+  "duellj"
+  "eastwood"
+  "edvardm"
+  "emotty"
+  "essembeh"
+  "evan"
+  "example"
+  "fino-time"
+  "fino"
+  "fishy"
+  "flazz"
+  "fletcherm"
+  "fox"
+  "frisk"
+  "frontcube"
+  "funky"
+  "fwalch"
+  "gallifrey"
+  "gallois"
+  "garyblessington"
+  "gentoo"
+  "geoffgarside"
+  "gianu"
+  "gnzh"
+  "gozilla"
+  "half-life"
+  "humza"
+  "imajes"
+  "intheloop"
+  "itchy"
+  "jaischeema"
+  "jbergantine"
+  "jispwoso"
+  "jnrowe"
+  "jonathan"
+  "josh"
+  "jreese"
+  "jtriley"
+  "juanghurtado"
+  "junkfood"
+  "kafeitu"
+  "kardan"
+  "kennethreitz"
+  "kiwi"
+  "kolo"
+  "kphoen"
+  "lambda"
+  "linuxonly"
+  "lukerandall"
+  "macovsky-ruby"
+  "macovsky"
+  "maran"
+  "mgutz"
+  "mh"
+  "michelebologna"
+  "mikeh"
+  "miloshadzic"
+  "minimal"
+  "mira"
+  "mortalscumbag"
+  "mrtazz"
+  "murilasso"
+  "muse"
+  "nanotech"
+  "nebirhos"
+  "nicoulaj"
+  "norm"
+  "obraun"
+  "peepcode"
+  "philips"
+  "pmcgee"
+  "pure"
+  "pygmalion"
+  "re5et"
+  "refined"
+  "rgm"
+  "risto"
+  "rixius"
+  "rkj-repos"
+  "rkj"
+  "robbyrussell"
+  "sammy"
+  "simonoff"
+  "simple"
+  "skaro"
+  "smt"
+  "sonicradish"
+  "sorin"
+  "sporty_256"
+  "steeef"
+  "strug"
+  "sunaku"
+  "sunrise"
+  "superjarin"
+  "suvash"
+  "takashiyoshida"
+  "terminalparty"
+  "theunraveler"
+  "tjkirch"
+  "tjkirch_mod"
+  "tonotdo"
+  "trapd00r"
+  "wedisagree"
+  "wezm+"
+  "wezm"
+  "wuffers"
+  "xiong-chiamiov-plus"
+  "xiong-chiamiov"
+  "ys"
+  "zhann"
+)
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=7
+# export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -42,7 +191,8 @@ ZSH_THEME="random"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -51,7 +201,24 @@ ZSH_THEME="random"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(battery brew common-alias dirhistory git git-flow-avh mvn node nvm osx python)
+plugins=(
+  battery
+  brew 
+  common-alias 
+  dirhistory 
+  django
+  git
+  git-flow-avh 
+  gnu-utils
+  iterm2
+  mvn 
+  node 
+  nvm 
+  osx 
+  pyenv
+  python
+  virtualenv
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -83,6 +250,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fpath=(/usr/local/share/zsh-completions $fpath)
+# rm -f ~/.zcompdump; compinit
 
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
@@ -91,6 +261,6 @@ export PATH="$HOME/bin:$PATH";
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
 for file in ~/.{path,exports,aliases,functions,extra}; do
-	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+  [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;

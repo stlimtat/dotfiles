@@ -6,13 +6,15 @@ git config --global user.name "$GIT_AUTHOR_NAME"
 GIT_AUTHOR_EMAIL="sweetat.lim@finantix.com"
 GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
 git config --global user.email "$GIT_AUTHOR_EMAIL"
+HOMEBREW_GITHUB_API_TOKEN="f6d21dba92f39c3e96a8134c1fc79d8eaf865d77"
+export HOMEBREW_GITHUB_API_TOKEN
 
 # Using nvm
 export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
 
 # Using jenv
-eval "$(/usr/local/bin/jenv init -)"
+eval "$(/usr/local/bin/jenv init - ${SHELL})"
 export JAVA_HOME=$(/usr/local/bin/jenv javahome)
 
 # Using pyenv
