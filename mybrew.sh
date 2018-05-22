@@ -61,7 +61,7 @@ brew cask install font-microsoft-office
 
 # Install garmin
 brew tap caskroom/drivers
-brew cask install garmin-express
+# brew cask install garmin-express
 
 # jenv requires java to be installed first
 brew install jenv
