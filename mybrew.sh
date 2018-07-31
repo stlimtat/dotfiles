@@ -15,7 +15,7 @@ brew upgrade
 brew tap caskroom/versions
 
 # Install java before installing maven
-brew cask install java6 
+# brew cask install java6 
 brew cask install java8
 brew cask install java 
 
@@ -29,16 +29,16 @@ brew install postgresql
 # Install from casks
 brew cask install docker
 brew cask install gimp
-brew cask install firefox-beta
+#brew cask install firefox-beta
 brew cask install google-chrome-beta
 brew cask install google-backup-and-sync
 brew cask install gpg-suite
 brew cask install iterm2
-brew cask install onedrive
+#brew cask install onedrive
 brew cask install pgadmin4
 brew cask install rambox
 brew cask install skype
-brew cask install skype-for-business
+#brew cask install skype-for-business
 brew cask install spectacle 
 brew cask install vimr
 brew cask install virtualbox
