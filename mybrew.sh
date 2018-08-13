@@ -71,6 +71,7 @@ source ~/.extra
 jenv add /Library/Java/JavaVirtualMachines/$( ls /Library/Java/JavaVirtualMachines | grep 1.6 )/Contents/Home
 jenv add /Library/Java/JavaVirtualMachines/$( ls /Library/Java/JavaVirtualMachines | grep 1.7 )/Contents/Home
 jenv add /Library/Java/JavaVirtualMachines/$( ls /Library/Java/JavaVirtualMachines | grep 1.8 )/Contents/Home
+jenv add /Library/Java/JavaVirtualMachines/$( ls /Library/Java/JavaVirtualMachines | grep 10 )/Contents/Home
 
 # Install rbenv
 brew install rbenv
@@ -80,21 +81,31 @@ rbenv install ${RB_VERSION}
 rbenv global ${RB_VERSION}
 eval "$(rbenv init -)"
 
-# Install rbenv
+# Install pyenv
 brew install pyenv
 eval "$(pyenv init -)"
-PY_VER="$(pyenv install --list | grep -v [a-z] | grep 2.7 | tail -n1)"
+PY_VER="$(pyenv install --list | grep -v [a-z] | grep 3.7 | tail -n1)"
 pyenv install ${PY_VER}
 pyenv global ${PY_VER}
 eval "$(pyenv init -)"
 curl -o- https://bootstrap.pypa.io/get-pip.py | python -
 pip install --upgrade pip setuptools
 
-# Install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# Install goenv
+brew install goenv
+eval "$(goenv init -)"
+GO_VER="$(goenv install --list | grep -v [a-z] | grep 1.10 | tail -n1)"
+goenv install ${GO_VER}
+goenv global ${GO_VER}
+
+# Run the original brew.sh
+source ./brew.sh
 
 # Install iterm shell integration
 curl -L https://iterm2.com/misc/install_shell_integration_and_utilities.sh | bash
+
+# Install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # Remove outdated versions from the cellar.
 brew cleanup
