@@ -8,6 +8,9 @@ fi
 # Make sure we’re using the latest Homebrew.
 brew update
 
+# Run the original brew.sh
+source ./brew.sh
+
 # Upgrade any already-installed formulae.
 brew upgrade
 
@@ -25,6 +28,7 @@ brew install maven
 brew install maven-completion
 brew install nvm 
 brew install postgresql
+brew install zsh-syntax-highlighting
 
 # Install from casks
 brew cask install docker
@@ -33,6 +37,7 @@ brew cask install gimp
 brew cask install google-chrome-beta
 brew cask install google-backup-and-sync
 brew cask install gpg-suite
+brew cask install itsycal
 brew cask install iterm2
 #brew cask install onedrive
 brew cask install pgadmin4
@@ -98,14 +103,12 @@ GO_VER="$(goenv install --list | grep -v [a-z] | grep 1.10 | tail -n1)"
 goenv install ${GO_VER}
 goenv global ${GO_VER}
 
-# Run the original brew.sh
-source ./brew.sh
-
 # Install iterm shell integration
 curl -L https://iterm2.com/misc/install_shell_integration_and_utilities.sh | bash
 
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+mv ${HOME}/.zshrc.pre* ${HOME}/.zshrc
 
 # Remove outdated versions from the cellar.
 brew cleanup
