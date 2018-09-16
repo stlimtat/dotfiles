@@ -45,8 +45,18 @@ set number
 syntax on
 " Highlight current line
 set cursorline
+" Automagic Indent
+set autoindent
+" Smart Indent
+set smartindent
 " Make tabs as wide as two spaces
 set tabstop=2
+" Indents will have a width of 4
+set shiftwidth=2
+" Sets the number of columns for a TAB
+set softtabstop=2
+" Expand TABs to spaces
+set expandtab
 " Show “invisible” characters
 "set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
 "set list
