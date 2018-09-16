@@ -3,7 +3,7 @@
 GIT_AUTHOR_NAME="Lim Swee Tat"
 GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
 git config --global user.name "$GIT_AUTHOR_NAME"
-GIT_AUTHOR_EMAIL="plst467i@spgroup.com.sg"
+GIT_AUTHOR_EMAIL="st_lim@stlim.net"
 GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
 git config --global user.email "$GIT_AUTHOR_EMAIL"
 HOMEBREW_GITHUB_API_TOKEN="b07e681fb2e7d5ec56136179c5ab78d7b7b5fb8f"
