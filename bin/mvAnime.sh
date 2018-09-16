@@ -1,10 +1,7 @@
 #!/usr/local/bin/bash
 
 MOVIE_DIR=/Volumes/downloads
-#MOVIE_DIR=/Users/st_lim/Public
-#MOVIE_DIR=/Volumes/STLIM_2TB/archive/Movies
 ANIME_DIR=${MOVIE_DIR}/Anime
-#ANIME_DIR=${MOVIE_DIR}/../Anime
 
 ANIME_PREFIX=('HorribleSubs' 'DeadFish' 'PAS' 'UTW' 'Anon' 'anon')
 
@@ -20,5 +17,18 @@ for i in {0..9} {A..Z}; do
 																mv "${k}" "${ANIME_I}/${l}"
 												fi
 								done
+				done
+done
+
+IFS=$'\012'
+for i in ${MOVIE_DIR}/*\[YTS.A*\] ${MOVIE_DIR}/*\({1950..2050}\); do
+				for j in `find ${i} -name "*.mp4" -o -name "*.mkv"`; do
+								subliminal download -l en -s "${j}"
+								mv ${j} ${MOVIE_DIR}/Hollywood
+								mv ${j/.mp4/.srt} ${MOVIE_DIR}/Hollywood
+								mv ${j/.mkv/.srt} ${MOVIE_DIR}/Hollywood
+								if [ ! -f "${j}" ]; then
+												rm -rf "${i}"
+								fi
 				done
 done
