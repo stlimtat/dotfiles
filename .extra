@@ -3,14 +3,17 @@
 GIT_AUTHOR_NAME="Lim Swee Tat"
 GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
 git config --global user.name "$GIT_AUTHOR_NAME"
-GIT_AUTHOR_EMAIL="st_lim@stlim.net"
+GIT_AUTHOR_EMAIL="st_lim+github@stlim.net"
+#GIT_AUTHOR_EMAIL="plst467i@spgroup.com.sg"
 GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
 git config --global user.email "$GIT_AUTHOR_EMAIL"
-HOMEBREW_GITHUB_API_TOKEN="b07e681fb2e7d5ec56136179c5ab78d7b7b5fb8f"
-export HOMEBREW_GITHUB_API_TOKEN
+export HOMEBREW_GITHUB_API_TOKEN="b07e681fb2e7d5ec56136179c5ab78d7b7b5fb8f"
+#export HOMEBREW_GITHUB_API_TOKEN="9c5c04df33fe64bba2b393d0b0e1bd7a56b7ca40"
 
 # Setting proxy
-export all_proxy=http://proxy.singaporepower.com.sg:8080
+#export all_proxy=http://proxy.singaporepower.com.sg:8080
+#export no_proxy="127.,localhost,.local,169.254/16,10.,.in.spdigital.io,auth.singaporepower.com.sg"
+#export NO_PROXY=${no_proxy}
 
 # Using nvm
 export NVM_DIR="$HOME/.nvm"
