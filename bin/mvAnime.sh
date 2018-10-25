@@ -20,8 +20,21 @@ for i in {0..9} {A..Z}; do
 				done
 done
 
+YEAR=$(date +%Y)
+YEAR_PLUS=$(($YEAR + 1))
+YEAR_LIST=$(eval echo {1950..$YEAR_PLUS})
+count=-1
+for j in $YEAR_LIST; do
+				MOVIES_YEAR=${MOVIE_DIR}/*\($j\)
+				if [ -d ${MOVIES_YEAR[0]} ]; then
+								for k in ${MOVIES_YEAR[*]}; do
+												count=$((count + 1))
+												MOVIES_BRACKET[$count]=${k}
+								done
+				fi
+done
 IFS=$'\012'
-for i in ${MOVIE_DIR}/*\[YTS.A*\] ${MOVIE_DIR}/*\({1950..2050}\); do
+for i in ${MOVIE_DIR}/*\[YTS.A*\] ${MOVIES_BRACKET[*]}; do
 				for j in `find ${i} -name "*.mp4" -o -name "*.mkv"`; do
 								subliminal download -l en -s "${j}"
 								mv ${j} ${MOVIE_DIR}/Hollywood
