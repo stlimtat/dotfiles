@@ -2,6 +2,7 @@
 
 MOVIE_DIR=/Volumes/downloads
 ANIME_DIR=${MOVIE_DIR}/Anime
+HOLLY_DIR=${MOVIE_DIR}/Hollywood
 
 ANIME_PREFIX=('HorribleSubs' 'DeadFish' 'PAS' 'UTW' 'Anon' 'anon')
 
@@ -37,9 +38,17 @@ IFS=$'\012'
 for i in ${MOVIE_DIR}/*\[YTS.A*\] ${MOVIES_BRACKET[*]}; do
 				for j in `find ${i} -name "*.mp4" -o -name "*.mkv"`; do
 								subliminal download -l en -s "${j}"
-								mv ${j} ${MOVIE_DIR}/Hollywood
-								mv ${j/.mp4/.srt} ${MOVIE_DIR}/Hollywood
-								mv ${j/.mkv/.srt} ${MOVIE_DIR}/Hollywood
+								MOVIE_NAME=$(basename $j)
+								FIRST_CHAR=${MOVIE_NAME:0:1}
+								THE_DETECT=${MOVIE_NAME:0:3}
+								THE_DETECT_UPPPER=$(echo ${THE_DETECT} | tr '[:lower:]' '[:upper:]')
+								if [ "${THE_DETECT_UPPER}" == "THE" ]; then
+												FIRST_CHAR=${MOVIE_NAME:4:1}
+								fi
+								[ ! -d ${HOLLY_DIR}/${FIRST_CHAR}/ ] && mkdir ${HOLLY_DIR}/${FIRST_CHAR}
+								mv ${j} ${HOLLY_DIR}/${FIRST_CHAR}/
+								mv ${j/.mp4/.srt} ${HOLLY_DIR}/${FIRST_CHAR}/
+								mv ${j/.mkv/.srt} ${HOLLY_DIR}/${FIRST_CHAR}/
 								if [ ! -f "${j}" ]; then
 												rm -rf "${i}"
 								fi
