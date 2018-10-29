@@ -46,3 +46,5 @@ alias vim='/usr/local/bin/nvim'
 # For some odd ohmyzsh theme which gives zsh_path errors
 #alias zsh_path="dirname $(which zsh)"
 alias zsh_path="pwd"
+
+tabs -2
