@@ -17,10 +17,10 @@ move_file_to_dir() {
   if [ "$THE_DETECT_UPPPER" = "THE" ]; then
     FIRST_CHAR=${MOVIE_NAME:4:1}
   fi
-  [ ! -d ${HOLLY_DIR}/${FIRST_CHAR}/ ] && mkdir ${HOLLY_DIR}/${FIRST_CHAR}
-  mv ${FILE_NAME} ${HOLLY_DIR}/${FIRST_CHAR}/
-  mv ${FILE_NAME/.mp4/.srt} ${HOLLY_DIR}/${FIRST_CHAR}/
-  mv ${FILE_NAME/.mkv/.srt} ${HOLLY_DIR}/${FIRST_CHAR}/
+  [ ! -d ${MY_DIR}/${FIRST_CHAR}/ ] && mkdir ${MY_DIR}/${FIRST_CHAR}
+  mv ${FILE_NAME} ${MY_DIR}/${FIRST_CHAR}/
+  mv ${FILE_NAME/.mp4/.srt} ${MY_DIR}/${FIRST_CHAR}/
+  mv ${FILE_NAME/.mkv/.srt} ${MY_DIR}/${FIRST_CHAR}/
 }
 
 [ ! -d ${ANIME_DIR} ] && mkdir -p ${ANIME_DIR} 
@@ -56,18 +56,27 @@ IFS=$'\012'
 for i in ${MOVIE_DIR}/*\[YTS.A*\] ${MOVIES_BRACKET[*]} ${MOVIE_DIR}/*.BluRay.* ${MOVIE_DIR}/*.WEBRip.*; do
   for j in `find ${i} -name "*.mp4" -o -name "*.mkv"`; do
     subliminal download -l en -s "${j}"
-		move_file_to_dir "${j}" "${MOVIE_DIR}"
+		move_file_to_dir "${j}" "${HOLLY_DIR}"
     if [ ! -f "${j}" ]; then
       rm -rf "${i}"
     fi
   done
 done
 
-for i in `find ${KIDS_DIR} -maxdepth 2 -name "*.mp4" -o -name "*.mkv"` `find ${HOLLY_DIR} -maxdepth 2 -name "*.mp4" -o -name "*.mkv"`; do
+for i in `find ${KIDS_DIR} -maxdepth 2 -name "*.mp4" -o -name "*.mkv"`; do
   MOVIE_NAME=$(basename -- $i)
   SRT_FILE=${MOVIE_NAME%.*}.srt
   if [ -f ${SRT_FILE} ]; then
     subliminal download -l en -s "${i}"
-  	move_file_to_dir "${j}" "$(dirname ${j})"
+  	move_file_to_dir "${i}" "$(KIDS_DIR}"
+  fi
+done
+
+for i in `find ${HOLLY_DIR} -maxdepth 2 -name "*.mp4" -o -name "*.mkv"`; do
+  MOVIE_NAME=$(basename -- $i)
+  SRT_FILE=${MOVIE_NAME%.*}.srt
+  if [ -f ${SRT_FILE} ]; then
+    subliminal download -l en -s "${i}"
+  	move_file_to_dir "${i}" "${HOLLY_DIR}"
   fi
 done
