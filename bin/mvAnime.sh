@@ -23,60 +23,67 @@ move_file_to_dir() {
   mv ${FILE_NAME/.mkv/.srt} ${MY_DIR}/${FIRST_CHAR}/
 }
 
-[ ! -d ${ANIME_DIR} ] && mkdir -p ${ANIME_DIR} 
-for i in {0..9} {A..Z}; do
-  ANIME_I=${ANIME_DIR}/${i}
-  for j in ${ANIME_PREFIX[@]}; do
-    cd ${MOVIE_DIR}
-    for k in \[${j}\]\ ${i}*.mkv \[${j}\]_${i}*.mkv \[${j}\]\ ${i}*.mp4 \[${j}\]_${i}*.mp4; do
-      if [ -f "${k}" ]; then
-        l="${k%% - [0-9][0-9]*}"
-        [ ! -d "${ANIME_I}/${l}" ] && mkdir -p "${ANIME_I}/${l}"
-        mv "${k}" "${ANIME_I}/${l}"
+move_anime_to_dir() {
+  [ ! -d ${ANIME_DIR} ] && mkdir -p ${ANIME_DIR} 
+  for i in {0..9} {A..Z}; do
+    ANIME_I=${ANIME_DIR}/${i}
+    for j in ${ANIME_PREFIX[@]}; do
+      cd ${MOVIE_DIR}
+      for k in \[${j}\]\ ${i}*.mkv \[${j}\]_${i}*.mkv \[${j}\]\ ${i}*.mp4 \[${j}\]_${i}*.mp4; do
+        if [ -f "${k}" ]; then
+          l="${k%% - [0-9][0-9]*}"
+          [ ! -d "${ANIME_I}/${l}" ] && mkdir -p "${ANIME_I}/${l}"
+          mv "${k}" "${ANIME_I}/${l}"
+        fi
+      done
+    done
+  done
+}
+
+move_to_holly() {
+  YEAR=$(date +%Y)
+  YEAR_PLUS=$(($YEAR + 1))
+  YEAR_LIST=$(eval echo {1950..$YEAR_PLUS})
+  count=-1
+  for j in $YEAR_LIST; do
+    MOVIES_YEAR=${MOVIE_DIR}/*\($j\)
+    if [ -d ${MOVIES_YEAR[0]} ]; then
+      for k in ${MOVIES_YEAR[*]}; do
+        count=$((count + 1))
+        MOVIES_BRACKET[$count]=${k}
+      done
+    fi
+  done
+  
+  IFS=$'\012'
+  for i in ${MOVIE_DIR}/*\[YTS.A*\] \
+    ${MOVIES_BRACKET[*]} \
+    ${MOVIE_DIR}/*.BluRay.* \
+    ${MOVIE_DIR}/*.WEBRip.*; do
+    for j in `find ${i} -name "*.mp4" -o -name "*.mkv"`; do
+      subliminal download -l en -s "${j}"
+  		move_file_to_dir "${j}" "${HOLLY_DIR}"
+      if [ ! -f "${j}" ]; then
+        rm -rf "${i}"
       fi
     done
   done
-done
+}
 
-YEAR=$(date +%Y)
-YEAR_PLUS=$(($YEAR + 1))
-YEAR_LIST=$(eval echo {1950..$YEAR_PLUS})
-count=-1
-for j in $YEAR_LIST; do
-  MOVIES_YEAR=${MOVIE_DIR}/*\($j\)
-  if [ -d ${MOVIES_YEAR[0]} ]; then
-    for k in ${MOVIES_YEAR[*]}; do
-      count=$((count + 1))
-      MOVIES_BRACKET[$count]=${k}
-    done
-  fi
-done
-
-IFS=$'\012'
-for i in ${MOVIE_DIR}/*\[YTS.A*\] ${MOVIES_BRACKET[*]} ${MOVIE_DIR}/*.BluRay.* ${MOVIE_DIR}/*.WEBRip.*; do
-  for j in `find ${i} -name "*.mp4" -o -name "*.mkv"`; do
-    subliminal download -l en -s "${j}"
-		move_file_to_dir "${j}" "${HOLLY_DIR}"
-    if [ ! -f "${j}" ]; then
-      rm -rf "${i}"
+get_dir_subs() {
+  MY_DIR=$1
+  IFS=$'\012'
+  for i in `find ${MY_DIR} -maxdepth 2 -name "*.mp4" -o -name "*.mkv"`; do
+    MOVIE_NAME=$(basename -- $i)
+    SRT_FILE=${MOVIE_NAME%.*}.srt
+    if [ -f ${SRT_FILE} ]; then
+      subliminal download -l en -s "${i}"
+    	move_file_to_dir "${i}" "${MY_DIR}"
     fi
   done
-done
+}
 
-for i in `find ${KIDS_DIR} -maxdepth 2 -name "*.mp4" -o -name "*.mkv"`; do
-  MOVIE_NAME=$(basename -- $i)
-  SRT_FILE=${MOVIE_NAME%.*}.srt
-  if [ -f ${SRT_FILE} ]; then
-    subliminal download -l en -s "${i}"
-  	move_file_to_dir "${i}" "$(KIDS_DIR}"
-  fi
-done
-
-for i in `find ${HOLLY_DIR} -maxdepth 2 -name "*.mp4" -o -name "*.mkv"`; do
-  MOVIE_NAME=$(basename -- $i)
-  SRT_FILE=${MOVIE_NAME%.*}.srt
-  if [ -f ${SRT_FILE} ]; then
-    subliminal download -l en -s "${i}"
-  	move_file_to_dir "${i}" "${HOLLY_DIR}"
-  fi
-done
+move_anime_to_dir
+move_to_holly
+get_dir_subs ${KIDS_DIR}
+get_dir_subs ${HOLLY_DIR}
