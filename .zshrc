@@ -204,9 +204,7 @@ HIST_STAMPS="yyyy-mm-dd"
 plugins=(
   battery
   brew 
-  colored-man
   colorize
-  common-alias 
   dirhistory 
   django
   docker
@@ -223,13 +221,13 @@ plugins=(
   osx 
   pip
   python
+  tmuxinator
   virtualenv
-  zsh-syntax-highlighting
 )
 
-echo "Running oh-my-zsh.sh...$(gdate +%s.%N)"
+#echo "Running oh-my-zsh.sh...$(gdate +%s.%N)"
 source $ZSH/oh-my-zsh.sh
-echo "Running oh-my-zsh.sh...$(gdate +%s.%N)...Done"
+#echo "Running oh-my-zsh.sh...$(gdate +%s.%N)...Done"
 
 # User configuration
 
@@ -270,8 +268,8 @@ export PATH="$HOME/bin:$PATH";
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
 for file in ~/.{path,exports,aliases,functions,extra}; do
-  echo "Running $file...$(gdate +%s.%N)"
+#  echo "Running $file...$(gdate +%s.%N)"
   [ -r "$file" ] && [ -f "$file" ] && source "$file";
-  echo "Running $file...$(gdate +%s.%N)...Done"
+#  echo "Running $file...$(gdate +%s.%N)...Done"
 done;
 unset file;

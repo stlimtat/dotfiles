@@ -80,16 +80,23 @@
 	}; f"
 
   # Fetch all remote branches
-	fall = "!f() { \
-	  declare localBranches=\"$(git branch | grep -v master)\"; \
-	  for b in \"${localBranches}\"; do \
-		  git branch --quiet --delete --force ${b}; \
+  fall = "!f() { \
+    for localBranch in $(git branch | grep -v master | sort); do \
+      if [ ! -e ${localBranch} ]; then \
+        echo \"Delete Local Branch ${localBranch}\"; \
+        git branch --quiet --delete --force ${localBranch}; \
+      fi; \
 		done; \
 		for remote in $(git branch -r | sed -e 's/^ *//g' | grep origin | grep -v HEAD); do \
-		  git branch --quiet --track \"${remote#origin/}\" \"${remote}\"; \
-		done; \
-		git fetch --all; \
-	}; f"
+      echo \"Tracking Remote Branch ${remote}\"; \
+      git branch --quiet --track \"${remote#origin/}\" \"${remote}\"; \
+      git fetch origin ${remote#origin/}; \
+    done; \
+    git fetch --all; \
+    git pull; \
+    }; f"
+
+  tree = log --graph --pretty=oneline --abbrev-commit --decorate
 
 [apply]
 
@@ -147,8 +154,8 @@
 [commit]
 
 	# https://help.github.com/articles/signing-commits-using-gpg/
-	gpgsign = true
-	template = /Users/st_lim/.gitmsg.txt
+	gpgsign = false
+	template = /Users/plst467i/.gitmsg.txt
 
 [diff]
 
@@ -181,6 +188,7 @@
 
 [url "git@github.com:"]
 
+  # Personal Access Token - 9c5c04df33fe64bba2b393d0b0e1bd7a56b7ca40
 	insteadOf = "gh:"
 	pushInsteadOf = "github:"
 	pushInsteadOf = "git://github.com/"
@@ -204,9 +212,24 @@
 	insteadOf = "bb:"
 	pushInsteadOf = "https://bitbucket.org/"
 
+[url "git@code.in.spdigital.sg:"]
+
+  insteadOf = "spd:"
+  pushInsteadOf = "spdigital:"
+
+[url "https://code.in.spdigital.sg/"] 
+
+  proxy = ""
+
 [user]
-	signingkey = 0B5E45C5
+
+	signingkey = 31051081
 	name = Lim Swee Tat
-	email = sweetat.lim@finantix.com
-[remote "origin"]
-	fetch = +refs/heads/*:refs/remotes/origin/*
+	email = plst467i@spgroup.com.sg
+
+# [remote "origin"]
+#	fetch = +refs/heads/*:refs/remotes/origin/*
+
+[credential]
+
+  helper = osxkeychain
