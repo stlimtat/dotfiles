@@ -70,38 +70,35 @@ brew tap caskroom/drivers
 
 # jenv requires java to be installed first
 brew install jenv
+brew install rbenv
+brew install pyenv
+brew install goenv
 
 # Source for jenv from ~/.extra
 source ~/.extra
-jenv add /Library/Java/JavaVirtualMachines/$( ls /Library/Java/JavaVirtualMachines | grep 1.6 )/Contents/Home
-jenv add /Library/Java/JavaVirtualMachines/$( ls /Library/Java/JavaVirtualMachines | grep 1.7 )/Contents/Home
-jenv add /Library/Java/JavaVirtualMachines/$( ls /Library/Java/JavaVirtualMachines | grep 1.8 )/Contents/Home
-jenv add /Library/Java/JavaVirtualMachines/$( ls /Library/Java/JavaVirtualMachines | grep 10 )/Contents/Home
 
-# Install rbenv
-brew install rbenv
-eval "$(rbenv init -)"
-RB_VERSION=$(rbenv install -l | grep -v [a-z] | sort -n | tail -n1)
-rbenv install ${RB_VERSION}
-rbenv global ${RB_VERSION}
-eval "$(rbenv init -)"
+# Install Renv
+# https://github.com/viking/Renv
+# Install texinfo and basictex first
+brew install texinfo
+brew cask install basictex
+open /usr/local/Caskroom/basictex/*/mactex-basictex-*.pkg
+# Install Renv
+git clone git@github.com:viking/Renv.git ${HOME}/.Renv
+mkdir ${HOME}/.Renv/versions ${HOME}/.Renv/plugins
+git clone git@github.com:viking/R-build.git ${HOME}/.Renv/plugins/R-build
+eval "$(${HOME}/.Renv/bin/Renv init -)"
+R_VER="$(${HOME}/.Renv/bin/Renv install --list | grep -v [a-z] | sort -n | tail -n1 | awk '{print $1}' )"
+CONFIGURE_OPTS="--without-x --enable-R-framework --includedir=$(brew --prefix xz)/include --enable-memory-profiling" Renv install --keep --verbose ${R_VER}
+pushd ${HOME}/.Renv/sources/${R_VER}/R-${R_VER}
+  ./configure --prefix=${HOME}/.Renv/versions/${R_VER} --without-x --enable-R-framework --includedir=$(brew --prefix xz)/include --enable-memory-profiling
+  make
+  make install
+popd
+Renv global ${R_VER}
 
-# Install pyenv
-brew install pyenv
-eval "$(pyenv init -)"
-PY_VER="$(pyenv install --list | grep -v [a-z] | grep 3.7 | tail -n1)"
-pyenv install ${PY_VER}
-pyenv global ${PY_VER}
-eval "$(pyenv init -)"
-curl -o- https://bootstrap.pypa.io/get-pip.py | python -
-pip install --upgrade pip setuptools
-
-# Install goenv
-brew install goenv
-eval "$(goenv init -)"
-GO_VER="$(goenv install --list | grep -v [a-z] | grep 1.10 | tail -n1)"
-goenv install ${GO_VER}
-goenv global ${GO_VER}
+# Invoke bin/reset-env.sh
+source ~/bin/reset-env.sh
 
 # Install iterm shell integration
 curl -L https://iterm2.com/misc/install_shell_integration_and_utilities.sh | bash
