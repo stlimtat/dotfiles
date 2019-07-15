@@ -5,7 +5,7 @@ ANIME_DIR=${DOWNLOAD_DIR}/Anime
 HOLLY_DIR=${DOWNLOAD_DIR}/Hollywood
 KIDS_DIR=${DOWNLOAD_DIR}/kids
 
-ANIME_PREFIX=('HorribleSubs' 'DeadFish' 'PAS' 'UTW' 'Anon' 'anon')
+ANIME_PREFIX=('HorribleSubs' 'DeadFish' 'PAS' 'UTW' 'Anon' 'anon' 'Over-Time')
 
 move_file_to_dir() {
   FILE_NAME=$1
@@ -41,26 +41,20 @@ move_anime_to_dir() {
 }
 
 move_to_holly() {
-  IFS=$'\012'
-  YEAR=$(date +%Y)
-  YEAR_PLUS=$(($YEAR + 1))
-  YEAR_LIST=$(eval echo {1950..$YEAR_PLUS})
   count=-1
-  for j in $YEAR_LIST; do
-    MOVIES_YEAR=${DOWNLOAD_DIR}/*\(${j}\)
-    if [ -d ${MOVIES_YEAR[0]} ]; then
-      for k in ${MOVIES_YEAR[*]}; do
+  for j in $(gfind ${DOWNLOAD_DIR} -maxdepth 1 -type d -regex '.*\ ([0-9]+)'); do
         count=$((count + 1))
-        MOVIES_BRACKET[$count]=${k}
-      done
-    fi
+        MOVIES_BRACKET[$count]=${j}
   done
+  echo ${MOVIES_BRACKET[*]}
+  IFS=$'\012'
   
-  for i in ${DOWNLOAD_DIR}/*\[YTS.A*\] \
+  for i in \
+    ${DOWNLOAD_DIR}/*\[YTS.*\] \
     ${MOVIES_BRACKET[*]} \
     ${DOWNLOAD_DIR}/*.BluRay.* \
     ${DOWNLOAD_DIR}/*.WEBRip.*; do
-    for j in `find ${i} -name "*.mp4" -o -name "*.mkv"`; do
+    for j in $(gfind ${i} -name "*.mp4" -o -name "*.mkv" -o -name "*.avi"); do
       subliminal download -l en -s "${j}"
   		move_file_to_dir "${j}" "${HOLLY_DIR}"
       if [ ! -f "${j}" ]; then
@@ -73,7 +67,7 @@ move_to_holly() {
 get_dir_subs() {
   MY_DIR=$1
   IFS=$'\012'
-  for i in `find ${MY_DIR} -maxdepth 2 -name "*.mp4" -o -name "*.mkv"`; do
+  for i in $(gfind ${MY_DIR} -maxdepth 2 -name "*.mp4" -o -name "*.mkv" -o -name "*.avi"); do
     MOVIE_NAME=$(basename -- $i)
     SRT_FILE=${MOVIE_NAME%.*}.srt
     if [ -f ${SRT_FILE} ]; then
