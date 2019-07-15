@@ -18,9 +18,11 @@ export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
 
 # For goenv
+export GOENV_DISABLE_GOPATH=1
+export GO111MODULE=on
 eval "$(/usr/local/bin/goenv init - )"
-# export GOPATH=${HOME}/src
-export PATH=$PATH:${HOME}/go/bin
+export GOPATH=${HOME}/go
+export PATH=$PATH:$(go env GOPATH)/bin
 
 # Using jenv
 eval "$(/usr/local/bin/jenv init - ${SHELL})"
@@ -48,6 +50,6 @@ alias zsh_path="pwd"
 
 # For adding Renv to the path
 export PATH=${PATH}:/Library/TeX/texbin:${HOME}/.Renv/bin
-eval "$(${HOME}/.Renv/bin/Renv -)"
+eval "$(${HOME}/.Renv/bin/Renv init -)"
 
 tabs -2
