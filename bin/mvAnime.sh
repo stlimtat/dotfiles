@@ -41,13 +41,13 @@ move_anime_to_dir() {
 }
 
 move_to_holly() {
+  IFS=$'\012'
   count=-1
   for j in $(gfind ${DOWNLOAD_DIR} -maxdepth 1 -type d -regex '.*\ ([0-9]+)'); do
         count=$((count + 1))
         MOVIES_BRACKET[$count]=${j}
   done
   echo ${MOVIES_BRACKET[*]}
-  IFS=$'\012'
   
   for i in \
     ${DOWNLOAD_DIR}/*\[YTS.*\] \
