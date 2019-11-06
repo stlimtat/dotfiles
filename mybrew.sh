@@ -14,9 +14,6 @@ source ./brew.sh
 # Upgrade any already-installed formulae.
 brew upgrade
 
-# Ensure the tap is available
-brew tap caskroom/versions
-
 # Install java before installing maven
 # brew cask install java6 
 brew cask install java8
@@ -27,52 +24,54 @@ brew install gpg2
 brew install maven
 brew install maven-completion
 brew install nvm 
-brew install postgresql
+# brew install postgresql
 brew install zsh-syntax-highlighting
 
 # Install from casks
 brew cask install docker
 brew cask install gimp
-#brew cask install firefox-beta
-brew cask install google-chrome-beta
+# brew cask install firefox-beta
+brew cask install google-chrome
 brew cask install google-backup-and-sync
 brew cask install gpg-suite
 brew cask install itsycal
 brew cask install iterm2
-#brew cask install onedrive
-brew cask install pgadmin4
+# brew cask install onedrive
+# brew cask install pgadmin4
 brew cask install rambox
-brew cask install skype
-#brew cask install skype-for-business
+# brew cask install skype
+# brew cask install skype-for-business
 brew cask install spectacle 
 brew cask install vimr
-brew cask install virtualbox
-brew cask install virtualbox-extension-pack
+# brew cask install virtualbox
+# brew cask install virtualbox-extension-pack
 brew cask install vlc
+brew cask install zoom
 
 # Install neovim
 brew tap neovim/neovim
 brew install neovim
 
 # Install fonts
-brew tap caskroom/fonts
+brew tap homebrew/fonts
 brew cask install font-arial
 brew cask install font-awesome-terminal-fonts 
 brew cask install font-fontawesome
+brew cask install cascadia-fonts
 
 # Install microsoft fonts
 brew tap colindean/fonts-nonfree
 brew cask install font-microsoft-office
 
 # Install garmin
-brew tap caskroom/drivers
+# brew tap caskroom/drivers
 # brew cask install garmin-express
 
 # jenv requires java to be installed first
 brew install jenv
 brew install rbenv
 brew install pyenv
-brew install goenv
+brew install --HEAD goenv
 
 # Source for jenv from ~/.extra
 source ~/.extra
