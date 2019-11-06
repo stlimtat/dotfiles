@@ -83,9 +83,9 @@ brew install texinfo
 brew cask install basictex
 open /usr/local/Caskroom/basictex/*/mactex-basictex-*.pkg
 # Install Renv
-git clone git@github.com:viking/Renv.git ${HOME}/.Renv
+git clone https://github.com/viking/Renv.git ${HOME}/.Renv
 mkdir ${HOME}/.Renv/versions ${HOME}/.Renv/plugins
-git clone git@github.com:viking/R-build.git ${HOME}/.Renv/plugins/R-build
+git clone https://github.com/viking/R-build.git ${HOME}/.Renv/plugins/R-build
 eval "$(${HOME}/.Renv/bin/Renv init -)"
 R_VER="$(${HOME}/.Renv/bin/Renv install --list | grep -v [a-z] | sort -n | tail -n1 | awk '{print $1}' )"
 CONFIGURE_OPTS="--without-x --enable-R-framework --includedir=$(brew --prefix xz)/include --enable-memory-profiling" Renv install --keep --verbose ${R_VER}
