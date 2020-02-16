@@ -1,11 +1,11 @@
 #!/usr/local/bin/bash
 
-DOWNLOAD_DIR=/Volumes/downloads
+DOWNLOAD_DIR=/Volumes/Public
 ANIME_DIR=${DOWNLOAD_DIR}/Anime
 HOLLY_DIR=${DOWNLOAD_DIR}/Hollywood
 KIDS_DIR=${DOWNLOAD_DIR}/kids
 
-ANIME_PREFIX=('HorribleSubs' 'DeadFish' 'PAS' 'UTW' 'Anon' 'anon' 'Over-Time' 'FLsnow' 'Some-Stuffs')
+ANIME_PREFIX=('HorribleSubs' 'DeadFish' 'PAS' 'UTW' 'Anon' 'anon' 'Over-Time' 'FLsnow' 'Some-Stuffs' 'AnimeRG')
 
 move_file_to_dir() {
   FILE_NAME=$1
@@ -31,9 +31,11 @@ move_anime_to_dir() {
       cd ${DOWNLOAD_DIR}
       for k in \[${j}\]\ ${i}*.mkv \[${j}\]_${i}*.mkv \[${j}\]\ ${i}*.mp4 \[${j}\]_${i}*.mp4; do
         if [ -f "${k}" ]; then
-          l="${k%% - [0-9][0-9]*}"
-          [ ! -d "${ANIME_I}/${l}" ] && mkdir -p "${ANIME_I}/${l}"
-          mv "${k}" "${ANIME_I}/${l}"
+          l="${k//_/ }"
+          m="${l%% - [0-9][0-9]*}"
+          n="${m%%) [0-9][0-9]* (*}"
+          [ ! -d "${ANIME_I}/${n}" ] && mkdir -p "${ANIME_I}/${n}"
+          mv "${k}" "${ANIME_I}/${n}"
         fi
       done
     done
