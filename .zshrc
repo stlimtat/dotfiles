@@ -7,7 +7,7 @@
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="smt"
+ZSH_THEME="pygmalion"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -53,28 +53,28 @@ HIST_STAMPS="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  battery
-  brew 
-  colorize
-  dirhistory 
-  django
+  brew
+  bundler
   docker
   docker-compose
+  encode64
+  gem
   git
   git-flow-avh
-  github
-  gitignore
-  gnu-utils
-  golang
   iterm2
+  jsontools
   kubectl
-  mvn 
-  node 
-  osx 
+  node
+  npm
   pip
   python
-  tmuxinator
-  virtualenv
+  rails
+  redis-cli
+  ruby
+  rvm
+  sudo
+  tmux
+  yarn
 )
 
 #echo "Running oh-my-zsh.sh...$(gdate +%s.%N)"
@@ -109,7 +109,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fpath=(/usr/local/share/zsh-completions $fpath)
 #rm -f ~/.zcompdump*; compinit
 
@@ -124,4 +124,4 @@ for file in ~/.{path,exports,aliases,functions,extra}; do
   [ -r "$file" ] && [ -f "$file" ] && source "$file";
 #  echo "Running $file...$(gdate +%s.%N)...Done"
 done;
-unset file;
+unset file
