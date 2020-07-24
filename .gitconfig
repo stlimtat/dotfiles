@@ -13,7 +13,7 @@
 	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
 	# Pull in remote changes for the current repository and all its submodules
-	p = pull --recurse-submodules
+	p = git pull --recurse-submodules
 
 	# Clone a repository including all submodules
 	c = clone --recursive
@@ -56,7 +56,7 @@
 	# Find commits by commit message
 	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
 
-	# Remove branches that have already been merged with main
+	# Remove branches that have already been merged with master
 	# a.k.a. ‘delete merged’
 	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 
@@ -97,8 +97,6 @@
     }; f"
 
   tree = log --graph --pretty=oneline --abbrev-commit --decorate
-	# Show the user email for the current repository.
-	whoami = config user.email
 
 [apply]
 
@@ -157,7 +155,7 @@
 
 	# https://help.github.com/articles/signing-commits-using-gpg/
 	gpgsign = false
-	template = /Users/plst467i/.gitmsg.txt
+  #template = /Users/st_lim/.gitmsg.txt
 
 [diff]
 
@@ -214,20 +212,11 @@
 	insteadOf = "bb:"
 	pushInsteadOf = "https://bitbucket.org/"
 
-[url "git@code.in.spdigital.sg:"]
-
-  insteadOf = "spd:"
-  pushInsteadOf = "spdigital:"
-
-[url "https://code.in.spdigital.sg/"] 
-
-  proxy = ""
-
 [user]
 
-#	signingkey = 31051081
+	signingkey = 31051081
 	name = Lim Swee Tat
-	email = sweetat@xfers.com
+	email = sweetat+github@xfers.com
 
 # [remote "origin"]
 #	fetch = +refs/heads/*:refs/remotes/origin/*
@@ -235,7 +224,5 @@
 [credential]
 
   helper = osxkeychain
-
-[init]
-
-	templateDir = ~/.config/git/template/
+[pull]
+	rebase = false
