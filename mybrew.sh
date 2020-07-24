@@ -44,7 +44,7 @@ brew cask install rectangle
 # brew cask install skype
 # brew cask install skype-for-business
 # brew cask install spectacle 
-brew cask install vimr
+# brew cask install vimr
 # brew cask install virtualbox
 # brew cask install virtualbox-extension-pack
 brew cask install visual-studio-code

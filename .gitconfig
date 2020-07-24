@@ -13,7 +13,7 @@
 	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
 	# Pull in remote changes for the current repository and all its submodules
-	p = git pull --recurse-submodules
+	p = pull --recurse-submodules
 
 	# Clone a repository including all submodules
 	c = clone --recursive
@@ -56,7 +56,7 @@
 	# Find commits by commit message
 	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
 
-	# Remove branches that have already been merged with master
+	# Remove branches that have already been merged with main
 	# a.k.a. ‘delete merged’
 	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 
@@ -97,6 +97,8 @@
     }; f"
 
   tree = log --graph --pretty=oneline --abbrev-commit --decorate
+	# Show the user email for the current repository.
+	whoami = config user.email
 
 [apply]
 
@@ -223,9 +225,9 @@
 
 [user]
 
-	signingkey = 31051081
+#	signingkey = 31051081
 	name = Lim Swee Tat
-	email = plst467i@spgroup.com.sg
+	email = sweetat@xfers.com
 
 # [remote "origin"]
 #	fetch = +refs/heads/*:refs/remotes/origin/*
@@ -233,3 +235,7 @@
 [credential]
 
   helper = osxkeychain
+
+[init]
+
+	templateDir = ~/.config/git/template/
