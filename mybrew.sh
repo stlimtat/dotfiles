@@ -21,8 +21,8 @@ brew cask install java
 
 # Install my packages that I need installed
 brew install gpg2
-brew install maven
-brew install maven-completion
+# brew install maven
+# brew install maven-completion
 brew install nvm 
 # brew install postgresql
 brew install zsh-syntax-highlighting
@@ -71,9 +71,9 @@ brew cask install font-microsoft-office
 
 # jenv requires java to be installed first
 brew install jenv
-brew install rbenv
+# brew install rbenv
 brew install pyenv
-brew install --HEAD goenv
+# brew install --HEAD goenv
 
 # Source for jenv from ~/.extra
 source ~/.extra
@@ -99,14 +99,18 @@ source ~/.extra
 # Renv global ${R_VER}
 
 # Invoke bin/reset-env.sh
-source ~/bin/reset-env.sh
+# source ~/bin/reset-env.sh
 
 # Install iterm shell integration
 curl -L https://iterm2.com/misc/install_shell_integration_and_utilities.zsh | zsh
 
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-mv ${HOME}/.zshrc.pre* ${HOME}/.zshrc
 
 # Remove outdated versions from the cellar.
 brew cleanup
+
+# Link the vim
+ln -sf ${HOME}/.config/nvim ${HOME}/.vim
+ln -sf ${HOME}/.config/nvim/init.vim ${HOME}/.vimrc
+mv ${HOME}/.zshrc.pre* ${HOME}/.zshrc

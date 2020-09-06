@@ -3,10 +3,11 @@
 GIT_AUTHOR_NAME="Lim Swee Tat"
 GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
 git config --global user.name "$GIT_AUTHOR_NAME"
-GIT_AUTHOR_EMAIL="st_lim+github@stlim.net"
+GIT_AUTHOR_EMAIL="sweetat@withevo.com"
 GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
 git config --global user.email "$GIT_AUTHOR_EMAIL"
-export HOMEBREW_GITHUB_API_TOKEN="<API TOKEN>"
+export HOMEBREW_GITHUB_API_TOKEN="447c7cf52718d5326802db1c7863910e2dcb7d4d"
+git config --global user.signingkey EE1EF39C32152053
 
 
 
@@ -20,7 +21,7 @@ export NVM_DIR="$HOME/.nvm"
 # For goenv
 export GOENV_DISABLE_GOPATH=1
 export GO111MODULE=on
-eval "$(/usr/local/bin/goenv init - )"
+# eval "$(/usr/local/bin/goenv init - )"
 export GOPATH=${HOME}/go
 export PATH=$PATH:$(go env GOPATH)/bin
 
@@ -32,7 +33,7 @@ export JAVA_HOME=$(/usr/local/bin/jenv javahome)
 eval "$(/usr/local/bin/pyenv init -)"
 
 # For rbenv
-eval "$(/usr/local/bin/rbenv init - )"
+# eval "$(/usr/local/bin/rbenv init - )"
 
 # iterm2 shell integration
 test -e "${HOME}/.iterm2_shell_integration.$(basename $SHELL)" && source "${HOME}/.iterm2_shell_integration.$(basename $SHELL)"
@@ -49,7 +50,10 @@ alias vim='/usr/local/bin/nvim'
 alias zsh_path="pwd"
 
 # For adding Renv to the path
-export PATH=${PATH}:/Library/TeX/texbin:${HOME}/.Renv/bin
-eval "$(${HOME}/.Renv/bin/Renv init -)"
+# export PATH=${PATH}:/Library/TeX/texbin:${HOME}/.Renv/bin
+# eval "$(${HOME}/.Renv/bin/Renv init -)"
 
+# Map caps lock to delete-backspace
+# https://apple.stackexchange.com/questions/7231/how-can-i-rebind-caps-lock-to-delete-backspace
+hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x70000002A}]}' > /dev/null 2>&1
 tabs -2
