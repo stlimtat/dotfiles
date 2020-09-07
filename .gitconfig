@@ -132,30 +132,11 @@
 	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
 	ui = auto
 
-[color "branch"]
-
-	current = yellow reverse
-	local = yellow
-	remote = green
-
-[color "diff"]
-
-	meta = yellow bold
-	frag = magenta bold # line info
-	old = red # deletions
-	new = green # additions
-
-[color "status"]
-
-	added = yellow
-	changed = green
-	untracked = cyan
-
 [commit]
 
 	# https://help.github.com/articles/signing-commits-using-gpg/
-	gpgsign = false
-  #template = /Users/st_lim/.gitmsg.txt
+  gpgsign = false
+  # template = /Users/st_lim/.gitmsg.txt
 
 [diff]
 
@@ -188,7 +169,7 @@
 
 [url "git@github.com:"]
 
-  # Personal Access Token - 9c5c04df33fe64bba2b393d0b0e1bd7a56b7ca40
+  # Personal Access Token - ff400df05163d1969c39696cc5caf1b852cb64e9
 	insteadOf = "gh:"
 	pushInsteadOf = "github:"
 	pushInsteadOf = "git://github.com/"
@@ -214,15 +195,19 @@
 
 [user]
 
-	signingkey = 31051081
-	name = Lim Swee Tat
-	email = sweetat+github@xfers.com
-
-# [remote "origin"]
-#	fetch = +refs/heads/*:refs/remotes/origin/*
+	signingkey = EE1EF39C32152053
+	name = Swee Tat Lim (WithEvo)
+	email = sweetat@withevo.com
 
 [credential]
 
   helper = osxkeychain
+
 [pull]
-	rebase = false
+
+  rebase = false
+
+[gpg]
+
+  program = smimesign
+	format = x509
