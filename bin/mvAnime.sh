@@ -5,7 +5,7 @@ ANIME_DIR=${DOWNLOAD_DIR}/Anime
 HOLLY_DIR=${DOWNLOAD_DIR}/Hollywood
 KIDS_DIR=${DOWNLOAD_DIR}/kids
 
-ANIME_PREFIX=('HorribleSubs' 'DeadFish' 'PAS' 'UTW' 'Anon' 'anon' 'Over-Time' 'FLsnow' 'Some-Stuffs' 'AnimeRG', 'Judas')
+ANIME_PREFIX=('HorribleSubs' 'DeadFish' 'PAS' 'UTW' 'Anon' 'anon' 'Over-Time' 'FLsnow' 'Some-Stuffs' 'AnimeRG' 'Judas' 'Anime Time' 'ASW')
 
 move_file_to_dir() {
   FULL_FILENAME=$1
@@ -31,18 +31,21 @@ move_file_to_dir() {
 }
 
 move_anime_to_dir() {
-  [ ! -d ${ANIME_DIR} ] && mkdir -p ${ANIME_DIR} 
+  [ ! -d ${ANIME_DIR} ] && mkdir -p ${ANIME_DIR}
+  IFS=$'\012'
   for i in {0..9} {A..Z}; do
     ANIME_I=${ANIME_DIR}/${i}
     for j in ${ANIME_PREFIX[@]}; do
       cd ${DOWNLOAD_DIR}
       for k in \[${j}\]\ ${i}*.mkv \[${j}\]_${i}*.mkv \[${j}\]\ ${i}*.mp4 \[${j}\]_${i}*.mp4; do
         if [ -f "${k}" ]; then
-          l="${k//_/ }"
-          m="${l%% - [0-9][0-9]*}"
-          n="${m%%) [0-9][0-9]* (*}"
-          [ ! -d "${ANIME_I}/${n}" ] && mkdir -p "${ANIME_I}/${n}"
-          mv "${k}" "${ANIME_I}/${n}"
+          a="${k//_/ }"
+          b="${a%% - [0-9][0-9]*}"
+          a="${b%%) [0-9][0-9]* (*}"
+          b="${a%% - [0-9]* \[*}"
+          x="${b%%- S[0-9][0-9]E[0-9][0-9]*}"
+          [ ! -d "${ANIME_I}/${x}" ] && mkdir -p "${ANIME_I}/${x}"
+          mv "${k}" "${ANIME_I}/${x}/"
         fi
       done
     done
@@ -107,7 +110,13 @@ if [ ! -d ${DOWNLOAD_DIR} ]; then
   exit 1
 fi
 
+OPTS=$1
 move_anime_to_dir
 move_to_holly
-#get_dir_subs ${KIDS_DIR}
-get_dir_subs ${HOLLY_DIR}
+case $OPTS in
+  sub)
+    #get_dir_subs ${KIDS_DIR}
+    get_dir_subs ${HOLLY_DIR}
+    ;;
+esac
+
