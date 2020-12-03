@@ -5,7 +5,7 @@ ANIME_DIR=${DOWNLOAD_DIR}/Anime
 HOLLY_DIR=${DOWNLOAD_DIR}/Hollywood
 KIDS_DIR=${DOWNLOAD_DIR}/kids
 
-ANIME_PREFIX=('HorribleSubs' 'DeadFish' 'PAS' 'UTW' 'Anon' 'anon' 'Over-Time' 'FLsnow' 'Some-Stuffs' 'AnimeRG' 'Judas' 'Anime Time' 'ASW')
+ANIME_PREFIX=('HorribleSubs' 'HorribleRips' 'DeadFish' 'PAS' 'UTW' 'Anon' 'anon' 'Over-Time' 'FLsnow' 'Some-Stuffs' 'AnimeRG' 'Judas' 'Anime Time' 'ASW')
 
 move_file_to_dir() {
   FULL_FILENAME=$1
@@ -105,6 +105,10 @@ get_dir_subs() {
   done
 }
 
+move_nsznsp_to_games() {
+    mv *\[NSP\] *\[NSZ\] ${DOWNLOAD_DIR}/Games/Switch
+}
+
 if [ ! -d ${DOWNLOAD_DIR} ]; then
   echo "${DOWNLOAD_DIR} not found"
   exit 1
@@ -113,6 +117,7 @@ fi
 OPTS=$1
 move_anime_to_dir
 move_to_holly
+move_nsznsp_to_games
 case $OPTS in
   sub)
     #get_dir_subs ${KIDS_DIR}
