@@ -54,11 +54,9 @@ HIST_STAMPS="yyyy-mm-dd"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   brew
-  bundler
   docker
   docker-compose
   encode64
-  gem
   git
   git-flow-avh
   iterm2
@@ -68,10 +66,6 @@ plugins=(
   npm
   pip
   python
-  rails
-  redis-cli
-  ruby
-  rvm
   sudo
   tmux
   yarn

@@ -2,7 +2,7 @@
 
 # Install command-line tools using Homebrew.
 if [ ! -d /usr/local/Homebrew ]; then
-				/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
 # Make sure we’re using the latest Homebrew.
@@ -15,41 +15,52 @@ source ./brew.sh
 brew upgrade
 
 # Install java before installing maven
-# brew cask install java6 
-# brew cask install java8
-brew cask install java 
+brew tap adoptopenjdk/openjdk
+# brew install --cask java6
+# brew install --cask java8
+brew install --cask java
 
 # Install my packages that I need installed
-brew install gpg2
+brew install awscli
+brew install aws-sam-cli
+brew install kafka
+brew install kafkacat
 # brew install maven
 # brew install maven-completion
-brew install nvm 
+brew install mongodb-database-tools
+brew install nvm
 # brew install postgresql
-brew install zsh-syntax-highlighting
+# brew install zsh-syntax-highlighting
 
 # Install from casks
-brew cask install docker
-brew cask install gimp
-brew cask install firefox
-# brew cask install firefox-beta
-brew cask install google-chrome
-brew cask install google-backup-and-sync
-brew cask install gpg-suite
-brew cask install itsycal
-brew cask install iterm2
-# brew cask install onedrive
-# brew cask install pgadmin4
-brew cask install rambox
-brew cask install rectangle
-# brew cask install skype
-# brew cask install skype-for-business
-# brew cask install spectacle 
-# brew cask install vimr
-# brew cask install virtualbox
-# brew cask install virtualbox-extension-pack
-brew cask install visual-studio-code
-brew cask install vlc
-brew cask install zoom
+brew install --cask brave-browser
+brew install --cask docker
+brew install --cask gimp
+brew install --cask firefox
+# brew install --cask firefox-beta
+brew install --cask goland
+# brew install --cask google-chrome
+# brew install --cask google-backup-and-sync
+# brew install --cask gpg-suite
+# brew install --cask itsycal
+brew install --cask iterm2
+brew install --cask keka
+brew install --cask kekadefaultapp
+# brew install --cask onedrive
+brew install --cask openvpn-connect
+# brew install --cask pgadmin4
+brew install --cask postman
+brew install --cask rambox
+brew install --cask rectangle
+# brew install --cask skype
+# brew install --cask skype-for-business
+brew install --cask steam
+# brew install --cask vimr
+# brew install --cask virtualbox
+# brew install --cask virtualbox-extension-pack
+# brew install --cask visual-studio-code
+brew install --cask vlc
+brew install --cask zoomus
 
 # Install neovim
 brew tap neovim/neovim
@@ -57,17 +68,17 @@ brew install neovim
 
 # Install fonts
 brew tap homebrew/cask-fonts
-brew cask install font-arial
-brew cask install cascadia-fonts
-brew cask install jetbrains-mono
+brew install --cask font-arial
+brew install --cask font-cascadia-code
+brew install --cask font-jetbrains-mono
 
 # Install microsoft fonts
 brew tap colindean/fonts-nonfree
-brew cask install font-microsoft-office
+brew install --cask font-microsoft-office
 
 # Install garmin
 # brew tap caskroom/drivers
-# brew cask install garmin-express
+# brew install --cask garmin-express
 
 # jenv requires java to be installed first
 brew install jenv
@@ -78,11 +89,19 @@ brew install pyenv
 # Source for jenv from ~/.extra
 source ~/.extra
 
+# Source for aws related
+brew tap aws/tap
+brew install --cask amazon-chime
+
+# Source for mongo related
+brew tap mongodb/brew
+brew install --cask mongodb-compass
+
 # Install Renv
 # https://github.com/viking/Renv
 # Install texinfo and basictex first
 # brew install texinfo
-# brew cask install basictex
+# brew install --cask basictex
 # open /usr/local/Caskroom/basictex/*/mactex-basictex-*.pkg
 # Install Renv
 # git clone https://github.com/viking/Renv.git ${HOME}/.Renv
