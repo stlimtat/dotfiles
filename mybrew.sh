@@ -111,6 +111,17 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 brew cleanup
 
 # Link the vim
-ln -sf ${HOME}/.config/nvim ${HOME}/.vim
-ln -sf ${HOME}/.config/nvim/init.vim ${HOME}/.vimrc
+# Using https://github.com/amix/vimrc
+git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+sh ~/.vim_runtime/install_awesome_vimrc.sh
+cd ~/.vim_runtime
+python update_plugins.py
+cd
+mkdir -p ~/.config/nvim
+ln -sf ~/.vimrc ~/.config/nvim/init.vim
+
+# ln -sf ${HOME}/.config/nvim ${HOME}/.vim
+# ln -sf ${HOME}/.config/nvim/init.vim ${HOME}/.vimrc
 mv ${HOME}/.zshrc.pre* ${HOME}/.zshrc
+
+
