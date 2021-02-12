@@ -2,7 +2,7 @@
 
 # Install command-line tools using Homebrew.
 if [ ! -d /usr/local/Homebrew ]; then
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
 # Make sure we’re using the latest Homebrew.
@@ -30,6 +30,7 @@ brew install kafkacat
 brew install mongodb-database-tools
 brew install nvm
 # brew install postgresql
+brew install tmux
 # brew install zsh-syntax-highlighting
 
 # Install from casks
@@ -76,10 +77,6 @@ brew install --cask font-jetbrains-mono
 brew tap colindean/fonts-nonfree
 brew install --cask font-microsoft-office
 
-# Install garmin
-# brew tap caskroom/drivers
-# brew install --cask garmin-express
-
 # jenv requires java to be installed first
 brew install jenv
 # brew install rbenv
@@ -97,25 +94,9 @@ brew install --cask amazon-chime
 brew tap mongodb/brew
 brew install --cask mongodb-compass
 
-# Install Renv
-# https://github.com/viking/Renv
-# Install texinfo and basictex first
-# brew install texinfo
-# brew install --cask basictex
-# open /usr/local/Caskroom/basictex/*/mactex-basictex-*.pkg
-# Install Renv
-# git clone https://github.com/viking/Renv.git ${HOME}/.Renv
-# mkdir ${HOME}/.Renv/versions ${HOME}/.Renv/plugins
-# git clone https://github.com/viking/R-build.git ${HOME}/.Renv/plugins/R-build
-# eval "$(${HOME}/.Renv/bin/Renv init -)"
-# R_VER="$(${HOME}/.Renv/bin/Renv install --list | grep -v [a-z] | sort -n | tail -n1 | awk '{print $1}' )"
-# CONFIGURE_OPTS="--without-x --enable-R-framework --includedir=$(brew --prefix xz)/include --enable-memory-profiling" Renv install --keep --verbose ${R_VER}
-# pushd ${HOME}/.Renv/sources/${R_VER}/R-${R_VER}
-#   ./configure --prefix=${HOME}/.Renv/versions/${R_VER} --without-x --enable-R-framework --includedir=$(brew --prefix xz)/include --enable-memory-profiling
-#   make
-#   make install
-# popd
-# Renv global ${R_VER}
+# Source for zsa-wally
+brew tap homebrew/cask-drivers
+brew install --cask zsa-wally
 
 # Invoke bin/reset-env.sh
 # source ~/bin/reset-env.sh
