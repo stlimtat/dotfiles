@@ -114,11 +114,12 @@ brew cleanup
 # Using https://github.com/amix/vimrc
 git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
 sh ~/.vim_runtime/install_awesome_vimrc.sh
-cd ~/.vim_runtime
+pushd ~/.vim_runtime
 python update_plugins.py
-cd
+popd
 mkdir -p ~/.config/nvim
 ln -sf ~/.vimrc ~/.config/nvim/init.vim
+cp init/my_configs.vim ~/.vim_runtime
 
 # ln -sf ${HOME}/.config/nvim ${HOME}/.vim
 # ln -sf ${HOME}/.config/nvim/init.vim ${HOME}/.vimrc
