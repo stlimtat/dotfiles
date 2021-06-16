@@ -5,7 +5,7 @@ ANIME_DIR=${DOWNLOAD_DIR}/Anime
 HOLLY_DIR=${DOWNLOAD_DIR}/Hollywood
 KIDS_DIR=${DOWNLOAD_DIR}/kids
 
-ANIME_PREFIX=('SSA' 'HorribleSubs' 'HorribleRips' 'DeadFish' 'PAS' 'UTW' 'Anon' 'anon' 'Over-Time' 'FLsnow' 'Some-Stuffs' 'AnimeRG' 'Judas' 'Anime Time' 'ASW')
+ANIME_PREFIX=('SSA' 'SubsPlease' 'Setsugen' 'Setsugen-Gao' 'HorribleSubs' 'HorribleRips' 'DeadFish' 'PAS' 'UTW' 'Anon' 'anon' 'Over-Time' 'FLsnow' 'Some-Stuffs' 'AnimeRG' 'Judas' 'Anime Time' 'ASW')
 
 move_file_to_dir() {
   FULL_FILENAME=$1

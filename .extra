@@ -19,10 +19,10 @@ export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
 
 # For goenv
-export GOENV_DISABLE_GOPATH=1
-export GO111MODULE=on
+# export GOENV_DISABLE_GOPATH=1
+# export GO111MODULE=on
 # eval "$(/usr/local/bin/goenv init - )"
-export GOPATH=${HOME}/go
+# export GOPATH=${HOME}/go
 export PATH=/usr/local/opt/curl-openssl/bin:$PATH:$(go env GOPATH)/bin
 
 # Using jenv
@@ -30,7 +30,9 @@ eval "$(/usr/local/bin/jenv init - ${SHELL})"
 export JAVA_HOME=$(/usr/local/bin/jenv javahome)
 
 # Using pyenv
-eval "$(/usr/local/bin/pyenv init -)"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
 
 # For rbenv
 # eval "$(/usr/local/bin/rbenv init - )"
