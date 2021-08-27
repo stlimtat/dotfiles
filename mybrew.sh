@@ -42,6 +42,19 @@ if [ ! -d ${HOME}/.vim_runtime ]; then
     mkdir -p ~/.config/nvim
     ln -sf ~/.vimrc ~/.config/nvim/init.vim
     cp init/my_configs.vim ~/.vim_runtime
+
+    git clone --depth=1 https://github.com/vim-syntastic/syntastic.git ~/.vim_runtime/my_plugins/syntastic
+    git clone https://github.com/fatih/vim-go.git ~/.vim_runtime/my_plugins/vim-go
+fi
+
+# python
+if [ ! -d ${HOME}/.pyenv/versions ]; then
+    PY_VER=$(pyenv install --list | grep "  3.9" | tail -n 1 | sed -e 's/ //g')
+    pyenv install ${PY_VER}
+    pyenv global ${PY_VER}
+    eval "$(pyenv init --path)"
+    pip install --upgrade pip
+    
 fi
 
 # https://github.com/jeffreytse/zsh-vi-mode

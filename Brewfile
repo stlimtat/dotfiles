@@ -29,6 +29,7 @@ brew 'neovim'
 brew 'nmap'
 brew 'mas' # Mac App Store manager
 brew 'p7zip'
+brew 'python'
 brew 'ssh-copy-id'
 brew 'tmux'
 
