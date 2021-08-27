@@ -7,7 +7,7 @@
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="pygmalion"
+ZSH_THEME="re5et"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -53,22 +53,19 @@ HIST_STAMPS="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  brew
   docker
   docker-compose
   encode64
   git
-  git-flow-avh
+  git-prompt
+  golang
   iterm2
-  jsontools
-  kubectl
-  node
-  npm
-  pip
-  python
+  jira
+  rand-quote
   sudo
+  terraform
   tmux
-  yarn
+  zsh-vi-mode
 )
 
 #echo "Running oh-my-zsh.sh...$(gdate +%s.%N)"
@@ -103,7 +100,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fpath=(/usr/local/share/zsh-completions $fpath)
 #rm -f ~/.zcompdump*; compinit
 
