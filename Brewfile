@@ -31,6 +31,7 @@ brew 'mas' # Mac App Store manager
 brew 'p7zip'
 brew 'python'
 brew 'ssh-copy-id'
+brew 'svn' # Needed for the custom fonts later
 brew 'tmux'
 
 # Development
@@ -46,7 +47,7 @@ brew 'pyenv'
 brew 'terraform'
 
 # Apps
-cask '1password'
+cask '1password-beta'
 cask 'brave-browser'
 cask 'docker'
 cask 'firefox'
