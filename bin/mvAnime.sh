@@ -5,7 +5,30 @@ ANIME_DIR=${DOWNLOAD_DIR}/Anime
 HOLLY_DIR=${DOWNLOAD_DIR}/Hollywood
 KIDS_DIR=${DOWNLOAD_DIR}/kids
 
-ANIME_PREFIX=('SSA' 'SubsPlease' 'Setsugen' 'Setsugen-Gao' 'QaS' 'HorribleSubs' 'Aoneko Subs' 'HorribleRips' 'DeadFish' 'PAS' 'UTW' 'Anon' 'anon' 'Over-Time' 'FLsnow' 'Some-Stuffs' 'AnimeRG' 'Judas' 'Anime Time' 'ASW')
+ANIME_PREFIX=(
+'Anime Time'
+'AnimeRG'
+'Anon'
+'anon'
+'Aoneko Subs'
+'ASW'
+'HYSUB'
+'DeadFish'
+'FLsnow'
+'HorribleRips'
+'HorribleSubs'
+'Judas'
+'Over-Time'
+'PAS'
+'QaS'
+'Sakurato'
+'Setsugen'
+'Setsugen-Gao'
+'Some-Stuffs'
+'SSA'
+'SubsPlease'
+'UTW'
+)
 
 move_file_to_dir() {
   FULL_FILENAME=$1
@@ -106,6 +129,9 @@ get_dir_subs() {
 }
 
 move_nsznsp_to_games() {
+    for i in *\[NSP\] *\[NSZ\]; do
+        rm -rf ${DOWNLOAD_DIR}/Games/Switch/${i}
+    done
     mv *\[NSP\] *\[NSZ\] ${DOWNLOAD_DIR}/Games/Switch
 }
 
