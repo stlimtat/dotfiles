@@ -12,6 +12,7 @@ ANIME_PREFIX=(
 'anon'
 'Aoneko Subs'
 'ASW'
+'EMBER'
 'HYSUB'
 'DeadFish'
 'FLsnow'
