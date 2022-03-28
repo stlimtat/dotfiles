@@ -49,7 +49,7 @@ fi
 
 # python
 if [ ! -d ${HOME}/.pyenv/versions ]; then
-    PY_VER=$(pyenv install --list | grep "  3.9" | tail -n 1 | sed -e 's/ //g')
+    PY_VER=$(pyenv install --list | grep "  3.10" | tail -n 1 | sed -e 's/ //g')
     pyenv install ${PY_VER}
     pyenv global ${PY_VER}
     eval "$(pyenv init --path)"

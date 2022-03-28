@@ -19,17 +19,17 @@ export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
 
 # For goenv
-# export GOENV_DISABLE_GOPATH=1
-# export GO111MODULE=on
-# eval "$(/usr/local/bin/goenv init - )"
-# export GOPATH=${HOME}/go
-export PATH=/usr/local/opt/curl-openssl/bin:$PATH:$(go env GOPATH)/bin
+export GOENV_PATH=$HOME/.goenv
+export PATH=$GOENV_PATH/bin:$PATH
+eval "$($GOENV_PATH/bin/goenv init - )"
+export PATH=$(go env GOPATH)/bin:$PATH
 
 # Using jenv
 eval "$(/usr/local/bin/jenv init - ${SHELL})"
 export JAVA_HOME=$(/usr/local/bin/jenv javahome)
 
 # Using pyenv
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
@@ -93,9 +93,16 @@ export DATABRICKS_AWS_TOKEN="dapi4c4be586986132b7ffc546a2926b3bac"
 # export SPARK_HOME=${HOME}/installs/spark-2.3.0-bin-hadoop2.7
 # export PATH=$SPARK_HOME/bin:$PATH
 
+export PYENV_VENV=3.8.8/envs/abnormal8
 export SOURCE=${HOME}/source
-export VENV=$(pyenv virtualenv-prefix abnormal)/envs/abnormal
+export VENV=$(pyenv prefix $PYENV_VENV)
+pyenv activate $PYENV_VENV
 . ${SOURCE}/tools/dev/common_bash_includes
 
-# Abnormal conda activate abnormal
-# conda activate airflow
+export CHRONOSPHERE_API_TOKEN=e6a8d4620877a9d845c1ee07673e1162b1fc6dc451c92ef595da26613a77bee0
+export CHRONOSPHERE_ORG_NAME=abnormal
+
+# unfunction aws_ecr_login
+# aws_ecr_login() {
+#     aws-vault exec prod-eng aws ecr get-login-password -- --region us-east-1 | podman login --username AWS --password-stdin ${ECR_REPO}
+# }
