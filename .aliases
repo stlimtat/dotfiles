@@ -149,3 +149,15 @@ alias reload="exec ${SHELL} -l"
 
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
+
+# For lvim
+# https://www.lunarvim.org/
+alias vim='$HOME/.local/bin/lvim'
+
+# For some odd ohmyzsh theme which gives zsh_path errors
+#alias zsh_path="dirname $(which zsh)"
+alias zsh_path="pwd"
+
+# Some abnormal security stuff
+alias airflow_worker_ips="aws ec2 describe-instances --filters Name=tag:Name,Values=airflow-worker-prod | jq -r '.Reservations[].Instances[].PrivateIpAddress' | sort "
+alias airflow_onboarding_worker_ips="aws ec2 describe-instances --filters Name=tag:Name,Values=airflow-worker-onboarding | jq -r '.Reservations[].Instances[].PrivateIpAddress' | sort"
