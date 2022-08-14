@@ -17,6 +17,7 @@ tap 'nicoverbruggen/homebrew-cask'
 # Binaries
 brew 'awscli'
 brew 'bash' # Latest Bash version
+brew 'code-minimap' # Needed for neovim minimap
 brew 'coreutils' # Those that come with macOS are outdated
 brew 'findutils'
 brew 'git'
@@ -32,6 +33,7 @@ brew 'p7zip'
 brew 'python'
 brew 'ssh-copy-id'
 brew 'svn' # Needed for the custom fonts later
+brew 'the_silver_searcher' # Needed for fzf for vim
 brew 'tmux'
 
 # Development

@@ -65,11 +65,11 @@ export CHRONOSPHERE_API_TOKEN=e6a8d4620877a9d845c1ee07673e1162b1fc6dc451c92ef595
 export CHRONOSPHERE_ORG_NAME=abnormal
 
 # export KUBECONFIG="$SOURCE/ops/kubernetes/azure/prod/configurations/kubelogin_config_deploy.yaml"
+export AWS_PROFILE=absec-mgmt
 export DATABRICKS_AWS_TOKEN=dapia607e9ea91f04633998ae6bc9e0dd9fd 
 export MANAGED_IDENTITY_CLIENT_ID="97121047-5626-4493-a9df-ee73178e98d5"
 export MTLS_HOME=${HOME}/.mtls/user
 export STORAGE_ACCOUNT_URL="https://abnormaldataneu.blob.core.windows.net"
-
 
 # in bash_profile
 broadcast_to_airflow_onboarding_workers() {
