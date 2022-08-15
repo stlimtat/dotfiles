@@ -529,7 +529,7 @@
   },
   "Blur" : false,
   "Vertical Spacing" : 1,
-  "Normal Font" : "FiraCodeNerdFontCompleteM-Regular 14",
+  "Normal Font" : "JetBrainsMonoNerdFontCompleteM-Regular 14",
   "Ansi 7 Color" : {
     "Red Component" : 0.93333333333333335,
     "Color Space" : "sRGB",
