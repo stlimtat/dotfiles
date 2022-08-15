@@ -90,6 +90,7 @@ Swee Tat Lim
 ## Thanks to…
 
 * [Mathias Bynens](https://mathiasbynens.be/) and his [dotfiles repo](https://github.com/mathiasbynens/dotfiles)
+* [abzcoding]() for his [lvim config](https://github.com/abzcoding/lvim)
 * @ptb and [his _macOS Setup_ repository](https://github.com/ptb/mac-setup)
 * [Ben Alman](http://benalman.com/) and his [dotfiles repository](https://github.com/cowboy/dotfiles)
 * [Cătălin Mariș](https://github.com/alrra) and his [dotfiles repository](https://github.com/alrra/dotfiles)
