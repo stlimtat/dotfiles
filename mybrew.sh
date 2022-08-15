@@ -40,18 +40,24 @@ fi
 # Using https://www.lunarvim.org/
 if [[ ! -f ${HOME}/.local/bin/lvim ]]; then
     curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh | /bin/zsh -
+    ln -sf ${HOME}/.local/bin/lvim ${HOME}/bin/lvim
+    ${HOME}/bin/lvim +LvimUpdate +LvimCacheReset +q
+    ${HOME}/bin/lvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+    luarocks install luacheck
+     bn
 fi
 # python
 # https://github.com/pyenv/pyenv
 if [[ ! -d ${HOME}/.pyenv/versions ]]; then
-    PY_VER=$(pyenv install --list | grep "  3.10" | tail -n 1 | sed -e 's/ //g')
-    pyenv install ${PY_VER}
-    pyenv global ${PY_VER}
+    # PY_VER=$(pyenv install --list | grep "  3.10" | tail -n 1 | sed -e 's/ //g')
+    # pyenv install ${PY_VER}
+    # pyenv global ${PY_VER}
+    pyenv install 3.8.8
+    pyenv global 3.8.8
     eval "$(pyenv init --path)"
     pip install --upgrade pip
-    pip install subliminal
-    pip install virtualenv pipenv
-    pip install youtube-dl
+    pip install subliminal youtube-dl
+    pip install flake8 pipenv pynvim vim-vint virtualenv yapf
 fi
 
 # https://github.com/jeffreytse/zsh-vi-mode
