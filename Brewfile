@@ -88,7 +88,7 @@ cask 'quicklook-json'
 # Fonts
 cask 'font-arial'
 cask 'font-cascadia-code'
-cask 'font-hack'
+cask 'font-hack-nerd-font'
 cask 'font-fira-code-nerd-font'
 cask 'font-ibm-plex'
 cask 'font-ibm-plex-mono'
