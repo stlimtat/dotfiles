@@ -3,7 +3,9 @@ export PYENV_VENV=3.8.8/envs/abnormal
 export SOURCE=${HOME}/source
 export VENV=$(pyenv prefix $PYENV_VENV)
 pyenv activate $PYENV_VENV
+echo "Running abnormal/tools/dev/common_bash_includes...$(gdate +%s.%N)"
 . ${SOURCE}/tools/dev/common_bash_includes
+echo "Running abnormal/tools/dev/common_bash_includes...$(gdate +%s.%N)...Done"
 
 # export KUBECONFIG="$SOURCE/ops/kubernetes/azure/prod/configurations/kubelogin_config_deploy.yaml"
 export AWS_PROFILE=absec-mgmt
