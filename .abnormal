@@ -1,0 +1,31 @@
+# Abnormal
+export PYENV_VENV=3.8.8/envs/abnormal
+export SOURCE=${HOME}/source
+export VENV=$(pyenv prefix $PYENV_VENV)
+pyenv activate $PYENV_VENV
+. ${SOURCE}/tools/dev/common_bash_includes
+
+# export KUBECONFIG="$SOURCE/ops/kubernetes/azure/prod/configurations/kubelogin_config_deploy.yaml"
+export AWS_PROFILE=absec-mgmt
+export MTLS_HOME=${HOME}/.mtls/user
+export STORAGE_ACCOUNT_URL="https://abnormaldataneu.blob.core.windows.net"
+
+# in bash_profile
+broadcast_to_airflow_onboarding_workers() {
+  BROADCAST_COMMAND="\"$1\""
+  echo "Broadcasting command: $BROADCAST_COMMAND"
+
+  output_file="/tmp/broadcast_output.txt"
+  echo "" > $output_file
+  tail -f $output_file &
+  # for IP_ADDRESS in "space-separated recipient IP addresses"
+  for IP_ADDRESS in $(airflow_onboarding_worker_ips)
+  do
+    echo $IP_ADDRESS >> $output_file
+    echo "ssh -t $IP_ADDRESS \"docker exec -it \\\$(docker container ps -f name=airflow-worker | sed -n '2 p' | cut -f1 -d' ' ) /bin/bash -c -i $BROADCAST_COMMAND\""
+    ssh -t $IP_ADDRESS "docker exec -it \$(docker container ps -f name=airflow-worker | sed -n '2 p' | cut -f1 -d' ' ) /bin/bash -c -i $BROADCAST_COMMAND" >> $output_file
+    echo "##################################################" >> $output_file
+  done
+  fg
+}
+
