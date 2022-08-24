@@ -1,6 +1,10 @@
 -- Additional Plugins
 lvim.plugins = {
+  { 'skywind3000/asyncrun.vim' },
+  { 'skywind3000/asynctasks.vim' },
   { "lunarvim/colorschemes" },
+  { 'tpope/vim-dadbod' },
+
   {
     "sindrets/diffview.nvim",
     event = "BufRead",
@@ -20,7 +24,6 @@ lvim.plugins = {
     config = function()
       require('goto-preview').setup {
         width = 120; -- Width of the floating window
-        height = 25; -- Height of the floating window
         default_mappings = true; -- Bind default mappings
         debug = false; -- Print debug information
         opacity = nil; -- 0-100 opacity level of the floating window where 100 is fully transparent.
@@ -55,17 +58,6 @@ lvim.plugins = {
     end,
   },
   {
-    "AckslD/nvim-neoclip.lua",
-    requires = {
-      -- you'll need at least one of these
-      -- {'nvim-telescope/telescope.nvim'},
-      -- {'ibhagwan/fzf-lua'},
-    },
-    config = function()
-      require('neoclip').setup()
-    end,
-  },
-  {
     "nacro90/numb.nvim",
     event = "BufRead",
     config = function()
@@ -75,6 +67,36 @@ lvim.plugins = {
       }
     end,
   },
+  {
+    'kevinhwang91/nvim-hlslens',
+    config = function()
+      require("hlslens").setup({
+        auto_enable = true,
+        calm_down = true,
+        enable_incsearch = false,
+      })
+    end
+  },
+  {
+    "AckslD/nvim-neoclip.lua",
+    requires = {
+      { 'nvim-telescope/telescope.nvim' },
+    },
+    config = function()
+      require('neoclip').setup()
+    end,
+  },
+  {
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim"
+    },
+  },
+  { 'nvim-neotest/neotest-go' },
+  { 'nvim-neotest/neotest-python' },
+  { 'nvim-neotest/neotest-vim-test' },
   {
     "kevinhwang91/nvim-bqf",
     event = { "BufRead", "BufNew" },
@@ -127,6 +149,41 @@ lvim.plugins = {
     end,
   },
   { 'anuvyklack/pretty-fold.nvim' },
+  {
+    "ThePrimeagen/refactoring.nvim",
+    requires = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-treesitter/nvim-treesitter" }
+    },
+    config = function()
+      require('refactoring').setup({
+        prompt_func_return_type = {
+          go = true,
+          java = false,
+          python = true,
+
+          cpp = false,
+          c = false,
+          h = false,
+          hpp = false,
+          cxx = false,
+        },
+        prompt_func_param_type = {
+          go = true,
+          java = false,
+          python = true,
+
+          cpp = false,
+          c = false,
+          h = false,
+          hpp = false,
+          cxx = false,
+        },
+        printf_statements = {},
+        print_var_statements = {},
+      })
+    end,
+  },
   { 'rose-pine/neovim' },
   {
     'simrat39/symbols-outline.nvim',
@@ -149,7 +206,8 @@ lvim.plugins = {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
-  { "rhysd/vim-grammarous" },
+  { 'kristijanhusak/vim-dadbod-completion' },
+  { 'kristijanhusak/vim-dadbod-ui' },
   {
     "tpope/vim-fugitive",
     cmd = {
@@ -169,6 +227,8 @@ lvim.plugins = {
     },
     ft = { "fugitive" }
   },
+  { "rhysd/vim-grammarous" },
+  { 'mtdl9/vim-log-highlighting' },
   {
     "andymass/vim-matchup",
     event = "CursorMoved",
@@ -180,6 +240,7 @@ lvim.plugins = {
   { "tpope/vim-rhubarb" },
   { "tpope/vim-repeat" },
   { "tpope/vim-surround" },
+  { 'vim-test/vim-test' },
 }
 
 -- general
@@ -209,15 +270,20 @@ vim.cmd([[
   nmap [q :cprevious <cr>
   nmap ]q :cnext <cr>
 ]])
+vim.g["test#python#runner"] = 'pytest'
 vim.g.tokyonight_italic_functions = true
 vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 vim.g.tokyonight_style = "night"
 -- unmap a default keymapping
 vim.keymap.del("n", "<C-Up>")
+-- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.o.foldlevel = 4
+-- vim.o.foldmethod = 'expr'
 vim.o.guifont = "JetbrainsMono Nerd Font Mono:14;FiraCode Nerd Font:14"
 vim.o.sessionoptions = "curdir,folds,help,options,tabpages,winsize,resize,winpos,terminal"
 vim.opt.cmdheight = 1
 vim.opt.relativenumber = true
+vim.opt.wrap = true
 
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.alpha.active = true
@@ -266,6 +332,7 @@ lvim.builtin.telescope.on_config_done = function(telescope)
   pcall(telescope.load_extension, "neoclip")
   pcall(telescope.load_extension, "packer")
   pcall(telescope.load_extension, "project")
+  pcall(telescope.load_extension, "refactoring")
   pcall(telescope.load_extension, "smart-history")
 end
 lvim.builtin.terminal.active = true
@@ -354,10 +421,22 @@ lvim.builtin.which_key.mappings["z"] = {
 }
 
 -- generic LSP settings
-lvim.lsp.automatic_servers_installation = false
+lvim.lsp.automatic_servers_installation = true
+-- lvim.lsp.installer.setup.automatic_installation = true
 lvim.lsp.installer.setup.ensure_installed = {
+  -- "bashls",
+  -- "css-lsp",
+  -- "cssmodules_ls",
+  -- "dockerfile",
+  -- "dockerls",
+  -- "golangci_lint_ls",
+  -- "gopls",
+  -- "grammerly",
+  -- "html-lsp",
+  -- "json-lsp",
+  "pyright",
   "sumeko_lua",
-  "jsonls",
+  -- "terraformls",
 }
 
 -- set a formatter, this will override the language server formatting capabilities (if it exists)
@@ -365,7 +444,7 @@ local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { command = "black", filetypes = { "python" } },
   { command = "gofmt", filetypes = { "go" } },
-  { command = "isort", filetypes = { "python" } },
+  -- { command = "isort", filetypes = { "python" } },
   {
     command = "prettier",
     extra_args = { "--print-with", "100" },
@@ -376,8 +455,18 @@ formatters.setup {
 -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
-  { command = "pylint", filetypes = { "python" } },
-  { command = "flake8", filetypes = { "python" } },
+  {
+    command = "pylint",
+    extra_args = {
+      "--init-hook",
+      "import sys;" ..
+          "sys.path.append(\"" .. os.getenv("HOME") .. "/source/src/py\");" ..
+          "sys.path.append(\"" .. os.getenv("HOME") .. "/source/src/pytests\");" ..
+          "sys.path.append(\"" .. os.getenv("HOME") .. "/source/src/pytests/abnormal/test\");",
+    },
+    filetypes = { "python" },
+  },
+  -- { command = "flake8", filetypes = { "python" } },
   {
     command = "shellcheck",
     extra_args = { "--severity", "warning" },
@@ -402,6 +491,40 @@ vim.api.nvim_create_autocmd("FileType", {
     require("nvim-treesitter.highlight").attach(0, "bash")
   end,
 })
+require("neotest").setup({
+  adapters = {
+    require("neotest-python")({
+      dap = {
+        justMyCode = false
+      },
+    }),
+    require("neotest-vim-test")({
+      ignore_file_types = { "python", "vim", "lua" },
+    }),
+  },
+})
+require("lvim.lsp.manager").setup("pyright", {
+  settings = {
+    python = {
+      analysis = {
+        include = {
+          os.getenv('HOME') .. '/source/src/py',
+          os.getenv('HOME') .. '/source/src/pytests',
+          os.getenv('HOME') .. '/source/src/pytests/abnormal/test',
+        },
+        exclude = {
+          "**/__pycache__",
+        },
+        extraPaths = {
+          os.getenv('HOME') .. '/source/src/py',
+          os.getenv('HOME') .. '/source/src/pytests',
+          os.getenv('HOME') .. '/source/src/pytests/abnormal/test',
+        }
+      },
+    },
+  },
+})
+
 local status_ok, user_dap = pcall(require, "user.dap")
 if not status_ok then
   return
