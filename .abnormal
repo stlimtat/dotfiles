@@ -1,19 +1,31 @@
+# .alias
+# For lvim - abnormal
+# https://www.lunarvim.org/
+alias lvim="PYTHONPATH=${HOME}/source/src/py:${HOME}/source/src/pytests:${HOME}/source/src/pytests/abnormal/test ${HOME}/.local/bin/lvim"
+alias vim="PYTHONPATH=${HOME}/source/src/py:${HOME}/source/src/pytests:${HOME}/source/src/pytests/abnormal/test ${HOME}/.local/bin/lvim"
+
+# Some abnormal security stuff
+alias airflow_worker_ips="aws ec2 describe-instances --filters Name=tag:Name,Values=airflow-worker-prod | jq -r '.Reservations[].Instances[].PrivateIpAddress' | sort "
+alias airflow_onboarding_worker_ips="aws ec2 describe-instances --filters Name=tag:Name,Values=airflow-worker-onboarding | jq -r '.Reservations[].Instances[].PrivateIpAddress' | sort"
+
 # Abnormal
+export AWS_PROFILE=absec-mgmt
+# export KUBECONFIG="$SOURCE/ops/kubernetes/azure/prod/configurations/kubelogin_config_deploy.yaml"
+export MTLS_HOME=${HOME}/.mtls/user
 export PYENV_VENV=3.8.8/envs/abnormal
 export SOURCE=${HOME}/source
+export STORAGE_ACCOUNT_URL="https://abnormaldataneu.blob.core.windows.net"
 export VENV=$(pyenv prefix $PYENV_VENV)
 pyenv activate $PYENV_VENV
-echo "Running abnormal/tools/dev/common_bash_includes...$(gdate +%s.%N)"
+start_time=$(gdate +%s%3N)
+echo "Running abnormal/tools/dev/common_bash_includes...${start_time}ms"
 . ${SOURCE}/tools/dev/common_bash_includes
-echo "Running abnormal/tools/dev/common_bash_includes...$(gdate +%s.%N)...Done"
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Running abnormal/tools/dev/common_bash_includes...${end_time}ms...${time_taken}ms...Done"
 
-# export KUBECONFIG="$SOURCE/ops/kubernetes/azure/prod/configurations/kubelogin_config_deploy.yaml"
-export AWS_PROFILE=absec-mgmt
-export MTLS_HOME=${HOME}/.mtls/user
-export STORAGE_ACCOUNT_URL="https://abnormaldataneu.blob.core.windows.net"
-
-# in bash_profile
-broadcast_to_airflow_onboarding_workers() {
+# Adding a function in bash_profile
+function broadcast_to_airflow_onboarding_workers() {
   BROADCAST_COMMAND="\"$1\""
   echo "Broadcasting command: $BROADCAST_COMMAND"
 

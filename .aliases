@@ -54,6 +54,7 @@ alias update='sudo softwareupdate -i -a; mas upgrade; brew update; brew upgrade 
 # Google Chrome
 alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 alias canary='/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary'
+alias brave='/Applications/Brave Browser.app/Contents/MacOS/Brave Browser'
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -150,15 +151,9 @@ alias reload="exec ${SHELL} -l"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 
-# For lvim
-# https://www.lunarvim.org/
-alias lvim='$HOME/.local/bin/lvim'
-alias vim='$HOME/.local/bin/lvim'
-
 # For some odd ohmyzsh theme which gives zsh_path errors
 #alias zsh_path="dirname $(which zsh)"
 alias zsh_path="pwd"
 
-# Some abnormal security stuff
-alias airflow_worker_ips="aws ec2 describe-instances --filters Name=tag:Name,Values=airflow-worker-prod | jq -r '.Reservations[].Instances[].PrivateIpAddress' | sort "
-alias airflow_onboarding_worker_ips="aws ec2 describe-instances --filters Name=tag:Name,Values=airflow-worker-onboarding | jq -r '.Reservations[].Instances[].PrivateIpAddress' | sort"
+# For lvim - normal
+alias vim="${HOME}/.local/bin/lvim"
