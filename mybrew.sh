@@ -44,18 +44,29 @@ fi
 # Lunarvim
 # Using https://www.lunarvim.org/
 if [[ ! -f ${HOME}/.local/bin/lvim ]]; then
-    curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh | /bin/zsh -
+    curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh | /bin/bash -
     ln -sf ${HOME}/.local/bin/lvim ${HOME}/bin/lvim
-    ${HOME}/bin/lvim +LvimUpdate +LvimCacheReset +q
+    rsync -ar $(pwd)/.config/ ${HOME}/.config/
+    ${HOME}/bin/lvim +LvimUpdate +LvimCacheReset +'LspInstall pyright' +'TSInstall python' +q
     ${HOME}/bin/lvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
     luarocks install luacheck
-     bn
 fi
 #
 # oh-my-zsh
 # https://github.com/ohmyzsh/ohmyzsh
 if [[ ! -d ${HOME}/.oh-my-zsh ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    # https://github.com/jeffreytse/zsh-vi-mode
+    if [[ ! -d ${HOME}/.oh-my-zsh/custom/plugins/zsh-vi-mode ]]; then
+        git clone https://github.com/jeffreytse/zsh-vi-mode ${HOME}/.oh-my-zsh/custom/plugins/zsh-vi-mode
+    fi
+    # https://github.com/eendroroy/alien
+    if [[ ! -d ${HOME}/.oh-my-zsh/custom/alien ]]; then
+        git clone https://github.com/eendroroy/alien ${HOME}/.oh-my-zsh/custom/alien
+        pushd ${HOME}/.oh-my-zsh/custom/alien
+          git submodule update --init --recursive
+        popd
+    fi
 fi
 #
 # python
@@ -70,11 +81,6 @@ if [[ ! -d ${HOME}/.pyenv/versions ]]; then
     pip install --upgrade pip
     pip install subliminal youtube-dl
     pip install flake8 pipenv pynvim vim-vint virtualenv yapf
-fi
-
-# https://github.com/jeffreytse/zsh-vi-mode
-if [[ ! -d ${ZSH}/custom/plugins/zsh-vi-mode ]]; then
-    git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH/custom/plugins/zsh-vi-mode
 fi
 
 # Return the .zshrc.pre back to .zshrc

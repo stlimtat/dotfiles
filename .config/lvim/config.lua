@@ -122,6 +122,7 @@ lvim.plugins = {
   {
     'rcarriga/nvim-dap-ui',
     requires = { "mfussenegger/nvim-dap" },
+
   },
   {
     'theHamsta/nvim-dap-virtual-text',
@@ -189,6 +190,7 @@ lvim.plugins = {
     'simrat39/symbols-outline.nvim',
     cmd = "SymbolsOutline",
   },
+  { 'kelly-lin/telescope-ag' },
   { 'nvim-telescope/telescope-file-browser.nvim' },
   { 'nvim-telescope/telescope-frecency.nvim' },
   { 'nvim-telescope/telescope-packer.nvim' },
@@ -244,9 +246,31 @@ lvim.plugins = {
 }
 
 -- general
+-- Autocommands (https://neovim.io/doc/user/autocmd.html)
+lvim.autocommands = {
+  {
+    "BufAdd,BufNewFile,BufRead",
+    {
+      command = "tab sball",
+      nested = true,
+      pattern = "*",
+    }
+  },
+  {
+    "FileType",
+    {
+      pattern = "zsh",
+      callback = function()
+        -- let treesitter use bash highlight for zsh files as well
+        require("nvim-treesitter.highlight").attach(0, "bash")
+      end,
+    }
+  },
+}
 lvim.colorscheme = "tokyonight"
 lvim.format_on_save = true
 lvim.leader = "space"
+lvim.line_wrap_cursor_movement = true
 lvim.log.level = "warn"
 -- override a default keymapping
 lvim.keys.normal_mode = {
@@ -276,13 +300,17 @@ vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 vim.g.tokyonight_style = "night"
 -- unmap a default keymapping
 vim.keymap.del("n", "<C-Up>")
--- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
--- vim.o.foldlevel = 4
--- vim.o.foldmethod = 'expr'
-vim.o.guifont = "JetbrainsMono Nerd Font Mono:14;FiraCode Nerd Font:14"
-vim.o.sessionoptions = "curdir,folds,help,options,tabpages,winsize,resize,winpos,terminal"
+vim.opt.guifont = "JetbrainsMono Nerd Font Mono:14;FiraCode Nerd Font:14"
 vim.opt.cmdheight = 1
+vim.opt.expandtab = true
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.opt.foldlevel = 4
+vim.opt.foldmethod = 'expr'
 vim.opt.relativenumber = true
+vim.opt.sessionoptions = "curdir,folds,help,options,tabpages,winsize,resize,winpos,terminal"
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+vim.opt.tabstop = 2
 vim.opt.wrap = true
 
 -- Use which-key to add extra bindings with the leader-key prefix
@@ -326,6 +354,7 @@ lvim.builtin.telescope.defaults.mappings = {
   },
 }
 lvim.builtin.telescope.on_config_done = function(telescope)
+  pcall(telescope.load_extension, "ag")
   pcall(telescope.load_extension, "file-browser")
   pcall(telescope.load_extension, "frecency")
   -- pcall(telescope.load_extension, "fzf-native")
@@ -421,8 +450,9 @@ lvim.builtin.which_key.mappings["z"] = {
 }
 
 -- generic LSP settings
-lvim.lsp.automatic_servers_installation = true
--- lvim.lsp.installer.setup.automatic_installation = true
+-- lvim.lsp.automatic_servers_installation = true
+lvim.lsp.installer.setup.automatic_installation = false
+lvim.lsp.automatic_configuration.skipped_servers = {}
 lvim.lsp.installer.setup.ensure_installed = {
   -- "bashls",
   -- "css-lsp",
@@ -434,7 +464,7 @@ lvim.lsp.installer.setup.ensure_installed = {
   -- "grammerly",
   -- "html-lsp",
   -- "json-lsp",
-  "pyright",
+  -- "pylsp",
   "sumeko_lua",
   -- "terraformls",
 }
@@ -444,7 +474,7 @@ local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { command = "black", filetypes = { "python" } },
   { command = "gofmt", filetypes = { "go" } },
-  -- { command = "isort", filetypes = { "python" } },
+  { command = "isort", filetypes = { "python" } },
   {
     command = "prettier",
     extra_args = { "--print-with", "100" },
@@ -458,6 +488,8 @@ linters.setup {
   {
     command = "pylint",
     extra_args = {
+      "--rcfile",
+      os.getenv("HOME") .. "/source/.pylintrc",
       "--init-hook",
       "import sys;" ..
           "sys.path.append(\"" .. os.getenv("HOME") .. "/source/src/py\");" ..
@@ -466,7 +498,7 @@ linters.setup {
     },
     filetypes = { "python" },
   },
-  -- { command = "flake8", filetypes = { "python" } },
+  { command = "flake8", filetypes = { "python" } },
   {
     command = "shellcheck",
     extra_args = { "--severity", "warning" },
@@ -477,20 +509,6 @@ linters.setup {
   },
 }
 
-
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
-vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = { "*.json", "*.jsonc" },
-  -- enable wrap mode for json files only
-  command = "setlocal wrap",
-})
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "zsh",
-  callback = function()
-    -- let treesitter use bash highlight for zsh files as well
-    require("nvim-treesitter.highlight").attach(0, "bash")
-  end,
-})
 require("neotest").setup({
   adapters = {
     require("neotest-python")({
