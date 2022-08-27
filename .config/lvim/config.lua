@@ -86,17 +86,17 @@ lvim.plugins = {
       require('neoclip').setup()
     end,
   },
-  {
-    "nvim-neotest/neotest",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "antoinemadec/FixCursorHold.nvim"
-    },
-  },
-  { 'nvim-neotest/neotest-go' },
-  { 'nvim-neotest/neotest-python' },
-  { 'nvim-neotest/neotest-vim-test' },
+  -- {
+  --   "nvim-neotest/neotest",
+  --   requires = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "antoinemadec/FixCursorHold.nvim"
+  --   },
+  -- },
+  -- { 'nvim-neotest/neotest-go' },
+  -- { 'nvim-neotest/neotest-python' },
+  -- { 'nvim-neotest/neotest-vim-test' },
   {
     "kevinhwang91/nvim-bqf",
     event = { "BufRead", "BufNew" },
@@ -149,7 +149,6 @@ lvim.plugins = {
       require("octo").setup({})
     end,
   },
-  { 'anuvyklack/pretty-fold.nvim' },
   {
     "ThePrimeagen/refactoring.nvim",
     requires = {
@@ -293,6 +292,9 @@ vim.cmd([[
   nmap <C-f> :Ag<Space>
   nmap [q :cprevious <cr>
   nmap ]q :cnext <cr>
+  set shiftwidth=2
+  set softtabstop=2
+  set tabstop=2
 ]])
 vim.g["test#python#runner"] = 'pytest'
 vim.g.tokyonight_italic_functions = true
@@ -300,17 +302,19 @@ vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 vim.g.tokyonight_style = "night"
 -- unmap a default keymapping
 vim.keymap.del("n", "<C-Up>")
-vim.opt.guifont = "JetbrainsMono Nerd Font Mono:14;FiraCode Nerd Font:14"
 vim.opt.cmdheight = 1
+vim.opt.colorcolumn = "99999"
 vim.opt.expandtab = true
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
--- vim.opt.foldlevel = 4
+vim.opt.foldlevel = 999
 vim.opt.foldmethod = 'expr'
+vim.opt.guifont = "JetbrainsMono Nerd Font Mono:14;FiraCode Nerd Font:14"
 vim.opt.relativenumber = true
 vim.opt.sessionoptions = "curdir,folds,help,options,tabpages,winsize,resize,winpos,terminal"
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.tabstop = 2
+vim.opt.termguicolors = true
 vim.opt.wrap = true
 
 -- Use which-key to add extra bindings with the leader-key prefix
@@ -319,7 +323,7 @@ lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.cmp.completion.keyword_length = 3
 lvim.builtin.dap.active = true
 lvim.builtin.notify.active = true
-lvim.builtin.nvimtree.setup.disable_netrw = true
+lvim.builtin.nvimtree.setup.disable_netrw = false
 lvim.builtin.nvimtree.setup.open_on_setup = true
 lvim.builtin.nvimtree.setup.renderer.group_empty = true
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
@@ -452,7 +456,7 @@ lvim.builtin.which_key.mappings["z"] = {
 -- generic LSP settings
 -- lvim.lsp.automatic_servers_installation = true
 lvim.lsp.installer.setup.automatic_installation = false
-lvim.lsp.automatic_configuration.skipped_servers = {}
+-- lvim.lsp.automatic_configuration.skipped_servers = {}
 lvim.lsp.installer.setup.ensure_installed = {
   -- "bashls",
   -- "css-lsp",
@@ -469,60 +473,24 @@ lvim.lsp.installer.setup.ensure_installed = {
   -- "terraformls",
 }
 
--- set a formatter, this will override the language server formatting capabilities (if it exists)
-local formatters = require "lvim.lsp.null-ls.formatters"
-formatters.setup {
-  { command = "black", filetypes = { "python" } },
-  { command = "gofmt", filetypes = { "go" } },
-  { command = "isort", filetypes = { "python" } },
-  {
-    command = "prettier",
-    extra_args = { "--print-with", "100" },
-    filetypes = { "typescript", "typescriptreact" },
-  },
-}
-
--- set additional linters
-local linters = require "lvim.lsp.null-ls.linters"
-linters.setup {
-  {
-    command = "pylint",
-    extra_args = {
-      "--rcfile",
-      os.getenv("HOME") .. "/source/.pylintrc",
-      "--init-hook",
-      "import sys;" ..
-          "sys.path.append(\"" .. os.getenv("HOME") .. "/source/src/py\");" ..
-          "sys.path.append(\"" .. os.getenv("HOME") .. "/source/src/pytests\");" ..
-          "sys.path.append(\"" .. os.getenv("HOME") .. "/source/src/pytests/abnormal/test\");",
-    },
-    filetypes = { "python" },
-  },
-  { command = "flake8", filetypes = { "python" } },
-  {
-    command = "shellcheck",
-    extra_args = { "--severity", "warning" },
-  },
-  {
-    command = "codespell",
-    filetypes = { "javascript", "python" },
-  },
-}
-
-require("neotest").setup({
-  adapters = {
-    require("neotest-python")({
-      dap = {
-        justMyCode = false
-      },
-    }),
-    require("neotest-vim-test")({
-      ignore_file_types = { "python", "vim", "lua" },
-    }),
-  },
-})
+-- require("neotest").setup({
+--   adapters = {
+--     require("neotest-python")({
+--       dap = {
+--         justMyCode = false
+--       },
+--     }),
+--     require("neotest-vim-test")({
+--       ignore_file_types = { "python", "vim", "lua" },
+--     }),
+--   },
+-- })
 require("lvim.lsp.manager").setup("pyright", {
   settings = {
+    pyright = {
+      disableLanguageServices = false,
+      disableOrganizeImports = false,
+    },
     python = {
       analysis = {
         include = {
@@ -530,6 +498,8 @@ require("lvim.lsp.manager").setup("pyright", {
           os.getenv('HOME') .. '/source/src/pytests',
           os.getenv('HOME') .. '/source/src/pytests/abnormal/test',
         },
+        autoSearchPaths = true,
+        diagnosticMode = "workspace",
         exclude = {
           "**/__pycache__",
         },
@@ -537,7 +507,8 @@ require("lvim.lsp.manager").setup("pyright", {
           os.getenv('HOME') .. '/source/src/py',
           os.getenv('HOME') .. '/source/src/pytests',
           os.getenv('HOME') .. '/source/src/pytests/abnormal/test',
-        }
+        },
+        useLibraryCodeForTypes = true,
       },
     },
   },
@@ -554,3 +525,15 @@ if not status_ok then
   return
 end
 user_dapui.setup()
+local user_lualine
+status_ok, user_lualine = pcall(require, "user.lualine")
+if not status_ok then
+  return
+end
+user_lualine.config()
+local user_null_ls
+status_ok, user_null_ls = pcall(require, "user.null_ls")
+if not status_ok then
+  return
+end
+user_null_ls.config()
