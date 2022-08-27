@@ -86,7 +86,7 @@
   insteadOf = "gist:"
 [user]
 	name = Lim Swee Tat
-	email = sweetat@withevo.com
+	email = slim@abnormalsecurity.com
 	signingkey = EE1EF39C32152053
 [credential]
   helper = osxkeychain

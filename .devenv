@@ -3,7 +3,12 @@
 export ANDROID_NDK_HOME="/usr/local/share/android-ndk"
 
 # For gvm
-source $HOME/.gvm/scripts/gvm
+start_time=$(gdate +%s%3N)
+echo "Running ${HOME}/.gvm/scripts/gvm...${start_time}ms"
+source ${HOME}/.gvm/scripts/gvm
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Running ${HOME}/.gvm/scripts/gvm...${end_time}ms...${time_taken}ms...Done"
 
 # For jediterm - intellij terminal
 if [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]
@@ -14,9 +19,17 @@ else
 fi
 
 # Using jenv
-eval "$(/usr/local/bin/jenv init - ${SHELL})"
+start_time=$(gdate +%s%3N)
+echo "Running /usr/local/bin/jenv...${start_time}ms"
 export JAVA_HOME=$(/usr/local/bin/jenv javahome)
 alias jenv_prompt_info="jenv version-name"
+eval "$(/usr/local/bin/jenv init - ${SHELL})"
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Running /usr/local/bin/jenv...${end_time}ms...${time_taken}ms...Done"
+
+# Using kubectl
+export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
 
 # Using lunarvim
 export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"$HOME/.local/share/lunarvim"}"
@@ -24,16 +37,30 @@ export LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"$HOME/.config/lvim"}"
 export LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-"$HOME/.cache/lvim"}"
 
 # Using nvm
+start_time=$(gdate +%s%3N)
+echo "Running nvm...${start_time}ms"
 export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Running nvm...${end_time}ms...${time_taken}ms...Done"
+
+# pnpm
+export PNPM_HOME="/Users/st_lim/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
 
 # Using pyenv
+start_time=$(gdate +%s%3N)
+echo "Running pyenv...${start_time}ms"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Running pyenv...${end_time}ms...${time_taken}ms...Done"
 
 # For rbenv
 # eval "$(/usr/local/bin/rbenv init - )"

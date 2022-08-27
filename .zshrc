@@ -5,13 +5,7 @@ HYPHEN_INSENSITIVE="true"
 # ~/.oh-my-zsh/plugins/vi-mode/README.md
 export VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 export VI_MODE_SET_CURSOR=true
-ZSH_THEME="re5et"
-# ~/.oh-my-zsh/plugins/pyenv/README.md
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-export ZSH_PYENV_QUIET=false
-export ZSH_PYENV_VIRTUALENV=true
+ZSH_THEME="abnormal"
 # ~/.oh-my-zsh/plugins/tmux/README.md
 export ZSH_TMUX_AUTOSTART=true
 export ZSH_TMUX_AUTOSTART_ONCE=true
@@ -29,37 +23,35 @@ plugins=(
   gh
   golang
   iterm2
-  pyenv
   rand-quote
   terraform
   urltools
   zsh-vi-mode
 )
 source $ZSH/oh-my-zsh.sh
-# https://github.com/eendroroy/alien
-export ALIEN_SECTIONS_LEFT=(
-  exit
-  battery
-  user
-  path
-  pyenv_version
-  vcs_branch:async
-  vcs_status:async
-  vcs_dirty:async
-  versions:async
-  newline
-  ssh
-  prompt
-)
-export ALIEN_SECTIONS_RIGHT=(
-  time
-)
-export ALIEN_SECTION_TIME_FORMAT="%F %T%z" # default is %r
-export ALIEN_THEME="gruvbox"
-export ALIEN_USE_NERD_FONT=1
-export ALIEN_VERSIONS_PROMPT='GO NODE PYTHON RUBY'
-source ${ZSH}/custom/alien/alien.zsh
-
+# # https://github.com/eendroroy/alien
+# export ALIEN_SECTIONS_LEFT=(
+#   exit
+#   battery
+#   user
+#   path
+#   pyenv_version
+#   vcs_branch:async
+#   vcs_status:async
+#   vcs_dirty:async
+#   versions:async
+#   newline
+#   ssh
+#   prompt
+# )
+# export ALIEN_SECTIONS_RIGHT=(
+#   time
+# )
+# export ALIEN_SECTION_TIME_FORMAT="%F %T%z" # default is %r
+# export ALIEN_THEME="gruvbox"
+# export ALIEN_USE_NERD_FONT=1
+# # export ALIEN_VERSIONS_PROMPT='GO NODE PYTHON RUBY'
+# source ${ZSH}/custom/alien/alien.zsh
 fpath=(/usr/local/share/zsh-completions $fpath)
 for file in ~/.{aliases,devenv,exports,extra,functions,path,tokens,abnormal}; do
   [ -r "$file" ] && [ -f "$file" ] && source "$file";
