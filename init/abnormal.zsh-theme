@@ -186,7 +186,7 @@ function git_time_since_commit() {
       elif [ "$MINUTES" -gt 60 ]; then
           echo -n "${HOURS}h${SUB_MINUTES}m"
       else
-          echo -n "${MINUTES}m)"
+          echo -n "${MINUTES}m"
       fi
     fi
   fi
