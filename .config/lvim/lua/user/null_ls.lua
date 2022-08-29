@@ -38,7 +38,10 @@ M.config = function()
       prefer_local = "node_modules/.bin",
     },
     nls.builtins.formatting.scalafmt,
-    nls.builtins.formatting.shfmt.with { extra_args = { "-i", "2", "-ci" } },
+    nls.builtins.formatting.shfmt.with {
+      extra_args = { "-i", "2", "-ci" },
+      filetypes = { "bash", "zsh", "zshrc" },
+    },
     nls.builtins.formatting.sqlformat,
     -- nls.builtins.formatting.stylua,
     nls.builtins.formatting.terraform_fmt,
@@ -91,7 +94,9 @@ M.config = function()
       end,
       extra_args = { "--metrics", "off", "--config", "'p/r2c-security-audit'" },
     },
-    nls.builtins.diagnostics.shellcheck,
+    nls.builtins.diagnostics.shellcheck.with {
+      filetypes = { "bash", "zsh", "zshrc" }
+    },
     nls.builtins.diagnostics.solhint.with {
       condition = function(utils)
         return utils.root_has_file ".solhint.json"
