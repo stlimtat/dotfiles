@@ -142,10 +142,8 @@ lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 -- override a default keymapping
 lvim.keys.normal_mode["<C-q>"] = ":q<cr>" -- or vim.keymap.set("n", "<C-q>", ":q<cr>" )
--- Switch Tabs
-lvim.keys.normal_mode["<M-[>"] = ":tabp<cr>"
-lvim.keys.normal_mode["<M-]>"] = ":tabn<cr>"
 lvim.leader = "space"
+lvim.line_wrap_cursor_movement = true
 lvim.lint_on_save = true
 lvim.log.level = "warn"
 -- generic LSP settings
@@ -272,6 +270,13 @@ lvim.plugins = {
     event = "BufRead",
     config = function()
       require("lsp-rooter").setup()
+    end,
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "BufRead",
+    config = function()
+      require "lsp_signature".on_attach()
     end,
   },
   {
