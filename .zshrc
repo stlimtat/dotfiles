@@ -1,4 +1,4 @@
-export PATH="$HOME/bin:$PATH";
+export PATH="${HOME}/bin:$PATH"
 export ZSH=${HOME}/.oh-my-zsh
 HIST_STAMPS="yyyy-mm-dd"
 HYPHEN_INSENSITIVE="true"
@@ -61,6 +61,6 @@ echo "Running oh-my-zsh...${end_time}ms...${time_taken}ms...Done"
 # source ${ZSH}/custom/alien/alien.zsh
 fpath=(/usr/local/share/zsh-completions $fpath)
 for file in ~/.{aliases,devenv,exports,extra,functions,path,tokens,abnormal}; do
-  [ -r "$file" ] && [ -f "$file" ] && source "$file";
-done;
+  [ -r "$file" ] && [ -f "$file" ] && source "$file"
+done
 unset file
