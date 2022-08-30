@@ -14,6 +14,7 @@ export ZSH_TMUX_AUTOQUIT=ZSH_TMUX_AUTOSTART
 export ZSH_TMUX_ITERM2=true
 export ZSH_TMUX_FIXTERM_WITH_256COLOR="screen-256color"
 export ZSH_TMUX_UNICODE=true
+# ~/.oh-my-zsh/plugins
 plugins=(
   ag
   colored-man-pages
@@ -28,7 +29,13 @@ plugins=(
   urltools
   zsh-vi-mode
 )
-source $ZSH/oh-my-zsh.sh
+# ~/.oh-my-zsh
+start_time=$(gdate +%s%3N)
+echo "Running oh-my-zsh...${start_time}ms"
+source ${ZSH}/oh-my-zsh.sh
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Running oh-my-zsh...${end_time}ms...${time_taken}ms...Done"
 # # https://github.com/eendroroy/alien
 # export ALIEN_SECTIONS_LEFT=(
 #   exit

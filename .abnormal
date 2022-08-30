@@ -9,7 +9,6 @@ alias airflow_worker_ips="aws ec2 describe-instances --filters Name=tag:Name,Val
 alias airflow_onboarding_worker_ips="aws ec2 describe-instances --filters Name=tag:Name,Values=airflow-worker-onboarding | jq -r '.Reservations[].Instances[].PrivateIpAddress' | sort"
 
 # Abnormal
-export AWS_PROFILE=absec-mgmt
 # export KUBECONFIG="$SOURCE/ops/kubernetes/azure/prod/configurations/kubelogin_config_deploy.yaml"
 export MTLS_HOME=${HOME}/.mtls/user
 export PYENV_VENV=3.8.8/envs/abnormal
@@ -23,6 +22,7 @@ echo "Running abnormal/tools/dev/common_bash_includes...${start_time}ms"
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running abnormal/tools/dev/common_bash_includes...${end_time}ms...${time_taken}ms...Done"
+export AWS_PROFILE=absec-mgmt
 
 # Adding a function in bash_profile
 function broadcast_to_airflow_onboarding_workers() {

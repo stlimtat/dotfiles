@@ -22,6 +22,7 @@ brew 'colima' # docker replacement
 brew 'coreutils' # Those that come with macOS are outdated
 brew 'exa' # Replaces ls - so much better
 brew 'findutils'
+brew 'fzf'
 brew 'git'
 brew 'git-lfs'
 brew 'gnu-sed'
@@ -33,15 +34,20 @@ brew 'nmap'
 brew 'mas' # Mac App Store manager
 brew 'p7zip'
 brew 'python'
+brew 'ripgrep' # Needed for telescope-fzf for vim
+brew 'shfmt' # Needed for LSP bash for vim
 brew 'ssh-copy-id'
 brew 'svn' # Needed for the custom fonts later
 brew 'the_silver_searcher' # Needed for fzf for vim
 brew 'tmux'
-brew 'tmuxinator'
+# brew 'tmuxinator'
 
 # Development
 brew 'bazelisk'
+brew 'cargo'
 brew 'composer'
+brew 'colima'
+brew 'docker-credential-helper'
 brew 'go'
 brew 'golangci-lint'
 brew 'hadolint' # dockerfile lint
@@ -51,14 +57,13 @@ brew 'jq'
 brew 'lazygit'
 brew 'libmemcached'
 brew 'luarocks' # for lua on vim
-brew 'markdownlint-cli'
+brew 'markdownlint-cli' # for markdown for vim
 brew 'nvm'
 brew 'pyenv'
 brew 'pyenv-virtualenv'
 brew 'rust'
-brew 'terraform'
 brew 'tfenv'
-brew 'vale'
+brew 'vale' # for markdown for vim
 
 # Apps
 cask '1password'
@@ -82,8 +87,8 @@ brew 'dosbox-staging'
 cask 'steam'
 
 # Quicklook
-cask 'qlmarkdown'
-cask 'quicklook-json'
+# cask 'qlmarkdown'
+# cask 'quicklook-json'
 
 # Fonts
 cask 'font-arial'

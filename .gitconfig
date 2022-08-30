@@ -70,6 +70,7 @@
   default = simple
   # Make `git push` push relevant annotated tags when pushing branches out.
   followTags = true
+	autoSetupRemote = true
 # URL shorthands
 [url "git@github.com:"]
     # Personal Access Token - ff400df05163d1969c39696cc5caf1b852cb64e9
@@ -95,3 +96,8 @@
 [gpg]
   program = smimesign
   format = x509
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f

@@ -36,9 +36,12 @@ alias lsd="ls -lF ${colorflag} | grep --color '^d'"
 # Always use color output for `ls`
 alias ls="command exa --git --icons ${colorflag}"
 
+# diff to use colordiff
+alias diff="colordiff"
+
 # Always enable colored `grep` output
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
-alias grep='ag --color'
+alias grep='ggrep --color=auto'
 alias fgrep='ag --color'
 alias egrep='egrep --color=auto'
 

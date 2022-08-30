@@ -1,3 +1,4 @@
+#!/bin/zsh
 #set -x
 # Android NDK Home
 export ANDROID_NDK_HOME="/usr/local/share/android-ndk"
