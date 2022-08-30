@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+DOTFILES_DIR=${HOME}/go/src/github.com/stlimtat/dotfiles
 function doIt() {
   rsync --exclude ".git/" \
     --exclude ".DS_Store" \
@@ -20,7 +21,7 @@ function doIt() {
 }
 
 # cd "$(dirname "${BASH_SOURCE}")";
-pushd ${HOME}/go/src/github.com/stlimtat/dotfiles
+pushd ${DOTFILES_DIR}
   git pull origin master;
 
   if [ "$1" == "--force" -o "$1" == "-f" ]; then
