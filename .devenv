@@ -12,8 +12,7 @@ time_taken=$((end_time - start_time))
 echo "Running ${HOME}/.gvm/scripts/gvm...${end_time}ms...${time_taken}ms...Done"
 
 # For jediterm - intellij terminal
-if [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]
-then 
+if [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]; then
   export ZSH_TMUX_AUTOSTART=true
 else
   export PROMPT_COMMAND="resize &>/dev/null ; $PROMPT_COMMAND"
@@ -71,5 +70,5 @@ test -e "${HOME}/.iterm2_shell_integration.$(basename $SHELL)" && source "${HOME
 
 # Map caps lock to delete-backspace
 # https://apple.stackexchange.com/questions/7231/how-can-i-rebind-caps-lock-to-delete-backspace
-hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x70000002A}]}' > /dev/null 2>&1
+hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x70000002A}]}' >/dev/null 2>&1
 tabs -2

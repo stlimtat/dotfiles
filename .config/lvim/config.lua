@@ -1,199 +1,3 @@
-lvim.builtin.alpha.active = true
-lvim.builtin.alpha.mode = "dashboard"
-lvim.builtin.cmp.completion.keyword_length = 2
-lvim.builtin.dap.active = true
-lvim.builtin.notify.active = true
-lvim.builtin.nvimtree.setup.disable_netrw = false
-lvim.builtin.nvimtree.setup.open_on_setup = true
-lvim.builtin.nvimtree.setup.renderer.group_empty = true
-lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
-lvim.builtin.nvimtree.setup.sort_by = "case_sensitive"
-lvim.builtin.nvimtree.setup.view.adaptive_size = true
-lvim.builtin.nvimtree.setup.view.centralize_selection = true
-lvim.builtin.nvimtree.setup.view.number = true
-lvim.builtin.nvimtree.setup.view.relativenumber = true
-lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.setup.view.width = 50
-lvim.builtin.project.detection_methods = { "pattern", "lsp" }
-lvim.builtin.project.patterns = {
-  ".git", "package.json"
-}
--- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
--- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
-local _, actions = pcall(require, "telescope.actions")
-lvim.builtin.telescope.defaults.layout_config.width = 0.95
-lvim.builtin.telescope.defaults.layout_config.preview_cutoff = 75
-lvim.builtin.telescope.defaults.mappings = {
-  -- for input mode
-  i = {
-    ["<C-j>"] = actions.move_selection_next,
-    ["<C-k>"] = actions.move_selection_previous,
-    ["<C-n>"] = actions.cycle_history_next,
-    ["<C-p>"] = actions.cycle_history_prev,
-  },
-  -- for normal mode
-  n = {
-    ["<C-j>"] = actions.move_selection_next,
-    ["<C-k>"] = actions.move_selection_previous,
-  },
-}
-lvim.builtin.telescope.on_config_done = function(telescope)
-  -- pcall(telescope.load_extension, "ag")
-  pcall(telescope.load_extension, "file-browser")
-  pcall(telescope.load_extension, "frecency")
-  pcall(telescope.load_extension, "live-grep-args")
-  pcall(telescope.load_extension, "neoclip")
-  pcall(telescope.load_extension, "packer")
-  pcall(telescope.load_extension, "project")
-  pcall(telescope.load_extension, "refactoring")
-  pcall(telescope.load_extension, "smart-history")
-end
-lvim.builtin.terminal.active = true
--- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = {
-  "bash",
-  "c",
-  "css",
-  "java",
-  "javascript",
-  "json",
-  "go",
-  "lua",
-  "python",
-  "rust",
-  "typescript",
-  "tsx",
-  "yaml",
-}
-lvim.builtin.treesitter.ignore_install = { "haskell" }
-lvim.builtin.treesitter.highlight.enabled = true
-lvim.builtin.treesitter.highlight.additional_vim_regex_highlighting = true
-lvim.builtin.treesitter.ignore_install = { "haskell" }
-lvim.builtin.treesitter.indent.disable = { "python", "yaml" }
-lvim.builtin.treesitter.indent.enable = true
-lvim.builtin.treesitter.rainbow.enable = true
-lvim.builtin.treesitter.matchup.enable = true
-lvim.builtin.treesitter.playground.enable = true
-lvim.builtin.treesitter.textobjects.select.enable = true
-lvim.builtin.treesitter.textobjects.swap.enable = true
-lvim.builtin.treesitter.textsubjects.enable = true
-lvim.builtin.treesitter.textsubjects.keymaps["."] = "textsubjects-smart"
-lvim.builtin.treesitter.textsubjects.keymaps[";"] = "textsubjects-big"
--- Use which-key to add extra bindings with the leader-key prefix
-lvim.builtin.which_key.mappings["dm"] = { "<cmd>lua require('dap-python').test_method()<cr>",
-  "Test current Method (python)" }
-lvim.builtin.which_key.mappings["dv"] = { "<cmd>lua require('dapui').toggle()<cr>", "DAP UI" }
-lvim.builtin.which_key.mappings["dz"] = { "<cmd>lua require('dap-python').test_class()<cr>",
-  "Test current class (python)" }
-lvim.builtin.which_key.mappings["O"] = {
-  name = "+Github (Octo)",
-  c = {
-    name = "+Comments",
-    a = { "<cmd>Octo comment add<cr>", "Add comment to current context" },
-  },
-  i = {
-    name = "+Issues",
-    b = { "<cmd>Octo issue browser<cr>", "Open current issue in browser" },
-    c = { "<cmd>Octo issue create<cr>", "Create new issue in current repo" },
-    -- e = { "<cmd>Octo issue edit<Space>", "Edit issue <specify number>" },
-    r = { "<cmd>Octo issue reload<cr>", "Reload current issue" },
-    -- s = { "<cmd>Octo issue search<Space>", "Search issue in current repo" },
-    x = { "<cmd>Octo issue close<cr>", "Close current issue" },
-  },
-  p = {
-    name = "+Pull Requests",
-    b = { "<cmd>Octo pr browser<cr>", "Open PR in browser" },
-    c = { "<cmd>Octo pr create<cr>", "Create PR" },
-    s = { "<cmd>Octo pr checks<cr>", "PR checks status" },
-  },
-  r = {
-    name = "+Reviews",
-    a = { "<cmd>Octo review start<cr>", "Start a new review" },
-    c = { "<cmd>Octo review comments<cr>", "View pending review comments" },
-    s = { "<cmd>Octo review submit<cr>", "Submit the review" },
-  },
-  m = { "<cmd>Octo search is:pr is:open author:assweet<cr>", "Search for my PRs" },
-  t = {
-    name = "+Threads",
-    a = { "<cmd>Octo thread resolve<cr>", "Mark a review thread as resolved" },
-  },
-}
-lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-lvim.builtin.which_key.mappings["sw"] = { "<cmd>Telescope grep_string<cr>", "Search string under cursor" }
-lvim.builtin.which_key.mappings["t"] = {
-  name = "+Trouble",
-  r = { "<cmd>Trouble lsp_references<cr>", "References" },
-  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-  d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
-  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-  w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
-}
-lvim.builtin.which_key.mappings["z"] = {
-  "<cmd>call fzf#vim#ag(expand('<cword>'), fzf#vim#with_preview())<cr>",
-  "Search under cursor"
-}
-lvim.colorscheme = "onedarker"
-lvim.format_on_save = true
--- keymappings [view all the defaults by pressing <leader>Lk]
--- add your own keymapping
-lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
-lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
--- override a default keymapping
-lvim.keys.normal_mode["<C-q>"] = ":q<cr>" -- or vim.keymap.set("n", "<C-q>", ":q<cr>" )
-lvim.leader = "space"
-lvim.line_wrap_cursor_movement = true
-lvim.lint_on_save = true
-lvim.log.level = "warn"
--- generic LSP settings
----configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
-lvim.lsp.installer.setup.automatic_installation = false
-lvim.lsp.installer.setup.ensure_installed = {
-  "sumeko_lua",
-  "jsonls",
-}
-lvim.use_icons = true
-
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "zsh",
-  callback = function()
-    -- let treesitter use bash highlight for zsh files as well
-    require("nvim-treesitter.highlight").attach(0, "bash")
-  end,
-})
--- vim.api.nvim_create_autocmd("BufAdd,BufNewFile,BufRead", {
---   command = "tab sball",
---   nested = true,
---   pattern = "*",
--- })
-vim.cmd([[
-  nmap <C-f> :Ag<Space>
-  nmap [q :cprevious <cr>
-  nmap ]q :cnext <cr>
-  set shiftwidth=2
-  set softtabstop=2
-  set tabstop=2
-]])
-vim.g["test#python#runner"] = 'pytest'
-vim.g.tokyonight_italic_functions = true
-vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
-vim.g.tokyonight_style = "night"
-vim.opt.cmdheight = 1
-vim.opt.colorcolumn = "99999"
-vim.opt.expandtab = true
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.opt.foldlevel = 999
-vim.opt.foldmethod = 'expr'
-vim.opt.guifont = "JetbrainsMono Nerd Font Mono:14;FiraCode Nerd Font:14"
-vim.opt.relativenumber = true
-vim.opt.sessionoptions = "curdir,folds,help,options,tabpages,winsize,resize,winpos,terminal"
-vim.opt.shiftwidth = 2
-vim.opt.softtabstop = 2
-vim.opt.tabstop = 2
-vim.opt.termguicolors = true
-
 -- Additional Plugins
 lvim.plugins = {
   { 'skywind3000/asyncrun.vim' },
@@ -284,9 +88,15 @@ lvim.plugins = {
     run = "cargo install --locked code-minimap",
     cmd = { "Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight" },
     config = function()
-      vim.cmd("let g:minimap_width = 10")
-      vim.cmd("let g:minimap_auto_start = 1")
-      vim.cmd("let g:minimap_auto_start_win_enter = 1")
+      vim.cmd([[
+        let g:minimap_auto_start = 1
+        let g:minimap_auto_start_win_enter = 1
+        let g:minimap_enable_highlight_colorgroup = 1
+        let g:minimap_width = 20
+        highlight minimapCursor ctermbg=59  ctermfg=228 guibg=#5F5F5F guifg=#FFFF87
+        highlight minimapDiffLine ctermbg=59  ctermfg=228 guibg=#5F5F5F guifg=#FFFF87
+        highlight minimapRange ctermbg=242 ctermfg=228 guibg=#4F4F4F guifg=#FFFF87
+        ]])
     end,
   },
   {
@@ -413,7 +223,11 @@ lvim.plugins = {
   { "p00f/nvim-ts-rainbow" },
   {
     "pwntester/octo.nvim",
-    event = "BufRead",
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'kyazdani42/nvim-web-devicons',
+    },
   },
   { "lunarvim/onedarker.nvim" },
   {
@@ -459,7 +273,7 @@ lvim.plugins = {
       require('symbols-outline').setup()
     end
   },
-  -- { 'kelly-lin/telescope-ag' },
+  { 'kelly-lin/telescope-ag' },
   { 'nvim-telescope/telescope-file-browser.nvim' },
   { 'nvim-telescope/telescope-frecency.nvim' },
   { 'nvim-telescope/telescope-live-grep-args.nvim' },
@@ -536,6 +350,168 @@ lvim.plugins = {
   },
 }
 
+lvim.builtin.alpha.active = true
+lvim.builtin.alpha.mode = "dashboard"
+lvim.builtin.cmp.completion.keyword_length = 2
+lvim.builtin.dap.active = true
+lvim.builtin.notify.active = true
+lvim.builtin.nvimtree.setup.disable_netrw = false
+lvim.builtin.nvimtree.setup.open_on_setup = true
+lvim.builtin.nvimtree.setup.renderer.group_empty = true
+lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
+lvim.builtin.nvimtree.setup.sort_by = "case_sensitive"
+lvim.builtin.nvimtree.setup.view.adaptive_size = true
+lvim.builtin.nvimtree.setup.view.centralize_selection = true
+lvim.builtin.nvimtree.setup.view.number = true
+lvim.builtin.nvimtree.setup.view.relativenumber = true
+lvim.builtin.nvimtree.setup.view.side = "left"
+lvim.builtin.nvimtree.setup.view.width = 50
+lvim.builtin.project.detection_methods = { "pattern", "lsp" }
+lvim.builtin.project.patterns = {
+  ".git", "package.json"
+}
+-- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
+-- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
+local _, actions = pcall(require, "telescope.actions")
+lvim.builtin.telescope.defaults.layout_config.width = 0.95
+lvim.builtin.telescope.defaults.layout_config.preview_cutoff = 75
+lvim.builtin.telescope.defaults.mappings = {
+  -- for input mode
+  i = {
+    ["<C-j>"] = actions.move_selection_next,
+    ["<C-k>"] = actions.move_selection_previous,
+    ["<C-n>"] = actions.cycle_history_next,
+    ["<C-p>"] = actions.cycle_history_prev,
+  },
+  -- for normal mode
+  n = {
+    ["<C-j>"] = actions.move_selection_next,
+    ["<C-k>"] = actions.move_selection_previous,
+  },
+}
+lvim.builtin.telescope.on_config_done = function(telescope)
+  pcall(telescope.load_extension, "ag")
+  pcall(telescope.load_extension, "file-browser")
+  pcall(telescope.load_extension, "frecency")
+  pcall(telescope.load_extension, "live-grep-args")
+  pcall(telescope.load_extension, "neoclip")
+  pcall(telescope.load_extension, "packer")
+  pcall(telescope.load_extension, "project")
+  pcall(telescope.load_extension, "refactoring")
+  pcall(telescope.load_extension, "smart-history")
+end
+lvim.builtin.terminal.active = true
+-- if you don't want all the parsers change this to a table of the ones you want
+lvim.builtin.treesitter.ensure_installed = {
+  "bash",
+  "c",
+  "css",
+  "java",
+  "javascript",
+  "json",
+  "go",
+  "lua",
+  "python",
+  "rust",
+  "typescript",
+  "tsx",
+  "yaml",
+}
+lvim.builtin.treesitter.ignore_install = { "haskell" }
+lvim.builtin.treesitter.highlight.enabled = true
+lvim.builtin.treesitter.highlight.additional_vim_regex_highlighting = true
+lvim.builtin.treesitter.ignore_install = { "haskell" }
+lvim.builtin.treesitter.indent.enable = false
+lvim.builtin.treesitter.rainbow.enable = true
+lvim.builtin.treesitter.matchup.enable = true
+lvim.builtin.treesitter.playground.enable = true
+lvim.builtin.treesitter.textobjects.select.enable = true
+lvim.builtin.treesitter.textobjects.swap.enable = true
+lvim.builtin.treesitter.textsubjects.enable = true
+lvim.builtin.treesitter.textsubjects.keymaps["."] = "textsubjects-smart"
+lvim.builtin.treesitter.textsubjects.keymaps[";"] = "textsubjects-big"
+-- Use which-key to add extra bindings with the leader-key prefix
+lvim.builtin.which_key.mappings["dm"] = { "<cmd>lua require('dap-python').test_method()<cr>",
+  "Test current Method (python)" }
+lvim.builtin.which_key.mappings["dv"] = { "<cmd>lua require('dapui').toggle()<cr>", "DAP UI" }
+lvim.builtin.which_key.mappings["dz"] = { "<cmd>lua require('dap-python').test_class()<cr>",
+  "Test current class (python)" }
+lvim.builtin.which_key.mappings["O"] = {
+  name = "+Github (Octo)",
+  m = { "<cmd>Octo search is:pr is:open author:assweet<cr>", "Search for my PRs" },
+}
+lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings["sw"] = { "<cmd>Telescope grep_string<cr>", "Search string under cursor" }
+lvim.builtin.which_key.mappings["t"] = {
+  name = "+Trouble",
+  r = { "<cmd>Trouble lsp_references<cr>", "References" },
+  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+  d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
+  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+  w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+}
+lvim.builtin.which_key.mappings["z"] = {
+  "<cmd>call fzf#vim#ag(expand('<cword>'), fzf#vim#with_preview())<cr>",
+  "Search under cursor"
+}
+lvim.colorscheme = "onedarker"
+lvim.format_on_save = true
+-- keymappings [view all the defaults by pressing <leader>Lk]
+-- add your own keymapping
+lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
+lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
+-- override a default keymapping
+lvim.keys.normal_mode["<C-q>"] = ":q<cr>" -- or vim.keymap.set("n", "<C-q>", ":q<cr>" )
+lvim.leader = "space"
+lvim.line_wrap_cursor_movement = true
+lvim.lint_on_save = true
+lvim.log.level = "warn"
+-- generic LSP settings
+---configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
+lvim.lsp.installer.setup.automatic_installation = false
+lvim.lsp.installer.setup.ensure_installed = {
+  "sumeko_lua",
+  "jsonls",
+}
+lvim.use_icons = true
+
+-- Autocommands (https://neovim.io/doc/user/autocmd.html)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "zsh",
+  callback = function()
+    -- let treesitter use bash highlight for zsh files as well
+    require("nvim-treesitter.highlight").attach(0, "bash")
+  end,
+})
+vim.api.nvim_create_autocmd({ "BufAdd", "BufNewFile", "BufRead" }, {
+  command = "tab sball",
+  nested = true,
+  pattern = "*",
+})
+vim.cmd([[
+  nmap <C-f> :Ag<Space>
+  nmap [q :cprevious <cr>
+  nmap ]q :cnext <cr>
+]])
+vim.g["test#python#runner"] = 'pytest'
+vim.g.tokyonight_italic_functions = true
+vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
+vim.g.tokyonight_style = "night"
+vim.o.shiftwidth = 2
+vim.o.softtabstop = 2
+vim.o.tabstop = 2
+vim.opt.cmdheight = 1
+vim.opt.colorcolumn = "99999"
+vim.opt.expandtab = true
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.opt.foldlevel = 999
+vim.opt.foldmethod = 'expr'
+vim.opt.guifont = "JetbrainsMono Nerd Font Mono:14;FiraCode Nerd Font:14"
+vim.opt.relativenumber = true
+vim.opt.sessionoptions = "curdir,folds,help,options,tabpages,winsize,resize,winpos,terminal"
+vim.opt.termguicolors = true
 require("lvim.lsp.manager").setup("pyright", {
   settings = {
     pyright = {
@@ -584,6 +560,13 @@ if not status_ok then
   return
 end
 user_null_ls.config()
+
+-- octo
+require("octo").setup({
+  mappings = {}
+})
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+parser_config.markdown.filetype_to_parsername = "octo"
 
 -- example mappings you can place in some other place
 -- An awesome method to jump to windows

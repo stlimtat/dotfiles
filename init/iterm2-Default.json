@@ -56,14 +56,14 @@
             "maxwidth" : 1.7976931348623157e+308,
             "base: priority" : 5,
             "minwidth" : 0,
+            "base: compression resistance" : 1,
             "shared text color" : {
               "Red Component" : 0.90000000000000002,
               "Color Space" : "sRGB",
               "Blue Component" : 0.63,
               "Alpha Component" : 1,
               "Green Component" : 0.63
-            },
-            "base: compression resistance" : 1
+            }
           },
           "layout advanced configuration dictionary value" : {
             "remove empty components" : false,
@@ -80,15 +80,15 @@
             "path" : "path",
             "maxwidth" : 1.7976931348623157e+308,
             "base: priority" : 5,
+            "base: compression resistance" : 1,
+            "minwidth" : 0,
             "shared text color" : {
               "Red Component" : 0.90000000000000002,
               "Color Space" : "sRGB",
               "Blue Component" : 0.63,
               "Alpha Component" : 1,
               "Green Component" : 0.84060000000000001
-            },
-            "base: compression resistance" : 1,
-            "minwidth" : 0
+            }
           },
           "layout advanced configuration dictionary value" : {
             "remove empty components" : false,
@@ -105,15 +105,15 @@
             "maxwidth" : 1.7976931348623157e+308,
             "iTermStatusBarGitComponentPollingIntervalKey" : 2,
             "base: priority" : 5,
+            "base: compression resistance" : 1,
+            "minwidth" : 0,
             "shared text color" : {
               "Red Component" : 0.74880000000000002,
               "Color Space" : "sRGB",
               "Blue Component" : 0.63,
               "Alpha Component" : 1,
               "Green Component" : 0.90000000000000002
-            },
-            "base: compression resistance" : 1,
-            "minwidth" : 0
+            }
           },
           "layout advanced configuration dictionary value" : {
             "remove empty components" : false,
@@ -512,7 +512,7 @@
   },
   "Blur" : false,
   "Vertical Spacing" : 1,
-  "Normal Font" : "JetBrainsMonoNerdFontCompleteM-Regular 14",
+  "Normal Font" : "JetBrainsMonoNerdFontCompleteM-Regular 12",
   "Ansi 7 Color" : {
     "Green Component" : 0.89001238346099854,
     "Blue Component" : 0.79781103134155273,
@@ -522,7 +522,7 @@
   "Terminal Type" : "xterm-256color",
   "Horizontal Spacing" : 1,
   "Option Key Sends" : 0,
-  "Minimum Contrast" : 0.7528467814127604,
+  "Minimum Contrast" : 0.5,
   "Ansi 15 Color" : {
     "Green Component" : 0.95794391632080078,
     "Blue Component" : 0.86405980587005615,

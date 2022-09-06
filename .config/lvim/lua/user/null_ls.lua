@@ -25,7 +25,17 @@ M.config = function()
       prefer_local = "node_modules/.bin",
     },
     nls.builtins.formatting.goimports,
-    nls.builtins.formatting.isort.with { extra_args = { "--profile", "black" }, filetypes = { "python" } },
+    nls.builtins.formatting.isort.with {
+      extra_args = {
+        "--profile",
+        "black",
+        "--indent",
+        "'  '",
+        "--multi_line_output",
+        "3",
+      },
+      filetypes = { "python" }
+    },
     -- NOTE: npm install -g prettier prettier-plugin-solidity
     nls.builtins.formatting.prettier.with {
       filetypes = { "solidity" },
@@ -38,10 +48,10 @@ M.config = function()
       prefer_local = "node_modules/.bin",
     },
     nls.builtins.formatting.scalafmt,
-    nls.builtins.formatting.shfmt.with {
-      extra_args = { "-i", "2", "-ci" },
-      filetypes = { "bash", "zsh", "zshrc" },
-    },
+    -- nls.builtins.formatting.shfmt.with {
+    --   extra_args = { "-i", "2", "-ci" },
+    --   filetypes = { "bash", "zsh", "zshrc" },
+    -- },
     nls.builtins.formatting.sqlformat,
     -- nls.builtins.formatting.stylua,
     nls.builtins.formatting.terraform_fmt,
