@@ -13,18 +13,25 @@ case ${SOLARIZED_THEME:-dark} in
     *)     CURRENT_FG='black';;
 esac
 
-ZSH_THEME_GIT_PROMPT_UNTRACKED=" ✭"
-ZSH_THEME_GIT_PROMPT_DIRTY=''
-ZSH_THEME_GIT_PROMPT_STASHED=' ⚑'
-ZSH_THEME_GIT_PROMPT_DIVERGED=' ⚡'
-ZSH_THEME_GIT_PROMPT_ADDED=" ✚"
-ZSH_THEME_GIT_PROMPT_MODIFIED=" ✹"
-ZSH_THEME_GIT_PROMPT_DELETED=" ✖"
-ZSH_THEME_GIT_PROMPT_RENAMED=" ➜"
-ZSH_THEME_GIT_PROMPT_UNMERGED=" ═"
-ZSH_THEME_GIT_PROMPT_AHEAD=' ⬆'
-ZSH_THEME_GIT_PROMPT_BEHIND=' ⬇'
-ZSH_THEME_GIT_PROMPT_DIRTY=' ±'
+# https://ethanschoonover.com/solarized/
+ZSH_THEME_BG01=234
+ZSH_THEME_BG02=240
+ZSH_THEME_BG03=235
+ZSH_THEME_BG04=241
+ZSH_THEME_FG01=254
+ZSH_THEME_FG02=244
+ZSH_THEME_FG03=230
+ZSH_THEME_FG04=245
+# Colors
+ZSH_THEME_BLUE=33
+ZSH_THEME_BRMAGENTA=61
+ZSH_THEME_BRRED=166
+ZSH_THEME_CYAN=37
+ZSH_THEME_GREEN=64
+ZSH_THEME_MAGENTA=125
+ZSH_THEME_RED=160
+ZSH_THEME_YELLOW=136
+
 
 # Special Powerline characters
 
@@ -47,7 +54,7 @@ ZSH_THEME_GIT_PROMPT_DIRTY=' ±'
 # Begin a segment
 # Takes two arguments, background and foreground. Both can be omitted,
 # rendering default background/foreground.
-prompt_segment() {
+function prompt_segment() {
   local bg fg
   [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
   [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
@@ -60,7 +67,7 @@ prompt_segment() {
   [[ -n $3 ]] && echo -n $3
 }
 
-prompt_segment_right() {
+function prompt_segment_right() {
   local bg fg
   [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
   [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
@@ -70,13 +77,13 @@ prompt_segment_right() {
 }
 
 # End the prompt, closing any open segments
-prompt_end() {
+function prompt_end() {
   if [[ -n $CURRENT_BG ]]; then
     echo -n "%{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR_LEFT"
-    echo -n "\n%{%k%F{223}%}$SEGMENT_SEPARATOR_LEFT"
+    echo -n "\n%{%k%F{$ZSH_THEME_FG01}%}$SEGMENT_SEPARATOR_LEFT"
   else
     echo -n "%{%k%}"
-    echo -n "\n%{%k%F{223}%}$SEGMENT_SEPARATOR_LEFT"
+    echo -n "\n%{%k%F{$ZSH_THEME_FG01}%}$SEGMENT_SEPARATOR_LEFT"
   fi
   echo -n "%{%f%}"
   CURRENT_BG=''
@@ -89,14 +96,14 @@ prompt_end() {
 # - was there an error
 # - am I root
 # - are there background jobs?
-prompt_status() {
+function prompt_status() {
   local -a symbols
 
   [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}${RETVAL}:✘"
   [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡"
   [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}⚙"
 
-  [[ -n "$symbols" ]] && prompt_segment 142 234 "$symbols"
+  [[ -n "$symbols" ]] && prompt_segment $ZSH_THEME_BG04 $ZSH_THEME_RED "$symbols"
 }
 
 # Segment 2 - AWS Profile:
@@ -104,42 +111,59 @@ prompt_status() {
 # - displays yellow on red if profile name contains 'production' or
 #   ends in '-prod'
 # - displays black on green otherwise
-prompt_aws() {
+function prompt_aws() {
   [[ -z "$AWS_PROFILE" || "$SHOW_AWS_PROMPT" = false ]] && return
   case "$AWS_PROFILE" in
     *-prod|*production*) prompt_segment red yellow  "AWS: ${AWS_PROFILE:gs/%/%%}" ;;
-    *) prompt_segment 241 235 "AWS: ${AWS_PROFILE:gs/%/%%}" ;;
+    *) prompt_segment $ZSH_THEME_BG01 $ZSH_THEME_FG01 "AWS: ${AWS_PROFILE:gs/%/%%}" ;;
   esac
 }
 
 # Segment 3 - Context: user@hostname (who am I and where am I)
-prompt_context() {
+function prompt_context() {
   if [[ "$USERNAME" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-    prompt_segment 239 223 "%n@%m"
+    prompt_segment $ZSH_THEME_BG02 $ZSH_THEME_FG02 "%n@%m"
   fi
 }
 
 # Right Segment 3 - Time: 
-prompt_time() {
-  prompt_segment_right 239 223 '%D{%F %T%z} '
+function prompt_time() {
+  prompt_segment_right $ZSH_THEME_BG02 $ZSH_THEME_FG02 '%D{%F %T%z} '
 }
 
 # Segment 4 - Dir: current working directory
-prompt_dir() {
-  prompt_segment 223 239 '%~'
+function prompt_dir() {
+  prompt_segment $ZSH_THEME_BG03 $ZSH_THEME_FG03 '%~'
 }
 
 # Right Segment 4 - Virtualenv: current working virtualenv
-prompt_virtualenv() {
+function prompt_virtualenv() {
   # This is modified for pyenv
   PYENV_VENV=$(pyenv version-name)
   if [[ -n "$PYENV_VENV" ]]; then
-    prompt_segment_right 223 239 "(${PYENV_VENV})"
+    prompt_segment_right $ZSH_THEME_BG03 $ZSH_THEME_FG03 "(${PYENV_VENV})"
   fi
 }
 
+ZSH_THEME_GIT_PROMPT_UNTRACKED="✭"
+ZSH_THEME_GIT_PROMPT_DIRTY=''
+ZSH_THEME_GIT_PROMPT_STASHED='⚑'
+ZSH_THEME_GIT_PROMPT_DIVERGED='⚡'
+ZSH_THEME_GIT_PROMPT_ADDED="✚"
+ZSH_THEME_GIT_PROMPT_MODIFIED="✹"
+ZSH_THEME_GIT_PROMPT_DELETED="✖"
+ZSH_THEME_GIT_PROMPT_RENAMED="➜"
+ZSH_THEME_GIT_PROMPT_UNMERGED="═"
+ZSH_THEME_GIT_PROMPT_AHEAD='⬆'
+ZSH_THEME_GIT_PROMPT_BEHIND='⬇'
+ZSH_THEME_GIT_PROMPT_DIRTY='±'
+# ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT=$ZSH_THEME_YELLOW
+# ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM=$ZSH_THEME_CYAN
+# ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG=$ZSH_THEME_BRMAGENTA
+# ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL=$ZSH_THEME_FG04
+
 # Segment 5 - Git: branch/detached head, dirty status
-prompt_git() {
+function prompt_git() {
   (( $+commands[git] )) || return
   if [[ "$(git config --get oh-my-zsh.hide-status 2>/dev/null)" = 1 ]]; then
     return
@@ -147,35 +171,82 @@ prompt_git() {
   local PL_BRANCH_CHAR
   () {
     local LC_ALL="" LC_CTYPE="en_US.UTF-8"
-    PL_BRANCH_CHAR=$'\ue0a0'         # 
+    PL_BRANCH_CHAR=$'\ue0a0'
   }
   local ref dirty mode repo_path
 
   if [[ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]]; then
-    repo_path=$(git rev-parse --git-dir 2>/dev/null)
-    ref=$(plib_git_branch)
-    if [[ _ref = "detached" ]]; then ref=$(plib_git_rev); fi
     dirty=$(git_dirty)
     if [[ -n "${dirty}" ]]; then
-      prompt_segment 142 239
+      prompt_segment $ZSH_THEME_BG04 $ZSH_THEME_BRRED
     else
-      prompt_segment 142 red
+      prompt_segment $ZSH_THEME_BG04 $ZSH_THEME_FG04
     fi
 
+    # https://arjanvandergaag.nl/blog/customize-zsh-prompt-with-vcs-info.html
     setopt promptsubst
     autoload -Uz vcs_info
 
     zstyle ':vcs_info:*' enable git
     zstyle ':vcs_info:*' get-revision true
     zstyle ':vcs_info:*' check-for-changes true
-    zstyle ':vcs_info:*' stagedstr '✚'
-    zstyle ':vcs_info:*' unstagedstr '±'
-    zstyle ':vcs_info:*' formats ' %u%c'
-    zstyle ':vcs_info:*' actionformats ' %u%c'
+    zstyle ':vcs_info:*' stagedstr $ZSH_THEME_GIT_PROMPT_ADDED
+    zstyle ':vcs_info:*' unstagedstr $ZSH_THEME_GIT_PROMPT_DIRTY
+    zstyle ':vcs_info:*' formats '%b %{%F{166}%}%m%u%c%{%F{254}%} %S'
+    zstyle ':vcs_info:*' actionformats '%b %{%F{166}%}%m%u%c%{%F{254}%} %S'
     vcs_info
-    echo -ne "${PL_BRANCH_CHAR}${ref}${vcs_info_msg_0_%% }${dirty}$(git_lr)"
+    echo -ne "${PL_BRANCH_CHAR}${vcs_info_msg_0_}%F{$ZSH_THEME_BRRED}${dirty}%F{$ZSH_THEME_FG04}$(git_lr)"
   fi
 }
+
+# # Determine the time since last commit. If branch is clean,
+# # use a neutral color, otherwise colors will vary according to time.
+# function prompt_git_time_since_commit() {
+#   if [[ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]]; then
+#     # Only proceed if there is actually a commit.
+#     if [[ "$(git log --pretty=oneline -1 2>&1 | awk '{ print $1 }')" != "fatal:" ]]; then
+#       # Get the last commit.
+#       last_commit=$(git log --pretty=format:'%at' -1 2> /dev/null)
+#       now=$(date +%s)
+#       seconds_since_last_commit=$(( now - last_commit))
+
+#       # Totals
+#       MINUTES=$((seconds_since_last_commit / 60))
+#       HOURS=$((seconds_since_last_commit/3600))
+#      
+#       # Sub-hours and sub-minutes
+#       DAYS=$((seconds_since_last_commit / 86400))
+#       SUB_HOURS=$((HOURS % 24))
+#       SUB_MINUTES=$((MINUTES % 60))
+#       
+#       if [[ -n "$(git status -s 2> /dev/null)" ]]; then
+#           if [ "$MINUTES" -gt 30 ]; then
+#               COLOR="$ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG"
+#           elif [ "$MINUTES" -gt 10 ]; then
+#               COLOR="$ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM"
+#           else
+#               COLOR="$ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT"
+#           fi
+#       else
+#           COLOR="$ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL"
+#       fi
+#       dirty=$(git_dirty)
+#       if [[ -n $dirty ]]; then
+#         prompt_segment 234 $COLOR
+#       else
+#         prompt_segment 234 $COLOR
+#       fi
+
+#       if [ "$HOURS" -gt 24 ]; then
+#           echo -n "${DAYS}d${SUB_HOURS}h${SUB_MINUTES}m"
+#       elif [ "$MINUTES" -gt 60 ]; then
+#           echo -n "${HOURS}h${SUB_MINUTES}m"
+#       else
+#           echo -n "${MINUTES}m"
+#       fi
+#     fi
+#   fi
+# }
 
 # Copied from https://github.com/eendroroy/promptlib-zsh/blob/master/modules/git.zsh
 plib_git_branch(){
@@ -316,61 +387,7 @@ git_lr(){
   [[ "$__push" != 0 ]] && [[ "$__push" != '' ]] && __pushpull+="${__push}${GIT_PUSH_SYM}"
 
   if [[ "$__pushpull" != '' ]]; then
-    echo -ne " ${__pushpull}"
-  fi
-}
-
-ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT=40
-ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM=66
-ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG=red
-ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL=142
-
-# Determine the time since last commit. If branch is clean,
-# use a neutral color, otherwise colors will vary according to time.
-function git_time_since_commit() {
-  if [[ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]]; then
-    # Only proceed if there is actually a commit.
-    if [[ "$(git log --pretty=oneline -1 2>&1 | awk '{ print $1 }')" != "fatal:" ]]; then
-      # Get the last commit.
-      last_commit=$(git log --pretty=format:'%at' -1 2> /dev/null)
-      now=$(date +%s)
-      seconds_since_last_commit=$(( now - last_commit))
-
-      # Totals
-      MINUTES=$((seconds_since_last_commit / 60))
-      HOURS=$((seconds_since_last_commit/3600))
-     
-      # Sub-hours and sub-minutes
-      DAYS=$((seconds_since_last_commit / 86400))
-      SUB_HOURS=$((HOURS % 24))
-      SUB_MINUTES=$((MINUTES % 60))
-      
-      if [[ -n "$(git status -s 2> /dev/null)" ]]; then
-          if [ "$MINUTES" -gt 30 ]; then
-              COLOR="$ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG"
-          elif [ "$MINUTES" -gt 10 ]; then
-              COLOR="$ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM"
-          else
-              COLOR="$ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT"
-          fi
-      else
-          COLOR="$ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL"
-      fi
-      dirty=$(git_dirty)
-      if [[ -n $dirty ]]; then
-        prompt_segment 239 $COLOR
-      else
-        prompt_segment 239 $COLOR
-      fi
-
-      if [ "$HOURS" -gt 24 ]; then
-          echo -n "${DAYS}d${SUB_HOURS}h${SUB_MINUTES}m"
-      elif [ "$MINUTES" -gt 60 ]; then
-          echo -n "${HOURS}h${SUB_MINUTES}m"
-      else
-          echo -n "${MINUTES}m"
-      fi
-    fi
+    echo -ne "${__pushpull}"
   fi
 }
 
@@ -382,7 +399,7 @@ build_left_prompt() {
   prompt_context
   prompt_dir
   prompt_git
-  git_time_since_commit
+  # prompt_git_time_since_commit
   prompt_end
 }
 

@@ -15,20 +15,20 @@ M.config = function()
   local custom_md_hover = require "user.null_ls_markdown"
   local sources = {
     -- Support for nix files
-    nls.builtins.formatting.alejandra,
+    -- nls.builtins.formatting.alejandra,
     -- nls.builtins.formatting.black.with { extra_args = { "--fast" }, filetypes = { "python" } },
-    nls.builtins.formatting.cmake_format,
-    nls.builtins.formatting.eslint_d.with {
-      condition = function(utils)
-        return utils.root_has_file { ".eslintrc", ".eslintrc.js" }
-      end,
-      prefer_local = "node_modules/.bin",
-    },
-    nls.builtins.formatting.goimports,
+    -- nls.builtins.formatting.cmake_format,
+    -- nls.builtins.formatting.eslint_d.with {
+    --   condition = function(utils)
+    --     return utils.root_has_file { ".eslintrc", ".eslintrc.js" }
+    --   end,
+    --   prefer_local = "node_modules/.bin",
+    -- },
+    -- nls.builtins.formatting.goimports,
     nls.builtins.formatting.isort.with {
       extra_args = {
-        "--profile",
-        "black",
+        -- "--profile",
+        -- "black",
         "--indent",
         "'  '",
         "--multi_line_output",
@@ -47,35 +47,35 @@ M.config = function()
       end,
       prefer_local = "node_modules/.bin",
     },
-    nls.builtins.formatting.scalafmt,
-    -- nls.builtins.formatting.shfmt.with {
-    --   extra_args = { "-i", "2", "-ci" },
-    --   filetypes = { "bash", "zsh", "zshrc" },
-    -- },
+    -- nls.builtins.formatting.scalafmt,
+    nls.builtins.formatting.shfmt.with {
+      extra_args = { "-i", "2", "-ci" },
+      filetypes = { "bash", "zsh", "zshrc" },
+    },
     nls.builtins.formatting.sqlformat,
     -- nls.builtins.formatting.stylua,
     nls.builtins.formatting.terraform_fmt,
     -- diagnostics
-    nls.builtins.diagnostics.ansiblelint.with {
-      condition = function(utils)
-        return utils.root_has_file "roles" and utils.root_has_file "inventories"
-      end,
-    },
-    nls.builtins.diagnostics.chktex,
-    -- nls.builtins.diagnostics.codespell,
+    -- nls.builtins.diagnostics.ansiblelint.with {
+    --   condition = function(utils)
+    --     return utils.root_has_file "roles" and utils.root_has_file "inventories"
+    --   end,
+    -- },
+    -- nls.builtins.diagnostics.chktex,
+    nls.builtins.diagnostics.codespell,
     -- Support for nix files
-    nls.builtins.diagnostics.deadnix,
+    -- nls.builtins.diagnostics.deadnix,
     nls.builtins.diagnostics.eslint_d.with {
       condition = function(utils)
         return utils.root_has_file { ".eslintrc", ".eslintrc.js" }
       end,
       prefer_local = "node_modules/.bin",
     },
-    nls.builtins.diagnostics.golangci_lint.with {
-      condition = function(utils)
-        return utils.root_has_file ".golangci.yml"
-      end,
-    },
+    -- nls.builtins.diagnostics.golangci_lint.with {
+    --   condition = function(utils)
+    --     return utils.root_has_file ".golangci.yml"
+    --   end,
+    -- },
     nls.builtins.diagnostics.hadolint,
     nls.builtins.diagnostics.luacheck,
     nls.builtins.diagnostics.markdownlint.with {
@@ -93,30 +93,30 @@ M.config = function()
       },
       filetypes = { "python" },
     },
-    nls.builtins.diagnostics.revive.with {
-      condition = function(utils)
-        return utils.root_has_file "revive.toml"
-      end,
-    },
-    nls.builtins.diagnostics.semgrep.with {
-      condition = function(utils)
-        return utils.root_has_file ".semgrepignore"
-      end,
-      extra_args = { "--metrics", "off", "--config", "'p/r2c-security-audit'" },
-    },
+    -- nls.builtins.diagnostics.revive.with {
+    --   condition = function(utils)
+    --     return utils.root_has_file "revive.toml"
+    --   end,
+    -- },
+    -- nls.builtins.diagnostics.semgrep.with {
+    --   condition = function(utils)
+    --     return utils.root_has_file ".semgrepignore"
+    --   end,
+    --   extra_args = { "--metrics", "off", "--config", "'p/r2c-security-audit'" },
+    -- },
     nls.builtins.diagnostics.shellcheck.with {
       filetypes = { "bash", "zsh", "zshrc" }
     },
-    nls.builtins.diagnostics.solhint.with {
-      condition = function(utils)
-        return utils.root_has_file ".solhint.json"
-      end,
-    },
-    nls.builtins.diagnostics.statix,
-    nls.builtins.diagnostics.vale.with {
-      filetypes = { "markdown" },
-    },
-    nls.builtins.diagnostics.vint,
+    -- nls.builtins.diagnostics.solhint.with {
+    --   condition = function(utils)
+    --     return utils.root_has_file ".solhint.json"
+    --   end,
+    -- },
+    -- nls.builtins.diagnostics.statix,
+    -- nls.builtins.diagnostics.vale.with {
+    --   filetypes = { "markdown" },
+    -- },
+    -- nls.builtins.diagnostics.vint,
     nls.builtins.code_actions.eslint_d.with {
       condition = function(utils)
         return utils.root_has_file { ".eslintrc", ".eslintrc.js" }

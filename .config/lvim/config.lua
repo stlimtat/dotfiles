@@ -93,39 +93,10 @@ lvim.plugins = {
         let g:minimap_auto_start_win_enter = 1
         let g:minimap_enable_highlight_colorgroup = 1
         let g:minimap_width = 20
-        highlight minimapCursor ctermbg=59  ctermfg=228 guibg=#5F5F5F guifg=#FFFF87
-        highlight minimapDiffLine ctermbg=59  ctermfg=228 guibg=#5F5F5F guifg=#FFFF87
+        highlight minimapCursor ctermbg=59 ctermfg=228 guibg=#5F5F5F guifg=#FFFF87
+        highlight minimapDiffLine ctermbg=59 ctermfg=228 guibg=#5F5F5F guifg=#FFFF87
         highlight minimapRange ctermbg=242 ctermfg=228 guibg=#4F4F4F guifg=#FFFF87
         ]])
-    end,
-  },
-  {
-    "nacro90/numb.nvim",
-    event = "BufRead",
-    config = function()
-      require("numb").setup {
-        show_numbers = true,
-        show_cursorline = true,
-      }
-    end,
-  },
-  {
-    'kevinhwang91/nvim-hlslens',
-    config = function()
-      require("hlslens").setup({
-        auto_enable = true,
-        calm_down = true,
-        enable_incsearch = false,
-      })
-    end
-  },
-  {
-    "AckslD/nvim-neoclip.lua",
-    requires = {
-      { 'nvim-telescope/telescope.nvim' },
-    },
-    config = function()
-      require('neoclip').setup()
     end,
   },
   -- {
@@ -139,6 +110,16 @@ lvim.plugins = {
   -- { 'nvim-neotest/neotest-go' },
   -- { 'nvim-neotest/neotest-python' },
   -- { 'nvim-neotest/neotest-vim-test' },
+  {
+    "nacro90/numb.nvim",
+    event = "BufRead",
+    config = function()
+      require("numb").setup {
+        show_numbers = true,
+        show_cursorline = true,
+      }
+    end,
+  },
   {
     "kevinhwang91/nvim-bqf",
     event = { "BufRead", "BufNew" },
@@ -193,6 +174,26 @@ lvim.plugins = {
   --   requires = { "mfussenegger/nvim-dap" },
   -- },
   {
+    'kevinhwang91/nvim-hlslens',
+    config = function()
+      require("hlslens").setup({
+        auto_enable = true,
+        calm_down = true,
+        enable_incsearch = false,
+      })
+    end
+  },
+  {
+    "AckslD/nvim-neoclip.lua",
+    requires = {
+      { 'nvim-telescope/telescope.nvim' },
+    },
+    config = function()
+      require('neoclip').setup()
+    end,
+  },
+  { "ishan9299/nvim-solarized-lua" },
+  {
     "windwp/nvim-spectre",
     event = "BufRead",
     config = function()
@@ -229,7 +230,7 @@ lvim.plugins = {
       'kyazdani42/nvim-web-devicons',
     },
   },
-  { "lunarvim/onedarker.nvim" },
+  -- { "lunarvim/onedarker.nvim" },
   {
     "ThePrimeagen/refactoring.nvim",
     requires = {
@@ -353,7 +354,7 @@ lvim.plugins = {
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.cmp.completion.keyword_length = 2
-lvim.builtin.dap.active = true
+lvim.builtin.dap.active = false
 lvim.builtin.notify.active = true
 lvim.builtin.nvimtree.setup.disable_netrw = false
 lvim.builtin.nvimtree.setup.open_on_setup = true
@@ -404,20 +405,17 @@ lvim.builtin.terminal.active = true
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
-  "c",
   "css",
-  "java",
   "javascript",
   "json",
   "go",
   "lua",
   "python",
-  "rust",
   "typescript",
   "tsx",
   "yaml",
 }
-lvim.builtin.treesitter.ignore_install = { "haskell" }
+lvim.builtin.treesitter.ignore_install = { "haskell", "pyright" }
 lvim.builtin.treesitter.highlight.enabled = true
 lvim.builtin.treesitter.highlight.additional_vim_regex_highlighting = true
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -455,7 +453,7 @@ lvim.builtin.which_key.mappings["z"] = {
   "<cmd>call fzf#vim#ag(expand('<cword>'), fzf#vim#with_preview())<cr>",
   "Search under cursor"
 }
-lvim.colorscheme = "onedarker"
+lvim.colorscheme = "tokyonight"
 lvim.format_on_save = true
 -- keymappings [view all the defaults by pressing <leader>Lk]
 -- add your own keymapping
@@ -494,11 +492,19 @@ vim.cmd([[
   nmap <C-f> :Ag<Space>
   nmap [q :cprevious <cr>
   nmap ]q :cnext <cr>
+  set shiftwidth=2
+  set softtabstop=2
+  set tabstop=2
+  setlocal shiftwidth=2
+  setlocal softtabstop=2
+  setlocal tabstop=2
 ]])
 vim.g["test#python#runner"] = 'pytest'
+vim.g.solarized_italics = 1
 vim.g.tokyonight_italic_functions = true
 vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 vim.g.tokyonight_style = "night"
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
 vim.o.shiftwidth = 2
 vim.o.softtabstop = 2
 vim.o.tabstop = 2
@@ -511,32 +517,35 @@ vim.opt.foldmethod = 'expr'
 vim.opt.guifont = "JetbrainsMono Nerd Font Mono:14;FiraCode Nerd Font:14"
 vim.opt.relativenumber = true
 vim.opt.sessionoptions = "curdir,folds,help,options,tabpages,winsize,resize,winpos,terminal"
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+vim.opt.tabstop = 2
 vim.opt.termguicolors = true
-require("lvim.lsp.manager").setup("pyright", {
-  settings = {
-    pyright = {
-      disableLanguageServices = false,
-      disableOrganizeImports = false,
-    },
-    python = {
-      analysis = {
-        autoImportCompletions = true,
-        autoSearchPaths = true,
-        diagnosticMode = "workspace",
-        exclude = {
-          "**/__pycache__",
-        },
-        extraPaths = {
-          os.getenv("PYENV_VIRTUAL_ENV") .. "/lib/python3.8/site-packages",
-          os.getenv('HOME') .. '/source/src/py',
-          os.getenv('HOME') .. '/source/src/pytests',
-          os.getenv('HOME') .. '/source/src/pytests/abnormal/test',
-        },
-        useLibraryCodeForTypes = true,
-      },
-    },
-  },
-})
+-- require("lvim.lsp.manager").setup("pyright", {
+--   settings = {
+--     pyright = {
+--       disableLanguageServices = false,
+--       disableOrganizeImports = false,
+--     },
+--     python = {
+--       analysis = {
+--         autoImportCompletions = true,
+--         autoSearchPaths = true,
+--         diagnosticMode = "workspace",
+--         exclude = {
+--           "**/__pycache__",
+--         },
+--         extraPaths = {
+--           os.getenv("PYENV_VIRTUAL_ENV") .. "/lib/python3.8/site-packages",
+--           os.getenv('HOME') .. '/source/src/py',
+--           os.getenv('HOME') .. '/source/src/pytests',
+--           os.getenv('HOME') .. '/source/src/pytests/abnormal/test',
+--         },
+--         useLibraryCodeForTypes = true,
+--       },
+--     },
+--   },
+-- })
 local status_ok, user_dap = pcall(require, "user.dap")
 if not status_ok then
   return
@@ -554,12 +563,12 @@ if not status_ok then
   return
 end
 user_lualine.config()
-local user_null_ls
-status_ok, user_null_ls = pcall(require, "user.null_ls")
-if not status_ok then
-  return
-end
-user_null_ls.config()
+-- local user_null_ls
+-- status_ok, user_null_ls = pcall(require, "user.null_ls")
+-- if not status_ok then
+--   return
+-- end
+-- user_null_ls.config()
 
 -- octo
 require("octo").setup({
