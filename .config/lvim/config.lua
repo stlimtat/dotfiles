@@ -563,12 +563,12 @@ if not status_ok then
   return
 end
 user_lualine.config()
--- local user_null_ls
--- status_ok, user_null_ls = pcall(require, "user.null_ls")
--- if not status_ok then
---   return
--- end
--- user_null_ls.config()
+local user_null_ls
+status_ok, user_null_ls = pcall(require, "user.null_ls")
+if not status_ok then
+  return
+end
+user_null_ls.config()
 
 -- octo
 require("octo").setup({
