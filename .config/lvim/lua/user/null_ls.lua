@@ -11,8 +11,8 @@ M.config = function()
     return
   end
 
-  local custom_go_actions = require "user.null_ls_go"
-  local custom_md_hover = require "user.null_ls_markdown"
+  -- local custom_go_actions = require "user.null_ls_go"
+  -- local custom_md_hover = require "user.null_ls_markdown"
   local sources = {
     -- Support for nix files
     -- nls.builtins.formatting.alejandra,
@@ -48,10 +48,10 @@ M.config = function()
       prefer_local = "node_modules/.bin",
     },
     -- nls.builtins.formatting.scalafmt,
-    nls.builtins.formatting.shfmt.with {
-      extra_args = { "-i", "2", "-ci" },
-      filetypes = { "bash", "zsh", "zshrc" },
-    },
+    -- nls.builtins.formatting.shfmt.with {
+    --   extra_args = { "-i", "2", "-ci" },
+    --   filetypes = { "bash", "zsh", "zshrc" },
+    -- },
     nls.builtins.formatting.sqlformat,
     -- nls.builtins.formatting.stylua,
     nls.builtins.formatting.terraform_fmt,
@@ -62,7 +62,7 @@ M.config = function()
     --   end,
     -- },
     -- nls.builtins.diagnostics.chktex,
-    nls.builtins.diagnostics.codespell,
+    -- nls.builtins.diagnostics.codespell,
     -- Support for nix files
     -- nls.builtins.diagnostics.deadnix,
     nls.builtins.diagnostics.eslint_d.with {
@@ -104,9 +104,9 @@ M.config = function()
     --   end,
     --   extra_args = { "--metrics", "off", "--config", "'p/r2c-security-audit'" },
     -- },
-    nls.builtins.diagnostics.shellcheck.with {
-      filetypes = { "bash", "zsh", "zshrc" }
-    },
+    -- nls.builtins.diagnostics.shellcheck.with {
+    --   filetypes = { "bash", "zsh", "zshrc" }
+    -- },
     -- nls.builtins.diagnostics.solhint.with {
     --   condition = function(utils)
     --     return utils.root_has_file ".solhint.json"
@@ -126,14 +126,14 @@ M.config = function()
     nls.builtins.code_actions.refactoring.with {
       filetypes = { "typescript", "javascript", "lua", "c", "cpp", "go", "python", "java", "php" },
     },
-    nls.builtins.code_actions.shellcheck,
+    -- nls.builtins.code_actions.shellcheck,
     -- TODO: try these later on
     -- nls.builtins.formatting.google_java_format,
     -- nls.builtins.code_actions.proselint,
     -- nls.builtins.diagnostics.proselint,
-    custom_go_actions.gomodifytags,
-    custom_go_actions.gostructhelper,
-    custom_md_hover.dictionary,
+    -- custom_go_actions.gomodifytags,
+    -- custom_go_actions.gostructhelper,
+    -- custom_md_hover.dictionary,
   }
 
   -- you can either config null-ls itself

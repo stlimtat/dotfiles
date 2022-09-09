@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/bin/zsh
 
 IFS=$'\012'
 DOWN_DIR=/Volumes/downloads

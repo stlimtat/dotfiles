@@ -22,9 +22,9 @@ if [[ -d "${DOTFILES_DIR}" ]]; then
   rsync -ar --progress ${DOTFILES_DIR}/.config/lvim/ ${HOME}/.config/lvim/
   ln -sf ${HOME}/.local/bin/lvim ${HOME}/bin/lvim
   rsync -ar --progress $(pwd)/.config/ ${HOME}/.config/
-  ${HOME}/bin/lvim +LvimUpdate +LvimCacheReset +60sleep +q
-  ${HOME}/bin/lvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+  ${HOME}/bin/lvim +LvimUpdate +LvimCacheReset +qa
+  # ${HOME}/bin/lvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
   # https://github.com/wbthomason/packer.nvim/issues/502 - need to run twice
-  ${HOME}/bin/lvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+  # ${HOME}/bin/lvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 fi
 

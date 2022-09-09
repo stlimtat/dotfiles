@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/bin/zsh
 
 USB=$1
 USB_PATH=/Volumes/${USB}

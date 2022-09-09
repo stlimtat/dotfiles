@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/bin/zsh
 
 #docker system prune -a
 docker ps -a | grep -v CONTAINER | awk '{ print $1 }' | xargs docker rm --force

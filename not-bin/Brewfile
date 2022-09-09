@@ -21,6 +21,7 @@ brew 'code-minimap' # Needed for neovim minimap
 brew 'colima' # docker replacement
 brew 'coreutils' # Those that come with macOS are outdated
 brew 'exa' # Replaces ls - so much better
+brew 'fd' # Alternate find for lunarvim
 brew 'findutils'
 brew 'fzf'
 brew 'git'

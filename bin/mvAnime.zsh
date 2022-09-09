@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 DOWNLOAD_DIR=/Volumes/Public
 ANIME_DIR=${DOWNLOAD_DIR}/Anime
@@ -34,7 +34,7 @@ ANIME_PREFIX=(
 move_file_to_dir() {
   FULL_FILENAME=$1
   MY_DIR=$2
-  # https://stackoverflow.com/questions/965053/extract-filename-and-extension-in-bash/965072#965072
+  # https://stackoverflow.com/questions/965053/extract-filename-and-extension-in-zsh/965072#965072
   MOVIE_FILENAME="${FULL_FILENAME##*/}"
   MOVIE_DIR="${FULL_FILENAME:0:${#FULL_FILENAME} - ${#MOVIE_FILENAME}}"
   MOVIE_FILEBASE="${MOVIE_FILENAME%.[^.]*}"
@@ -91,7 +91,7 @@ move_to_holly() {
     ${DOWNLOAD_DIR}/*.BluRay.* \
     ${DOWNLOAD_DIR}/*.WEBRip.*; do
     for j in $(gfind ${i} -name "*.mp4" -o -name "*.mkv" -o -name "*.avi" 2> /dev/null); do
-      # https://stackoverflow.com/questions/965053/extract-filename-and-extension-in-bash/965072#965072
+      # https://stackoverflow.com/questions/965053/extract-filename-and-extension-in-zsh/965072#965072
       MOVIE_FILENAME="${j##*/}"
       MOVIE_DIR="${j:0:${#j} - ${#MOVIE_FILENAME}}"
       MOVIE_FILEBASE="${MOVIE_FILENAME%.[^.]*}"
@@ -113,7 +113,7 @@ get_dir_subs() {
   MY_DIR=$1
   IFS=$'\012'
   for i in $(gfind ${MY_DIR} -maxdepth 2 -name "*.mp4" -o -name "*.mkv" -o -name "*.avi"); do
-    # https://stackoverflow.com/questions/965053/extract-filename-and-extension-in-bash/965072#965072
+    # https://stackoverflow.com/questions/965053/extract-filename-and-extension-in-zsh/965072#965072
     MOVIE_FILENAME="${i##*/}"
     MOVIE_DIR="${i:0:${#i} - ${#MOVIE_FILENAME}}"
     MOVIE_FILEBASE="${MOVIE_FILENAME%.[^.]*}"

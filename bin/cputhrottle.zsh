@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/bin/zsh
 
 while `test -z $(pgrep -f OneDrive)`; do
   sleep 10

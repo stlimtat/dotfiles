@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/zsh
 
 PRODUCTS="pycharm"
 MY_DATE=$(date +%Y%m%d-%H%M)

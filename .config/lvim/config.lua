@@ -374,6 +374,47 @@ lvim.builtin.project.patterns = {
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
 local _, actions = pcall(require, "telescope.actions")
+lvim.builtin.telescope.defaults.file_ignore_patterns = {
+  "%.cache",
+  "%.class",
+  "%.dll",
+  "%.docx",
+  "%.dylib",
+  "%.exe",
+  "%.ico",
+  "%.ipynb",
+  "%.jar",
+  "%.jpg",
+  "%.jpeg",
+  "%.lock",
+  "%.met",
+  "%.pdb",
+  "%.pdf",
+  "%.png",
+  "%.sqlite3",
+  "%.svg",
+  "%.otf",
+  "%.ttf",
+  "%.webp",
+  "__pycache__/",
+  "__pycache__/*",
+  ".dart_tool/",
+  ".git/",
+  ".github/",
+  ".gradle/",
+  ".idea/",
+  ".settings/",
+  ".vale/",
+  ".vscode/",
+  "build/",
+  "env/",
+  "gradle/",
+  "node_modules/",
+  "node_modules/*",
+  "smalljre_*/*",
+  "target/",
+  "vendor/*",
+}
 lvim.builtin.telescope.defaults.layout_config.width = 0.95
 lvim.builtin.telescope.defaults.layout_config.preview_cutoff = 75
 lvim.builtin.telescope.defaults.mappings = {
@@ -415,7 +456,7 @@ lvim.builtin.treesitter.ensure_installed = {
   "tsx",
   "yaml",
 }
-lvim.builtin.treesitter.ignore_install = { "haskell", "pyright" }
+lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 lvim.builtin.treesitter.highlight.additional_vim_regex_highlighting = true
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -504,7 +545,6 @@ vim.g.solarized_italics = 1
 vim.g.tokyonight_italic_functions = true
 vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 vim.g.tokyonight_style = "night"
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
 vim.o.shiftwidth = 2
 vim.o.softtabstop = 2
 vim.o.tabstop = 2
@@ -521,31 +561,81 @@ vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.tabstop = 2
 vim.opt.termguicolors = true
--- require("lvim.lsp.manager").setup("pyright", {
---   settings = {
---     pyright = {
---       disableLanguageServices = false,
---       disableOrganizeImports = false,
---     },
---     python = {
---       analysis = {
---         autoImportCompletions = true,
---         autoSearchPaths = true,
---         diagnosticMode = "workspace",
---         exclude = {
---           "**/__pycache__",
---         },
---         extraPaths = {
---           os.getenv("PYENV_VIRTUAL_ENV") .. "/lib/python3.8/site-packages",
---           os.getenv('HOME') .. '/source/src/py',
---           os.getenv('HOME') .. '/source/src/pytests',
---           os.getenv('HOME') .. '/source/src/pytests/abnormal/test',
---         },
---         useLibraryCodeForTypes = true,
---       },
---     },
---   },
--- })
+require("lvim.lsp.manager").setup("pyright", {
+  settings = {
+    pyright = {
+      disableLanguageServices = false,
+      disableOrganizeImports = false,
+    },
+    python = {
+      analysis = {
+        autoImportCompletions = true,
+        autoSearchPaths = true,
+        diagnosticMode = "workspace",
+        exclude = {
+          "**/__pycache__",
+        },
+        extraPaths = {
+          os.getenv("PYENV_VIRTUAL_ENV") .. "/lib/python3.8/site-packages",
+          os.getenv('SOURCE') .. '/src/py',
+          os.getenv('SOURCE') .. '/src/pytests',
+          os.getenv('SOURCE') .. '/src/pytests/abnormal/test',
+        },
+        useLibraryCodeForTypes = true,
+      },
+    },
+  },
+})
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  -- {
+  --   command = "black",
+  --   args = { "--stdin-filename", "$FILENAME", "--verbose", "%:p" },
+  --   filetypes = { "python" },
+  -- },
+  {
+    command = "isort",
+    args = { "--stdout", "--filename", "$FILENAME", "-" },
+    filetypes = { "python" }
+  },
+  {
+    command = "prettier",
+    args = { "--print-width", "100" },
+    filetypes = { "typescript", "typescriptreact" },
+  },
+}
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  -- { command = "flake8" },
+  {
+    command = "pylint",
+    args = {
+      "--rcfile",
+      os.getenv("SOURCE") .. "/.pylintrc",
+      "--init-hook",
+      "import sys;" ..
+          "sys.path.append(\"" .. os.getenv("PYENV_VIRTUAL_ENV") .. "/lib/python3.8/site-packages\");" ..
+          "sys.path.append(\"" .. os.getenv("SOURCE") .. "/src/py\");" ..
+          "sys.path.append(\"" .. os.getenv("SOURCE") .. "/src/pytests\");" ..
+          "sys.path.append(\"" .. os.getenv("SOURCE") .. "/src/pytests/abnormal/test\");",
+    },
+    filetypes = { "python" },
+  },
+  {
+    command = "shellcheck",
+    args = { "--severity", "warning" },
+  },
+  {
+    command = "codespell",
+    filetypes = { "javascript", "python" },
+  },
+}
+local code_actions = require "lvim.lsp.null-ls.code_actions"
+code_actions.setup {
+  {
+    command = "proselint"
+  },
+}
 local status_ok, user_dap = pcall(require, "user.dap")
 if not status_ok then
   return
@@ -563,12 +653,12 @@ if not status_ok then
   return
 end
 user_lualine.config()
-local user_null_ls
-status_ok, user_null_ls = pcall(require, "user.null_ls")
-if not status_ok then
-  return
-end
-user_null_ls.config()
+-- local user_null_ls
+-- status_ok, user_null_ls = pcall(require, "user.null_ls")
+-- if not status_ok then
+--   return
+-- end
+-- user_null_ls.config()
 
 -- octo
 require("octo").setup({
