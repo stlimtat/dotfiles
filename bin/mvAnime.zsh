@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 DOWNLOAD_DIR=/Volumes/Public
 ANIME_DIR=${DOWNLOAD_DIR}/Anime

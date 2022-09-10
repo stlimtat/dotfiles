@@ -31,10 +31,10 @@ echo "Running /usr/local/bin/jenv...${end_time}ms...${time_taken}ms...Done"
 # Using kubectl
 export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
 
-# Using lunarvim
-export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"$HOME/.local/share/lunarvim"}"
-export LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"$HOME/.config/lvim"}"
-export LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-"$HOME/.cache/lvim"}"
+## Using lunarvim
+# export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"$HOME/.local/share/lunarvim"}"
+# export LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"$HOME/.config/lvim"}"
+# export LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-"$HOME/.cache/lvim"}"
 
 # Using nvm
 start_time=$(gdate +%s%3N)

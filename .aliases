@@ -159,4 +159,4 @@ alias path='echo -e ${PATH//:/\\n}'
 alias zsh_path="pwd"
 
 # For lvim - normal
-alias vim="${HOME}/.local/bin/lvim"
+# alias vim="${HOME}/.local/bin/lvim"

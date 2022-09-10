@@ -4,6 +4,6 @@ rsync -ar --progress ${HOME}/.{abnormal,aliases,bash_profile,bash_prompt,bashrc,
 rsync -ar --progress ${HOME}/bin/*.zsh ${DOTFILES_DIR}/bin/
 rsync -ar --progress --exclude="plugin" ${HOME}/.config/lvim/ ${DOTFILES_DIR}/.config/lvim/
 pushd ${DOTFILES_DIR}
-git commit -m "Sync with config at $(date +'%F %T%z') by $(whoami)@$(hostname)"
-git push
+  git commit -m "Sync with config at $(date +'%F %T%z') by $(whoami)@$(hostname)"
+  git push
 popd
