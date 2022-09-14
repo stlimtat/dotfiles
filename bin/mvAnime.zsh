@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 DOWNLOAD_DIR=/Volumes/Public
 ANIME_DIR=${DOWNLOAD_DIR}/Anime
@@ -41,10 +41,10 @@ move_file_to_dir() {
   SRT_FILE="${MOVIE_DIR}${MOVIE_FILEBASE}.srt"
   FIRST_CHAR=${MOVIE_FILENAME:0:1}
   # Removing the "The" section of the filename
-  if [ "${FIRST_CHAR}" == "T" ]; then
+  if [[ "${FIRST_CHAR}" = "T" ]]; then
     THE_DETECT=${MOVIE_FILENAME:0:3}
     THE_DETECT_UPPPER=$(echo ${THE_DETECT} | tr '[:lower:]' '[:upper:]')
-    if [ "$THE_DETECT_UPPPER" = "THE" ]; then
+    if [[ "$THE_DETECT_UPPPER" = "THE" ]]; then
       FIRST_CHAR=${MOVIE_FILENAME:4:1}
     fi
   fi
@@ -56,27 +56,30 @@ move_file_to_dir() {
 
 move_anime_to_dir() {
   [ ! -d ${ANIME_DIR} ] && mkdir -p ${ANIME_DIR}
+  setopt NULL_GLOB
   IFS=$'\012'
-  for i in {0..9} {A..Z}; do
-    ANIME_I=${ANIME_DIR}/${i}
+  for FIRST_CHAR in {0..9} {A..Z}; do
+    ANIME_CHAR=${ANIME_DIR}/${FIRST_CHAR}
     for j in ${ANIME_PREFIX[@]}; do
       cd ${DOWNLOAD_DIR}
-      for k in \[${j}\]\ ${i}*.mkv \[${j}\]_${i}*.mkv \[${j}\]\ ${i}*.mp4 \[${j}\]_${i}*.mp4; do
+      for k in \[${j}\]\ ${FIRST_CHAR}*.mkv(N) \[${j}\]_${FIRST_CHAR}*.mkv(N) \[${j}\]\ ${FIRST_CHAR}*.mp4(N) \[${j}\]_${FIRST_CHAR}*.mp4(N); do
         if [ -f "${k}" ]; then
           a="${k//_/ }"
           b="${a%% - [0-9][0-9]*}"
-          a="${b%%) [0-9][0-9]* (*}"
+          a="${b%%) [0-9][0-9]* \(*}"
           b="${a%% - [0-9]* \[*}"
           x="${b%%- S[0-9][0-9]E[0-9][0-9]*}"
-          [ ! -d "${ANIME_I}/${x}" ] && mkdir -p "${ANIME_I}/${x}"
-          mv "${k}" "${ANIME_I}/${x}/"
+          [ ! -d "${ANIME_CHAR}/${x}" ] && mkdir -p "${ANIME_CHAR}/${x}"
+          mv "${k}" "${ANIME_CHAR}/${x}/"
         fi
       done
     done
   done
+  unsetopt NULL_GLOB
 }
 
 move_to_holly() {
+  setopt NULL_GLOB
   IFS=$'\012'
   count=-1
   for j in $(gfind ${DOWNLOAD_DIR} -maxdepth 1 -type d -regex '.*\ ([0-9]+)'); do
@@ -107,10 +110,12 @@ move_to_holly() {
       rm -rf "${i}"
     done
   done
+  unsetopt NULL_GLOB
 }
 
 get_dir_subs() {
   MY_DIR=$1
+  setopt NULL_GLOB
   IFS=$'\012'
   for i in $(gfind ${MY_DIR} -maxdepth 2 -name "*.mp4" -o -name "*.mkv" -o -name "*.avi"); do
     # https://stackoverflow.com/questions/965053/extract-filename-and-extension-in-zsh/965072#965072
@@ -127,13 +132,17 @@ get_dir_subs() {
     rm -rf ${i}
     subliminal download -l en -s "${i/.srt/.mp4}"
   done
+  unsetopt NULL_GLOB
 }
 
 move_nsznsp_to_games() {
-    for i in *\[NSP\] *\[NSZ\]; do
-        rm -rf ${DOWNLOAD_DIR}/Games/Switch/${i}
-    done
-    mv *\[NSP\] *\[NSZ\] ${DOWNLOAD_DIR}/Games/Switch
+  setopt NULL_GLOB
+  IFS=$'\012'
+  for i in *\[NSP\] *\[NSZ\]; do
+    rm -rf ${DOWNLOAD_DIR}/Games/Switch/${i}
+  done
+  mv *\[NSP\] *\[NSZ\] ${DOWNLOAD_DIR}/Games/Switch
+  unsetopt NULL_GLOB
 }
 
 if [ ! -d ${DOWNLOAD_DIR} ]; then
