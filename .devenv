@@ -40,7 +40,7 @@ export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
 start_time=$(gdate +%s%3N)
 echo "Running nvm...${start_time}ms"
 export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
+# . "/usr/local/opt/nvm/nvm.sh"
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running nvm...${end_time}ms...${time_taken}ms...Done"

@@ -81,7 +81,8 @@ move_anime_to_dir() {
 move_to_holly() {
   setopt NULL_GLOB
   IFS=$'\012'
-  count=-1
+  count=0
+  MOVIES_BRACKET=()
   for j in $(gfind ${DOWNLOAD_DIR} -maxdepth 1 -type d -regex '.*\ ([0-9]+)'); do
         count=$((count + 1))
         MOVIES_BRACKET[$count]=${j}
@@ -153,7 +154,7 @@ fi
 OPTS=$1
 move_anime_to_dir
 move_to_holly
-move_nsznsp_to_games
+# move_nsznsp_to_games
 case $OPTS in
   sub)
     #get_dir_subs ${KIDS_DIR}
