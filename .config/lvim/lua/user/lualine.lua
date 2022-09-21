@@ -1,5 +1,7 @@
 local M = {}
 local kind = require "user.lsp_kind"
+local SEGMENT_SEPARATOR_RIGHT = '\'
+local SEGMENT_SEPARATOR_LEFT = '\'
 
 local function clock()
   return kind.icons.clock .. os.date "%F %T%z"
@@ -44,36 +46,35 @@ local mode = function()
     "  ",
   }
   if mod == "n" or mod == "no" or mod == "nov" then
-    return normal_icons[selector]
+    return normal_icons[selector] .. "NORMAL"
   elseif mod == "i" or mod == "ic" or mod == "ix" then
     local insert_icons = {
       "  ",
       "  ",
       "  ",
     }
-    return insert_icons[selector]
+    return insert_icons[selector] .. "INSERT"
   elseif mod == "V" or mod == "v" or mod == "vs" or mod == "Vs" or mod == "cv" then
     local verbose_icons = {
       " 勇",
       "  ",
       "  ",
     }
-    return verbose_icons[selector]
+    return verbose_icons[selector] .. "VISUAL"
   elseif mod == "c" or mod == "ce" then
     local command_icons = {
       "  ",
       "  ",
       "  ",
     }
-
-    return command_icons[selector]
+    return command_icons[selector] .. "COMMAND"
   elseif mod == "r" or mod == "rm" or mod == "r?" or mod == "R" or mod == "Rc" or mod == "Rv" or mod == "Rv" then
     local replace_icons = {
       "  ",
       "  ",
       "  ",
     }
-    return replace_icons[selector]
+    return replace_icons[selector] .. "REPLACE"
   end
   return normal_icons[selector]
 end
@@ -185,14 +186,15 @@ M.config = function()
       icons_enabled = true,
       -- Disable sections and component separators
       component_separators = { left = "", right = "" },
-      section_separators = { left = "", right = "" },
-      theme = {
-        -- We are going to use lualine_c an lualine_x as left and
-        -- right section. Both are highlighted by c theme .  So we
-        -- are just setting default looks o statusline
-        normal = { c = { fg = colors.fg, bg = colors.bg } },
-        inactive = { c = { fg = colors.fg, bg = colors.bg_alt } },
-      },
+      section_separators = { left = SEGMENT_SEPARATOR_LEFT, right = SEGMENT_SEPARATOR_RIGHT },
+      theme = "tokyonight",
+      -- theme = {
+      --   -- We are going to use lualine_c an lualine_x as left and
+      --   -- right section. Both are highlighted by c theme .  So we
+      --   -- are just setting default looks o statusline
+      --   normal = { c = { fg = colors.fg, bg = colors.bg } },
+      --   inactive = { c = { fg = colors.fg, bg = colors.bg_alt } },
+      -- },
       disabled_filetypes = { "dashboard", "NvimTree", "Outline", "alpha", "vista", "vista_kind", "TelescopePrompt" },
       always_divide_middle = true,
       globalstatus = lvim.builtin.global_statusline,

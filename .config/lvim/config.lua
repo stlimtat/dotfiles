@@ -2,27 +2,27 @@
 lvim.plugins = {
   { "skywind3000/asyncrun.vim" },
   { "skywind3000/asynctasks.vim" },
-  ["max397574/better-escape.nvim"] = {
+  { "max397574/better-escape.nvim",
     event = "InsertEnter",
     config = function()
       require("better_escape").setup()
     end,
   },
-  ["hrsh7th/cmp-path"] = { disable = false },
+  { "hrsh7th/cmp-cmdline" },
   { "lunarvim/colorschemes" },
-  ["sindrets/diffview.nvim"] = {
+  { "sindrets/diffview.nvim",
     event = "BufRead",
   },
   { "junegunn/fzf" },
   { "junegunn/fzf.vim" },
-  { "f-person/git-blame.nvim",
-    event = "BufRead",
-    config = function()
-      vim.cmd "highlight default link gitblame SpecialComment"
-      vim.g.gitblame_enabled = 1
-      vim.g.gitblame_date_format = "%c"
-    end,
-  },
+  -- { "f-person/git-blame.nvim",
+  --   event = "BufRead",
+  --   config = function()
+  --     vim.cmd "highlight default link gitblame SpecialComment"
+  --     vim.g.gitblame_enabled = 1
+  --     vim.g.gitblame_date_format = "%c"
+  --   end,
+  -- },
   { "akinsho/git-conflict.nvim",
     config = function()
       require("git-conflict").setup({
@@ -45,9 +45,12 @@ lvim.plugins = {
           -- adds current line nr in the url for normal mode
           add_current_line_on_normal_mode = true,
           -- callback for what to do with the url
-          action_callback = require("gitlinker.actions").open_in_browser,
+          action_callback = function(url)
+            require("gitlinker.actions").copy_to_clipboard(url)
+            require("gitlinker.actions").open_in_browser(url)
+          end,
           -- print the url after performing the action
-          print_url = false,
+          print_url = true,
           -- mapping to call url generation
           mappings = "<leader>gy",
         },
@@ -103,23 +106,22 @@ lvim.plugins = {
       require "lsp_signature".on_attach()
     end,
   },
-  { "wfxr/minimap.vim",
-    run = "cargo install --locked code-minimap",
-    cmd = { "Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight" },
-    config = function()
-      vim.cmd([[
-        let g:minimap_auto_start = 1
-        let g:minimap_auto_start_win_enter = 1
-        let g:minimap_enable_highlight_colorgroup = 1
-        let g:minimap_width = 20
-        highlight minimapCursor ctermbg=59 ctermfg=228 guibg=#5F5F5F guifg=#FFFF87
-        highlight minimapDiffLine ctermbg=59 ctermfg=228 guibg=#5F5F5F guifg=#FFFF87
-        highlight minimapRange ctermbg=242 ctermfg=228 guibg=#4F4F4F guifg=#FFFF87
-        ]])
-    end,
-  },
-  -- {
-  --   "nvim-neotest/neotest",
+  -- { "wfxr/minimap.vim",
+  --   run = "cargo install --locked code-minimap",
+  --   cmd = { "Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight" },
+  --   config = function()
+  --     vim.cmd([[
+  --       let g:minimap_auto_start = 1
+  --       let g:minimap_auto_start_win_enter = 1
+  --       let g:minimap_enable_highlight_colorgroup = 1
+  --       let g:minimap_width = 20
+  --       highlight minimapCursor ctermbg=59 ctermfg=228 guibg=#5F5F5F guifg=#FFFF87
+  --       highlight minimapDiffLine ctermbg=59 ctermfg=228 guibg=#5F5F5F guifg=#FFFF87
+  --       highlight minimapRange ctermbg=242 ctermfg=228 guibg=#4F4F4F guifg=#FFFF87
+  --       ]])
+  --   end,
+  -- },
+  -- { "nvim-neotest/neotest",
   --   requires = {
   --     "nvim-lua/plenary.nvim" ] = {
   --     "nvim-treesitter/nvim-treesitter",
@@ -129,12 +131,6 @@ lvim.plugins = {
   -- { "nvim-neotest/neotest-go" },
   -- { "nvim-neotest/neotest-python" },
   -- { "nvim-neotest/neotest-vim-test" },
-  ["jose-elias-alvarez/null-ls.nvim"] = {
-    after = "nvim-lspconfig",
-    config = function()
-      require "custom.plugins.null-ls"
-    end,
-  },
   { "nacro90/numb.nvim",
     event = "BufRead",
     config = function()
@@ -185,6 +181,9 @@ lvim.plugins = {
     end,
   },
   { "stlimtat/nvim-dap-python" },
+  { "rcarriga/nvim-dap-ui",
+    requires = { { "mfussenegger/nvim-dap" } },
+  },
   { "theHamsta/nvim-dap-virtual-text",
     config = function()
       require("nvim-dap-virtual-text").setup()
@@ -373,9 +372,12 @@ lvim.plugins = {
 
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
+lvim.builtin.bufferline.options.numbers = 'buffer_id'
 lvim.builtin.cmp.completion.keyword_length = 2
 lvim.builtin.dap.active = true
 lvim.builtin.gitsigns.opts.current_line_blame = true
+lvim.builtin.lualine.options.theme = "powerline_dark"
+lvim.builtin.luasnip.sources.friendly_snippets = true
 lvim.builtin.notify.active = true
 lvim.builtin.nvimtree.setup.disable_netrw = false
 lvim.builtin.nvimtree.setup.open_on_setup = true
@@ -506,6 +508,7 @@ lvim.builtin.which_key.mappings["dB"] = { "<cmd>lua require('dap').clear_breakpo
   "Clear Breakpoints" }
 lvim.builtin.which_key.mappings["dQ"] = { "<cmd>lua require('dap').terminate()<cr>",
   "Terminate" }
+lvim.builtin.which_key.mappings["dm"] = { "<cmd>lua require('dap-python').test_method()<cr>", "Test Method" }
 lvim.builtin.which_key.mappings["dv"] = { "<cmd>lua require('dapui').toggle()<cr>", "Toggle Debugger UI" }
 lvim.builtin.which_key.mappings["dz"] = { "<cmd>lua require('dap-python').test_class()<cr>",
   "Test current class (python)" }
@@ -607,7 +610,7 @@ lvim.builtin.which_key.vmappings["h"] = {
 --     },
 --   },
 -- }, wk_opts)
-lvim.colorscheme = "tokyonight"
+lvim.colorscheme = "tokyonight-storm"
 lvim.format_on_save = true
 -- keymappings [view all the defaults by pressing <leader>Lk]
 -- keymapping - navigation
@@ -657,17 +660,25 @@ lvim.use_icons = true
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "python" },
+  command = "setlocal wrap shiftwidth=2 softtabstop=2 tabstop=2",
+})
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = { "*.py" },
+  command = "setlocal wrap shiftwidth=2 softtabstop=2 tabstop=2",
+})
+vim.api.nvim_create_autocmd("FileType", {
   pattern = "zsh",
   callback = function()
     -- let treesitter use bash highlight for zsh files as well
     require("nvim-treesitter.highlight").attach(0, "bash")
   end,
 })
-vim.api.nvim_create_autocmd({ "BufAdd", "BufNewFile", "BufRead" }, {
-  command = "tab sball",
-  nested = true,
-  pattern = "*",
-})
+-- vim.api.nvim_create_autocmd({ "BufAdd", "BufNewFile", "BufRead" }, {
+--   command = "tab sball",
+--   nested = true,
+--   pattern = "*",
+-- })
 vim.api.nvim_create_autocmd('User', {
   pattern = 'GitConflictDetected',
   callback = function()
@@ -682,21 +693,12 @@ vim.cmd([[
   nmap <C-f> :Ag<Space>
   nmap [q :cprevious <cr>
   nmap ]q :cnext <cr>
-  set shiftwidth=2
-  set softtabstop=2
-  set tabstop=2
-  setlocal shiftwidth=2
-  setlocal softtabstop=2
-  setlocal tabstop=2
 ]])
 vim.g["test#python#runner"] = 'pytest'
 vim.g.solarized_italics = 1
 vim.g.tokyonight_italic_functions = true
 vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 vim.g.tokyonight_style = "night"
-vim.o.shiftwidth = 2
-vim.o.softtabstop = 2
-vim.o.tabstop = 2
 vim.opt.cmdheight = 1
 vim.opt.colorcolumn = "99999"
 vim.opt.expandtab = true
@@ -786,27 +788,19 @@ code_actions.setup {
   },
 }
 local status_ok, user_dap = pcall(require, "user.dap")
-if not status_ok then
-  return
-end
+if not status_ok then return end
 user_dap.setup()
 local user_dapui
 status_ok, user_dapui = pcall(require, "user.dapui")
-if not status_ok then
-  return
-end
+if not status_ok then return end
 user_dapui.setup()
 local user_lualine
 status_ok, user_lualine = pcall(require, "user.lualine")
-if not status_ok then
-  return
-end
+if not status_ok then return end
 user_lualine.config()
 -- local user_null_ls
 -- status_ok, user_null_ls = pcall(require, "user.null_ls")
--- if not status_ok then
---   return
--- end
+-- if not status_ok then return end
 -- user_null_ls.config()
 
 -- octo

@@ -10,6 +10,10 @@ alias airflow_onboarding_worker_ips="aws ec2 describe-instances --filters Name=t
 
 # Abnormal
 export ABNORMAL_USER=slim
+export ABSEC_CLOUD="aws"
+export ABSEC_ENV="test"
+export ABSEC_PART="management"
+export ABSEC_REGION="us-east-1"
 export AWS_PROFILE=absec-mgmt
 # export KUBECONFIG="$SOURCE/ops/kubernetes/azure/prod/configurations/kubelogin_config_deploy.yaml"
 export MTLS_HOME=${HOME}/.mtls/user
