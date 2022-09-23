@@ -547,6 +547,8 @@ lvim.builtin.which_key.vmappings["h"] = {
   p = { "<cmd>HopPattern<cr>", "Pattern" },
   w = { "<cmd>HopWord<cr>", "Word" },
 }
+lvim.builtin.which_key.vmappings["sf"] = { "<cmd>lua require('telescope').extensions.refactoring.refactors()<cr>",
+  "Refactoring" }
 -- which_key - g keys
 -- local which_key = require("which-key")
 -- wk_opts = {
