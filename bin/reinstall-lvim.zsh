@@ -15,6 +15,12 @@ if [[ -d "${LUNARVIM_RUNTIME_DIR}" ]]; then
     ${LUNARVIM_RUNTIME_DIR}
 fi
 
+REINSTALL=$1
+if [[ -z "${REINSTALL}" ]]; then
+  echo "Removed all lunarvim artefacts"
+  exit 0
+fi
+
 LV_BRANCH=rolling \
   bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
 
