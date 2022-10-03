@@ -1,6 +1,7 @@
 return {
   g = {
     ["test#python#runner"] = 'pytest',
+    indent_blankline_char_list = {'|', '¦', '┆', '┊'},
     solarized_italics = 1,
     tokyonight_italic_functions = true,
     tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" },
@@ -8,7 +9,7 @@ return {
   },
   opt = {
     cmdheight = 1,
-    colorcolumn = "80,120",
+    colorcolumn = "80",
     conceallevel = 2,
     expandtab = true,
     foldenable = false,

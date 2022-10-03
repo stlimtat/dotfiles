@@ -1,8 +1,15 @@
-# .alias
+#!/usr/bin/env zsh
+# .abnormal
 # For lvim - abnormal
 # https://www.lunarvim.org/
-alias lvim="PYTHONPATH=${HOME}/source/src/py:${HOME}/source/src/pytests:${HOME}/source/src/pytests/abnormal/test ${HOME}/.local/bin/lvim"
-alias vim="PYTHONPATH=${HOME}/source/src/py:${HOME}/source/src/pytests:${HOME}/source/src/pytests/abnormal/test ${HOME}/.local/bin/lvim"
+if [[ -f "${HOME}/.local/bin/lvim" ]]; then
+  alias lvim="PYTHONPATH=${HOME}/source/src/py:${HOME}/source/src/pytests:${HOME}/source/src/pytests/abnormal/test ${HOME}/.local/bin/lvim"
+  alias vim="PYTHONPATH=${HOME}/source/src/py:${HOME}/source/src/pytests:${HOME}/source/src/pytests/abnormal/test ${HOME}/.local/bin/lvim"
+fi
+# For astrovim
+if [[ -f "${HOME}/.config/nvim/config.ld" ]]; then
+  alias vim="PYTHONPATH=${HOME}/source/src/py:${HOME}/source/src/pytests:${HOME}/source/src/pytests/abnormal/test /usr/local/bin/nvim"
+fi
 
 # Some abnormal security stuff
 alias airflow_worker_ips="aws ec2 describe-instances --filters Name=tag:Name,Values=airflow-worker-prod | jq -r '.Reservations[].Instances[].PrivateIpAddress' | sort "

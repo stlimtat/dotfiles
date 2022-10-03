@@ -132,6 +132,7 @@ return {
       require "lsp_signature".on_attach()
     end,
   },
+  ["folke/lua-dev.nvim"] = {},
   ["nvim-lualine/lualine.nvim"] = {
     config = function()
       require("lualine").setup()
@@ -212,6 +213,7 @@ return {
   --     })
   --   end,
   -- },
+  ["mfussenegger/nvim-dap"] = {},
   ["stlimtat/nvim-dap-python"] = {},
   ["rcarriga/nvim-dap-ui"] = {
     requires = { { "mfussenegger/nvim-dap" } },
@@ -250,26 +252,26 @@ return {
       require("spectre").setup()
     end,
   },
-  ["romgrk/nvim-treesitter-context"] = {
-    config = function()
-      require("treesitter-context").setup {
-        enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-        throttle = true, -- Throttles plugin updates (may improve performance)
-        max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-        patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
-          -- For all filetypes
-          -- Note that setting an entry here replaces all other patterns for this entry.
-          -- By setting the "default" entry below, you can control which nodes you want to
-          -- appear in the context window.
-          default = {
-            "class",
-            "function",
-            "method",
-          },
-        },
-      }
-    end
-  },
+  -- ["romgrk/nvim-treesitter-context"] = {
+  --   config = function()
+  --     require("treesitter-context").setup {
+  --       enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+  --       throttle = true, -- Throttles plugin updates (may improve performance)
+  --       max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+  --       patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+  --         -- For all filetypes
+  --         -- Note that setting an entry here replaces all other patterns for this entry.
+  --         -- By setting the "default" entry below, you can control which nodes you want to
+  --         -- appear in the context window.
+  --         default = {
+  --           "class",
+  --           "function",
+  --           "method",
+  --         },
+  --       },
+  --     }
+  --   end
+  -- },
   ["p00f/nvim-ts-rainbow"] = {},
   ["s1n7ax/nvim-window-picker"] = {
     tag = "1.*",
@@ -299,6 +301,20 @@ return {
     },
   },
   -- ["lunarvim/onedarker.nvim"] = {},
+  ["ahmedkhalf/project.nvim"] = {
+    config = function()
+      require("project_nvim").setup({
+        manual_mode = false,
+        detection_methods = { "pattern" },
+        patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "pom.xml" },
+        show_hidden = false,
+        silent_chdir = true,
+        ignore_lsp = {},
+        datapath = vim.call("stdpath", "cache"),
+      })
+    end,
+    requires = { { "nvim-telescope/telescope.nvim" } },
+  },
   ["ThePrimeagen/refactoring.nvim"] = {
     requires = {
       "nvim-lua/plenary.nvim",
@@ -357,13 +373,6 @@ return {
   },
   ["nvim-telescope/telescope-packer.nvim"] = {
     requires = { { "nvim-telescope/telescope.nvim" } },
-  },
-  ["nvim-telescope/telescope-project.nvim"] = {
-    event = "BufWinEnter",
-    requires = { { "nvim-telescope/telescope.nvim" } },
-    setup = function()
-      vim.cmd [[packadd telescope.nvim]]
-    end,
   },
   ["nvim-telescope/telescope-smart-history.nvim"] = {
     requires = { { "nvim-telescope/telescope.nvim" } },

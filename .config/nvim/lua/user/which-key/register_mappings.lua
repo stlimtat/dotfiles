@@ -102,7 +102,7 @@ return {
           k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
           m = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
           n = { "<cmd>Telescope notify<cr>", "Notifications" },
-          p = { "<cmd>Telescope project<cr>", "Projects" },
+          p = { "<cmd>Telescope projects<cr>", "Projects" },
           r = { "<cmd>Telescope registers<cr>", "Registers" },
           s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
           S = {
