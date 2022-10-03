@@ -1,0 +1,53 @@
+# Taps
+tap 'adoptopenjdk/openjdk'
+tap 'aws/tap'
+tap 'golangci/tap'
+tap 'homebrew/cask-versions'
+tap 'mongodb/brew'
+tap 'neovim/neovim'
+tap 'nicoverbruggen/homebrew-cask'
+
+# Binaries
+brew 'awscli'
+brew 'code-minimap' # Needed for neovim minimap
+brew 'colima' # docker replacement
+brew 'gnupg'
+brew 'neovim'
+brew 'python'
+brew 'ripgrep' # Needed for telescope-fzf for vim
+brew 'shfmt' # Needed for LSP bash for vim
+brew 'svn' # Needed for the custom fonts later
+brew 'tmux'
+# brew 'tmuxinator'
+
+# Development
+brew 'bazelisk'
+brew 'cargo'
+brew 'composer'
+brew 'colima'
+brew 'docker-credential-helper'
+brew 'go'
+brew 'golangci-lint'
+brew 'hadolint' # dockerfile lint
+brew 'imagemagick'
+brew 'jenv'
+brew 'jq'
+brew 'lazygit'
+brew 'libmemcached'
+brew 'luarocks' # for lua on vim
+brew 'markdownlint-cli' # for markdown for vim
+brew 'nvm'
+brew 'pyenv'
+brew 'pyenv-virtualenv'
+brew 'rust'
+brew 'tfenv'
+brew 'vale' # for markdown for vim
+
+# Apps
+cask 'docker'
+# cask 'firefox'
+# cask 'google-chrome'
+cask 'postman'
+cask 'visual-studio-code'
+cask 'zsa-wally' # For my ergodox keyboard
+
