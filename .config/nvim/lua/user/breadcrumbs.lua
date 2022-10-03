@@ -8,47 +8,47 @@ M.setup = function()
 
   M.create_winbar()
   navic.setup({
-      icons = {
-        Text = " ",
-        Method = " ",
-        Function = " ",
-        Constructor = " ",
-        Field = " ",
-        Variable = " ",
-        Class = " ",
-        Interface = " ",
-        Module = " ",
-        Property = " ",
-        Unit = " ",
-        Value = " ",
-        Enum = " ",
-        Keyword = " ",
-        Snippet = " ",
-        Color = " ",
-        File = " ",
-        Reference = " ",
-        Folder = " ",
-        EnumMember = " ",
-        Constant = " ",
-        Struct = " ",
-        Event = " ",
-        Operator = " ",
-        TypeParameter = " ",
-        Array = " ",
-        Number = " ",
-        String = " ",
-        Boolean = "蘒",
-        Object = " ",
-        Package = " ",
-        Namespace = "",
-        Key = "",
-        Null = "ﳠ",
-      },
-      highlight = true,
-      separator = " " .. ">" .. " ",
-      depth_limit = 0,
-      depth_limit_indicator = "..",
-    })
+    icons = {
+      Text = " ",
+      Method = " ",
+      Function = " ",
+      Constructor = " ",
+      Field = " ",
+      Variable = " ",
+      Class = " ",
+      Interface = " ",
+      Module = " ",
+      Property = " ",
+      Unit = " ",
+      Value = " ",
+      Enum = " ",
+      Keyword = " ",
+      Snippet = " ",
+      Color = " ",
+      File = " ",
+      Reference = " ",
+      Folder = " ",
+      EnumMember = " ",
+      Constant = " ",
+      Struct = " ",
+      Event = " ",
+      Operator = " ",
+      TypeParameter = " ",
+      Array = " ",
+      Number = " ",
+      String = " ",
+      Boolean = "蘒",
+      Object = " ",
+      Package = " ",
+      Namespace = "",
+      Key = "",
+      Null = "ﳠ",
+    },
+    highlight = true,
+    separator = " " .. ">" .. " ",
+    depth_limit = 0,
+    depth_limit_indicator = "..",
+  })
 end
 
 M.winbar_filetype_exclude = {
@@ -87,7 +87,7 @@ M.get_filename = function()
 
   if not utils.isempty(filename) then
     local file_icon, file_icon_color =
-      require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
+    require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
 
     local hl_group = "FileIconColor" .. extension
 
@@ -149,7 +149,7 @@ M.get_winbar = function()
     end
   end
 
-  if not utils.isempty(value) and f.get_buf_option "mod" then
+  if not utils.isempty(value) then
     -- TODO: replace with circle
     local mod = "%#LspCodeLens#" .. "" .. "%*"
     if gps_added then
