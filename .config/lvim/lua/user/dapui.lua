@@ -1,11 +1,6 @@
 local M = {}
 
 M.setup = function()
-  local status_ok, dapui = pcall(require, "dapui")
-  if not status_ok then
-    return
-  end
-
   -- DAP UI helpers - https://github.com/rcarriga/nvim-dap-ui#usage
   local status_ok, dap = pcall(require, "dap")
   if not status_ok then
@@ -19,6 +14,10 @@ M.setup = function()
   end
   dap.listeners.before.event_exited["dapui_config"] = function()
     dapui.close()
+  end
+  local status_ok, dapui = pcall(require, "dapui")
+  if not status_ok then
+    return
   end
   dapui.setup({
     layouts = {

@@ -78,44 +78,44 @@ lvim.plugins = {
     end,
     -- cmd = { "HopChar1", "HopChar2", "HopLine", "HopPattern", "HopWord" },
   },
-  { "lukas-reineke/indent-blankline.nvim",
-    config = function()
-      vim.cmd([[
-        highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine
-        highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine
-        highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine
-        highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine
-        highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine
-        highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine
-      ]])
-      require("indent_blankline").setup {
-        buftype_exclude = { "terminal", "nofile" },
-        char = "│",
-        char_highlight_list = {
-          "IndentBlanklineIndent1",
-          "IndentBlanklineIndent2",
-          "IndentBlanklineIndent3",
-          "IndentBlanklineIndent4",
-          "IndentBlanklineIndent5",
-          "IndentBlanklineIndent6",
-        },
-        -- let g:indent_blankline_char_list = ["|", "¦", "┆", "┊"]
-        filetype_exclude = { "dashboard", "markdown" },
-        show_current_context = true,
-        show_current_context_start = true,
-        space_char_blankline = " ",
-        space_char_highlight_list = {
-          "IndentBlanklineIndent1",
-          "IndentBlanklineIndent2",
-          "IndentBlanklineIndent3",
-          "IndentBlanklineIndent4",
-          "IndentBlanklineIndent5",
-          "IndentBlanklineIndent6",
-        },
-        use_treesitter = true,
-      }
-    end,
-  },
+  -- { "lukas-reineke/indent-blankline.nvim",
+  --   config = function()
+  --     vim.cmd([[
+  --       highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine
+  --       highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine
+  --       highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine
+  --       highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine
+  --       highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine
+  --       highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine
+  --     ]])
+  --     require("indent_blankline").setup {
+  --       buftype_exclude = { "terminal", "nofile" },
+  --       char = "│",
+  --       char_highlight_list = {
+  --         "IndentBlanklineIndent1",
+  --         "IndentBlanklineIndent2",
+  --         "IndentBlanklineIndent3",
+  --         "IndentBlanklineIndent4",
+  --         "IndentBlanklineIndent5",
+  --         "IndentBlanklineIndent6",
+  --       },
+  --       -- let g:indent_blankline_char_list = ["|", "¦", "┆", "┊"]
+  --       filetype_exclude = { "dashboard", "markdown" },
+  --       show_current_context = true,
+  --       show_current_context_start = true,
+  --       space_char_blankline = " ",
+  --       space_char_highlight_list = {
+  --         "IndentBlanklineIndent1",
+  --         "IndentBlanklineIndent2",
+  --         "IndentBlanklineIndent3",
+  --         "IndentBlanklineIndent4",
+  --         "IndentBlanklineIndent5",
+  --         "IndentBlanklineIndent6",
+  --       },
+  --       use_treesitter = true,
+  --     }
+  --   end,
+  -- },
   { "rebelot/kanagawa.nvim" },
   { "kdheepak/lazygit.nvim" },
   { "ahmedkhalf/lsp-rooter.nvim",
@@ -354,7 +354,7 @@ lvim.plugins = {
   { "nvim-telescope/telescope-smart-history.nvim",
     requires = { { "nvim-telescope/telescope.nvim" } },
   },
-  { "folke/tokyonight.nvim" },
+  -- { "folke/tokyonight.nvim" },
   { "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
@@ -400,6 +400,43 @@ lvim.builtin.bufferline.options.numbers = 'buffer_id'
 lvim.builtin.cmp.completion.keyword_length = 2
 lvim.builtin.dap.active = true
 lvim.builtin.gitsigns.opts.current_line_blame = true
+lvim.builtin.indentlines.options = {
+  buftype_exclude = { "terminal", "nofile" },
+  char = "▏",
+  char_highlight_list = {
+    "IndentBlanklineIndent1",
+    "IndentBlanklineIndent2",
+    "IndentBlanklineIndent3",
+    "IndentBlanklineIndent4",
+    "IndentBlanklineIndent5",
+    "IndentBlanklineIndent6",
+  },
+  filetype_exclude = {
+    "help",
+    "startify",
+    "dashboard",
+    "packer",
+    "neogitstatus",
+    "NvimTree",
+    "markdown",
+    "Trouble",
+    "text",
+  },
+  show_first_indent_level = true,
+  show_trailing_blankline_indent = false,
+  space_char_blankline = " ",
+  space_char_highlight_list = {
+    "IndentBlanklineIndent1",
+    "IndentBlanklineIndent2",
+    "IndentBlanklineIndent3",
+    "IndentBlanklineIndent4",
+    "IndentBlanklineIndent5",
+    "IndentBlanklineIndent6",
+  },
+  use_treesitter = true,
+  show_current_context = true,
+  show_current_context_start = true,
+}
 lvim.builtin.lualine.options.theme = "powerline_dark"
 lvim.builtin.luasnip.sources.friendly_snippets = true
 lvim.builtin.notify.active = true
@@ -519,14 +556,14 @@ lvim.builtin.treesitter.textsubjects.enable = true
 lvim.builtin.treesitter.textsubjects.keymaps["."] = "textsubjects-smart"
 lvim.builtin.treesitter.textsubjects.keymaps[";"] = "textsubjects-big"
 -- which_key -- insert_mode
-lvim.builtin.which_key.mappings["<C-d>"] = {
-  d = { "<c-r>=strftime('%F %T%z')<cr>", "d/m/Y H:M:S z" },
-  f = { "<c-r>=strftime('%B %d, %Y')<cr>", "B d, Y" },
-  F = { "<c-r>=strftime('%T')<cr>", "H:M:S" },
-  n = { "<c-r>=strftime('%F')<cr>", "d-m-Y" },
-  x = { "<c-r>=strftime('%d/%m/%y')<cr>", "d/m/y" },
-  X = { "<c-r>=strftime('%H:%M')<cr>", "H:M" },
-}
+-- lvim.builtin.which_key.imappings["<C-d>"] = {
+--   d = { "<c-r>=strftime('%F %T%z')<cr>", "d/m/Y H:M:S z" },
+--   f = { "<c-r>=strftime('%B %d, %Y')<cr>", "B d, Y" },
+--   F = { "<c-r>=strftime('%T')<cr>", "H:M:S" },
+--   n = { "<c-r>=strftime('%F')<cr>", "d-m-Y" },
+--   x = { "<c-r>=strftime('%d/%m/%y')<cr>", "d/m/y" },
+--   X = { "<c-r>=strftime('%H:%M')<cr>", "H:M" },
+-- }
 -- which_key -- normal_mode
 lvim.builtin.which_key.mappings["dB"] = { "<cmd>lua require('dap').clear_breakpoints()<cr>",
   "Clear Breakpoints" }
@@ -551,6 +588,7 @@ lvim.builtin.which_key.mappings["h"] = {
   S = { "<cmd>STSSelectCurrentNode<cr>", "Surf Node" },
   w = { "<cmd>HopWord<cr>", "Word" },
 }
+lvim.builtin.which_key.mappings["j"] = { "<cmd>BufferLinePick <cr>", "Jump to Buffer" }
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<cr>", "Projects" }
 lvim.builtin.which_key.mappings["sw"] = { "<cmd>Telescope grep_string<cr>", "Search string under cursor" }
 lvim.builtin.which_key.mappings["t"] = {
@@ -716,28 +754,44 @@ vim.api.nvim_create_autocmd('User', {
   end
 })
 vim.cmd([[
+  let g:indent_blankline_char_list = ["|", "¦", "┆", "┊"]
   nmap <C-f> :Ag<Space>
   nmap [q :cprevious <cr>
   nmap ]q :cnext <cr>
 ]])
+local colors = require("tokyonight.colors").setup()
+vim.cmd("highlight ColorColumn guibg=" .. colors.magenta .. " gui=nocombine")
+vim.cmd("highlight WinSeparator guibg=" .. colors.blue .. " gui=nocombine")
+vim.cmd("highlight IndentBlanklineIndent1 guifg=" .. colors.red .. " gui=nocombine")
+vim.cmd("highlight IndentBlanklineIndent2 guifg=" .. colors.orange .. " gui=nocombine")
+vim.cmd("highlight IndentBlanklineIndent3 guifg=" .. colors.yellow .. " gui=nocombine")
+vim.cmd("highlight IndentBlanklineIndent4 guifg=" .. colors.green .. " gui=nocombine")
+vim.cmd("highlight IndentBlanklineIndent5 guifg=" .. colors.blue .. " gui=nocombine")
+vim.cmd("highlight IndentBlanklineIndent6 guifg=" .. colors.magenta .. " gui=nocombine")
 vim.g["test#python#runner"] = 'pytest'
 vim.g.solarized_italics = 1
 vim.g.tokyonight_italic_functions = true
 vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 vim.g.tokyonight_style = "night"
 vim.opt.cmdheight = 1
-vim.opt.colorcolumn = "99999"
+vim.opt.colorcolumn = "80"
+vim.opt.conceallevel = 2
 vim.opt.expandtab = true
+vim.opt.foldenable = true
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
--- vim.opt.foldlevel = 999
 vim.opt.foldmethod = 'expr'
 vim.opt.guifont = "JetbrainsMono Nerd Font Mono:14;FiraCode Nerd Font:14"
+vim.opt.linebreak = true
+vim.opt.list = true
+vim.opt.listchars = { tab = "│→", extends = "⟩", precedes = "⟨", trail = "·", nbsp = "␣" }
 vim.opt.relativenumber = true
 vim.opt.sessionoptions = "curdir,folds,help,options,tabpages,winsize,resize,winpos,terminal"
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.tabstop = 2
 vim.opt.termguicolors = true
+vim.opt.undofile = false
+vim.opt.wrap = true
 require("lvim.lsp.manager").setup("pyright", {
   settings = {
     pyright = {
@@ -816,11 +870,9 @@ code_actions.setup {
 local status_ok, user_dap = pcall(require, "user.dap")
 if not status_ok then return end
 user_dap.setup()
-local user_dapui
 status_ok, user_dapui = pcall(require, "user.dapui")
 if not status_ok then return end
 user_dapui.setup()
-local user_lualine
 status_ok, user_lualine = pcall(require, "user.lualine")
 if not status_ok then return end
 user_lualine.config()

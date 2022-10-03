@@ -6,6 +6,7 @@ HOLLY_DIR=${DOWNLOAD_DIR}/Hollywood
 KIDS_DIR=${DOWNLOAD_DIR}/kids
 
 ANIME_PREFIX=(
+'Anime Land'
 'Anime Time'
 'AnimeRG'
 'Anon'
@@ -103,12 +104,16 @@ move_to_holly() {
       if [ -f "${SRT_FILE}" ]; then
         SRT_SIZE=$(gstat -c%s "${SRT_FILE}")
         if [ ${SRT_SIZE} -lt 500 ]; then
-          rm -rf "${SRT_FILE}"
+          while [[ -e "${SRT_FILE}" ]]; do
+            rm -rf "${SRT_FILE}"
+          done
         fi
       fi
       subliminal download -l en -s "${j}"
   		move_file_to_dir "${j}" "${HOLLY_DIR}"
-      rm -rf "${i}"
+      while [[ -e "${i}" ]]; do
+        rm -rf "${i}"
+      done
     done
   done
   unsetopt NULL_GLOB
@@ -130,7 +135,9 @@ get_dir_subs() {
     fi
   done
   for i in $(gfind ${MY_DIR} -name "*.srt" -size 1000c); do
-    rm -rf ${i}
+      while [[ -e "${i}" ]]; do
+        rm -rf "${i}"
+      done
     subliminal download -l en -s "${i/.srt/.mp4}"
   done
   unsetopt NULL_GLOB
@@ -140,9 +147,25 @@ move_nsznsp_to_games() {
   setopt NULL_GLOB
   IFS=$'\012'
   for i in *\[NSP\] *\[NSZ\]; do
-    rm -rf ${DOWNLOAD_DIR}/Games/Switch/${i}
+    while [[ -e "${DOWNLOAD_DIR}/Games/Switch/${i}" ]]; do
+      rm -rf ${DOWNLOAD_DIR}/Games/Switch/${i}
+    done
   done
   mv *\[NSP\] *\[NSZ\] ${DOWNLOAD_DIR}/Games/Switch
+  unsetopt NULL_GLOB
+}
+
+zip_comic_cbz() {
+  setopt NULL_GLOB
+  IFS=$'\012'
+  pushd ${DOWNLOAD_DIR}
+    for manga in $(gfind . -maxdepth 1 -type d -name "\[*\] *"); do 
+      echo $(basename $manga)
+      pushd ${manga}
+        zip -r "../$(basename $manga).cbz" *
+      popd
+    done
+  popd
   unsetopt NULL_GLOB
 }
 
@@ -154,7 +177,8 @@ fi
 OPTS=$1
 move_anime_to_dir
 move_to_holly
-# move_nsznsp_to_games
+move_nsznsp_to_games
+zip_comic_cbz
 case $OPTS in
   sub)
     #get_dir_subs ${KIDS_DIR}
