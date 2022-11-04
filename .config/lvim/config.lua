@@ -320,7 +320,7 @@ lvim.plugins = {
     end,
   },
   { "simrat39/symbols-outline.nvim",
-    cmd = "SymbolsOutline",
+    -- cmd = "SymbolsOutline",
     config = function()
       require("symbols-outline").setup()
     end
@@ -343,13 +343,6 @@ lvim.plugins = {
   },
   { "nvim-telescope/telescope-packer.nvim",
     requires = { { "nvim-telescope/telescope.nvim" } },
-  },
-  { "nvim-telescope/telescope-project.nvim",
-    event = "BufWinEnter",
-    requires = { { "nvim-telescope/telescope.nvim" } },
-    setup = function()
-      vim.cmd [[packadd telescope.nvim]]
-    end,
   },
   { "nvim-telescope/telescope-smart-history.nvim",
     requires = { { "nvim-telescope/telescope.nvim" } },
@@ -437,7 +430,7 @@ lvim.builtin.indentlines.options = {
   show_current_context = true,
   show_current_context_start = true,
 }
-lvim.builtin.lualine.options.theme = "powerline_dark"
+-- lvim.builtin.lualine.options.theme = "powerline_dark"
 lvim.builtin.luasnip.sources.friendly_snippets = true
 lvim.builtin.notify.active = true
 lvim.builtin.nvimtree.setup.disable_netrw = false
