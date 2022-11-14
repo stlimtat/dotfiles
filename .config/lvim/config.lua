@@ -1,7 +1,7 @@
 -- Additional Plugins
 lvim.plugins = {
-  { "skywind3000/asyncrun.vim" },
-  { "skywind3000/asynctasks.vim" },
+  -- { "skywind3000/asyncrun.vim" },
+  -- { "skywind3000/asynctasks.vim" },
   { "max397574/better-escape.nvim",
     event = "InsertEnter",
     config = function()
@@ -13,8 +13,8 @@ lvim.plugins = {
   { "sindrets/diffview.nvim",
     event = "BufRead",
   },
-  { "junegunn/fzf" },
-  { "junegunn/fzf.vim" },
+  -- { "junegunn/fzf" },
+  -- { "junegunn/fzf.vim" },
   -- { "f-person/git-blame.nvim",
   --   event = "BufRead",
   --   config = function()
@@ -205,9 +205,9 @@ lvim.plugins = {
     end,
   },
   { "stlimtat/nvim-dap-python" },
-  { "rcarriga/nvim-dap-ui",
-    requires = { { "mfussenegger/nvim-dap" } },
-  },
+  -- { "rcarriga/nvim-dap-ui",
+  --   requires = { { "mfussenegger/nvim-dap" } },
+  -- },
   { "theHamsta/nvim-dap-virtual-text",
     config = function()
       require("nvim-dap-virtual-text").setup()
@@ -432,7 +432,7 @@ lvim.builtin.indentlines.options = {
 }
 -- lvim.builtin.lualine.options.theme = "powerline_dark"
 lvim.builtin.luasnip.sources.friendly_snippets = true
-lvim.builtin.notify.active = true
+-- lvim.builtin.notify.active = true
 lvim.builtin.nvimtree.setup.disable_netrw = false
 lvim.builtin.nvimtree.setup.open_on_setup = true
 lvim.builtin.nvimtree.setup.renderer.group_empty = true
@@ -512,6 +512,7 @@ lvim.builtin.telescope.on_config_done = function(telescope)
   pcall(telescope.load_extension, "ag")
   pcall(telescope.load_extension, "file-browser")
   pcall(telescope.load_extension, "frecency")
+  pcall(telescope.load_extension, "fzf")
   pcall(telescope.load_extension, "hop")
   pcall(telescope.load_extension, "live-grep-args")
   pcall(telescope.load_extension, "neoclip")
