@@ -347,7 +347,6 @@ lvim.plugins = {
   { "nvim-telescope/telescope-smart-history.nvim",
     requires = { { "nvim-telescope/telescope.nvim" } },
   },
-  -- { "folke/tokyonight.nvim" },
   { "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
@@ -523,6 +522,8 @@ lvim.builtin.telescope.on_config_done = function(telescope)
   pcall(telescope.load_extension, "smart-history")
 end
 lvim.builtin.terminal.active = true
+lvim.builtin.theme.options.dim_inactive = true
+lvim.builtin.theme.options.style = "storm"
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
@@ -668,7 +669,7 @@ lvim.builtin.which_key.vmappings["sf"] = { "<cmd>lua require('telescope').extens
 --     },
 --   },
 -- }, wk_opts)
-lvim.colorscheme = "tokyonight-storm"
+lvim.colorscheme = "tokyonight"
 lvim.format_on_save = true
 -- keymappings [view all the defaults by pressing <leader>Lk]
 -- keymapping - navigation
@@ -766,7 +767,7 @@ vim.g["test#python#runner"] = 'pytest'
 vim.g.solarized_italics = 1
 vim.g.tokyonight_italic_functions = true
 vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
-vim.g.tokyonight_style = "night"
+vim.g.tokyonight_style = "storm"
 vim.opt.cmdheight = 1
 vim.opt.colorcolumn = "80"
 vim.opt.conceallevel = 2
