@@ -40,7 +40,7 @@ export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
 start_time=$(gdate +%s%3N)
 echo "Running nvm...${start_time}ms"
 export NVM_DIR="$HOME/.nvm"
-# . "/usr/local/opt/nvm/nvm.sh"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && source "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running nvm...${end_time}ms...${time_taken}ms...Done"
@@ -67,6 +67,12 @@ echo "Running pyenv...${end_time}ms...${time_taken}ms...Done"
 
 # iterm2 shell integration
 test -e "${HOME}/.iterm2_shell_integration.$(basename $SHELL)" && source "${HOME}/.iterm2_shell_integration.$(basename $SHELL)"
+
+# aws-vault completion
+eval "$(aws-vault --completion-script-zsh)"
+export AWS_SESSION_TOKEN_TTL=6h
+export AWS_ASSUME_ROLE_TTL=6h
+export AWS_MIN_TTL=6h
 
 # Map caps lock to delete-backspace
 # https://apple.stackexchange.com/questions/7231/how-can-i-rebind-caps-lock-to-delete-backspace
