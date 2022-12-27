@@ -1,3 +1,11 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+export POWERLEVEL9K_INSTANT_PROMPT=quiet
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 export PATH="${HOME}/bin:$PATH"
 export ZSH=${HOME}/.oh-my-zsh
 HIST_STAMPS="yyyy-mm-dd"
@@ -5,7 +13,9 @@ HYPHEN_INSENSITIVE="true"
 # ~/.oh-my-zsh/plugins/vi-mode/README.md
 export VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 export VI_MODE_SET_CURSOR=true
-ZSH_THEME="abnormal"
+# ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="bullet-train"
 # ~/.oh-my-zsh/plugins/tmux/README.md
 export ZSH_TMUX_AUTOSTART=true
 export ZSH_TMUX_AUTOSTART_ONCE=true
@@ -23,7 +33,6 @@ plugins=(
   encode64
   gh
   golang
-  iterm2
   rand-quote
   terraform
   urltools
@@ -64,3 +73,6 @@ for file in ~/.{aliases,devenv,exports,extra,functions,path,tokens,abnormal}; do
   [ -r "$file" ] && [ -f "$file" ] && source "$file"
 done
 unset file
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
