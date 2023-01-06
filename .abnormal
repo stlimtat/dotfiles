@@ -17,23 +17,23 @@ alias airflow_onboarding_worker_ips="aws ec2 describe-instances --filters Name=t
 
 # Abnormal
 export ABNORMAL_USER=slim
-# export ABSEC_CLOUD="aws"
-# export ABSEC_ENV="test"
-# export ABSEC_PART="management"
-# export ABSEC_REGION="us-east-1"
-# export KUBECONFIG="$SOURCE/ops/kubernetes/azure/prod/configurations/kubelogin_config_deploy.yaml"
 export MTLS_HOME="${HOME}/.mtls/user"
-export PYENV_VENV=3.8.8/envs/abnormal
-export SOURCE="${HOME}/source"
+export SOURCE="${HOME}/dev/source"
 export STORAGE_ACCOUNT_URL="https://abnormaldataneu.blob.core.windows.net"
-export VENV="$(pyenv prefix $PYENV_VENV)"
-pyenv activate $PYENV_VENV
+export VENV="$SOURCE/.venv"
 start_time=$(gdate +%s%3N)
 echo "Running abnormal/tools/dev/common_bash_includes...${start_time}ms"
-. ${SOURCE}/tools/dev/common_bash_includes
+source ${SOURCE}/tools/dev/common_bash_includes
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running abnormal/tools/dev/common_bash_includes...${end_time}ms...${time_taken}ms...Done"
+start_time=$(gdate +%s%3N)
+echo "Running venv-activate...${start_time}ms"
+deactivate
+source $SOURCE/tools/dev/venv-activate
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Running venv-activate...${end_time}ms...${time_taken}ms...Done"
 # AWS_PROFILE must be set after bash_includes
 export AWS_PROFILE=absec-mgmt
 
@@ -43,7 +43,6 @@ PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig:${PKG_CONFIG_PATH}
 export LD_LIBRARY_PATH CPATH PKG_CONFIG_PATH
 
 eval "$(colima completion zsh)"
-
 
 # Adding a function in bash_profile
 function broadcast_to_airflow_onboarding_workers() {

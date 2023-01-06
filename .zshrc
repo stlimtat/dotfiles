@@ -27,15 +27,15 @@ export ZSH_TMUX_UNICODE=true
 # ~/.oh-my-zsh/plugins
 plugins=(
   ag
+  asdf
   colored-man-pages
+  direnv
   docker
   docker-compose
-  encode64
+  fzf
   gh
   golang
-  rand-quote
-  terraform
-  urltools
+  helm
   zsh-vi-mode
 )
 # ~/.oh-my-zsh
@@ -45,29 +45,13 @@ source ${ZSH}/oh-my-zsh.sh
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running oh-my-zsh...${end_time}ms...${time_taken}ms...Done"
-# # https://github.com/eendroroy/alien
-# export ALIEN_SECTIONS_LEFT=(
-#   exit
-#   battery
-#   user
-#   path
-#   pyenv_version
-#   vcs_branch:async
-#   vcs_status:async
-#   vcs_dirty:async
-#   versions:async
-#   newline
-#   ssh
-#   prompt
-# )
-# export ALIEN_SECTIONS_RIGHT=(
-#   time
-# )
-# export ALIEN_SECTION_TIME_FORMAT="%F %T%z" # default is %r
-# export ALIEN_THEME="gruvbox"
-# export ALIEN_USE_NERD_FONT=1
-# # export ALIEN_VERSIONS_PROMPT='GO NODE PYTHON RUBY'
-# source ${ZSH}/custom/alien/alien.zsh
+# zstyle
+start_time=$(gdate +%s%3N)
+echo "Running zstyle...${start_time}ms"
+zstyle ':autocomplete:*' default-context history-incremental-search-backward
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Running zstyle...${end_time}ms...${time_taken}ms...Done"
 fpath=(/usr/local/share/zsh-completions $fpath)
 for file in ~/.{aliases,devenv,exports,extra,functions,path,tokens,abnormal}; do
   [ -r "$file" ] && [ -f "$file" ] && source "$file"

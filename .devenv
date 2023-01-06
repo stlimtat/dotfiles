@@ -3,13 +3,13 @@
 # Android NDK Home
 export ANDROID_NDK_HOME="/usr/local/share/android-ndk"
 
-# For gvm
+# Using pyenv
 start_time=$(gdate +%s%3N)
-echo "Running ${HOME}/.gvm/scripts/gvm...${start_time}ms"
-source ${HOME}/.gvm/scripts/gvm
+echo "Running asdf...${start_time}ms"
+source $(brew --prefix asdf)/libexec/asdf.sh
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
-echo "Running ${HOME}/.gvm/scripts/gvm...${end_time}ms...${time_taken}ms...Done"
+echo "Running asdf...${end_time}ms...${time_taken}ms...Done"
 
 # For jediterm - intellij terminal
 if [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]; then
@@ -18,32 +18,8 @@ else
   export PROMPT_COMMAND="resize &>/dev/null ; $PROMPT_COMMAND"
 fi
 
-# Using jenv
-start_time=$(gdate +%s%3N)
-echo "Running /usr/local/bin/jenv...${start_time}ms"
-export JAVA_HOME=$(/usr/local/bin/jenv javahome)
-alias jenv_prompt_info="jenv version-name"
-eval "$(/usr/local/bin/jenv init - ${SHELL})"
-end_time=$(gdate +%s%3N)
-time_taken=$((end_time - start_time))
-echo "Running /usr/local/bin/jenv...${end_time}ms...${time_taken}ms...Done"
-
 # Using kubectl
 export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
-
-## Using lunarvim
-# export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"$HOME/.local/share/lunarvim"}"
-# export LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"$HOME/.config/lvim"}"
-# export LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-"$HOME/.cache/lvim"}"
-
-# Using nvm
-start_time=$(gdate +%s%3N)
-echo "Running nvm...${start_time}ms"
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && source "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-end_time=$(gdate +%s%3N)
-time_taken=$((end_time - start_time))
-echo "Running nvm...${end_time}ms...${time_taken}ms...Done"
 
 # pnpm
 export PNPM_HOME="/Users/st_lim/Library/pnpm"
@@ -52,18 +28,13 @@ export PATH="$PNPM_HOME:$PATH"
 
 # Using pyenv
 start_time=$(gdate +%s%3N)
-echo "Running pyenv...${start_time}ms"
+echo "Running asdf python...${start_time}ms"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+export PYTHON_ROOT="$(asdf where python 3.8.8)"
+export PATH="$PYTHON_ROOT/bin:$PATH"
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
-echo "Running pyenv...${end_time}ms...${time_taken}ms...Done"
-
-# For rbenv
-# eval "$(/usr/local/bin/rbenv init - )"
+echo "Running asdf python...${end_time}ms...${time_taken}ms...Done"
 
 # iterm2 shell integration
 test -e "${HOME}/.iterm2_shell_integration.$(basename $SHELL)" && source "${HOME}/.iterm2_shell_integration.$(basename $SHELL)"

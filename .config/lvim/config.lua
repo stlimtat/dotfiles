@@ -47,7 +47,7 @@ lvim.plugins = {
           -- callback for what to do with the url
           action_callback = function(url)
             require("gitlinker.actions").copy_to_clipboard(url)
-            require("gitlinker.actions").open_in_browser(url)
+            -- require("gitlinker.actions").open_in_browser(url)
           end,
           -- print the url after performing the action
           print_url = true,
@@ -58,6 +58,7 @@ lvim.plugins = {
     end,
     requires = { { "nvim-lua/plenary.nvim" } },
   },
+  { "aspeddro/gitui.nvim" },
   { "rmagatti/goto-preview",
     config = function()
       require("goto-preview").setup {
@@ -78,46 +79,7 @@ lvim.plugins = {
     end,
     -- cmd = { "HopChar1", "HopChar2", "HopLine", "HopPattern", "HopWord" },
   },
-  -- { "lukas-reineke/indent-blankline.nvim",
-  --   config = function()
-  --     vim.cmd([[
-  --       highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine
-  --       highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine
-  --       highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine
-  --       highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine
-  --       highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine
-  --       highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine
-  --     ]])
-  --     require("indent_blankline").setup {
-  --       buftype_exclude = { "terminal", "nofile" },
-  --       char = "│",
-  --       char_highlight_list = {
-  --         "IndentBlanklineIndent1",
-  --         "IndentBlanklineIndent2",
-  --         "IndentBlanklineIndent3",
-  --         "IndentBlanklineIndent4",
-  --         "IndentBlanklineIndent5",
-  --         "IndentBlanklineIndent6",
-  --       },
-  --       -- let g:indent_blankline_char_list = ["|", "¦", "┆", "┊"]
-  --       filetype_exclude = { "dashboard", "markdown" },
-  --       show_current_context = true,
-  --       show_current_context_start = true,
-  --       space_char_blankline = " ",
-  --       space_char_highlight_list = {
-  --         "IndentBlanklineIndent1",
-  --         "IndentBlanklineIndent2",
-  --         "IndentBlanklineIndent3",
-  --         "IndentBlanklineIndent4",
-  --         "IndentBlanklineIndent5",
-  --         "IndentBlanklineIndent6",
-  --       },
-  --       use_treesitter = true,
-  --     }
-  --   end,
-  -- },
   { "rebelot/kanagawa.nvim" },
-  { "kdheepak/lazygit.nvim" },
   { "ahmedkhalf/lsp-rooter.nvim",
     event = "BufRead",
     config = function()
@@ -130,26 +92,11 @@ lvim.plugins = {
       require "lsp_signature".on_attach()
     end,
   },
-  -- { "wfxr/minimap.vim",
-  --   run = "cargo install --locked code-minimap",
-  --   cmd = { "Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight" },
-  --   config = function()
-  --     vim.cmd([[
-  --       let g:minimap_auto_start = 1
-  --       let g:minimap_auto_start_win_enter = 1
-  --       let g:minimap_enable_highlight_colorgroup = 1
-  --       let g:minimap_width = 20
-  --       highlight minimapCursor ctermbg=59 ctermfg=228 guibg=#5F5F5F guifg=#FFFF87
-  --       highlight minimapDiffLine ctermbg=59 ctermfg=228 guibg=#5F5F5F guifg=#FFFF87
-  --       highlight minimapRange ctermbg=242 ctermfg=228 guibg=#4F4F4F guifg=#FFFF87
-  --       ]])
-  --   end,
-  -- },
   -- { "nvim-neotest/neotest",
   --   requires = {
-  --     "nvim-lua/plenary.nvim" ] = {
+  --     "nvim-lua/plenary.nvim",
   --     "nvim-treesitter/nvim-treesitter",
-  --     "antoinemadec/FixCursorHold.nvim"
+  --     "antoinemadec/FixCursorHold.nvim",
   --   },
   -- },
   -- { "nvim-neotest/neotest-go" },
