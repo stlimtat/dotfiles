@@ -20,6 +20,8 @@ export ABNORMAL_USER=slim
 export MTLS_HOME="${HOME}/.mtls/user"
 export SOURCE="${HOME}/dev/source"
 export STORAGE_ACCOUNT_URL="https://abnormaldataneu.blob.core.windows.net"
+export TERRAGRUNT_SOURCE_MAP="git::ssh://git@github.com/abnormal-security/infrastructure-modules.git=${HOME}/dev/infrastructure-modules"
+export TERRAGRUNT_SOURCE_UPDATE=true
 export VENV="$SOURCE/.venv"
 start_time=$(gdate +%s%3N)
 echo "Running abnormal/tools/dev/common_bash_includes...${start_time}ms"
@@ -29,7 +31,7 @@ time_taken=$((end_time - start_time))
 echo "Running abnormal/tools/dev/common_bash_includes...${end_time}ms...${time_taken}ms...Done"
 start_time=$(gdate +%s%3N)
 echo "Running venv-activate...${start_time}ms"
-deactivate
+if [ "$VENV" != "" ]; then if [ "$VIRTUAL_ENV" != "" ]; then deactivate; fi; fi
 source $SOURCE/tools/dev/venv-activate
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))

@@ -1,7 +1,6 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-export POWERLEVEL9K_INSTANT_PROMPT=quiet
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -48,6 +47,7 @@ echo "Running oh-my-zsh...${end_time}ms...${time_taken}ms...Done"
 # zstyle
 start_time=$(gdate +%s%3N)
 echo "Running zstyle...${start_time}ms"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 zstyle ':autocomplete:*' default-context history-incremental-search-backward
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
@@ -60,3 +60,4 @@ unset file
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+

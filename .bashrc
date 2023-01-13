@@ -25,3 +25,5 @@ PATH_LIST=(
 )
 export PATH=.$(printf ":%s" "${PATH_LIST[@]}")
 export PYTHONSTARTUP=/Users/st_lim/.py-prompts/themes/time.py
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
