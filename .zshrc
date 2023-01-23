@@ -31,7 +31,6 @@ plugins=(
   direnv
   docker
   docker-compose
-  fzf
   gh
   golang
   helm
@@ -44,20 +43,24 @@ source ${ZSH}/oh-my-zsh.sh
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running oh-my-zsh...${end_time}ms...${time_taken}ms...Done"
-# zstyle
-start_time=$(gdate +%s%3N)
-echo "Running zstyle...${start_time}ms"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-zstyle ':autocomplete:*' default-context history-incremental-search-backward
-end_time=$(gdate +%s%3N)
-time_taken=$((end_time - start_time))
-echo "Running zstyle...${end_time}ms...${time_taken}ms...Done"
 fpath=(/usr/local/share/zsh-completions $fpath)
 for file in ~/.{aliases,devenv,exports,extra,functions,path,tokens,abnormal}; do
-  [ -r "$file" ] && [ -f "$file" ] && source "$file"
+  [[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
 done
 unset file
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+start_time=$(gdate +%s%3N)
+echo "Running p10k...${start_time}ms"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Running p10k...${end_time}ms...${time_taken}ms...Done"
+# fzf
+start_time=$(gdate +%s%3N)
+echo "Running fzf...${start_time}ms"
+source ~/.fzf.zsh
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Running fzf...${end_time}ms...${time_taken}ms...Done"
 

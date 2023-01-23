@@ -31,8 +31,8 @@ time_taken=$((end_time - start_time))
 echo "Running abnormal/tools/dev/common_bash_includes...${end_time}ms...${time_taken}ms...Done"
 start_time=$(gdate +%s%3N)
 echo "Running venv-activate...${start_time}ms"
-if [ "$VENV" != "" ]; then if [ "$VIRTUAL_ENV" != "" ]; then deactivate; fi; fi
-source $SOURCE/tools/dev/venv-activate
+[[ "$(type deactivate | grep function)" == "" ]] || deactivate()
+[[ "$(python --version | grep '3.8.')" == "" ]] && source $SOURCE/tools/dev/venv-activate
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running venv-activate...${end_time}ms...${time_taken}ms...Done"
@@ -44,7 +44,12 @@ CPATH=/usr/local/opt/openssl/include:${CPATH}
 PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig:${PKG_CONFIG_PATH}
 export LD_LIBRARY_PATH CPATH PKG_CONFIG_PATH
 
+start_time=$(gdate +%s%3N)
+echo "Running colima...${start_time}ms"
 eval "$(colima completion zsh)"
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Running colima...${end_time}ms...${time_taken}ms...Done"
 
 # Adding a function in bash_profile
 function broadcast_to_airflow_onboarding_workers() {

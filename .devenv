@@ -22,16 +22,14 @@ fi
 export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
 
 # pnpm
-export PNPM_HOME="/Users/st_lim/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
+# export PNPM_HOME="/Users/st_lim/Library/pnpm"
+# export PATH="$PNPM_HOME:$PATH"
 # pnpm end
 
 # Using pyenv
 start_time=$(gdate +%s%3N)
 echo "Running asdf python...${start_time}ms"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-export PYTHON_ROOT="$(asdf where python 3.8.8)"
-export PATH="$PYTHON_ROOT/bin:$PATH"
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running asdf python...${end_time}ms...${time_taken}ms...Done"

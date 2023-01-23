@@ -1,5 +1,12 @@
 #!/bin/zsh
 
+[[ "$(type deactivate | grep function)" != "" ]] && deactivate()
+[[ "$(python --version | grep '3.8.' )" == "" ]] && ${SOURCE}/tools/dev/venv-activate
+pip list --outdated |\ 
+  cut -w -f 1 |\
+  gsed 1,2d |\
+  xargs pip install --upgrade
+
 pushd ${SOURCE}
   mv ${SOURCE}/.idea ${HOME}/idea-$(date +%Y%m%d)
   for i in ${SOURCE}/src/js/abnormal/daffodil-playwright/.env*; do
@@ -17,16 +24,5 @@ pushd ${SOURCE}
     mv ${HOME}/${i} ${SOURCE}/src/js/abnormal/daffodil-playwright/${env_file}
   done
   ${SOURCE}/bin/venv-sync
-  pip install \
-    debugpy \
-    flake8 \
-    pip-tools \
-    pylint \
-    pynvim \
-    spotify-dl \
-    subliminal \
-    vim-vint \
-    virtualenv \
-    youtube-dl
-
 popd
+
