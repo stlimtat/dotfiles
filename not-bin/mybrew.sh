@@ -88,51 +88,71 @@ pushd ${DOTFILES_DIR}
     #
     # Install fzf
     [[ -f "$(brew --prefix)/opt/fzf/install" ]] && $(brew --prefix)/opt/fzf/install
-    #
-    # asdf
-    # https://github.com/asdf-vm/asdf
-    asdf plugin add golang
-    asdf plugin add nodejs 
-    asdf plugin add python 
-    asdf plugin add terraform
-    asdf plugin add terragrunt
-    #
-    # nodejs
-    # https://github.com/pyenv/pyenv
-    asdf install nodejs latest
-    asdf global nodejs latest
-    #
-    # python
-    # https://github.com/pyenv/pyenv
-    asdf install python 3.8.10
-    asdf install python latest
-    asdf global python latest
+    if [[ -f "${HOMEBREW_DIR}/bin/asdf" ]]; then
+      #
+      # asdf
+      # https://github.com/asdf-vm/asdf
+      asdf plugin add golang
+      asdf plugin add nodejs 
+      asdf plugin add python 
+      asdf plugin add terraform
+      asdf plugin add terragrunt
+      #
+      # nodejs
+      # https://github.com/pyenv/pyenv
+      asdf install nodejs latest
+      asdf global nodejs latest
+      mkdir ${HOME}/.npm-global
+      npm config set prefix "${HOME}/.npm-global"
+      export PATH=${HOME}/.npm-global/bin:$PATH
+      #
+      # python
+      # https://github.com/pyenv/pyenv
+      asdf install python 3.8.10
+      asdf install python latest
+      asdf global python latest
+    fi
     #
     # Lunarvim
     # Using https://www.lunarvim.org/
     if [[ ! -f ${HOME}/.local/bin/lvim ]]; then
       luarocks install luacheck
+      [[ "$(which node)" == "" ]] && echo "No node detected"
+      [[ "$(which python)" == "" ]] && echo "No python detected"
+      [[ "$(which rust)" == "" ]] && echo "No rust detected"
       /bin/zsh ${DOTFILES_DIR}/bin/reinstall-lvim.sh 1
     fi
     #
     # Abnormal
-    # hdf5
-    brew tap abnormal-security/abnormal git@github.com:abnormal-security/homebrew-abnormal.git
-    brew install pkg-config \
-      freetype \
-      libpng \
-      hdf5 \
-      virtualenv \
-      cmake \
-      snappy \
-      swig \
-      abnormal-security/abnormal/{mupdf,rocksdb}
-    mkdir ~/.matplotlib
-    cat > ~/.matplotlib/matplotlibrc <<EOF
+    # Adding abnormal-security brew tap
+    # Before doing this, you need to add ssh key to github account
+    if [[ ! -f "${HOME}/.ssh/id_ed25519.pub" ]]; then
+      ssh-keygen -t ed25519 -f ${HOME}/id_ed25519 -C 'st_lim@tanjiro' -a 100 -o
+      ssh-add -K
+      echo "Please login with a valid id on github"
+      [[ -f "/Applications/Brave Browser.app" ]] && open -a /Applications/Brave Browser.app https://github.com/
+      if [[ "$(brew tap | grep abnormal-security)" == "" ]]; then
+        brew tap \
+          abnormal-security/abnormal \
+          git@github.com:abnormal-security/homebrew-abnormal.git
+        brew install \
+          abnormal-security/abnormal/{mupdf,rocksdb} \
+          cmake \
+          freetype \
+          libpng \
+          hdf5 \
+          pkg-config \
+          snappy \
+          swig \
+          virtualenv
+        mkdir ~/.matplotlib
+        cat > ~/.matplotlib/matplotlibrc <<EOF
 backend: TkAgg
 EOF
-    if [[ "$(uname -m)" != "x86_64" ]]; then
-      cat > /opt/homebrew/lib/pkgconfig/hdf5.pc <<'EOF'
+        if [[ "$(uname -m)" != "x86_64" ]]; then
+          #
+          # hdf5
+          cat > /opt/homebrew/lib/pkgconfig/hdf5.pc <<EOF
 prefix=/opt/homebrew/opt/hdf5
 libdir=${prefix}/lib
 includedir=${prefix}/include
@@ -143,6 +163,8 @@ Version: 1.12.1
 Libs: -L${libdir}
 Cflags: -I${includedir}
 EOF
+       fi
+      fi
     fi
   fi
   [[ -f ${HOME}/.zshrc.pre* ]] && rm ${HOME}/.zshrc.pre* && cp ${DOTFILES_DIR}/.zshrc ${HOME}/.zshrc

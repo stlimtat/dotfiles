@@ -3,7 +3,7 @@
 # Android NDK Home
 export ANDROID_NDK_HOME="/usr/local/share/android-ndk"
 
-# Using pyenv
+# Using asdf
 start_time=$(gdate +%s%3N)
 echo "Running asdf...${start_time}ms"
 source $(brew --prefix asdf)/libexec/asdf.sh
@@ -21,11 +21,6 @@ fi
 # Using kubectl
 export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
 
-# pnpm
-# export PNPM_HOME="/Users/st_lim/Library/pnpm"
-# export PATH="$PNPM_HOME:$PATH"
-# pnpm end
-
 # Using pyenv
 start_time=$(gdate +%s%3N)
 echo "Running asdf python...${start_time}ms"
@@ -34,16 +29,9 @@ end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running asdf python...${end_time}ms...${time_taken}ms...Done"
 
-# iterm2 shell integration
-test -e "${HOME}/.iterm2_shell_integration.$(basename $SHELL)" && source "${HOME}/.iterm2_shell_integration.$(basename $SHELL)"
-
 # aws-vault completion
 eval "$(aws-vault --completion-script-zsh)"
 export AWS_SESSION_TOKEN_TTL=6h
 export AWS_ASSUME_ROLE_TTL=6h
 export AWS_MIN_TTL=6h
 
-# Map caps lock to delete-backspace
-# https://apple.stackexchange.com/questions/7231/how-can-i-rebind-caps-lock-to-delete-backspace
-hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x70000002A}]}' >/dev/null 2>&1
-tabs -2
