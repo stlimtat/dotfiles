@@ -114,7 +114,38 @@ pushd ${DOTFILES_DIR}
       luarocks install luacheck
       /bin/zsh ${DOTFILES_DIR}/bin/reinstall-lvim.sh 1
     fi
+    #
+    # Abnormal
+    # hdf5
+    brew tap abnormal-security/abnormal git@github.com:abnormal-security/homebrew-abnormal.git
+    brew install pkg-config \
+      freetype \
+      libpng \
+      hdf5 \
+      virtualenv \
+      cmake \
+      snappy \
+      swig \
+      abnormal-security/abnormal/{mupdf,rocksdb}
+    mkdir ~/.matplotlib
+    cat > ~/.matplotlib/matplotlibrc <<EOF
+backend: TkAgg
+EOF
+    if [[ "$(uname -m)" != "x86_64" ]]; then
+      cat > /opt/homebrew/lib/pkgconfig/hdf5.pc <<'EOF'
+prefix=/opt/homebrew/opt/hdf5
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: hdf5
+Description: File format designed to store large amounts of data
+Version: 1.12.1
+Libs: -L${libdir}
+Cflags: -I${includedir}
+EOF
+    fi
   fi
   [[ -f ${HOME}/.zshrc.pre* ]] && rm ${HOME}/.zshrc.pre* && cp ${DOTFILES_DIR}/.zshrc ${HOME}/.zshrc
   [[ -f ${HOME}/*brew.sh ]] && rm -rf ${HOME}/*brew.sh
+  sudo cp ${DOTFILES_DIR}/etc/nfs.conf /etc/nfs.conf
 popd 
