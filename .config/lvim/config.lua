@@ -749,7 +749,7 @@ require("lvim.lsp.manager").setup("pyright", {
           "**/__pycache__",
         },
         extraPaths = {
-          os.getenv("PYENV_VIRTUAL_ENV") .. "/lib/python3.8/site-packages",
+          os.getenv("VENV") .. "/lib/python3.8/site-packages",
           os.getenv('SOURCE') .. '/src/py',
           os.getenv('SOURCE') .. '/src/pytests',
           os.getenv('SOURCE') .. '/src/pytests/abnormal/test',
@@ -787,7 +787,7 @@ linters.setup {
       os.getenv("SOURCE") .. "/.pylintrc",
       "--init-hook",
       "import sys;" ..
-          "sys.path.append(\"" .. os.getenv("PYENV_VIRTUAL_ENV") .. "/lib/python3.8/site-packages\");" ..
+          "sys.path.append(\"" .. os.getenv("VENV") .. "/lib/python3.8/site-packages\");" ..
           "sys.path.append(\"" .. os.getenv("SOURCE") .. "/src/py\");" ..
           "sys.path.append(\"" .. os.getenv("SOURCE") .. "/src/pytests\");" ..
           "sys.path.append(\"" .. os.getenv("SOURCE") .. "/src/pytests/abnormal/test\");",

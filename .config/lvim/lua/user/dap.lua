@@ -248,7 +248,7 @@ M.setup = function()
   -- end
   -- stlimtat custom dap.lua
   local dap_python = require("dap-python")
-  dap_python.setup(os.getenv("PYENV_VIRTUAL_ENV") .. "/bin/python", {
+  dap_python.setup(os.getenv("VENV") .. "/bin/python", {
     console = "internalConsole",
     test_runner_config = {
       cwd = vim.env.SOURCE .. "/src/pytests"
@@ -271,7 +271,7 @@ M.setup = function()
       vim.fn.input("args = " .. result, "tester")
       return { "--ds=test_airflow_django_settings", "--nomigrations", result }
     end,
-    -- pythonPath = os.getenv("PYENV_VIRTUAL_ENV") .. "/bin/python",
+    -- pythonPath = os.getenv("VENV") .. "/bin/python",
   });
   table.insert(dap.configurations.python, 2, {
     type = "python",
@@ -288,7 +288,7 @@ M.setup = function()
       vim.fn.input("args = " .. result, "tester")
       return { result }
     end,
-    -- pythonPath = os.getenv("PYENV_VIRTUAL_ENV") .. "/bin/python",
+    -- pythonPath = os.getenv("VENV") .. "/bin/python",
   });
   lvim.builtin.dap.on_config_done = function(_)
     lvim.builtin.which_key.mappings["d"].name = " Debug"
