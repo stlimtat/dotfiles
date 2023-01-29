@@ -6,7 +6,9 @@ if [[ "${SCRIPT_DIR}" = "." ]]; then
 fi
 #
 # Check if installing for dev environment
-DEV_SETUP=$1
+echo -n "Are you setting up a dev machine (Y|n)?"
+read DEV_SETUP
+[[ "${DEV_SETUP}" =~ "[nN]" ]] && unset DEV_SETUP
 # 
 # Goes up one directory
 DOTFILES_DIR=$(dirname $SCRIPT_DIR)
@@ -28,6 +30,7 @@ pushd ${DOTFILES_DIR}
       --exclude ".tokens" \
       --exclude "*.sh" \
       --exclude "*.plist" \
+      --exclude "etc/" \
       --exclude "init/" \
       --exclude "not-bin/" \
       --exclude "README.md" \
@@ -42,6 +45,8 @@ pushd ${DOTFILES_DIR}
     echo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   fi
+  # Set PATH, MANPATH, etc., for Homebrew.
+  [[ -f "${HOMEBREW_DIR}/bin/brew" ]] && eval "$(${HOMEBREW_DIR}/bin/brew shellenv)"
   #
   # Make sure we’re using the latest Homebrew.
   brew tap homebrew/bundle
@@ -59,24 +64,7 @@ pushd ${DOTFILES_DIR}
   brew cleanup
   #
   # Source for jenv from ~/.extra
-  source ${}/.zshrc
-  #
-  # Install iterm shell integration
-  # https://iterm2.com/documentation-shell-integration.html
-  if [[ ! -d ${HOME}/.iterm2_shell_integration.zsh ]]; then
-    curl -L https://iterm2.com/shell_integration/zsh -o ~/.iterm2_shell_integration.zsh
-    source ~/.iterm2_shell_integration.zsh
-  fi
-  #
-  # iterm color schemes
-  # https://github.com/mbadolato/iTerm2-Color-Schemes
-  if [[ ! -d ${HOME}/go/src/github.com/mbadolato/iTerm2-Color-Schemes ]]; then
-    mkdir -p ${HOME}/go/src/github.com/mbadolato
-    git clone https://github.com/mbadolato/iTerm2-Color-Schemes ${HOME}/go/src/github.com/mbadolato/iTerm2-Color-Schemes
-    pushd ${HOME}/go/src/github.com/mbadolato/iTerm2-Color-Schemes
-    /bin/bash tools/import-scheme.sh "Solarized Darcula" "Solarized Dark - Patched" "Solarized Dark Higher Contrast"
-    popd
-  fi
+  source ${HOME}/.zshrc
   #
   # oh-my-zsh
   # https://github.com/ohmyzsh/ohmyzsh
@@ -88,36 +76,43 @@ pushd ${DOTFILES_DIR}
   fi
   if [[ "${DEV_SETUP}" != "" ]]; then
     #
+    # Run init again
+    [[ -f "${HOME}/.zshrc.pre*" ]] && rm ${HOME}/.zshrc.pre* && cp ${DOTFILES_DIR}/.zshrc ${HOME}/.zshrc
+    source ${HOME}/.zshrc
+    #
     # Install colima
     # https://github.com/abiosoft/colima
     if [[ ! -d ${HOME}/.colima ]]; then
-      colima start --cpu 4 --memory 8
+      colima start --cpu 5 --memory 16
     fi
     #
-    # Install gvm
-    # https://github.com/moovweb/gvm
-    if [[ ! -d ${HOME}/.gvm ]]; then
-      curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer | /bin/zsh -
-    fi
+    # Install fzf
+    [[ -f "$(brew --prefix)/opt/fzf/install" ]] && $(brew --prefix)/opt/fzf/install
+    #
+    # asdf
+    # https://github.com/asdf-vm/asdf
+    asdf plugin add golang
+    asdf plugin add nodejs 
+    asdf plugin add python 
+    asdf plugin add terraform
+    asdf plugin add terragrunt
+    #
+    # nodejs
+    # https://github.com/pyenv/pyenv
+    asdf install nodejs latest
+    asdf global nodejs latest
+    #
+    # python
+    # https://github.com/pyenv/pyenv
+    asdf install python 3.8.10
+    asdf install python latest
+    asdf global python latest
     #
     # Lunarvim
     # Using https://www.lunarvim.org/
     if [[ ! -f ${HOME}/.local/bin/lvim ]]; then
       luarocks install luacheck
-      /bin/zsh ${DOTFILES_DIR}/bin/reinstall-lvim.sh
-    fi
-    #
-    # python
-    # https://github.com/pyenv/pyenv
-    if [[ ! -d ${HOME}/.pyenv/versions ]]; then
-      # PY_VER=$(pyenv install --list | grep "  3.10" | tail -n 1 | sed -e 's/ //g')
-      # pyenv install ${PY_VER}
-      # pyenv global ${PY_VER}
-      pyenv install 3.8.8
-      pyenv global 3.8.8
-      eval "$(pyenv init --path)"
-      pip install --upgrade pip
-      /bin/zsh ${DOTFILES_DIR}/bin/restore-venv.sh
+      /bin/zsh ${DOTFILES_DIR}/bin/reinstall-lvim.sh 1
     fi
   fi
   [[ -f ${HOME}/.zshrc.pre* ]] && rm ${HOME}/.zshrc.pre* && cp ${DOTFILES_DIR}/.zshrc ${HOME}/.zshrc

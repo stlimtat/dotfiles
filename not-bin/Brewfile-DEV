@@ -6,11 +6,16 @@ tap 'homebrew/cask-versions'
 tap 'mongodb/brew'
 tap 'neovim/neovim'
 tap 'nicoverbruggen/homebrew-cask'
+tap 'syncdk/aws-session-manager-plugin'
 
 # Binaries
+brew 'asdf'
 brew 'awscli'
+brew 'aws-session-manager-plugin'
+brew 'aws-vault'
 brew 'code-minimap' # Needed for neovim minimap
 brew 'colima' # docker replacement
+brew 'docker' # docker replacement
 brew 'gnupg'
 brew 'neovim'
 brew 'python'
@@ -24,30 +29,25 @@ brew 'tmux'
 brew 'bazelisk'
 brew 'cargo'
 brew 'composer'
-brew 'colima'
 brew 'docker-credential-helper'
-brew 'go'
+brew 'gitui'
 brew 'golangci-lint'
 brew 'hadolint' # dockerfile lint
 brew 'imagemagick'
-brew 'jenv'
 brew 'jq'
-brew 'lazygit'
 brew 'libmemcached'
 brew 'luarocks' # for lua on vim
 brew 'markdownlint-cli' # for markdown for vim
-brew 'nvm'
-brew 'pyenv'
-brew 'pyenv-virtualenv'
 brew 'rust'
-brew 'tfenv'
 brew 'vale' # for markdown for vim
 
 # Apps
-cask 'docker'
+# cask 'docker'
 # cask 'firefox'
 # cask 'google-chrome'
-cask 'postman'
+# cask 'postman'
+cask 'adoptopenjdk/openjdk/adoptopenjdk8'
+cask 'pycharm-ce'
 cask 'visual-studio-code'
 cask 'zsa-wally' # For my ergodox keyboard
 
