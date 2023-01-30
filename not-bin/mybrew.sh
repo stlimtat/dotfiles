@@ -70,9 +70,10 @@ pushd ${DOTFILES_DIR}
   # https://github.com/ohmyzsh/ohmyzsh
   if [[ ! -d ${HOME}/.oh-my-zsh ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-    # rsync -ar ${DOTFILES_DIR}/init/abnormal.zsh-theme ${HOME}/.oh-my-zsh/custom/themes
     # Install the powerlevel10k theme
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    # Install the zsh-vi-mode plugin 
+    git clone https://github.com/jeffreytse/zsh-vi-mode ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-vi-mode
   fi
   if [[ "${DEV_SETUP}" != "" ]]; then
     #
