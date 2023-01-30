@@ -58,7 +58,7 @@ lvim.plugins = {
     end,
     requires = { { "nvim-lua/plenary.nvim" } },
   },
-  { "aspeddro/gitui.nvim" },
+  { "brneor/gitui.nvim" },
   { "rmagatti/goto-preview",
     config = function()
       require("goto-preview").setup {

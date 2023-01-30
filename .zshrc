@@ -18,8 +18,8 @@ export ZSH=${HOME}/.oh-my-zsh
 HIST_STAMPS="yyyy-mm-dd"
 HYPHEN_INSENSITIVE="true"
 # ~/.oh-my-zsh/plugins/vi-mode/README.md
-export VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
-export VI_MODE_SET_CURSOR=true
+# export VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
+# export VI_MODE_SET_CURSOR=true
 # ZSH_THEME="agnoster"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 # ZSH_THEME="bullet-train"
@@ -52,7 +52,7 @@ end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running oh-my-zsh...${end_time}ms...${time_taken}ms...Done"
 fpath=(/usr/local/share/zsh-completions $fpath)
-for file in ~/.{aliases,devenv,exports,extra,functions,path,tokens,abnormal}; do
+for file in ${HOME}/.{aliases,devenv,exports,extra,functions,path,tokens,abnormal}; do
   [[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
 done
 unset file
@@ -60,14 +60,15 @@ unset file
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 start_time=$(gdate +%s%3N)
 echo "Running p10k...${start_time}ms"
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f ${HOME}/.p10k.zsh ]] || source ${HOME}/.p10k.zsh
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running p10k...${end_time}ms...${time_taken}ms...Done"
 # fzf
 start_time=$(gdate +%s%3N)
 echo "Running fzf...${start_time}ms"
-source ~/.fzf.zsh
+zvm_after_init_commands+=("[ -f ${HOME}/.fzf.zsh ] && source ${HOME}/.fzf.zsh")
+source ${HOME}/.fzf.zsh
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running fzf...${end_time}ms...${time_taken}ms...Done"
