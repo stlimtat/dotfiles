@@ -35,6 +35,7 @@ brew 'golangci-lint'
 brew 'hadolint' # dockerfile lint
 brew 'imagemagick'
 brew 'jq'
+brew 'keycastr'
 brew 'libmemcached'
 brew 'luarocks' # for lua on vim
 brew 'markdownlint-cli' # for markdown for vim
