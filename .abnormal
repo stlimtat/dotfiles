@@ -17,7 +17,9 @@ alias airflow_onboarding_worker_ips="aws ec2 describe-instances --filters Name=t
 
 # Abnormal
 export ABNORMAL_USER=slim
+export GOFLAGS="-tags=dynamic"
 export MTLS_HOME="${HOME}/.mtls/user"
+export PKG_CONFIG_PATH="$(brew --prefix openssl@1.1)/lib/pkgconfig"
 export SOURCE="${HOME}/dev/source"
 export STORAGE_ACCOUNT_URL="https://abnormaldataneu.blob.core.windows.net"
 export TERRAGRUNT_SOURCE_MAP="git::ssh://git@github.com/abnormal-security/infrastructure-modules.git=${HOME}/dev/infrastructure-modules"
