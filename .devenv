@@ -18,16 +18,17 @@ else
   export PROMPT_COMMAND="resize &>/dev/null ; $PROMPT_COMMAND"
 fi
 
-# Using kubectl
-export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
-
-# Using pyenv
+# Using go
 start_time=$(gdate +%s%3N)
-echo "Running asdf python...${start_time}ms"
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+echo "Running go...${start_time}ms"
+export PATH=$(go env GOPATH)/bin:${PATH}
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
-echo "Running asdf python...${end_time}ms...${time_taken}ms...Done"
+echo "Running go...${end_time}ms...${time_taken}ms...Done"
+
+# For jediterm - intellij terminal
+# Using kubectl
+export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
 
 # aws-vault completion
 eval "$(aws-vault --completion-script-zsh)"

@@ -58,7 +58,7 @@ lvim.plugins = {
     end,
     requires = { { "nvim-lua/plenary.nvim" } },
   },
-  { "brneor/gitui.nvim" },
+  -- { "brneor/gitui.nvim" },
   { "rmagatti/goto-preview",
     config = function()
       require("goto-preview").setup {
@@ -80,6 +80,7 @@ lvim.plugins = {
     -- cmd = { "HopChar1", "HopChar2", "HopLine", "HopPattern", "HopWord" },
   },
   { "rebelot/kanagawa.nvim" },
+  { "kdheepak/lazygit.nvim" },
   { "ahmedkhalf/lsp-rooter.nvim",
     event = "BufRead",
     config = function()
@@ -460,6 +461,7 @@ lvim.builtin.telescope.on_config_done = function(telescope)
   pcall(telescope.load_extension, "frecency")
   pcall(telescope.load_extension, "fzf")
   pcall(telescope.load_extension, "hop")
+  pcall(telescope.load_extension, "lazygit")
   pcall(telescope.load_extension, "live-grep-args")
   pcall(telescope.load_extension, "neoclip")
   pcall(telescope.load_extension, "octo")
