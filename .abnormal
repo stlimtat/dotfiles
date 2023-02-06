@@ -18,13 +18,13 @@ alias airflow_onboarding_worker_ips="aws ec2 describe-instances --filters Name=t
 # Abnormal
 export ABNORMAL_USER=slim
 export GOFLAGS="-tags=dynamic"
-export MTLS_HOME="${HOME}/.mtls/user"
-export PKG_CONFIG_PATH="$(brew --prefix openssl@1.1)/lib/pkgconfig"
-export SOURCE="${HOME}/dev/source"
+export MTLS_HOME=${HOME}/.mtls/user
+export PKG_CONFIG_PATH=$(brew --prefix openssl@1.1)/lib/pkgconfig
+export SOURCE=${HOME}/dev/source
 export STORAGE_ACCOUNT_URL="https://abnormaldataneu.blob.core.windows.net"
 export TERRAGRUNT_SOURCE_MAP="git::ssh://git@github.com/abnormal-security/infrastructure-modules.git=${HOME}/dev/infrastructure-modules"
 export TERRAGRUNT_SOURCE_UPDATE=true
-export VENV="$SOURCE/.venv"
+export VENV=${HOME}/dev/venv
 start_time=$(gdate +%s%3N)
 echo "Running abnormal/tools/dev/common_bash_includes...${start_time}ms"
 source ${SOURCE}/tools/dev/common_bash_includes
@@ -33,8 +33,8 @@ time_taken=$((end_time - start_time))
 echo "Running abnormal/tools/dev/common_bash_includes...${end_time}ms...${time_taken}ms...Done"
 start_time=$(gdate +%s%3N)
 echo "Running venv-activate...${start_time}ms"
-[[ "$(type deactivate | grep function)" == "" ]] || deactivate()
-[[ "$(python --version | grep '3.8.')" == "" ]] && source $SOURCE/tools/dev/venv-activate
+[[ "$(type deactivate | grep function)" != "" ]] && echo "Running venv-activate...${start_time}ms...deactivate" && deactivate()
+[[ "$(python --version | grep '3.8.')" == "" || "${VIRTUAL_ENV}" == "" ]] && echo "Running venv-activate...${start_time}ms...activate" && source $VENV/bin/activate
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running venv-activate...${end_time}ms...${time_taken}ms...Done"
