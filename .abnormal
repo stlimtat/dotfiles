@@ -33,13 +33,10 @@ end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running abnormal/tools/dev/common_bash_includes...${end_time}ms...${time_taken}ms...Done"
 start_time=$(gdate +%s%3N)
-echo "Running venv-activate...${start_time}ms"
-[[ "$(type deactivate | grep function)" != "" ]] && \
-  echo "Running venv-activate...${start_time}ms...deactivate" && \
-  deactivate()
-[[ "${VIRTUAL_ENV}" == "" ]] && \
-  echo "Running venv-activate...${start_time}ms...activate" && \
-  source $VENV/bin/activate
+echo "Running venv-activate...${start_time}ms...deactivate" && \
+  deactivate() 2>&1
+echo "Running venv-activate...${start_time}ms...activate" && \
+  source ${VENV}/bin/activate 2>&1
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running venv-activate...${end_time}ms...${time_taken}ms...Done"
