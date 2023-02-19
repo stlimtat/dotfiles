@@ -2,13 +2,14 @@
 # .abnormal
 # For lvim - abnormal
 # https://www.lunarvim.org/
+export SOURCE=${HOME}/dev/source
 if [[ -f "${HOME}/.local/bin/lvim" ]]; then
-  alias lvim="PYTHONPATH=${HOME}/source/src/py:${HOME}/source/src/pytests:${HOME}/source/src/pytests/abnormal/test ${HOME}/.local/bin/lvim"
-  alias vim="PYTHONPATH=${HOME}/source/src/py:${HOME}/source/src/pytests:${HOME}/source/src/pytests/abnormal/test ${HOME}/.local/bin/lvim"
+  alias lvim="PYTHONPATH=${SOURCE}/src/py:${SOURCE}/src/pytests:${SOURCE}/src/pytests/abnormal/test ${HOME}/.local/bin/lvim"
+  alias vim="PYTHONPATH=${SOURCE}/src/py:${SOURCE}/src/pytests:${SOURCE}/src/pytests/abnormal/test ${HOME}/.local/bin/lvim"
 fi
 # For astrovim
 if [[ -f "${HOME}/.config/nvim/config.ld" ]]; then
-  alias vim="PYTHONPATH=${HOME}/source/src/py:${HOME}/source/src/pytests:${HOME}/source/src/pytests/abnormal/test /usr/local/bin/nvim"
+  alias vim="PYTHONPATH=${SOURCE}/src/py:${SOURCE}/src/pytests:${SOURCE}/src/pytests/abnormal/test /usr/local/bin/nvim"
 fi
 
 # Some abnormal security stuff
@@ -21,7 +22,6 @@ export INFRA=${HOME}/dev/infrastructure
 export GOFLAGS="-tags=dynamic"
 export MTLS_HOME=${HOME}/.mtls/user
 export PKG_CONFIG_PATH=$(brew --prefix openssl@1.1)/lib/pkgconfig
-export SOURCE=${HOME}/dev/source
 export STORAGE_ACCOUNT_URL="https://abnormaldataneu.blob.core.windows.net"
 export TERRAGRUNT_SOURCE_MAP="git::ssh://git@github.com/abnormal-security/infrastructure-modules.git=${HOME}/dev/infrastructure-modules"
 export TERRAGRUNT_SOURCE_UPDATE=true

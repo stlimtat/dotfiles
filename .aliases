@@ -34,7 +34,7 @@ alias la="ls -lAF ${colorflag}"
 alias lsd="ls -lF ${colorflag} | grep --color '^d'"
 
 # Always use color output for `ls`
-alias ls="command exa --git --icons ${colorflag}"
+alias ls="command exa -Fgh --color-scale --git --group-directories-first --icons ${colorflag}"
 
 # diff to use colordiff
 alias diff="colordiff"

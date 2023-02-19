@@ -62,11 +62,11 @@ lvim.plugins = {
   { "rmagatti/goto-preview",
     config = function()
       require("goto-preview").setup {
-        width = 120; -- Width of the floating window
-        height = 25; -- Height of the floating window
-        default_mappings = true; -- Bind default mappings
-        debug = false; -- Print debug information
-        opacity = nil; -- 0-100 opacity level of the floating window where 100 is fully transparent.
+        width = 120, -- Width of the floating window
+        height = 25, -- Height of the floating window
+        default_mappings = true, -- Bind default mappings
+        debug = false, -- Print debug information
+        opacity = nil, -- 0-100 opacity level of the floating window where 100 is fully transparent.
         post_open_hook = nil -- A function taking two arguments, a buffer and a window to be ran as a hook.
       }
     end
@@ -76,11 +76,17 @@ lvim.plugins = {
     config = function()
       -- you can configure Hop the way you like here; see :h hop-config
       require("hop").setup { keys = "etovxqpdygfblzhckisuran" }
+      vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
+      vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
     end,
     -- cmd = { "HopChar1", "HopChar2", "HopLine", "HopPattern", "HopWord" },
   },
   { "rebelot/kanagawa.nvim" },
   { "kdheepak/lazygit.nvim" },
+  {
+    "ggandor/lightspeed.nvim",
+    event = "BufRead",
+  },
   { "ahmedkhalf/lsp-rooter.nvim",
     event = "BufRead",
     config = function()
@@ -184,6 +190,13 @@ lvim.plugins = {
       require("spectre").setup()
     end,
   },
+  { "kylechui/nvim-surround",
+    tag = "*",
+    config = function()
+      require("nvim-surround").setup({
+      })
+    end,
+  },
   { "romgrk/nvim-treesitter-context",
     config = function()
       require("treesitter-context").setup {
@@ -204,7 +217,7 @@ lvim.plugins = {
       }
     end
   },
-  { "p00f/nvim-ts-rainbow" },
+  { "mrjones2014/nvim-ts-rainbow" },
   { "s1n7ax/nvim-window-picker",
     tag = "1.*",
     config = function()
@@ -231,6 +244,9 @@ lvim.plugins = {
       { "nvim-telescope/telescope.nvim" },
       { "kyazdani42/nvim-web-devicons" },
     },
+    config = function()
+      require("octo").setup()
+    end,
   },
   -- { "lunarvim/onedarker.nvim" },
   { "ThePrimeagen/refactoring.nvim",
@@ -330,7 +346,7 @@ lvim.plugins = {
   -- { "prettier/vim-prettier" },
   -- { "tpope/vim-rhubarb" },
   -- { "tpope/vim-repeat" },
-  { "tpope/vim-surround" },
+  -- { "tpope/vim-surround" },
   -- { "vim-test/vim-test" },
 }
 
@@ -789,10 +805,10 @@ linters.setup {
       os.getenv("SOURCE") .. "/.pylintrc",
       "--init-hook",
       "import sys;" ..
-          "sys.path.append(\"" .. os.getenv("VENV") .. "/lib/python3.8/site-packages\");" ..
-          "sys.path.append(\"" .. os.getenv("SOURCE") .. "/src/py\");" ..
-          "sys.path.append(\"" .. os.getenv("SOURCE") .. "/src/pytests\");" ..
-          "sys.path.append(\"" .. os.getenv("SOURCE") .. "/src/pytests/abnormal/test\");",
+      "sys.path.append(\"" .. os.getenv("VENV") .. "/lib/python3.8/site-packages\");" ..
+      "sys.path.append(\"" .. os.getenv("SOURCE") .. "/src/py\");" ..
+      "sys.path.append(\"" .. os.getenv("SOURCE") .. "/src/pytests\");" ..
+      "sys.path.append(\"" .. os.getenv("SOURCE") .. "/src/pytests/abnormal/test\");",
     },
     filetypes = { "python" },
   },
@@ -838,8 +854,8 @@ local picker = require('window-picker')
 
 vim.keymap.set("n", ",w", function()
   local picked_window_id = picker.pick_window({
-    include_current_win = true
-  }) or vim.api.nvim_get_current_win()
+        include_current_win = true
+      }) or vim.api.nvim_get_current_win()
   vim.api.nvim_set_current_win(picked_window_id)
 end, { desc = "Pick a window" })
 

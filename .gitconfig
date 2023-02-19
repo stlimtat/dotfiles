@@ -91,7 +91,7 @@
 [credential]
   helper = osxkeychain
 [pull]
-  ff = true
+  # ff = true
   # rebase = true
 [gpg]
   program = smimesign

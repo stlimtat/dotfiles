@@ -42,7 +42,9 @@ plugins=(
   gh
   golang
   helm
+  zsh-autosuggestions
   zsh-vi-mode
+  zsh-syntax-highlighting
 )
 # ~/.oh-my-zsh
 start_time=$(gdate +%s%3N)
