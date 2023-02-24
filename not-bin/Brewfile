@@ -32,10 +32,10 @@ cask '1password'
 cask 'brave-browser'
 cask 'ferdium'
 cask 'keka'
-cask 'kitty'
 cask 'rar'
 cask 'rectangle'
 cask 'vlc'
+cask 'wezterm'
 cask 'zoom'
 
 # Games
