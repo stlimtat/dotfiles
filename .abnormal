@@ -18,6 +18,7 @@ alias airflow_onboarding_worker_ips="aws ec2 describe-instances --filters Name=t
 
 # Abnormal
 export ABNORMAL_USER=slim
+export ABSEC_IDENTITY="aid://user/slim"
 export INFRA=${HOME}/dev/infrastructure
 export GOFLAGS="-tags=dynamic"
 export MTLS_HOME=${HOME}/.mtls/user
@@ -68,6 +69,7 @@ function broadcast_to_airflow_onboarding_workers() {
   do
     echo $IP_ADDRESS >> $output_file
     echo "ssh -t $IP_ADDRESS \"docker exec -it \\\$(docker container ps -f name=airflow-worker | sed -n '2 p' | cut -f1 -d' ' ) /bin/bash -c -i $BROADCAST_COMMAND\""
+    infocmp -a xterm-kitty | ssh $IP_ADDRESS tic -x -o \~/.terminfo /dev/stdin
     ssh -t $IP_ADDRESS "docker exec -it \$(docker container ps -f name=airflow-worker | sed -n '2 p' | cut -f1 -d' ' ) /bin/bash -c -i $BROADCAST_COMMAND" >> $output_file
     echo "##################################################" >> $output_file
   done

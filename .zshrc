@@ -59,13 +59,6 @@ for file in ${HOME}/.{aliases,devenv,exports,extra,functions,path,tokens,abnorma
 done
 unset file
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-start_time=$(gdate +%s%3N)
-echo "Running p10k...${start_time}ms"
-[[ ! -f ${HOME}/.p10k.zsh ]] || source ${HOME}/.p10k.zsh
-end_time=$(gdate +%s%3N)
-time_taken=$((end_time - start_time))
-echo "Running p10k...${end_time}ms...${time_taken}ms...Done"
 # fzf
 start_time=$(gdate +%s%3N)
 echo "Running fzf...${start_time}ms"
@@ -74,4 +67,18 @@ source ${HOME}/.fzf.zsh
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running fzf...${end_time}ms...${time_taken}ms...Done"
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+start_time=$(gdate +%s%3N)
+echo "Running p10k...${start_time}ms"
+[[ ! -f ${HOME}/.p10k.zsh ]] || source ${HOME}/.p10k.zsh
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Running p10k...${end_time}ms...${time_taken}ms...Done"
+# wezterm
+start_time=$(gdate +%s%3N)
+echo "Running wezterm...${start_time}ms"
+zsh ${HOME}/bin/wezterm.sh
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Running wezterm...${end_time}ms...${time_taken}ms...Done"
 
