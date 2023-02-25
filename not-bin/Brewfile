@@ -1,4 +1,4 @@
-# Taps
+#kekaexternalhelper Taps
 tap 'colindean/fonts-nonfree'
 tap 'homebrew/bundle'
 tap 'homebrew/cask'
@@ -31,9 +31,14 @@ brew 'the_silver_searcher' # Needed for fzf for vim
 cask '1password'
 cask 'brave-browser'
 cask 'ferdium'
+cask 'freetube'
 cask 'keka'
+cask 'kekaexternalhelper'
+cask 'onyx'
 cask 'rar'
 cask 'rectangle'
+cask 'transmission'
+cask 'tunnelblick'
 cask 'vlc'
 cask 'wezterm'
 cask 'zoom'
