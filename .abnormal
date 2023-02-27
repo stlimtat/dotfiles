@@ -21,6 +21,8 @@ export ABNORMAL_USER=slim
 export ABSEC_IDENTITY="aid://user/slim"
 export INFRA=${HOME}/dev/infrastructure
 export GOFLAGS="-tags=dynamic"
+# Stop Terraform from barfing on ARM Macbooks
+export GODEBUG=asyncpreemptoff=1
 export MTLS_HOME=${HOME}/.mtls/user
 export PKG_CONFIG_PATH=$(brew --prefix openssl@1.1)/lib/pkgconfig
 export STORAGE_ACCOUNT_URL="https://abnormaldataneu.blob.core.windows.net"
@@ -62,14 +64,14 @@ function broadcast_to_airflow_onboarding_workers() {
   echo "Broadcasting command: $BROADCAST_COMMAND"
 
   output_file="/tmp/broadcast_output.txt"
-  echo "" > $output_file
-  tail -f $output_file &
+  echo "" >> $output_file
+  # tail -f $output_file &
   # for IP_ADDRESS in "space-separated recipient IP addresses"
   for IP_ADDRESS in $(airflow_onboarding_worker_ips)
   do
     echo $IP_ADDRESS >> $output_file
     echo "ssh -t $IP_ADDRESS \"docker exec -it \\\$(docker container ps -f name=airflow-worker | sed -n '2 p' | cut -f1 -d' ' ) /bin/bash -c -i $BROADCAST_COMMAND\""
-    infocmp -a xterm-kitty | ssh $IP_ADDRESS tic -x -o \~/.terminfo /dev/stdin
+    # infocmp -a xterm-kitty | ssh $IP_ADDRESS tic -x -o \~/.terminfo /dev/stdin
     ssh -t $IP_ADDRESS "docker exec -it \$(docker container ps -f name=airflow-worker | sed -n '2 p' | cut -f1 -d' ' ) /bin/bash -c -i $BROADCAST_COMMAND" >> $output_file
     echo "##################################################" >> $output_file
   done
