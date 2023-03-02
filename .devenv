@@ -3,13 +3,14 @@
 # Android NDK Home
 export ANDROID_NDK_HOME="/usr/local/share/android-ndk"
 
-# Using asdf
-# start_time=$(gdate +%s%3N)
-# echo "Running asdf...${start_time}ms"
-# source $(brew --prefix asdf)/libexec/asdf.sh
-# end_time=$(gdate +%s%3N)
-# time_taken=$((end_time - start_time))
-# echo "Running asdf...${end_time}ms...${time_taken}ms...Done"
+# Using rtx
+start_time=$(gdate +%s%3N)
+echo "Running rtx...${start_time}ms"
+eval "$(rtx activate zsh)"
+eval "$(rtx hook-env)"
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Running rtx...${end_time}ms...${time_taken}ms...Done"
 
 # For jediterm - intellij terminal
 if [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]; then

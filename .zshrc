@@ -34,7 +34,6 @@ export ZSH_TMUX_UNICODE=true
 # ~/.oh-my-zsh/plugins
 plugins=(
   ag
-  asdf
   colored-man-pages
   direnv
   docker
@@ -54,6 +53,7 @@ end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running oh-my-zsh...${end_time}ms...${time_taken}ms...Done"
 fpath=(/usr/local/share/zsh-completions $fpath)
+fpath+=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-completions/src
 for file in ${HOME}/.{aliases,devenv,exports,extra,functions,path,tokens,abnormal}; do
   [[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
 done
