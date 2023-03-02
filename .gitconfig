@@ -92,7 +92,7 @@
   helper = osxkeychain
 [pull]
   # ff = true
-  # rebase = true
+  rebase = true
 [gpg]
   program = smimesign
   format = x509
