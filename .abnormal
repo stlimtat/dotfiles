@@ -15,10 +15,20 @@ fi
 # Some abnormal security stuff
 alias airflow_worker_ips="aws ec2 describe-instances --filters Name=tag:Name,Values=airflow-worker-prod | jq -r '.Reservations[].Instances[].PrivateIpAddress' | sort "
 alias airflow_onboarding_worker_ips="aws ec2 describe-instances --filters Name=tag:Name,Values=airflow-worker-onboarding | jq -r '.Reservations[].Instances[].PrivateIpAddress' | sort"
+# helm publish airflow
+alias gh_publish_airflow_prod="gh workflow run publish_bento_image_ecr.yml --ref $(git rev-parse --abbrev-ref HEAD) -f bento_target='gtm/onboarding/airflow' -f environments='prod' -f region_eu=false -f region_us=true -f region_us_legacy=false -f instance_tags='cd cd-arm' && gh run list --workflow=publish_bento_image_ecr.yml"
+alias gh_publish_airflow_test="gh workflow run publish_bento_image_ecr.yml --ref $(git rev-parse --abbrev-ref HEAD) -f bento_target='gtm/onboarding/airflow' -f environments='test' -f region_eu=false -f region_us=true -f region_us_legacy=false -f instance_tags='cd cd-arm' && gh run list --workflow=publish_bento_image_ecr.yml"
+# change absec
+alias absec_legacy="export ABSEC_CLOUD=aws; export ABSEC_ENV=prod; export ABSEC_PART=management; export ABSEC_REGION=us-east-1"
+alias absec_test="export ABSEC_CLOUD=aws; export ABSEC_ENV=test; export ABSEC_PART=test; export ABSEC_REGION=us-east-2"
 
 # Abnormal
 export ABNORMAL_USER=slim
+export ABSEC_CLOUD=aws
+export ABSEC_ENV=prod
 export ABSEC_IDENTITY="aid://user/slim"
+export ABSEC_PART=management
+export ABSEC_REGION=us-east-1
 export INFRA=${HOME}/dev/infrastructure
 export GOFLAGS="-tags=dynamic"
 # Stop Terraform from barfing on ARM Macbooks

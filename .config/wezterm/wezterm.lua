@@ -49,6 +49,8 @@ return {
     { key = 'w',  mods = 'CMD',         action = act.CloseCurrentPane({ confirm = true }) },
     { key = 'X',  mods = 'SUPER|SHIFT', action = act.ActivateCopyMode },
     { key = 'x',  mods = 'SUPER|SHIFT', action = act.ActivateCopyMode },
+    { key = '~',  mods = 'ALT|SHIFT',   action = act.ToggleFullScreen },
+    { key = '`',  mods = 'ALT|SHIFT',   action = act.ToggleFullScreen },
     { key = 's',  mods = 'ALT|SHIFT',   action = act.PaneSelect({ mode = "SwapWithActive" }) },
     { key = 'S',  mods = 'ALT|SHIFT',   action = act.PaneSelect({ mode = "SwapWithActive" }) },
     { key = '{',  mods = 'ALT|SHIFT',   action = act.RotatePanes("CounterClockwise") },

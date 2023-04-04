@@ -34,6 +34,7 @@ export ZSH_TMUX_UNICODE=true
 # ~/.oh-my-zsh/plugins
 plugins=(
   ag
+  aws
   colored-man-pages
   direnv
   docker
