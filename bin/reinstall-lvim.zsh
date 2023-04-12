@@ -10,7 +10,9 @@ if [[ -d "${LUNARVIM_RUNTIME_DIR}" ]]; then
   rm -rf \
     ${HOME}/.cache \
     ${HOME}/.config/nvim \
+    ${HOME}/.local/bin/lvim \
     ${HOME}/.local/share/nvim \
+    ${HOME}/.local/state/nvim \
     ${LUNARVIM_CONFIG_DIR} \
     ${LUNARVIM_RUNTIME_DIR}
 fi

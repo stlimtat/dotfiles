@@ -7,9 +7,9 @@ if [[ -f "${HOME}/.local/bin/lvim" ]]; then
   alias lvim="PYTHONPATH=${SOURCE}/src/py:${SOURCE}/src/pytests:${SOURCE}/src/pytests/abnormal/test ${HOME}/.local/bin/lvim"
   alias vim="PYTHONPATH=${SOURCE}/src/py:${SOURCE}/src/pytests:${SOURCE}/src/pytests/abnormal/test ${HOME}/.local/bin/lvim"
 fi
-# For astrovim
-if [[ -f "${HOME}/.config/nvim/config.ld" ]]; then
-  alias vim="PYTHONPATH=${SOURCE}/src/py:${SOURCE}/src/pytests:${SOURCE}/src/pytests/abnormal/test /usr/local/bin/nvim"
+# For astrovim or lazyvim
+if [[ -f "${HOME}/.config/nvim/config.ld" || -f "${HOME}/.config/nvim/lazy-lock.json" ]]; then
+  alias vim="PYTHONPATH=${SOURCE}/src/py:${SOURCE}/src/pytests:${SOURCE}/src/pytests/abnormal/test $(brew --prefix )/bin/nvim"
 fi
 
 # Some abnormal security stuff

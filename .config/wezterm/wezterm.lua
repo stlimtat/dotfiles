@@ -3,6 +3,11 @@ local act = wezterm.action
 return {
   automatically_reload_config = false,
   check_for_updates = false,
+  -- Enable the scrollbar.
+  -- It will occupy the right window padding space.
+  -- If right padding is set to 0 then it will be increased
+  -- to a single cell width
+  enable_scroll_bar = true,
   -- Do not hold on exit by default.
   -- Because the default 'CloseOnCleanExit' can be annoying when exiting with
   -- Ctrl-D and the last command exited with non-zero: the shell will exit
@@ -41,7 +46,9 @@ return {
     -- Clears the scrollback and viewport, and then sends CTRL-L to ask the
     -- shell to redraw its prompt
     -- { key = 'K', mods = 'CTRL|SHIFT',  action = act.Multiple { act.ClearScrollback 'ScrollbackAndViewport', act.SendKey { key = 'L', mods = 'CTRL' }, }, },
-    { key = 'K',  mods = 'SUPER|SHIFT', action = act.Multiple { act.ClearScrollback 'ScrollbackAndViewport', act.SendKey { key = 'L', mods = 'CTRL' }, }, },
+    { key = 'K',  mods = 'SUPER|SHIFT',
+                                          action = act.Multiple { act.ClearScrollback 'ScrollbackAndViewport', act
+          .SendKey { key = 'L', mods = 'CTRL' }, }, },
     { key = '|',  mods = 'ALT|SHIFT',   action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
     { key = '\\', mods = 'ALT|SHIFT',   action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
     { key = '-',  mods = 'ALT|SHIFT',   action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
@@ -58,13 +65,9 @@ return {
     { key = '}',  mods = 'ALT|SHIFT',   action = act.RotatePanes("Clockwise") },
     { key = ']',  mods = 'ALT|SHIFT',   action = act.RotatePanes("Clockwise") },
   },
+  quit_when_all_windows_are_closed = true,
   -- How many lines of scrollback you want to retain per tab
   scrollback_lines = 3500,
-  -- Enable the scrollbar.
-  -- It will occupy the right window padding space.
-  -- If right padding is set to 0 then it will be increased
-  -- to a single cell width
-  enable_scroll_bar = true,
   -- Make sure word selection stops on most punctuations.
   --
   -- Note that dot (.) & slash (/) are allowed though for

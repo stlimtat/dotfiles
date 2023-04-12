@@ -4,7 +4,7 @@
 export BASH_SILENCE_DEPRECATION_WARNING=1;
 
 # Make vim the default editor.
-export EDITOR=$HOME/bin/lvim
+export EDITOR=$(brew --prefix)/bin/lvim
 
 # Avoid issues with `gpg` as installed via Homebrew.
 # https://stackoverflow.com/a/42265848/96656
