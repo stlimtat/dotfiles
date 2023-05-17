@@ -2,7 +2,7 @@
   # Setting up a brand new branch with abnormal branching name
   abnormal = "!f() { git checkout -b \"assweet/pr/$1\" 2> /dev/null || git checkout \"assweet/pr/$1\"; }; f"
   abwt = "!f() { git worktree add -b \"assweet/pr/$1\" \"${SOURCE}/../$1\" && cd \"${SOURCE}/../$1\"; }; f"
-  abrmwt = "!f() { git worktree remove \"${SOURCE}/../$1\" && git branch -D \"assweet/pr/$1\"; }; f"
+  abrmwt = "!f() { git worktree remove --force \"${SOURCE}/../$1\" && git branch -D \"assweet/pr/$1\"; }; f"
   # Amend the currently staged files to the latest commit
   amend = commit --amend --reuse-message=HEAD
   # clean default
