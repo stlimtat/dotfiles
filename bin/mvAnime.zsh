@@ -160,10 +160,13 @@ zip_comic_cbz() {
   IFS=$'\012'
   pushd ${DOWNLOAD_DIR}
     for manga in $(gfind . -maxdepth 1 -type d -name "\[*\] *"); do 
-      echo $(basename $manga)
-      pushd ${manga}
-        zip -r "../$(basename $manga).cbz" *
-      popd
+      setopt -s DOT_GLOB
+      if [ -n "$(ls -A ${manga}/*.{jpg,png,JPG,PNG})" ]; then
+        echo $(basename $manga)
+        pushd ${manga}
+          zip -r "../$(basename $manga).cbz" *
+        popd
+      fi
     done
   popd
   unsetopt NULL_GLOB
