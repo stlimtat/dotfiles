@@ -13,6 +13,7 @@ return {
 	-- Ctrl-D and the last command exited with non-zero: the shell will exit
 	-- with non-zero and the terminal would hang until the window is closed manually.
 	exit_behavior = "Close", -- NOTE: this is now the default, remove?
+	exit_behavior_messaging = "None",
 	font = wezterm.font("JetBrains Mono"),
 	font_size = 12.0,
 	-- Enable various OpenType features
