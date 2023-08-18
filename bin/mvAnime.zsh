@@ -1,6 +1,7 @@
 #!/bin/zsh
 
-DOWNLOAD_DIR=/Volumes/Public
+# DOWNLOAD_DIR=/Volumes/Public
+DOWNLOAD_DIR=/Users/st_lim/1
 ANIME_DIR=${DOWNLOAD_DIR}/Anime
 HOLLY_DIR=${DOWNLOAD_DIR}/Hollywood
 KIDS_DIR=${DOWNLOAD_DIR}/kids
