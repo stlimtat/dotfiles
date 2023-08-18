@@ -50,7 +50,7 @@ brew 'vale' # for markdown for vim
 # cask 'firefox'
 # cask 'google-chrome'
 # cask 'postman'
-cask 'adoptopenjdk/openjdk/adoptopenjdk8'
+cask 'temurin8'
 cask 'goland'
 # cask 'pycharm-ce'
 cask 'visual-studio-code'

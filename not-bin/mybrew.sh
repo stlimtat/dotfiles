@@ -28,7 +28,6 @@ pushd ${DOTFILES_DIR}
       --exclude ".osx" \
       --exclude ".macos" \
       --exclude ".tokens" \
-      --exclude "*.sh" \
       --exclude "*.plist" \
       --exclude "etc/" \
       --exclude "init/" \
@@ -40,6 +39,8 @@ pushd ${DOTFILES_DIR}
       ${HOME}/
   fi
   source ~/.zshrc
+  # Install rosetta
+  sudo softwareupdate --install-rosetta
   # Install Homebrew
   if [[ ! -d "${HOMEBREW_DIR}" ]]; then
     echo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
@@ -125,10 +126,11 @@ pushd ${DOTFILES_DIR}
     # Using https://www.lazyvim.org/
     if [[ ! -f ${HOME}/.config/nvim/LICENSE ]]; then
       luarocks install luacheck
-      [[ "$(which node)" == "" ]] && echo "No node detected"
-      [[ "$(which python)" == "" ]] && echo "No python detected"
-      [[ "$(which rust)" == "" ]] && echo "No rust detected"
-      git clone https://github.com/LazyVim/starter ~/.config/nvim
+      if [[ -d ${HOME}/.config/nvim ]]; then
+        rm -rf ${HOME}/.config/nvim
+      fi
+      git clone https://github.com/LazyVim/starter ${HOME}/.config/nvim
+      rsync -ar --progress --partial ${DOTFILES_DIR}/.config/nvim/ ${HOME}/.config/nvim/
     fi
     #
     # Abnormal
@@ -145,14 +147,15 @@ pushd ${DOTFILES_DIR}
     # Adding abnormal-security brew tap
     # Before doing this, you need to add ssh key to github account
     if [[ ! -f "${HOME}/.ssh/id_ed25519.pub" ]]; then
-      ssh-keygen -t ed25519 -f ${HOME}/id_ed25519 -C 'st_lim@bocchi' -a 100 -o
+      mkdir ${HOME}/.ssh
+      ssh-keygen -t ed25519 -f ${HOME}/.ssh/id_ed25519 -C 'st_lim@bocchi' -a 100 -o
       ssh-add -K
       echo "Please login with a valid id on github"
-      [[ -f "/Applications/Brave Browser.app" ]] && open -a /Applications/Brave Browser.app https://github.com/
+      [[ -e "/Applications/Brave Browser.app" ]] && open -a /Applications/Brave Browser.app https://github.com/
       if [[ "$(brew tap | grep abnormal-security)" == "" ]]; then
         echo "We need to already have a valid ssh key installed in ssh"
         cat ${HOME}/id_ed25519.pub
-        readline
+        read
         brew tap \
           abnormal-security/abnormal \
           git@github.com:abnormal-security/homebrew-abnormal.git
