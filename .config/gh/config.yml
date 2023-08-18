@@ -14,6 +14,8 @@ aliases:
     internalapp-staging: workflow run deploy_internal_app_staging.yml -f service_name=staging-1
     internalapp-prod: 'workflow run deploy_internal_app_prod.yml '
     prls: pr list --author '@me'
+    onboarding-app-prod: workflow run deploy_onboarding_app_prod.yml
+    onboarding-app-staging: workflow run deploy_onboarding_app_staging.yml
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.
