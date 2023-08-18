@@ -65,6 +65,7 @@ pushd ${DOTFILES_DIR}
   #
   # Source for jenv from ~/.extra
   source ${HOME}/.zshrc
+  sudo cp ${DOTFILES_DIR}/etc/nfs.conf /etc/nfs.conf
   #
   # oh-my-zsh
   # https://github.com/ohmyzsh/ohmyzsh
@@ -97,50 +98,61 @@ pushd ${DOTFILES_DIR}
     #
     # Install fzf
     [[ -f "$(brew --prefix)/opt/fzf/install" ]] && $(brew --prefix)/opt/fzf/install
-    if [[ -f "${HOMEBREW_DIR}/bin/asdf" ]]; then
+    if [[ -f "${HOMEBREW_DIR}/bin/rtx" ]]; then
       #
-      # asdf
-      # https://github.com/asdf-vm/asdf
-      asdf plugin add golang
-      asdf plugin add nodejs 
-      asdf plugin add python 
-      asdf plugin add terraform
-      asdf plugin add terragrunt
+      # rtx is a tool for managing runtime versions. https://github.com/jdxcode/rtx
+      rtx plugin add golang
+      rtx plugin add nodejs 
+      rtx plugin add terraform
+      rtx plugin add terragrunt
       #
       # nodejs
       # https://github.com/pyenv/pyenv
-      asdf install nodejs latest
-      asdf global nodejs latest
+      rtx install nodejs@latest
+      rtx global nodejs@latest
       mkdir ${HOME}/.npm-global
       npm config set prefix "${HOME}/.npm-global"
       export PATH=${HOME}/.npm-global/bin:$PATH
       #
       # python
       # https://github.com/pyenv/pyenv
-      asdf install python 3.8.10
-      asdf install python latest
-      asdf global python latest
+      rtx install python@3.8.10
+      rtx install python@3.11
+      rtx global python latest
     fi
     #
-    # Lunarvim
-    # Using https://www.lunarvim.org/
-    if [[ ! -f ${HOME}/.local/bin/lvim ]]; then
+    # Lazyvim
+    # Using https://www.lazyvim.org/
+    if [[ ! -f ${HOME}/.config/nvim/LICENSE ]]; then
       luarocks install luacheck
       [[ "$(which node)" == "" ]] && echo "No node detected"
       [[ "$(which python)" == "" ]] && echo "No python detected"
       [[ "$(which rust)" == "" ]] && echo "No rust detected"
-      /bin/zsh ${DOTFILES_DIR}/bin/reinstall-lvim.sh 1
+      git clone https://github.com/LazyVim/starter ~/.config/nvim
+    fi
+    #
+    # Abnormal
+    # Ssm
+    if [[ ! -d /usr/local/sessionmanagerplugin ]]; then
+      curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/mac_arm64/sessionmanager-bundle.zip" -o "sessionmanager-bundle.zip"
+      unzip sessionmanager-bundle.zip
+      pushd sessionmanager-bundle
+        sudo ./install -i /usr/local/sessionmanagerplugin -b /opt/homebrew/bin/session-manager-plugin
+      popd
     fi
     #
     # Abnormal
     # Adding abnormal-security brew tap
     # Before doing this, you need to add ssh key to github account
     if [[ ! -f "${HOME}/.ssh/id_ed25519.pub" ]]; then
-      ssh-keygen -t ed25519 -f ${HOME}/id_ed25519 -C 'st_lim@tanjiro' -a 100 -o
+      ssh-keygen -t ed25519 -f ${HOME}/id_ed25519 -C 'st_lim@bocchi' -a 100 -o
       ssh-add -K
       echo "Please login with a valid id on github"
       [[ -f "/Applications/Brave Browser.app" ]] && open -a /Applications/Brave Browser.app https://github.com/
       if [[ "$(brew tap | grep abnormal-security)" == "" ]]; then
+        echo "We need to already have a valid ssh key installed in ssh"
+        cat ${HOME}/id_ed25519.pub
+        readline
         brew tap \
           abnormal-security/abnormal \
           git@github.com:abnormal-security/homebrew-abnormal.git
@@ -178,5 +190,4 @@ EOF
   fi
   [[ -f ${HOME}/.zshrc.pre* ]] && rm ${HOME}/.zshrc.pre* && cp ${DOTFILES_DIR}/.zshrc ${HOME}/.zshrc
   [[ -f ${HOME}/*brew.sh ]] && rm -rf ${HOME}/*brew.sh
-  sudo cp ${DOTFILES_DIR}/etc/nfs.conf /etc/nfs.conf
 popd 

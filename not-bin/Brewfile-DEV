@@ -32,13 +32,14 @@ brew 'cargo'
 brew 'colima'
 brew 'composer'
 brew 'docker-credential-helper'
+brew 'gh'
 brew 'gitui'
 brew 'golangci-lint'
 brew 'hadolint' # dockerfile lint
 brew 'imagemagick'
 brew 'jq'
 brew 'keycastr'
-brew 'libmemcached'
+brew 'lazygit'
 brew 'luarocks' # for lua on vim
 brew 'markdownlint-cli' # for markdown for vim
 brew 'rust'
@@ -50,6 +51,7 @@ brew 'vale' # for markdown for vim
 # cask 'google-chrome'
 # cask 'postman'
 cask 'adoptopenjdk/openjdk/adoptopenjdk8'
+cask 'goland'
 # cask 'pycharm-ce'
 cask 'visual-studio-code'
 cask 'zsa-wally' # For my ergodox keyboard
