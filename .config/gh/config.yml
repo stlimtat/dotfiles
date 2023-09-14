@@ -5,7 +5,7 @@ editor:
 # When to interactively prompt. This is a global config that cannot be overridden by hostname. Supported values: enabled, disabled
 prompt: enabled
 # A pager program to send command output to, e.g. "less". Set the value to "cat" to disable the pager.
-pager:
+pager: delta -s
 # Aliases allow you to create nicknames for gh commands
 aliases:
     co: pr checkout
@@ -16,6 +16,10 @@ aliases:
     prls: pr list --author '@me'
     onboarding-app-prod: workflow run deploy_onboarding_app_prod.yml
     onboarding-app-staging: workflow run deploy_onboarding_app_staging.yml
+    daffodil-worker-prod: workflow run deploy_daffodil_worker_prod.yml
+    daffodil-worker-staging: workflow run deploy_daffodil_worker_staging.yml
+    daffodil-prod: workflow run deploy_daffodil_prod.yml
+    daffodil-staging: workflow run deploy_daffodil_staging.yml
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.

@@ -123,7 +123,7 @@ get_dir_subs() {
   MY_DIR=$1
   setopt NULL_GLOB
   IFS=$'\012'
-  for i in $(gfind ${MY_DIR} -maxdepth 2 -name "*.mp4" -o -name "*.mkv" -o -name "*.avi"); do
+  for s in $(gfind ${MY_DIR} -maxdepth 2 -name "*.mp4" -o -name "*.mkv" -o -name "*.avi"); do
     # https://stackoverflow.com/questions/965053/extract-filename-and-extension-in-zsh/965072#965072
     MOVIE_FILENAME="${i##*/}"
     MOVIE_DIR="${i:0:${#i} - ${#MOVIE_FILENAME}}"
@@ -131,10 +131,10 @@ get_dir_subs() {
     SRT_FILE="${MOVIE_DIR}${MOVIE_FILEBASE}.srt"
     if [ ! -f "${SRT_FILE}" ]; then
       subliminal download -l en -s "${i}"
-    	move_file_to_dir "${i}" "${MY_DIR}"
+      move_file_to_dir "${i}" "${MY_DIR}"
     fi
   done
-  for i in $(gfind ${MY_DIR} -name "*.srt" -size 1000c); do
+  for s in $(gfind ${MY_DIR} -name "*.srt" -size 1000c); do
       while [[ -e "${i}" ]]; do
         rm -rf "${i}"
       done
