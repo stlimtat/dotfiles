@@ -3,10 +3,9 @@
 # For lvim - abnormal
 # https://www.lunarvim.org/
 export SOURCE=${HOME}/dev/source
-if [[ -f "${HOME}/.local/bin/lvim" ]]; then
-  alias lvim="PYTHONPATH=${SOURCE}/src/py:${SOURCE}/src/pytests:${SOURCE}/src/pytests/abnormal/test ${HOME}/.local/bin/lvim"
-  alias vim="PYTHONPATH=${SOURCE}/src/py:${SOURCE}/src/pytests:${SOURCE}/src/pytests/abnormal/test ${HOME}/.local/bin/lvim"
-fi
+
+#   alias vim="PYTHONPATH=${SOURCE}/src/py:${SOURCE}/src/pytests:${SOURCE}/src/pytests/abnormal/test ${HOME}/.local/bin/lvim"
+# fi
 # For astrovim or lazyvim
 if [[ -f "${HOME}/.config/nvim/config.ld" || -f "${HOME}/.config/nvim/lazy-lock.json" ]]; then
   alias vim="PYTHONPATH=${SOURCE}/src/py:${SOURCE}/src/pytests:${SOURCE}/src/pytests/abnormal/test $(brew --prefix )/bin/nvim"
@@ -40,16 +39,16 @@ export TERRAGRUNT_SOURCE_MAP="git::ssh://git@github.com/abnormal-security/infras
 export TERRAGRUNT_SOURCE_UPDATE=true
 export VENV=${HOME}/dev/venv
 start_time=$(gdate +%s%3N)
-echo "Running abnormal/tools/dev/common_bash_includes...${start_time}ms"
-source ${SOURCE}/tools/dev/common_bash_includes
+echo "Running abnormal/tools/bash/prelude...${start_time}ms"
+source ${SOURCE}/tools/bash/prelude.sh
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
-echo "Running abnormal/tools/dev/common_bash_includes...${end_time}ms...${time_taken}ms...Done"
+echo "Running abnormal/tools/bash/prelude...${end_time}ms...${time_taken}ms...Done"
 start_time=$(gdate +%s%3N)
 echo "Running venv-activate...${start_time}ms...deactivate" && \
   deactivate() 2>&1
 echo "Running venv-activate...${start_time}ms...activate" && \
-  source ${VENV}/bin/activate 2>&1
+  source ${SOURCE}/tools/dev/venv-activate 2>&1
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running venv-activate...${end_time}ms...${time_taken}ms...Done"
