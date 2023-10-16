@@ -31,9 +31,9 @@ return {
         default_mappings = true, -- disable buffer local mapping created by this plugin
         disable_diagnostics = false, -- This will disable the diagnostics in a buffer whilst it is conflicted
         highlights = { -- They must have background color, otherwise the default color will be used
-          incoming = 'DiffText',
-          current = 'DiffAdd',
-        }
+          incoming = "DiffText",
+          current = "DiffAdd",
+        },
       })
     end,
     tag = "*",
@@ -41,7 +41,7 @@ return {
   ["ruifm/gitlinker.nvim"] = {
     event = "BufRead",
     config = function()
-      require("gitlinker").setup {
+      require("gitlinker").setup({
         opts = {
           -- remote = "github", -- force the use of a specific remote
           -- adds current line nr in the url for normal mode
@@ -56,7 +56,7 @@ return {
           -- mapping to call url generation
           mappings = "<leader>gy",
         },
-      }
+      })
     end,
     requires = { { "nvim-lua/plenary.nvim" } },
   },
@@ -76,47 +76,9 @@ return {
     branch = "v2", -- optional but strongly recommended
     config = function()
       -- you can configure Hop the way you like here; see :h hop-config
-      require("hop").setup { keys = "etovxqpdygfblzhckisuran" }
+      require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
     end,
     -- cmd = { "HopChar1", "HopChar2", "HopLine", "HopPattern", "HopWord" },
-  },
-  ["lukas-reineke/indent-blankline.nvim"] = {
-    config = function()
-      vim.cmd([[
-        highlight IndentBlanklineIndent1 guifg=#F7768E gui=nocombine
-        highlight IndentBlanklineIndent2 guifg=#E0AF68 gui=nocombine
-        highlight IndentBlanklineIndent3 guifg=#9ECE6A gui=nocombine
-        highlight IndentBlanklineIndent4 guifg=#7DCFFF gui=nocombine
-        highlight IndentBlanklineIndent5 guifg=#7AA2F7 gui=nocombine
-        highlight IndentBlanklineIndent6 guifg=#BB9AF7 gui=nocombine
-      ]])
-      require("indent_blankline").setup {
-        buftype_exclude = { "terminal", "nofile" },
-        char = "│",
-        char_highlight_list = {
-          "IndentBlanklineIndent1",
-          "IndentBlanklineIndent2",
-          "IndentBlanklineIndent3",
-          "IndentBlanklineIndent4",
-          "IndentBlanklineIndent5",
-          "IndentBlanklineIndent6",
-        },
-        -- let g:indent_blankline_char_list = ["|", "¦", "┆", "┊"]
-        filetype_exclude = { "dashboard", "markdown" },
-        show_current_context = true,
-        show_current_context_start = true,
-        space_char_blankline = " ",
-        space_char_highlight_list = {
-          "IndentBlanklineIndent1",
-          "IndentBlanklineIndent2",
-          "IndentBlanklineIndent3",
-          "IndentBlanklineIndent4",
-          "IndentBlanklineIndent5",
-          "IndentBlanklineIndent6",
-        },
-        use_treesitter = true,
-      }
-    end,
   },
   ["rebelot/kanagawa.nvim"] = {},
   ["kdheepak/lazygit.nvim"] = {},
@@ -129,7 +91,7 @@ return {
   ["ray-x/lsp_signature.nvim"] = {
     event = "BufRead",
     config = function()
-      require "lsp_signature".on_attach()
+      require("lsp_signature").on_attach()
     end,
   },
   ["folke/lua-dev.nvim"] = {},
@@ -137,40 +99,15 @@ return {
     config = function()
       require("lualine").setup()
     end,
-    requires = {{ "kyazdani42/nvim-web-devicons" }}
+    requires = { { "kyazdani42/nvim-web-devicons" } },
   },
-  -- ["wfxr/minimap.vim"] = {
-  --   run = "cargo install --locked code-minimap",
-  --   cmd = { "Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight" },
-  --   config = function()
-  --     vim.cmd([[
-  --       let g:minimap_auto_start = 1
-  --       let g:minimap_auto_start_win_enter = 1
-  --       let g:minimap_enable_highlight_colorgroup = 1
-  --       let g:minimap_width = 20
-  --       highlight minimapCursor ctermbg=59 ctermfg=228 guibg=#5F5F5F guifg=#FFFF87
-  --       highlight minimapDiffLine ctermbg=59 ctermfg=228 guibg=#5F5F5F guifg=#FFFF87
-  --       highlight minimapRange ctermbg=242 ctermfg=228 guibg=#4F4F4F guifg=#FFFF87
-  --       ]])
-  --   end,
-  -- },
-  -- ["nvim-neotest/neotest"] = {
-  --   requires = {
-  --     "nvim-lua/plenary.nvim" ] = {
-  --     "nvim-treesitter/nvim-treesitter",
-  --     "antoinemadec/FixCursorHold.nvim"
-  --   },
-  -- },
-  -- ["nvim-neotest/neotest-go"] = {},
-  -- ["nvim-neotest/neotest-python"] = {},
-  -- ["nvim-neotest/neotest-vim-test"] = {},
   ["nacro90/numb.nvim"] = {
     event = "BufRead",
     config = function()
-      require("numb").setup {
+      require("numb").setup({
         show_numbers = true,
         show_cursorline = true,
-      }
+      })
     end,
   },
   ["kevinhwang91/nvim-bqf"] = {
@@ -198,21 +135,6 @@ return {
       })
     end,
   },
-  -- ["norcalli/nvim-colorizer.lua"] = {
-  --   config = function()
-  --     require("colorizer").setup({
-  --       "css", "scss", "html", "javascript"
-  --     }, {
-  --       RGB = true, -- #RGB hex codes
-  --       RRGGBB = true, -- #RRGGBB hex codes
-  --       RRGGBBAA = true, -- #RRGGBBAA hex codes
-  --       rgb_fn = true, -- CSS rgb() and rgba() functions
-  --       hsl_fn = true, -- CSS hsl() and hsla() functions
-  --       css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-  --       css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-  --     })
-  --   end,
-  -- },
   ["mfussenegger/nvim-dap"] = {},
   ["stlimtat/nvim-dap-python"] = {},
   ["rcarriga/nvim-dap-ui"] = {
@@ -231,13 +153,13 @@ return {
         calm_down = true,
         enable_incsearch = false,
       })
-    end
+    end,
   },
   ["SmiteshP/nvim-navic"] = {
-     config = function()
-       require("user.breadcrumbs").setup()
-     end,
-     requires = {{ "neovim/nvim-lspconfig" }},
+    config = function()
+      require("user.breadcrumbs").setup()
+    end,
+    requires = { { "neovim/nvim-lspconfig" } },
   },
   ["AckslD/nvim-neoclip.lua"] = {
     requires = { { "nvim-telescope/telescope.nvim" } },
@@ -252,26 +174,6 @@ return {
       require("spectre").setup()
     end,
   },
-  -- ["romgrk/nvim-treesitter-context"] = {
-  --   config = function()
-  --     require("treesitter-context").setup {
-  --       enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-  --       throttle = true, -- Throttles plugin updates (may improve performance)
-  --       max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-  --       patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
-  --         -- For all filetypes
-  --         -- Note that setting an entry here replaces all other patterns for this entry.
-  --         -- By setting the "default" entry below, you can control which nodes you want to
-  --         -- appear in the context window.
-  --         default = {
-  --           "class",
-  --           "function",
-  --           "method",
-  --         },
-  --       },
-  --     }
-  --   end
-  -- },
   ["p00f/nvim-ts-rainbow"] = {},
   ["s1n7ax/nvim-window-picker"] = {
     tag = "1.*",
@@ -318,7 +220,7 @@ return {
   ["ThePrimeagen/refactoring.nvim"] = {
     requires = {
       "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter"
+      "nvim-treesitter/nvim-treesitter",
     },
     config = function()
       require("refactoring").setup({
@@ -353,7 +255,7 @@ return {
     cmd = "SymbolsOutline",
     config = function()
       require("symbols-outline").setup()
-    end
+    end,
   },
   ["ziontee113/syntax-tree-surfer"] = {},
   ["kelly-lin/telescope-ag"] = {
@@ -384,24 +286,6 @@ return {
   ["tpope/vim-dadbod"] = {},
   ["kristijanhusak/vim-dadbod-completion"] = {},
   ["kristijanhusak/vim-dadbod-ui"] = {},
-  -- ["tpope/vim-fugitive"] = {
-  --   cmd = {
-  --     "G",
-  --     "Git",
-  --     "Gdiffsplit",
-  --     "Gread",
-  --     "Gwrite",
-  --     "Ggrep",
-  --     "GMove",
-  --     "GDelete",
-  --     "GBrowse",
-  --     "GRemove",
-  --     "GRename",
-  --     "Glgrep",
-  --     "Gedit"
-  --   },
-  --   ft = { "fugitive" }
-  -- },
   ["rhysd/vim-grammarous"] = {},
   ["mtdl9/vim-log-highlighting"] = {},
   ["andymass/vim-matchup"] = {
@@ -410,9 +294,4 @@ return {
       vim.g.matchup_matchparen_offscreen = { method = "popup" }
     end,
   },
-  -- ["prettier/vim-prettier"] = {},
-  -- ["tpope/vim-rhubarb"] = {},
-  -- ["tpope/vim-repeat"] = {},
-  ["tpope/vim-surround"] = {},
-  -- ["vim-test/vim-test"] = {},
 }

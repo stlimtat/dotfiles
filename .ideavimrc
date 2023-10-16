@@ -7,12 +7,12 @@ set commentary
 set easymotion
 set matchit
 set multiple-cursors
-set quickscope
 set ReplaceWithRegister
 set sneak
 set surround
 set textobj-entire
 set textobj-indent
+set quickscope
 
 """ Plugin settings -------------------------
 let g:argtextobj_pairs="[:],(:),<:>"
