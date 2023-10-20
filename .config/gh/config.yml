@@ -9,28 +9,32 @@ pager: delta -s
 # Aliases allow you to create nicknames for gh commands
 aliases:
   co: pr checkout
-  daffodil-prod: workflow run deploy_daffodil_prod.yml --ref=$(git branch --show-current)
+  custool-usea: workflow run publish_bento_image_ecr.yml -F bento_target=gtm/customer-toolbox -F environments=test -F region_us=true
+  custool-usea-watch: '!gh_out=$(gh run list --user assweet --workflow=publish_bento_image_ecr.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
+  daffodil-prod: workflow run deploy_daffodil_prod.yml
   daffodil-prod-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_daffodil_prod.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  daffodil-staging: workflow run deploy_daffodil_staging.yml --ref=$(git branch --show-current)
+  daffodil-staging: workflow run deploy_daffodil_staging.yml
   daffodil-staging-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_daffodil_staging.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  daffodil-worker-prod: workflow run deploy_daffodil_worker_prod.yml --ref=$(git branch --show-current)
+  daffodil-worker-prod: workflow run deploy_daffodil_worker_prod.yml
   daffodil-worker-prod-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_daffodil_worker_prod.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  daffodil-worker-staging: workflow run deploy_daffodil_worker_staging.yml --ref=$(git branch --show-current)
+  daffodil-worker-staging: workflow run deploy_daffodil_worker_staging.yml
   daffodil-worker-staging-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_daffodil_worker_staging.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
   daffodil-worker-usea: workflow run publish_bento_image_ecr.yml -F bento_target=gtm/daffodil/worker -F environments=test -F region_us=true
   daffodil-worker-usea-watch: '!gh_out=$(gh run list --user assweet --workflow=publish_bento_image_ecr.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  integration-handler-prod: workflow run deploy_integration_handler_prod.yml --ref=$(git branch --show-current)
+  integration-handler-prod: workflow run deploy_integration_handler_prod.yml
   integration-handler-prod-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_integration_handler_prod.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  integration-handler-staging: workflow run deploy_integration_handler_staging.yml --ref=$(git branch --show-current)
+  integration-handler-staging: workflow run deploy_integration_handler_staging.yml
   integration-handler-staging-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_integration_handler_staging.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  internalapp-prod: workflow run deploy_internal_app_prod.yml --ref=$(git branch --show-current)
+  internalapp-prod: workflow run deploy_internal_app_prod.yml
   internalapp-prod-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_internal_app_prod.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  internalapp-staging: workflow run deploy_internal_app_staging.yml -f service_name=staging-1 --ref=$(git branch --show-current)
+  internalapp-staging: workflow run deploy_internal_app_staging.yml
   internalapp-staging-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_internal_app_staging.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  onboarding-app-prod: workflow run deploy_onboarding_app_prod.yml --ref=$(git branch --show-current)
+  onboarding-app-prod: workflow run deploy_onboarding_app_prod.yml
   onboarding-app-prod-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_onboarding_app_prod.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  onboarding-app-staging: workflow run deploy_onboarding_app_staging.yml --ref=$(git branch --show-current)
+  onboarding-app-staging: workflow run deploy_onboarding_app_staging.yml
   onboarding-app-staging-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_onboarding_app_staging.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
+  onboarding-app-usea: workflow run publish_bento_image_ecr.yml -F bento_target=gtm/onboarding -F environments=test -F region_us=true
+  onboarding-app-usea-watch: '!gh_out=$(gh run list --user assweet --workflow=publish_bento_image_ecr.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
   prls: pr list --author '@me'
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
