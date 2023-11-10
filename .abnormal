@@ -143,3 +143,16 @@ function delete_s3_buckets() {
 }
 
 
+function run_prod_proxy() {
+  export AWS_PROFILE=$(aws configure list-profiles | fzf --header="Pick an AWS profile. (Careful -- This determines the kind of access you'll have)")
+  export CONTEXT=$(kubectl config view -o jsonpath='{range .contexts[*]}{.name}{"\n"}{end}' | fzf --header="Choose the correct kubecontext for the environment you are trying to access.")
+  export NAMESPACE=$(kubectl --context $CONTEXT get ns -o json | jq -r '.items | map(.metadata.name) | .[]' | fzf --header="Pick the namespace that corresponds to your database.")
+  export REGION=$(echo "us-east-1\nus-east-2\neu-west-1" | fzf --header="Pick a region. This affects which region AWS commands are run in.")
+  export PGPORT=54320
+  echo "Using port 54320 by default for the database."
+  export TARGET=$(aws rds --region $REGION describe-db-instances | jq -r '.DBInstances | .[] | .Endpoint.Address' | fzf --header="Pick the RDS Host you want to connect to"):$PGPORT
+  export LOCAL_PORT=54320
+  echo "Using port 54320 by default for the proxy."
+  export RUN_MODE=inline
+  prod-proxy start
+}
