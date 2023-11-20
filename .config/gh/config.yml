@@ -33,6 +33,8 @@ aliases:
   internalapp-prod-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_internal_app_prod.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
   internalapp-staging: workflow run deploy_internal_app_staging.yml
   internalapp-staging-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_internal_app_staging.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
+  onboarding-app-euwe: workflow run publish_bento_image_ecr.yml -F bento_target=gtm/onboarding -F environments=prod -F region_eu=true
+  onboarding-app-euwe-watch: '!gh_out=$(gh run list --user assweet --workflow=publish_bento_image_ecr.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId"); cd $SOURCE; helm-tool -- deploy --context aw-prod-euwe1-main -n gtm--onboarding -r onboarding'
   onboarding-app-prod: workflow run deploy_onboarding_app_prod.yml
   onboarding-app-prod-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_onboarding_app_prod.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
   onboarding-app-staging: workflow run deploy_onboarding_app_staging.yml
