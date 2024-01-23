@@ -3,14 +3,39 @@
 # Android NDK Home
 export ANDROID_NDK_HOME="/usr/local/share/android-ndk"
 
-# Using rtx
+# Using colima
 start_time=$(gdate +%s%3N)
-echo "Running rtx...${start_time}ms"
-eval "$(rtx activate zsh)"
-eval "$(rtx hook-env)"
+echo "Running colima...${start_time}ms"
+eval "$(colima completion zsh)"
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
-echo "Running rtx...${end_time}ms...${time_taken}ms...Done"
+echo "Running colima...${end_time}ms...${time_taken}ms...Done"
+
+# Using docker
+start_time=$(gdate +%s%3N)
+echo "Running docker...${start_time}ms"
+eval "$(docker completion zsh)"
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Running docker...${end_time}ms...${time_taken}ms...Done"
+
+# Using kubectl 
+start_time=$(gdate +%s%3N)
+echo "Running kubectl...${start_time}ms"
+eval "$(kubectl completion zsh)"
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Running kubectl...${end_time}ms...${time_taken}ms...Done"
+
+# Using mise 
+start_time=$(gdate +%s%3N)
+echo "Running mise...${start_time}ms"
+eval "$(mise activate zsh)"
+eval "$(mise completion zsh)"
+eval "$(mise hook-env)"
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Running mise...${end_time}ms...${time_taken}ms...Done"
 
 # For jediterm - intellij terminal
 if [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]; then

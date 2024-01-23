@@ -53,7 +53,6 @@ source ${ZSH}/oh-my-zsh.sh
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running oh-my-zsh...${end_time}ms...${time_taken}ms...Done"
-fpath=(/usr/local/share/zsh-completions $fpath)
 fpath+=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-completions/src
 rm -f ~/.zcompdump; compinit
 for file in ${HOME}/.{aliases,devenv,exports,extra,functions,path,tokens,abnormal}; do
