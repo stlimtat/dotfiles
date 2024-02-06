@@ -174,3 +174,9 @@ function connect_pgdb() {
   export PGPASSWORD="$(aws rds generate-db-auth-token --hostname $RDSHOST --port $PGPORT --region $REGION --username $PGUSER)"
   vim +DBUI
 }
+
+function connect_kafka() {
+  export MSK_ARN=$(aws kafka list-clusters | jq --raw-output ".ClusterInfoList | .[] | .ClusterArn" | fzf)
+  export KAFKA_BOOTSTRAP_BROKER=$(aws kafka get-bootstrap-brokers --cluster-arn $MSK_ARN --query BootstrapBrokerStringTls --output text | cut -d, -f1)
+  export KAFKA_CLUSTER=(--command-config "${HOME}/.config/kafka/client.properties" --bootstrap-server "${KAFKA_BOOTSTRAP_BROKER}")
+}

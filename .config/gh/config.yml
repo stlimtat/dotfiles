@@ -9,50 +9,13 @@ pager: delta -s
 # Aliases allow you to create nicknames for gh commands
 aliases:
   co: pr checkout
-  airflow-obdg-euwe: workflow run publish_bento_image_ecr.yml -F bento_target=gtm/onboarding/airflow -F environments=prod -F region_eu=true
-  airflow-obdg-euwe-watch: '!gh_out=$(gh run list --user assweet --workflow=publish_bento_image_ecr.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId"); cd $SOURCE; helm-tool -- deploy --context aw-prod-euwe1-main -n gtm--onboarding -r airflow'
-  custool-euwe: workflow run publish_bento_image_ecr.yml -F bento_target=gtm/customer-toolbox -F environments=prod -F region_eu=true
-  custool-euwe-watch: '!gh_out=$(gh run list --user assweet --workflow=publish_bento_image_ecr.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId"); cd $SOURCE; helm-tool -- deploy --context aw-prod-euwe1-main -n gtm--customer-toolbox -r customer-toolbox'
-  custool-usea: workflow run publish_bento_image_ecr.yml -F bento_target=gtm/customer-toolbox -F environments=test -F region_us=true
-  custool-usea-watch: '!gh_out=$(gh run list --user assweet --workflow=publish_bento_image_ecr.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | j q ".[0].databaseId"); cd $SOURCE; helm-tool -- deploy --context aw-test-usea2-main -n gtm--customer-toolbox -r customer-toolbox'
-  daffodil-prod: workflow run deploy_daffodil_prod.yml
-  daffodil-prod-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_daffodil_prod.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  daffodil-staging: workflow run deploy_daffodil_staging.yml
-  daffodil-staging-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_daffodil_staging.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  daffodil-worker-prod: workflow run deploy_daffodil_worker_prod.yml
-  daffodil-worker-prod-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_daffodil_worker_prod.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  daffodil-worker-staging: workflow run deploy_daffodil_worker_staging.yml
-  daffodil-worker-staging-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_daffodil_worker_staging.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  daffodil-worker-usea: workflow run publish_bento_image_ecr.yml -F bento_target=gtm/daffodil/worker -F environments=test -F region_us=true
-  daffodil-worker-usea-watch: '!gh_out=$(gh run list --user assweet --workflow=publish_bento_image_ecr.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
   gmpr: pr create --title "[Graymail] $1" --label msp-graymail --template pull_request_template.md
+  gm-airflow-prod: '!gh workflow run deploy_graymail_airflow_prod.yml --ref=$(git symbolic-ref --short HEAD);sleep 10;gh_out=$(gh run list --user assweet --workflow=deploy_graymail_airflow_prod.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
   gm-test: workflow run publish_bento_image_ecr.yml -F bento_target=email/graymail/graymail -F environments=test -F region_stratos_lite=true
   gm-test-watch: '!gh_out=$(gh run list --user assweet --workflow=publish_bento_image_ecr.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
   gm-prod: workflow run publish_bento_image_ecr.yml -F bento_target=email/graymail/graymail -F environments=prod -F region_eu=true -F region_us=true -F region_us_legacy=true -F region_apso1=true
-  gm-stratos: workflow run deploy_graymail_stratos.yml
-  gm-stratos-br: '!gh workflow run deploy_graymail_stratos.yml --ref=$(git symbolic-ref --short HEAD);sleep 10;gh_out=$(gh run list --user assweet --workflow=publish_bento_image_ecr.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  gm-reports-api-test: workflow run publish_bento_image_ecr.yml -F bento_target=email/graymail-reports/api-server -F environments=test -F region_us=true
-  gm-reports-api-test-watch: '!gh_out=$(gh run list --user assweet --workflow=publish_bento_image_ecr.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  integration-handler-prod: workflow run deploy_integration_handler_prod.yml
-  integration-handler-prod-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_integration_handler_prod.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  integration-handler-staging: workflow run deploy_integration_handler_staging.yml
-  integration-handler-staging-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_integration_handler_staging.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  internalapp-prod: workflow run deploy_internal_app_prod.yml
-  internalapp-prod-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_internal_app_prod.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  internalapp-staging: workflow run deploy_internal_app_staging.yml
-  internalapp-staging-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_internal_app_staging.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  onboarding-app-euwe: workflow run publish_bento_image_ecr.yml -F bento_target=gtm/onboarding -F environments=prod -F region_eu=true
-  onboarding-app-euwe-watch: '!gh_out=$(gh run list --user assweet --workflow=publish_bento_image_ecr.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId"); cd $SOURCE; helm-tool -- deploy --context aw-prod-euwe1-main -n gtm--onboarding -r onboarding'
-  onboarding-app-prod: workflow run deploy_onboarding_app_prod.yml
-  onboarding-app-prod-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_onboarding_app_prod.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  onboarding-app-staging: workflow run deploy_onboarding_app_staging.yml
-  onboarding-app-staging-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_onboarding_app_staging.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  onboarding-app-usea: workflow run publish_bento_image_ecr.yml -F bento_target=gtm/onboarding -F environments=test -F region_us=true
-  onboarding-app-usea-watch: '!gh_out=$(gh run list --user assweet --workflow=publish_bento_image_ecr.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  worker-pov-prod: workflow run deploy_worker_pov_management_prod.yml
-  worker-pov-prod-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_worker_pov_management_prod.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
-  worker-pov-staging: workflow run deploy_worker_pov_management_staging.yml
-  worker-pov-staging-watch: '!gh_out=$(gh run list --user assweet --workflow=deploy_worker_pov_management_staging.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
+  gm-stratos: '!gh workflow run deploy_graymail_stratos.yml --ref=$(git symbolic-ref --short HEAD);sleep 10;gh_out=$(gh run list --user assweet --workflow=deploy_graymail_stratos.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
+  gm-reports-api-test: '!gh workflow run deploy_graymail_reports_api_test.yml --ref=$(git symbolic-ref --short HEAD);sleep 10; gh_out=$(gh run list --user assweet --workflow=publish_bento_image_ecr.yml -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
   prls: pr list --author '@me'
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
