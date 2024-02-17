@@ -33,6 +33,13 @@ return {
     { "<leader>fc", Util.telescope.config_files(), desc = "Find Config File" },
     { "<leader>ff", Util.telescope("files"), desc = "Find Files (root dir)" },
     { "<leader>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
+    {
+      "<leader>fp",
+      function()
+        require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root })
+      end,
+      desc = "Find Plugin File",
+    },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
     { "<leader>fR", Util.telescope("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (cwd)" },
     -- git
@@ -125,6 +132,7 @@ return {
       defaults = {
         prompt_prefix = " ",
         selection_caret = " ",
+        sorting_strategy = "ascending",
         -- open files in the first window that is an actual file.
         -- use the current window if no other window is available.
         get_selection_window = function()
