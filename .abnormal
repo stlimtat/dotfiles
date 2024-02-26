@@ -183,6 +183,7 @@ function connect_pgdb() {
   # export PGDATABASE=employeeservice
   export PGPASSWORD="$(aws rds generate-db-auth-token --hostname $RDSHOST --port $PGPORT --region $REGION --username $PGUSER)"
   export ABDJANGO_USER=$( [[ "$PGUSER" == "rw" ]] && echo "writer" || echo "reader")
+  unset ABSEC_CLOUD ABSEC_ENV ABSEC_PART ABSEC_REGION
   abdjango showconnectioninfo --env $MY_ENV --cloud aws --region $REGION --product $MY_PRODUCT --application $MY_APP --component db --user $ABDJANGO_USER
   read
   psql
