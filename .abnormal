@@ -73,7 +73,15 @@ echo "Running colima...${end_time}ms...${time_taken}ms...Done"
 function run_prod_proxy() {
   [[ $AWS_PROFILE =~ .*-dbadmin ]] || export AWS_PROFILE=$(aws configure list-profiles | grep dbadmin | fzf --header="Pick an AWS profile. (Careful -- This determines the kind of access you'll have)")
   # Assumes that you are logged in as db admin on sso if there is something in ~/.aws/cli/cache/
-  [[ -z "$( gfind $HOME/.aws/cli/cache -mmin -120 )" ]] && aws sso login --profile $AWS_PROFILE
+  if [[ "$AWS_PROFILE" == "absec-mgmt-dbadmin" ]]
+  then 
+    export AWS_PROFILE=absec-mgmt
+    IS_LOGGED_IN_MGMT=$( aws sts get-caller-identity | jq '.Arn' | grep AbsecMgmtEngineer )
+    [[ "$IS_LOGGED_IN_MGMT" == "" ]] && aws sso login
+  else
+    IS_LOGGED_IN_DBADMIN=$( aws sts get-caller-identity | jq '.Arn' | grep AbsecDBAdmin )
+    [[ "$IS_LOGGED_IN_DBADMIN" == "" ]] && aws sso login
+  fi
   export CONTEXT=$(kubectl config view -o jsonpath='{range .contexts[*]}{.name}{"\n"}{end}' | fzf --header="Choose the correct kubecontext for the environment you are trying to access.")
   export NAMESPACE=$(kubectl --context $CONTEXT get ns -o json | jq -r '.items | map(.metadata.name) | .[]' | fzf --header="Pick the namespace that corresponds to your database.")
   export REGION=$(echo "us-east-1\nus-east-2\neu-west-1" | fzf --header="Pick a region. This affects which region AWS commands are run in.")
@@ -86,6 +94,11 @@ function run_prod_proxy() {
   prod-proxy start
 }
 
+alias pmmt_gmr_proxy='sudo CONTEXT=aw-pmmt-usea1-pmmt USER=operator prod-proxy inline rw.db.graymail-reports.email.usea1.pm.abnml.io:54320'
+alias prod_gmr_eu_proxy='sudo CONTEXT=aw-prod-euwe1-main USER=operator prod-proxy inline rw.db.graymail-reports.email.euwe1.p.abnml.io:54320'
+alias test_gmr_proxy='sudo CONTEXT=aw-test-usea2-main USER=operator prod-proxy inline rw.db.graymail-reports.email.usea2.t.abnml.io:54320'
+alias tmmt_gmr_proxy='sudo CONTEXT=aw-tmmt-usea1-tmmt USER=operator prod-proxy inline rw.db.graymail-reports.email.usea1.tm.abnml.io:54320'
+
 function connect_pgdb() {
   if [[ "$PGHOST" == "" || "$PGPORT" == "" || "$REGION" == "" || "$PGUSER" == "" ]]; then
     export PGUSER=$(echo "operator\nplatformadmin\nadmin\nrw\nro" | fzf  --header="Pick a user.")
@@ -93,9 +106,16 @@ function connect_pgdb() {
     export MY_PRODUCT=$(ls $SOURCE/config/app/$MY_APP | xargs basename | grep "^[a-z]" | sort | fzf --header="Pick the product")
     export ABNORMAL_USER=$(aws sts get-caller-identity --query UserId --output text | cut -f2 -d ':' | cut -f1 -d '@')
     export ABSEC_IDENTITY=aid://user/$ABNORMAL_USER/$PGUSER
-    [[ $AWS_PROFILE =~ .*-dbadmin ]] || export AWS_PROFILE=$(aws configure list-profiles | grep dbadmin | fzf --header="Pick an AWS profile. (Careful -- This determines the kind of access you'll have)")
     # Assumes that you are logged in as db admin on sso if there is something in ~/.aws/cli/cache/
-    [[ -z "$( gfind $HOME/.aws/cli/cache -mmin -120 )" ]] && aws sso login --profile $AWS_PROFILE
+  if [[ "$AWS_PROFILE" == "absec-mgmt-dbadmin" ]]
+  then 
+    export AWS_PROFILE=absec-mgmt
+    IS_LOGGED_IN_MGMT=$( aws sts get-caller-identity | jq '.Arn' | grep AbsecMgmtEngineer )
+    [[ "$IS_LOGGED_IN_MGMT" == "" ]] && aws sso login
+  else
+    IS_LOGGED_IN_DBADMIN=$( aws sts get-caller-identity | jq '.Arn' | grep AbsecDBAdmin )
+    [[ "$IS_LOGGED_IN_DBADMIN" == "" ]] && aws sso login
+  fi
     export CONTEXT=$(kubectl config view -o jsonpath='{range .contexts[*]}{.name}{"\n"}{end}' | fzf --header="Choose the correct kubecontext for the environment you are trying to access.")
     export MY_ENV=$(echo $CONTEXT | cut -f2 -d-)
     export NAMESPACE=${MY_APP}--${MY_PRODUCT}
@@ -107,7 +127,7 @@ function connect_pgdb() {
     export PGPORT=54320
     echo "Using port 54320 by default."
     export PGSSLMODE=verify-ca
-    export PGSSLROOTCERT=$(mktemp -d | xargs -I% bash -c "curl https://s3.amazonaws.com/rds-downloads/rds-ca-2019-root.pem > %/cert.pem; echo %/cert.pem;")
+    export PGSSLROOTCERT=$(mktemp -d | xargs -I% bash -c "curl https://truststore.pki.rds.amazonaws.com/${REGION}/${RREGION}-bundle.pem > %/cert.pem; echo %/cert.pem;")
     export PGDATABASE=$(aws rds --region $REGION describe-db-instances | jq -r '.DBInstances | map(.TagList) | map(map(select(.Key == "pac-application"))) | map(map(.Value)) | map(.[0]) | map(select(.)) | map(gsub("-";"")) | unique | .[]' | fzf --header "Pick the database name. (This information was picked out from the application name. Please contact #pi-data-platform if this doesnt correspond.")
     export ABDJANGO_USER=$( if [[ "$PGUSER" == "rw" ]]; then echo "writer"; elif [[ "$PGUSER" == "operator" ]]; then echo "operator"; else echo "reader"; fi)
   fi
