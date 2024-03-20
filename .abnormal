@@ -127,13 +127,18 @@ function connect_pgdb() {
     export PGPORT=54320
     echo "Using port 54320 by default."
     export PGSSLMODE=verify-ca
-    export PGSSLROOTCERT=$(mktemp -d | xargs -I% bash -c "curl https://truststore.pki.rds.amazonaws.com/${REGION}/${REGION}-bundle.pem > %/cert.pem; echo %/cert.pem;")
+    export PGSSLROOTCERT=$HOME/.postgresql/root.crt
     export PGDATABASE=$(aws rds --region $REGION describe-db-instances | jq -r '.DBInstances | map(.TagList) | map(map(select(.Key == "pac-application"))) | map(map(.Value)) | map(.[0]) | map(select(.)) | map(gsub("-";"")) | unique | .[]' | fzf --header "Pick the database name. (This information was picked out from the application name. Please contact #pi-data-platform if this doesnt correspond.")
+    export ABDJANGO_ENV=$( if [[ "$MY_ENV" == "tmmt" ]]; then echo "test"; elif [[ "$MY_ENV" == "pmmt" ]]; then echo "prod"; else echo $MY_ENV; fi)
     export ABDJANGO_USER=$( if [[ "$PGUSER" == "rw" ]]; then echo "writer"; elif [[ "$PGUSER" == "operator" ]]; then echo "operator"; else echo "reader"; fi)
   fi
   export PGPASSWORD="$(aws rds generate-db-auth-token --hostname $RDSHOST --port $PGPORT --region $REGION --username $PGUSER)"
   unset ABSEC_CLOUD ABSEC_ENV ABSEC_PART ABSEC_REGION
-  abdjango showconnectioninfo --env $MY_ENV --cloud aws --region $REGION --product $MY_PRODUCT --application $MY_APP --component db --user $ABDJANGO_USER
+  if [[ "$MY_ENV" == "tmmt" || "$MY_ENV" == "pmmt" ]]; then 
+    abdjango showconnectioninfo --env $ABDJANGO_ENV --cloud aws --region $REGION --partition management --product $MY_PRODUCT --application $MY_APP --component db --user $ABDJANGO_USER
+  else
+    abdjango showconnectioninfo --env $ABDJANGO_ENV --cloud aws --region $REGION --product $MY_PRODUCT --application $MY_APP --component db --user $ABDJANGO_USER
+  fi
   export DATABASE_URL="postgres://$PGUSER:$(python -c 'import urllib.parse; import os; print(urllib.parse.quote_plus(os.environ["PGPASSWORD"]));')@$PGHOST:$PGPORT/$PGDATABASE"
   read
   psql
