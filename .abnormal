@@ -104,18 +104,20 @@ function connect_pgdb() {
     export PGUSER=$(echo "operator\nplatformadmin\nadmin\nrw\nro" | fzf  --header="Pick a user.")
     export MY_PRODUCT=$(ls $SOURCE/config/app | xargs basename | grep "^[a-z]" | sort | fzf --header="Pick the product")
     export MY_APP=$(ls $SOURCE/config/app/$MY_PRODUCT | xargs basename | grep "^[a-z]" | sort | fzf --header="Pick the app")
+    # Assumes that you are logged in as db admin on sso if there is something in ~/.aws/cli/cache/
+    [[ $AWS_PROFILE =~ .*-dbadmin ]] || export AWS_PROFILE=$(aws configure list-profiles | grep dbadmin | fzf --header="Pick an AWS profile. (Careful -- This determines the kind of access you'll have)")
+    # Assumes that you are logged in as db admin on sso if there is something in ~/.aws/cli/cache/
+    if [[ "$AWS_PROFILE" == "absec-mgmt-dbadmin" ]]
+    then 
+      export AWS_PROFILE=absec-mgmt
+      IS_LOGGED_IN_MGMT=$( aws sts get-caller-identity | jq '.Arn' | grep AbsecMgmtEngineer )
+      [[ "$IS_LOGGED_IN_MGMT" == "" ]] && aws sso login
+    else
+      IS_LOGGED_IN_DBADMIN=$( aws sts get-caller-identity | jq '.Arn' | grep AbsecDBAdmin )
+      [[ "$IS_LOGGED_IN_DBADMIN" == "" ]] && aws sso login
+    fi
     export ABNORMAL_USER=$(aws sts get-caller-identity --query UserId --output text | cut -f2 -d ':' | cut -f1 -d '@')
     export ABSEC_IDENTITY=aid://user/$ABNORMAL_USER/$PGUSER
-    # Assumes that you are logged in as db admin on sso if there is something in ~/.aws/cli/cache/
-  if [[ "$AWS_PROFILE" == "absec-mgmt-dbadmin" ]]
-  then 
-    export AWS_PROFILE=absec-mgmt
-    IS_LOGGED_IN_MGMT=$( aws sts get-caller-identity | jq '.Arn' | grep AbsecMgmtEngineer )
-    [[ "$IS_LOGGED_IN_MGMT" == "" ]] && aws sso login
-  else
-    IS_LOGGED_IN_DBADMIN=$( aws sts get-caller-identity | jq '.Arn' | grep AbsecDBAdmin )
-    [[ "$IS_LOGGED_IN_DBADMIN" == "" ]] && aws sso login
-  fi
     export CONTEXT=$(kubectl config view -o jsonpath='{range .contexts[*]}{.name}{"\n"}{end}' | fzf --header="Choose the correct kubecontext for the environment you are trying to access.")
     export MY_ENV=$(echo $CONTEXT | cut -f2 -d-)
     export NAMESPACE=${MY_APP}--${MY_PRODUCT}
