@@ -39,6 +39,7 @@ plugins=(
   direnv
   docker
   docker-compose
+  fzf
   gh
   golang
   helm
@@ -65,6 +66,7 @@ start_time=$(gdate +%s%3N)
 echo "Running fzf...${start_time}ms"
 zvm_after_init_commands+=("[ -f ${HOME}/.fzf.zsh ] && source ${HOME}/.fzf.zsh")
 source ${HOME}/.fzf.zsh
+eval "$(fzf --zsh)"
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running fzf...${end_time}ms...${time_taken}ms...Done"
@@ -82,4 +84,3 @@ zsh ${HOME}/bin/wezterm.sh
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running wezterm...${end_time}ms...${time_taken}ms...Done"
-
