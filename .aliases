@@ -15,6 +15,9 @@ alias dt="cd ~/Desktop"
 alias p="cd ~/projects"
 alias g="git"
 
+# Always use color output for `ls`
+alias ls="command eza --classify --color --color-scale --git --group-directories-first --icons --level=1 --tree"
+
 # Detect which `ls` flavor is in use
 if ls --color >/dev/null 2>&1; then # GNU `ls`
 	colorflag="--color=auto"
@@ -32,9 +35,6 @@ alias la="ls -lAF ${colorflag}"
 
 # List only directories
 alias lsd="ls -lF ${colorflag} | grep --color '^d'"
-
-# Always use color output for `ls`
-alias ls="command exa -Fgh --color-scale --git --group-directories-first --icons ${colorflag}"
 
 # diff to use colordiff
 alias diff="colordiff"
