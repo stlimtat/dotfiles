@@ -3,7 +3,6 @@ tap 'adoptopenjdk/openjdk'
 tap 'aws/tap'
 tap 'golangci/tap'
 tap 'homebrew/cask-versions'
-tap 'jdxcode/tap'
 tap 'mongodb/brew'
 tap 'neovim/neovim'
 tap 'nicoverbruggen/homebrew-cask'
@@ -17,7 +16,8 @@ brew 'code-minimap' # Needed for neovim minimap
 brew 'colima' # docker replacement
 brew 'docker' # docker replacement
 brew 'gnupg'
-brew 'jdxcode/tap/rtx'
+# brew 'jdxcode/tap/rtx'
+brew 'mise'
 brew 'neovim'
 brew 'python'
 brew 'ripgrep' # Needed for telescope-fzf for vim
@@ -54,5 +54,5 @@ cask 'temurin8'
 cask 'goland'
 # cask 'pycharm-ce'
 cask 'visual-studio-code'
-cask 'zsa-wally' # For my ergodox keyboard
+# cask 'zsa-wally' # For my ergodox keyboard
 

@@ -10,8 +10,8 @@ tap 'homebrew/services'
 # Binaries
 # brew 'bash' # Latest Bash version
 brew 'coreutils' # Those that come with macOS are outdated
-brew 'exa' # Replaces ls - so much better
-brew 'fd' # Alternate find for lunarvim
+brew 'eza' # Replaces ls - so much better
+# brew 'fd' # Alternate find for lunarvim
 brew 'findutils'
 brew 'fzf'
 brew 'git'
@@ -29,22 +29,32 @@ brew 'the_silver_searcher' # Needed for fzf for vim
 
 # Apps
 cask '1password'
+cask '1password-cli'
 cask 'brave-browser'
+cask 'caldigit-docking-utility'
+cask 'caldigit-thunderbolt-charging'
 cask 'ferdium'
 cask 'freetube'
+cask 'gimp'
+cask 'karabiner-elements'
 cask 'keka'
 cask 'kekaexternalhelper'
-cask 'onyx'
+cask 'keycastr'
+cask 'logitech-camera-settings'
+# cask 'onyx'
 cask 'rar'
 cask 'rectangle'
+cask 'stats'
 cask 'transmission'
 cask 'tunnelblick'
+cask 'vial'
 cask 'vlc'
 cask 'wezterm'
 cask 'zoom'
 
 # Games
 brew 'dosbox-staging'
+cask 'porting-kit'
 cask 'steam'
 
 # Fonts
