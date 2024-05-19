@@ -15,7 +15,7 @@ return {
 	exit_behavior = "Close", -- NOTE: this is now the default, remove?
 	exit_behavior_messaging = "None",
 	font = wezterm.font("JetBrains Mono"),
-	font_size = 12.0,
+	font_size = 14.0,
 	-- Enable various OpenType features
 	-- See https://docs.microsoft.com/en-us/typography/opentype/spec/featurelist
 	harfbuzz_features = {

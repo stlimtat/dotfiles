@@ -81,6 +81,7 @@ echo "Running p10k...${end_time}ms...${time_taken}ms...Done"
 start_time=$(gdate +%s%3N)
 echo "Running wezterm...${start_time}ms"
 zsh ${HOME}/bin/wezterm.sh
+eval "$(wezterm shell-completion --shell zsh)"
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Running wezterm...${end_time}ms...${time_taken}ms...Done"
