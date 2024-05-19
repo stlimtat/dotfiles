@@ -7,6 +7,9 @@ for s in .config/gh .config/lvim .config/nvim/lua .config/karabiner/karabiner.js
   if [[ -d "${HOME}/${s}" ]]; then
     rsync -ar --progress --exclude="plugin" ${HOME}/${s}/ ${DOTFILES_DIR}/${s}/
   fi
+  if [[ -f "${HOME}/${s}" ]]; then
+    rsync -ar --progress --exclude="plugin" ${HOME}/${s} ${DOTFILES_DIR}/${s}
+  fi
 done
 pushd ${DOTFILES_DIR}
   git commit -m "Sync with config at $(date +'%F %T%z') by $(whoami)@$(hostname)" -a
