@@ -2,6 +2,9 @@ local Util = require("lazyvim.util")
 return {
   "nvim-telescope/telescope.nvim",
   cmd = "Telescope",
+  enabled = function()
+    return LazyVim.pick.want() == "telescope"
+  end,
   version = false, -- telescope did only one release, so use HEAD for now
   dependencies = {
     { "kelly-lin/telescope-ag", lazy = true, requires = { { "nvim-telescope/telescope.nvim" } } },
@@ -9,12 +12,23 @@ return {
     { "nvim-telescope/telescope-frecency.nvim", lazy = true, requires = { { "nvim-telescope/telescope.nvim" } } },
     {
       "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make",
-      enabled = vim.fn.executable("make") == 1,
-      config = function()
-        local Util = require("lazyvim.util")
-        Util.on_load("telescope.nvim", function()
-          require("telescope").load_extension("fzf")
+      build = have_make and "make"
+        or "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+      enabled = have_make or have_cmake,
+      config = function(plugin)
+        LazyVim.on_load("telescope.nvim", function()
+          local ok, err = pcall(require("telescope").load_extension, "fzf")
+          if not ok then
+            local lib = plugin.dir .. "/build/libfzf." .. (LazyVim.is_win() and "dll" or "so")
+            if not vim.uv.fs_stat(lib) then
+              LazyVim.warn("`telescope-fzf-native.nvim` not built. Rebuilding...")
+              require("lazy").build({ plugins = { plugin }, show = false }):wait(function()
+                LazyVim.info("Rebuilding `telescope-fzf-native.nvim` done.\nPlease restart Neovim.")
+              end)
+            else
+              LazyVim.error("Failed to load `telescope-fzf-native.nvim`:\n" .. err)
+            end
+          end
         end)
       end,
     },
@@ -24,54 +38,55 @@ return {
     { "nvim-telescope/telescope-smart-history.nvim", lazy = true, requires = { { "nvim-telescope/telescope.nvim" } } },
   },
   keys = {
-    { "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
-    { "<leader>/", Util.telescope("live_grep"), desc = "Grep (root dir)" },
-    { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-    { "<leader><space>", Util.telescope("files"), desc = "Find Files (root dir)" },
-    -- find
-    { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-    { "<leader>fc", Util.telescope.config_files(), desc = "Find Config File" },
-    { "<leader>ff", Util.telescope("files"), desc = "Find Files (root dir)" },
-    { "<leader>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
     {
-      "<leader>fp",
-      function()
-        require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root })
-      end,
-      desc = "Find Plugin File",
+      "<leader>,",
+      "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>",
+      desc = "Switch Buffer",
     },
+    { "<leader>/", LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
+    { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+    { "<leader><space>", LazyVim.pick("auto"), desc = "Find Files (Root Dir)" },
+    -- find
+    { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
+    { "<leader>fc", LazyVim.pick.config_files(), desc = "Find Config File" },
+    { "<leader>ff", LazyVim.pick("auto"), desc = "Find Files (Root Dir)" },
+    { "<leader>fF", LazyVim.pick("auto", { root = false }), desc = "Find Files (cwd)" },
+    { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Files (git-files)" },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-    { "<leader>fR", Util.telescope("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (cwd)" },
+    { "<leader>fR", LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
     -- git
-    { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
-    { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
+    { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "Commits" },
+    { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "Status" },
     -- search
     { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
     { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
     { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
     { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
     { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
-    { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document diagnostics" },
-    { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace diagnostics" },
-    { "<leader>sg", Util.telescope("live_grep"), desc = "Grep (root dir)" },
-    { "<leader>sG", Util.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
+    { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document Diagnostics" },
+    { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace Diagnostics" },
+    { "<leader>sg", LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
+    { "<leader>sG", LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
     { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
     { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
+    { "<leader>sj", "<cmd>Telescope jumplist<cr>", desc = "Jumplist" },
     { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+    { "<leader>sl", "<cmd>Telescope loclist<cr>", desc = "Location List" },
     { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
     { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
     { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
     { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
-    { "<leader>sw", Util.telescope("grep_string", { word_match = "-w" }), desc = "Word (root dir)" },
-    { "<leader>sW", Util.telescope("grep_string", { cwd = false, word_match = "-w" }), desc = "Word (cwd)" },
-    { "<leader>sw", Util.telescope("grep_string"), mode = "v", desc = "Selection (root dir)" },
-    { "<leader>sW", Util.telescope("grep_string", { cwd = false }), mode = "v", desc = "Selection (cwd)" },
-    { "<leader>uC", Util.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
+    { "<leader>sq", "<cmd>Telescope quickfix<cr>", desc = "Quickfix List" },
+    { "<leader>sw", LazyVim.pick("grep_string", { word_match = "-w" }), desc = "Word (Root Dir)" },
+    { "<leader>sW", LazyVim.pick("grep_string", { root = false, word_match = "-w" }), desc = "Word (cwd)" },
+    { "<leader>sw", LazyVim.pick("grep_string"), mode = "v", desc = "Selection (Root Dir)" },
+    { "<leader>sW", LazyVim.pick("grep_string", { root = false }), mode = "v", desc = "Selection (cwd)" },
+    { "<leader>uC", LazyVim.pick("colorscheme", { enable_preview = true }), desc = "Colorscheme with Preview" },
     {
       "<leader>ss",
       function()
         require("telescope.builtin").lsp_document_symbols({
-          symbols = require("lazyvim.config").get_kind_filter(),
+          symbols = LazyVim.config.get_kind_filter(),
         })
       end,
       desc = "Goto Symbol",
@@ -80,30 +95,27 @@ return {
       "<leader>sS",
       function()
         require("telescope.builtin").lsp_dynamic_workspace_symbols({
-          symbols = require("lazyvim.config").get_kind_filter(),
+          symbols = LazyVim.config.get_kind_filter(),
         })
       end,
       desc = "Goto Symbol (Workspace)",
     },
   },
-  opts = function(_, opts)
+  opts = function()
     local actions = require("telescope.actions")
 
     local open_with_trouble = function(...)
-      return require("trouble.providers.telescope").open_with_trouble(...)
-    end
-    local open_selected_with_trouble = function(...)
-      return require("trouble.providers.telescope").open_selected_with_trouble(...)
+      return require("trouble.sources.telescope").open(...)
     end
     local find_files_no_ignore = function()
       local action_state = require("telescope.actions.state")
       local line = action_state.get_current_line()
-      Util.telescope("find_files", { no_ignore = true, default_text = line })()
+      LazyVim.pick("find_files", { no_ignore = true, default_text = line })()
     end
     local find_files_with_hidden = function()
       local action_state = require("telescope.actions.state")
       local line = action_state.get_current_line()
-      Util.telescope("find_files", { hidden = true, default_text = line })()
+      LazyVim.pick("find_files", { hidden = true, default_text = line })()
     end
     if Util.has("flash.nvim") then
       local function flash(prompt_bufnr)
@@ -128,11 +140,11 @@ return {
       --     mappings = { n = { s = flash }, i = { ["<c-s>"] = flash } },
       --   })
     end
+
     return {
       defaults = {
         prompt_prefix = " ",
         selection_caret = " ",
-        sorting_strategy = "ascending",
         -- open files in the first window that is an actual file.
         -- use the current window if no other window is available.
         get_selection_window = function()
@@ -149,7 +161,7 @@ return {
         mappings = {
           i = {
             ["<c-t>"] = open_with_trouble,
-            ["<a-t>"] = open_selected_with_trouble,
+            ["<a-t>"] = open_with_trouble,
             ["<a-i>"] = find_files_no_ignore,
             ["<a-h>"] = find_files_with_hidden,
             ["<C-Down>"] = actions.cycle_history_next,
