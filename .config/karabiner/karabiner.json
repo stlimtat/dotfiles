@@ -10,10 +10,10 @@
     {
       "complex_modifications": {
         "parameters": {
-          "basic.simultaneous_threshold_milliseconds": 150,
+          "basic.simultaneous_threshold_milliseconds": 200,
           "basic.to_delayed_action_delay_milliseconds": 500,
-          "basic.to_if_alone_timeout_milliseconds": 150,
-          "basic.to_if_held_down_threshold_milliseconds": 150,
+          "basic.to_if_alone_timeout_milliseconds": 100,
+          "basic.to_if_held_down_threshold_milliseconds": 100,
           "mouse_motion_to_scroll.speed": 100
         },
         "rules": [
@@ -44,6 +44,9 @@
                       "key_code": "x"
                     }
                   ]
+                },
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 200
                 },
                 "to": [
                   {
@@ -78,6 +81,9 @@
                     }
                   ]
                 },
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 200
+                },
                 "to": [
                   {
                     "key_code": "x",
@@ -110,6 +116,9 @@
                       "key_code": "v"
                     }
                   ]
+                },
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 200
                 },
                 "to": [
                   {
@@ -144,6 +153,9 @@
                     }
                   ]
                 },
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 200
+                },
                 "to": [
                   {
                     "key_code": "v",
@@ -177,6 +189,9 @@
                     }
                   ]
                 },
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 200
+                },
                 "to": [
                   {
                     "key_code": "f",
@@ -209,6 +224,9 @@
                       "key_code": "d"
                     }
                   ]
+                },
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 200
                 },
                 "to": [
                   {
@@ -243,6 +261,9 @@
                     }
                   ]
                 },
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 200
+                },
                 "to": [
                   {
                     "key_code": "q",
@@ -275,6 +296,9 @@
                       "key_code": "r"
                     }
                   ]
+                },
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 200
                 },
                 "to": [
                   {
@@ -309,6 +333,9 @@
                     }
                   ]
                 },
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 200
+                },
                 "to": [
                   {
                     "key_code": "w",
@@ -341,6 +368,9 @@
                       "key_code": "d"
                     }
                   ]
+                },
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 200
                 },
                 "to": [
                   {
@@ -375,6 +405,9 @@
                     }
                   ]
                 },
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 200
+                },
                 "to": [
                   {
                     "key_code": "d",
@@ -407,6 +440,9 @@
                       "key_code": "g"
                     }
                   ]
+                },
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 200
                 },
                 "to": [
                   {
@@ -441,6 +477,9 @@
                     }
                   ]
                 },
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 200
+                },
                 "to": [
                   {
                     "key_code": "n",
@@ -473,8 +512,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 150,
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -518,8 +557,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 150,
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -563,7 +602,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -607,8 +647,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 150,
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -652,8 +692,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 150,
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -697,8 +737,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 150,
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -742,7 +782,7 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 150,
+                  "basic.to_if_alone_timeout_milliseconds": 100,
                   "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
@@ -787,8 +827,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 150,
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -837,8 +877,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 150,
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -883,8 +923,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 150,
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -929,8 +969,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 150,
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -975,8 +1015,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 150,
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -1021,8 +1061,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 150,
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -1067,7 +1107,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -1112,8 +1153,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 150,
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -1158,8 +1199,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 150,
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -1204,8 +1245,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 150,
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -1250,8 +1291,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 150,
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -1296,8 +1337,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 150,
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -1342,8 +1383,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 150,
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -1388,8 +1429,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 150,
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -1434,8 +1475,8 @@
                   }
                 },
                 "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 150,
-                  "basic.to_if_held_down_threshold_milliseconds": 150
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
