@@ -69,10 +69,10 @@ move_anime_to_dir() {
           b="${a%% - [0-9][0-9]*}"
           c="${b%%) [0-9][0-9]* \(*}"
           d="${c%% - [0-9]* \[*}"
-	  e="${d%% \[[0-9v]*\].*}"
+	        e="${d%% \[[0-9v]*\].*}"
           x="${e%%- S[0-9][0-9]E[0-9][0-9]*}"
           [ ! -d "${ANIME_CHAR}/${x}" ] && mkdir -p "${ANIME_CHAR}/${x}"
-          echo mv "${k}" "${ANIME_CHAR}/${x}/"
+          mv "${k}" "${ANIME_CHAR}/${x}/"
         fi
       done
     done
