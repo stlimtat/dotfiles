@@ -344,7 +344,7 @@
                 },
                 "to": [
                   {
-                    "key_code": "k",
+                    "key_code": "n",
                     "modifiers": ["right_command"]
                   }
                 ],
