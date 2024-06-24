@@ -10,10 +10,10 @@
     {
       "complex_modifications": {
         "parameters": {
-          "basic.simultaneous_threshold_milliseconds": 200,
+          "basic.simultaneous_threshold_milliseconds": 100,
           "basic.to_delayed_action_delay_milliseconds": 500,
-          "basic.to_if_alone_timeout_milliseconds": 100,
-          "basic.to_if_held_down_threshold_milliseconds": 100,
+          "basic.to_if_alone_timeout_milliseconds": 150,
+          "basic.to_if_held_down_threshold_milliseconds": 160,
           "mouse_motion_to_scroll.speed": 100
         },
         "rules": [
@@ -44,9 +44,6 @@
                       "key_code": "x"
                     }
                   ]
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 200
                 },
                 "to": [
                   {
@@ -81,9 +78,6 @@
                     }
                   ]
                 },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 200
-                },
                 "to": [
                   {
                     "key_code": "x",
@@ -116,9 +110,6 @@
                       "key_code": "v"
                     }
                   ]
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 200
                 },
                 "to": [
                   {
@@ -153,9 +144,6 @@
                     }
                   ]
                 },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 200
-                },
                 "to": [
                   {
                     "key_code": "v",
@@ -189,9 +177,6 @@
                     }
                   ]
                 },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 200
-                },
                 "to": [
                   {
                     "key_code": "f",
@@ -224,9 +209,6 @@
                       "key_code": "d"
                     }
                   ]
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 200
                 },
                 "to": [
                   {
@@ -261,9 +243,6 @@
                     }
                   ]
                 },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 200
-                },
                 "to": [
                   {
                     "key_code": "q",
@@ -296,9 +275,6 @@
                       "key_code": "r"
                     }
                   ]
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 200
                 },
                 "to": [
                   {
@@ -333,9 +309,6 @@
                     }
                   ]
                 },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 200
-                },
                 "to": [
                   {
                     "key_code": "w",
@@ -368,9 +341,6 @@
                       "key_code": "d"
                     }
                   ]
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 200
                 },
                 "to": [
                   {
@@ -405,9 +375,6 @@
                     }
                   ]
                 },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 200
-                },
                 "to": [
                   {
                     "key_code": "d",
@@ -440,9 +407,6 @@
                       "key_code": "g"
                     }
                   ]
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 200
                 },
                 "to": [
                   {
@@ -477,9 +441,6 @@
                     }
                   ]
                 },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 200
-                },
                 "to": [
                   {
                     "key_code": "n",
@@ -510,10 +471,6 @@
                   "modifiers": {
                     "optional": []
                   }
-                },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -556,10 +513,6 @@
                     "optional": []
                   }
                 },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
-                },
                 "to_delayed_action": {
                   "to_if_canceled": [
                     {
@@ -600,10 +553,6 @@
                   "modifiers": {
                     "optional": []
                   }
-                },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -646,10 +595,6 @@
                     "optional": []
                   }
                 },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
-                },
                 "to_delayed_action": {
                   "to_if_canceled": [
                     {
@@ -690,10 +635,6 @@
                   "modifiers": {
                     "optional": []
                   }
-                },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -736,10 +677,6 @@
                     "optional": []
                   }
                 },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
-                },
                 "to_delayed_action": {
                   "to_if_canceled": [
                     {
@@ -781,10 +718,6 @@
                     "optional": []
                   }
                 },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
-                },
                 "to_delayed_action": {
                   "to_if_canceled": [
                     {
@@ -825,10 +758,6 @@
                   "modifiers": {
                     "optional": []
                   }
-                },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -876,10 +805,6 @@
                     "optional": []
                   }
                 },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
-                },
                 "to_delayed_action": {
                   "to_if_canceled": [
                     {
@@ -921,10 +846,6 @@
                   "modifiers": {
                     "optional": []
                   }
-                },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -968,10 +889,6 @@
                     "optional": []
                   }
                 },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
-                },
                 "to_delayed_action": {
                   "to_if_canceled": [
                     {
@@ -1013,10 +930,6 @@
                   "modifiers": {
                     "optional": []
                   }
-                },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -1060,10 +973,6 @@
                     "optional": []
                   }
                 },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
-                },
                 "to_delayed_action": {
                   "to_if_canceled": [
                     {
@@ -1105,10 +1014,6 @@
                   "modifiers": {
                     "optional": []
                   }
-                },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -1152,10 +1057,6 @@
                     "optional": []
                   }
                 },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
-                },
                 "to_delayed_action": {
                   "to_if_canceled": [
                     {
@@ -1197,10 +1098,6 @@
                   "modifiers": {
                     "optional": []
                   }
-                },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -1244,10 +1141,6 @@
                     "optional": []
                   }
                 },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
-                },
                 "to_delayed_action": {
                   "to_if_canceled": [
                     {
@@ -1289,10 +1182,6 @@
                   "modifiers": {
                     "optional": []
                   }
-                },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -1336,10 +1225,6 @@
                     "optional": []
                   }
                 },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
-                },
                 "to_delayed_action": {
                   "to_if_canceled": [
                     {
@@ -1381,10 +1266,6 @@
                   "modifiers": {
                     "optional": []
                   }
-                },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -1428,10 +1309,6 @@
                     "optional": []
                   }
                 },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
-                },
                 "to_delayed_action": {
                   "to_if_canceled": [
                     {
@@ -1473,10 +1350,6 @@
                   "modifiers": {
                     "optional": []
                   }
-                },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 100,
-                  "basic.to_if_held_down_threshold_milliseconds": 100
                 },
                 "to_delayed_action": {
                   "to_if_canceled": [
@@ -1806,14 +1679,14 @@
       ],
       "name": "Default profile",
       "parameters": {
-        "delay_milliseconds_before_open_device": 1000
+        "delay_milliseconds_before_open_device": 1500
       },
       "selected": true,
       "simple_modifications": [],
       "virtual_hid_keyboard": {
         "country_code": 0,
         "indicate_sticky_modifier_keys_state": true,
-        "mouse_key_xy_scale": 100
+        "mouse_key_xy_scale": 150
       }
     }
   ]

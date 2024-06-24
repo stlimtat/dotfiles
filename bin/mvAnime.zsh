@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-DOWNLOAD_DIR=/Volumes/Public
+DOWNLOAD_DIR=/srv/dev-disk-by-uuid-46bbdcbc-fd97-408a-bdf5-d19fd03e13e1/Public
 ANIME_DIR=${DOWNLOAD_DIR}/Anime
 HOLLY_DIR=${DOWNLOAD_DIR}/Hollywood
 KIDS_DIR=${DOWNLOAD_DIR}/kids
@@ -67,11 +67,12 @@ move_anime_to_dir() {
         if [ -f "${k}" ]; then
           a="${k//_/ }"
           b="${a%% - [0-9][0-9]*}"
-          a="${b%%) [0-9][0-9]* \(*}"
-          b="${a%% - [0-9]* \[*}"
-          x="${b%%- S[0-9][0-9]E[0-9][0-9]*}"
+          c="${b%%) [0-9][0-9]* \(*}"
+          d="${c%% - [0-9]* \[*}"
+	  e="${d%% \[[0-9v]*\].*}"
+          x="${e%%- S[0-9][0-9]E[0-9][0-9]*}"
           [ ! -d "${ANIME_CHAR}/${x}" ] && mkdir -p "${ANIME_CHAR}/${x}"
-          mv "${k}" "${ANIME_CHAR}/${x}/"
+          echo mv "${k}" "${ANIME_CHAR}/${x}/"
         fi
       done
     done
@@ -84,25 +85,26 @@ move_to_holly() {
   IFS=$'\012'
   count=0
   MOVIES_BRACKET=()
-  for j in $(gfind ${DOWNLOAD_DIR} -maxdepth 1 -type d -regex '.*\ ([0-9]+)'); do
+  for j in $(find ${DOWNLOAD_DIR} -maxdepth 1 -type d -regex '.*\ ([0-9]+)'); do
         count=$((count + 1))
         MOVIES_BRACKET[$count]=${j}
   done
   echo ${MOVIES_BRACKET[*]}
+  echo ${DOWNLOAD_DIR}/*\[YTS.*\]
 
   for i in \
     ${DOWNLOAD_DIR}/*\[YTS.*\] \
     ${MOVIES_BRACKET[*]} \
     ${DOWNLOAD_DIR}/*.BluRay.* \
     ${DOWNLOAD_DIR}/*.WEBRip.*; do
-    for j in $(gfind ${i} -name "*.mp4" -o -name "*.mkv" -o -name "*.avi" 2> /dev/null); do
+    for j in $(find ${i} -name "*.mp4" -o -name "*.mkv" -o -name "*.avi" 2> /dev/null); do
       # https://stackoverflow.com/questions/965053/extract-filename-and-extension-in-zsh/965072#965072
       MOVIE_FILENAME="${j##*/}"
       MOVIE_DIR="${j:0:${#j} - ${#MOVIE_FILENAME}}"
       MOVIE_FILEBASE="${MOVIE_FILENAME%.[^.]*}"
       SRT_FILE="${MOVIE_DIR}${MOVIE_FILEBASE}.srt"
       if [ -f "${SRT_FILE}" ]; then
-        SRT_SIZE=$(gstat -c%s "${SRT_FILE}")
+        SRT_SIZE=$(stat -c%s "${SRT_FILE}")
         if [ ${SRT_SIZE} -lt 500 ]; then
           while [[ -e "${SRT_FILE}" ]]; do
             rm -rf "${SRT_FILE}"
@@ -123,7 +125,7 @@ get_dir_subs() {
   MY_DIR=$1
   setopt NULL_GLOB
   IFS=$'\012'
-  for s in $(gfind ${MY_DIR} -maxdepth 2 -name "*.mp4" -o -name "*.mkv" -o -name "*.avi"); do
+  for i in $(find ${MY_DIR} -maxdepth 2 -name "*.mp4" -o -name "*.mkv" -o -name "*.avi"); do
     # https://stackoverflow.com/questions/965053/extract-filename-and-extension-in-zsh/965072#965072
     MOVIE_FILENAME="${i##*/}"
     MOVIE_DIR="${i:0:${#i} - ${#MOVIE_FILENAME}}"
@@ -134,7 +136,7 @@ get_dir_subs() {
       move_file_to_dir "${i}" "${MY_DIR}"
     fi
   done
-  for s in $(gfind ${MY_DIR} -name "*.srt" -size 1000c); do
+  for i in $(find ${MY_DIR} -name "*.srt" -size 1000c); do
       while [[ -e "${i}" ]]; do
         rm -rf "${i}"
       done
@@ -159,7 +161,7 @@ zip_comic_cbz() {
   setopt NULL_GLOB
   IFS=$'\012'
   pushd ${DOWNLOAD_DIR}
-    for manga in $(gfind . -maxdepth 1 -type d -name "\[*\] *"); do 
+    for manga in $(find . -maxdepth 1 -type d -name "\[*\] *"); do 
       setopt -s DOT_GLOB
       if [ -n "$(ls -A ${manga}/*.{jpg,png,JPG,PNG})" ]; then
         echo $(basename $manga)
@@ -181,7 +183,7 @@ OPTS=$1
 move_anime_to_dir
 move_to_holly
 move_nsznsp_to_games
-zip_comic_cbz
+# zip_comic_cbz
 case $OPTS in
   sub)
     #get_dir_subs ${KIDS_DIR}
