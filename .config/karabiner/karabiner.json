@@ -12,8 +12,8 @@
                 "parameters": {
                     "basic.simultaneous_threshold_milliseconds": 100,
                     "basic.to_delayed_action_delay_milliseconds": 100,
-                    "basic.to_if_alone_timeout_milliseconds": 200,
-                    "basic.to_if_held_down_threshold_milliseconds": 100,
+                    "basic.to_if_alone_timeout_milliseconds": 150,
+                    "basic.to_if_held_down_threshold_milliseconds": 150,
                     "mouse_motion_to_scroll.speed": 100
                 },
                 "rules": [
@@ -651,10 +651,8 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "left_control",
-                                        "lazy": true,
-                                        "repeat": true
+                                        "lazy": true
                                     }
                                 ],
                                 "type": "basic"
@@ -700,10 +698,8 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "right_control",
-                                        "lazy": true,
-                                        "repeat": true
+                                        "lazy": true
                                     }
                                 ],
                                 "type": "basic"
@@ -749,10 +745,8 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "left_option",
-                                        "lazy": true,
-                                        "repeat": true
+                                        "lazy": true
                                     }
                                 ],
                                 "type": "basic"
@@ -798,10 +792,8 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "right_option",
-                                        "lazy": true,
-                                        "repeat": true
+                                        "lazy": true
                                     }
                                 ],
                                 "type": "basic"
@@ -847,10 +839,8 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "left_command",
-                                        "lazy": true,
-                                        "repeat": true
+                                        "lazy": true
                                     }
                                 ],
                                 "type": "basic"
@@ -896,10 +886,8 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "right_command",
-                                        "lazy": true,
-                                        "repeat": true
+                                        "lazy": true
                                     }
                                 ],
                                 "type": "basic"
@@ -945,10 +933,8 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "left_shift",
-                                        "lazy": true,
-                                        "repeat": true
+                                        "lazy": true
                                     }
                                 ],
                                 "type": "basic"
@@ -994,10 +980,8 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "right_shift",
-                                        "lazy": true,
-                                        "repeat": true
+                                        "lazy": true
                                     }
                                 ],
                                 "type": "basic"
@@ -1048,13 +1032,11 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "left_control",
                                         "lazy": true,
                                         "modifiers": [
                                             "left_shift"
-                                        ],
-                                        "repeat": true
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -1100,13 +1082,11 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "right_control",
                                         "lazy": true,
                                         "modifiers": [
                                             "right_shift"
-                                        ],
-                                        "repeat": true
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -1152,13 +1132,11 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "left_option",
                                         "lazy": true,
                                         "modifiers": [
                                             "left_shift"
-                                        ],
-                                        "repeat": true
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -1204,13 +1182,11 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "right_option",
                                         "lazy": true,
                                         "modifiers": [
                                             "right_shift"
-                                        ],
-                                        "repeat": true
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -1256,13 +1232,11 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "left_command",
                                         "lazy": true,
                                         "modifiers": [
                                             "left_shift"
-                                        ],
-                                        "repeat": true
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -1308,13 +1282,11 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "right_command",
                                         "lazy": true,
                                         "modifiers": [
                                             "right_shift"
-                                        ],
-                                        "repeat": true
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -1360,13 +1332,11 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "left_option",
                                         "lazy": true,
                                         "modifiers": [
                                             "left_control"
-                                        ],
-                                        "repeat": true
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -1412,13 +1382,11 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "right_option",
                                         "lazy": true,
                                         "modifiers": [
                                             "right_control"
-                                        ],
-                                        "repeat": true
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -1464,13 +1432,11 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "left_command",
                                         "lazy": true,
                                         "modifiers": [
                                             "left_control"
-                                        ],
-                                        "repeat": true
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -1516,13 +1482,11 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "right_command",
                                         "lazy": true,
                                         "modifiers": [
                                             "right_control"
-                                        ],
-                                        "repeat": true
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -1568,13 +1532,11 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "left_command",
                                         "lazy": true,
                                         "modifiers": [
                                             "left_option"
-                                        ],
-                                        "repeat": true
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -1620,13 +1582,11 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "right_command",
                                         "lazy": true,
                                         "modifiers": [
                                             "right_option"
-                                        ],
-                                        "repeat": true
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -1672,14 +1632,12 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "left_command",
                                         "lazy": true,
                                         "modifiers": [
                                             "left_option",
                                             "left_shift"
-                                        ],
-                                        "repeat": true
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -1725,14 +1683,12 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "halt": true,
                                         "key_code": "right_command",
                                         "lazy": true,
                                         "modifiers": [
                                             "right_option",
                                             "right_shift"
-                                        ],
-                                        "repeat": true
+                                        ]
                                     }
                                 ],
                                 "type": "basic"

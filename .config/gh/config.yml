@@ -8,7 +8,7 @@ prompt: enabled
 pager: delta -s
 # Aliases allow you to create nicknames for gh commands
 aliases:
-  adhoc-scorer-test: '!WORKFLOW=deploy_adhoc_scorer_aws_mgmt.yml; gh workflow run $WORKFLOW --ref=$(git symbolic-ref --short HEAD) --field identifier=assweet;sleep 10;gh_out=$(gh run list --user assweet --workflow=$WORKFLOW -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
+  adhoc-scorer-test: '!WORKFLOW=deploy_adhoc_scorer_aws_mgmt.yml; gh workflow run $WORKFLOW --ref=$(git symbolic-ref --short HEAD) --field identifier=zmo;sleep 10;gh_out=$(gh run list --user assweet --workflow=$WORKFLOW -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
   co: pr checkout
   bento_tmmt: '![[ "$BENTO_TARGET" == "" ]] && echo "Need to specify BENTO_TARGET" && exit 1;WORKFLOW=publish_bento_image_ecr.yml; gh workflow run $WORKFLOW --ref=$(git symbolic-ref --short HEAD) -F environments=test -F region_stratos_lite=true -F region_us_legacy=true -F bento_target=$BENTO_TARGET;sleep 10;gh_out=$(gh run list --user assweet --workflow=$WORKFLOW -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
   gmpr: pr create --title "[Graymail] $1" --label msp-graymail --template pull_request_template.md
