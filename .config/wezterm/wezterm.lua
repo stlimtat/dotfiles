@@ -60,6 +60,7 @@ config.keys = {
 	{ key = "_", mods = "ALT|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ key = "w", mods = "CMD", action = act.CloseCurrentPane({ confirm = true }) },
 }
+config.native_macos_fullscreen_mode = true
 config.quit_when_all_windows_are_closed = true
 -- How many lines of scrollback you want to retain per tab
 config.scrollback_lines = 3500
