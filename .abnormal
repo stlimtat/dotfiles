@@ -117,7 +117,7 @@ function connect_pgdb() {
       [[ "$IS_LOGGED_IN_DBADMIN" == "" ]] && aws sso login
     fi
     export ABNORMAL_USER=$(aws sts get-caller-identity --query UserId --output text | cut -f2 -d ':' | cut -f1 -d '@')
-    export ABSEC_IDENTITY=aid://user/$ABNORMAL_USER/$PGUSER
+    export ABSEC_IDENTITY=aid://user/$ABNORMAL_USER
     export CONTEXT=$(kubectl config view -o jsonpath='{range .contexts[*]}{.name}{"\n"}{end}' | fzf --header="Choose the correct kubecontext for the environment you are trying to access.")
     export MY_ENV=$(echo $CONTEXT | cut -f2 -d-)
     export NAMESPACE=${MY_APP}--${MY_PRODUCT}
