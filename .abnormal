@@ -36,6 +36,12 @@ export TERRAGRUNT_SOURCE_MAP="git::ssh://git@github.com/abnormal-security/infras
 export TERRAGRUNT_SOURCE_UPDATE=true
 export VENV=${HOME}/dev/venv
 start_time=$(gdate +%s%3N)
+echo "Running copilot...${start_time}ms"
+eval "$(gh copilot alias -- zsh)"
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Running copilot...${end_time}ms...${time_taken}ms...Done"
+start_time=$(gdate +%s%3N)
 echo "Running abnormal/tools/bash/prelude...${start_time}ms"
 source ${SOURCE}/tools/bash/prelude.sh
 end_time=$(gdate +%s%3N)
