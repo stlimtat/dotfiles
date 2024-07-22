@@ -1254,7 +1254,7 @@
                 ],
                 "to_if_held_down": [
                   {
-                    "key_code": "left_command",
+                    "key_code": "left_control",
                     "modifiers": ["left_shift", "left_option"]
                   }
                 ],
@@ -1281,7 +1281,7 @@
                   }
                 ],
                 "from": {
-                  "key_code": "comma",
+                  "key_code": "m",
                   "modifiers": {
                     "optional": []
                   }
@@ -1301,8 +1301,106 @@
                 ],
                 "to_if_held_down": [
                   {
-                    "key_code": "right_command",
+                    "key_code": "right_control",
                     "modifiers": ["right_shift", "right_option"]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "input_sources": [
+                      {
+                        "input_source_id": "com.apple.keylayout.Colemak",
+                        "language": "en"
+                      }
+                    ],
+                    "type": "input_source_if"
+                  },
+                  {
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ],
+                    "type": "device_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "b",
+                  "modifiers": {
+                    "optional": []
+                  }
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "b"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "b"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_control",
+                    "modifiers": ["left_shift", "left_option", "left_command"]
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "input_sources": [
+                      {
+                        "input_source_id": "com.apple.keylayout.Colemak",
+                        "language": "en"
+                      }
+                    ],
+                    "type": "input_source_if"
+                  },
+                  {
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ],
+                    "type": "device_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "n",
+                  "modifiers": {
+                    "optional": []
+                  }
+                },
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "n"
+                    }
+                  ]
+                },
+                "to_if_alone": [
+                  {
+                    "halt": true,
+                    "key_code": "n"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_control",
+                    "modifiers": [
+                      "right_shift",
+                      "right_option",
+                      "right_command"
+                    ]
                   }
                 ],
                 "type": "basic"

@@ -77,6 +77,16 @@ echo "Running colima...${end_time}ms...${time_taken}ms...Done"
 
 
 function run_prod_proxy() {
+  export CONTEXT=$(kubectl config view -o jsonpath='{range .contexts[*]}{.name}{"\n"}{end}' | fzf --header="Choose the correct kubecontext for the environment you are trying to access.")
+  export MY_ENV=$(echo $CONTEXT | cut -f2 -d-)
+  export MY_PRODUCT=$(ls $SOURCE/config/app | xargs basename | grep "^[a-z]" | sort | fzf --header="Pick the product")
+  export MY_APP=$(ls $SOURCE/config/app/$MY_PRODUCT | xargs basename | grep "^[a-z]" | sort | fzf --header="Pick the app")
+  export NAMESPACE=${MY_PRODUCT}--${MY_APP}
+  export PGPORT=54320
+  echo "Using port $PGPORT by default."
+  declare -A REGION_MAP=( ["usea1"]="us-east-1" ["usea2"]="us-east-2" ["euwe1"]="eu-west-1" )
+  export REGION_SHORT=$(echo $CONTEXT | cut -f3 -d-)
+  export REGION=$REGION_MAP[$REGION_SHORT]
   [[ $AWS_PROFILE =~ .*-dbadmin ]] || export AWS_PROFILE=$(aws configure list-profiles | grep dbadmin | fzf --header="Pick an AWS profile. (Careful -- This determines the kind of access you'll have)")
   # Assumes that you are logged in as db admin on sso if there is something in ~/.aws/cli/cache/
   if [[ "$AWS_PROFILE" == "absec-mgmt-dbadmin" ]]
@@ -88,15 +98,14 @@ function run_prod_proxy() {
     IS_LOGGED_IN_DBADMIN=$( aws sts get-caller-identity | jq '.Arn' | grep AbsecDBAdmin )
     [[ "$IS_LOGGED_IN_DBADMIN" == "" ]] && aws sso login
   fi
-  export CONTEXT=$(kubectl config view -o jsonpath='{range .contexts[*]}{.name}{"\n"}{end}' | fzf --header="Choose the correct kubecontext for the environment you are trying to access.")
-  export NAMESPACE=$(kubectl --context $CONTEXT get ns -o json | jq -r '.items | map(.metadata.name) | .[]' | fzf --header="Pick the namespace that corresponds to your database.")
-  export REGION=$(echo "us-east-1\nus-east-2\neu-west-1" | fzf --header="Pick a region. This affects which region AWS commands are run in.")
-  export PGPORT=54320
-  echo "Using port 54320 by default for the database."
   export TARGET=$(aws rds --region $REGION describe-db-instances | jq -r '.DBInstances | .[] | .Endpoint.Address' | fzf --header="Pick the RDS Host you want to connect to"):$PGPORT
   export LOCAL_PORT=54320
   echo "Using port 54320 by default for the proxy."
   export RUN_MODE=inline
+  declare -A ENV_MAP=( ["pmmt"]="pm" ["prod"]="p" ["test"]="t" ["tmmt"]="tm" )
+  export ENV_URL=$ENV_MAP[$MY_ENV]
+  echo "127.0.0.1 ro.db.${MY_APP}.${MY_PRODUCT}.${REGION_SHORT}.${ENV_URL}.abnml.io" | sudo tee -a /etc/hosts
+  echo "127.0.0.1 ro.db.${MY_APP}.${MY_PRODUCT}.${REGION_SHORT}.${ENV_URL}.abnml.io" | sudo tee -a /etc/hosts
   prod-proxy start
 }
 
@@ -106,10 +115,20 @@ alias test_gmr_proxy='sudo CONTEXT=aw-test-usea2-main USER=operator prod-proxy i
 alias tmmt_gmr_proxy='sudo CONTEXT=aw-tmmt-usea1-tmmt USER=operator prod-proxy inline rw.db.graymail-reports.email.usea1.tm.abnml.io:54320'
 
 function connect_pgdb() {
+  export CONTEXT=$(kubectl config view -o jsonpath='{range .contexts[*]}{.name}{"\n"}{end}' | fzf --header="Choose the correct kubecontext for the environment you are trying to access.")
+  export MY_ENV=$(echo $CONTEXT | cut -f2 -d-)
+  export MY_PRODUCT=$(ls $SOURCE/config/app | xargs basename | grep "^[a-z]" | sort | fzf --header="Pick the product")
+  export MY_APP=$(ls $SOURCE/config/app/$MY_PRODUCT | xargs basename | grep "^[a-z]" | sort | fzf --header="Pick the app")
+  export NAMESPACE=${MY_PRODUCT}--${MY_APP}
+  export PGPORT=54320
+  echo "Using port $PGPORT by default."
+  export PGSSLMODE=verify-ca
+  export PGSSLROOTCERT=$HOME/.postgresql/root.crt
+  declare -A REGION_MAP=( ["usea1"]="us-east-1" ["usea2"]="us-east-2" ["euwe1"]="eu-west-1" )
+  export REGION_SHORT=$(echo $CONTEXT | cut -f3 -d-)
+  export REGION=$REGION_MAP[$REGION_SHORT]
   if [[ "$PGHOST" == "" || "$PGPORT" == "" || "$REGION" == "" || "$PGUSER" == "" ]]; then
     export PGUSER=$(echo "operator\nplatformadmin\nadmin\nrw\nro" | fzf  --header="Pick a user.")
-    export MY_PRODUCT=$(ls $SOURCE/config/app | xargs basename | grep "^[a-z]" | sort | fzf --header="Pick the product")
-    export MY_APP=$(ls $SOURCE/config/app/$MY_PRODUCT | xargs basename | grep "^[a-z]" | sort | fzf --header="Pick the app")
     # Assumes that you are logged in as db admin on sso if there is something in ~/.aws/cli/cache/
     [[ $AWS_PROFILE =~ .*-dbadmin ]] || export AWS_PROFILE=$(aws configure list-profiles | grep dbadmin | fzf --header="Pick an AWS profile. (Careful -- This determines the kind of access you'll have)")
     # Assumes that you are logged in as db admin on sso if there is something in ~/.aws/cli/cache/
@@ -124,18 +143,8 @@ function connect_pgdb() {
     fi
     export ABNORMAL_USER=$(aws sts get-caller-identity --query UserId --output text | cut -f2 -d ':' | cut -f1 -d '@')
     export ABSEC_IDENTITY=aid://user/$ABNORMAL_USER
-    export CONTEXT=$(kubectl config view -o jsonpath='{range .contexts[*]}{.name}{"\n"}{end}' | fzf --header="Choose the correct kubecontext for the environment you are trying to access.")
-    export MY_ENV=$(echo $CONTEXT | cut -f2 -d-)
-    export NAMESPACE=${MY_APP}--${MY_PRODUCT}
-    declare -A REGION_MAP=( ["usea1"]="us-east-1" ["usea2"]="us-east-2" ["euwe1"]="eu-west-1" )
-    export REGION_SHORT=$(echo $CONTEXT | cut -f3 -d-)
-    export REGION=$REGION_MAP[$REGION_SHORT]
     export RDSHOST=$(aws rds --region $REGION describe-db-instances | jq -r '.DBInstances | .[] | .Endpoint.Address' | fzf --header="Pick the RDS Host you want to connect to")
     export PGHOST=$(echo "$RDSHOST\n127.0.0.1" | fzf --header "Pick the host to connect to using psql. If you are using a proxy, use localhost.")
-    export PGPORT=54320
-    echo "Using port 54320 by default."
-    export PGSSLMODE=verify-ca
-    export PGSSLROOTCERT=$HOME/.postgresql/root.crt
     export PGDATABASE=$(aws rds --region $REGION describe-db-instances | jq -r '.DBInstances | map(.TagList) | map(map(select(.Key == "pac-application"))) | map(map(.Value)) | map(.[0]) | map(select(.)) | map(gsub("-";"")) | unique | .[]' | fzf --header "Pick the database name. (This information was picked out from the application name. Please contact #pi-data-platform if this doesnt correspond.")
     export ABDJANGO_ENV=$( if [[ "$MY_ENV" == "tmmt" ]]; then echo "test"; elif [[ "$MY_ENV" == "pmmt" ]]; then echo "prod"; else echo $MY_ENV; fi)
     export ABDJANGO_USER=$( if [[ "$PGUSER" == "rw" ]]; then echo "writer"; elif [[ "$PGUSER" == "operator" ]]; then echo "operator"; else echo "reader"; fi)
