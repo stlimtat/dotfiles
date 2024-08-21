@@ -30,7 +30,6 @@ brew 'ssh-copy-id'
 brew 'the_silver_searcher' # Needed for fzf for vim
 brew 'zsh-autosuggestions'
 brew 'zsh-completions'
-brew 'zsh-git-prompt'
 brew 'zsh-syntax-highlighting'
 brew 'zsh-vi-mode'
 

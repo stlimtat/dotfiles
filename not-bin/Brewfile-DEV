@@ -24,6 +24,7 @@ brew 'ripgrep' # Needed for telescope-fzf for vim
 brew 'shfmt' # Needed for LSP bash for vim
 brew 'svn' # Needed for the custom fonts later
 brew 'tmux'
+brew 'usage'
 # brew 'tmuxinator'
 
 # Development

@@ -42,7 +42,6 @@ echo "Load kubectl...${time_taken}ms...Done"
 start_time=$(gdate +%s%3N)
 eval "$(mise activate zsh)"
 eval "$(mise completion zsh)"
-eval "$(mise hook-env)"
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load mise...${time_taken}ms...Done"
@@ -66,10 +65,3 @@ echo "Load go...${time_taken}ms...Done"
 # For jediterm - intellij terminal
 # Using kubectl
 export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
-
-# zsh-git-prompt
-start_time=$(gdate +%s%3N)
-source /opt/homebrew/opt/zsh-git-prompt/zshrc.sh
-end_time=$(gdate +%s%3N)
-time_taken=$((end_time - start_time))
-echo "Load zsh-git-prompt...${time_taken}ms...Done"
