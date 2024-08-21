@@ -34,6 +34,8 @@ aliases:
   gm-reprocess-test: '!WORKFLOW=deploy_graymail_reprocess_test.yml; gh workflow run $WORKFLOW --ref=$(git symbolic-ref --short HEAD);sleep 10;gh_out=$(gh run list --user assweet --workflow=$WORKFLOW -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
   gm-unleash: '!WORKFLOW=deploy_graymail_reports_unleash.yml; gh workflow run $WORKFLOW --ref=$(git symbolic-ref --short HEAD) -F no_prompt=true;sleep 10;gh_out=$(gh run list --user assweet --workflow=$WORKFLOW -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
   prls: pr list --author '@me'
+  portal-be-stg: '!WORKFLOW=deploy_portal_backend_non_prod.yml; gh workflow run $WORKFLOW --ref=$(git symbolic-ref --short HEAD) -F service_name=staging-6 -F deploy_prod_mgmt=true;sleep 10;gh_out=$(gh run list --user assweet --workflow=$WORKFLOW -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
+  portal-fe-stg: '!WORKFLOW=deploy_portal_frontend_non_prod.yml; gh workflow run $WORKFLOW --ref=$(git symbolic-ref --short HEAD) -F app_name=portal-host -F service_name=staging-6 -F deploy_prod_mgmt=true;sleep 10;gh_out=$(gh run list --user assweet --workflow=$WORKFLOW -L 2 --json "headBranch,databaseId,startedAt,status"); echo $gh_out; gh run watch $(echo $gh_out | jq ".[0].databaseId")'
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.

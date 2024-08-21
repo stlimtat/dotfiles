@@ -9,6 +9,7 @@ tap 'homebrew/services'
 
 # Binaries
 # brew 'bash' # Latest Bash version
+brew 'bat' # bat is not cat
 brew 'coreutils' # Those that come with macOS are outdated
 brew 'eza' # Replaces ls - so much better
 # brew 'fd' # Alternate find for lunarvim
@@ -24,8 +25,14 @@ brew 'neovim'
 brew 'nmap'
 brew 'mas' # Mac App Store manager
 brew 'p7zip'
+brew 'powerlevel10k'
 brew 'ssh-copy-id'
 brew 'the_silver_searcher' # Needed for fzf for vim
+brew 'zsh-autosuggestions'
+brew 'zsh-completions'
+brew 'zsh-git-prompt'
+brew 'zsh-syntax-highlighting'
+brew 'zsh-vi-mode'
 
 # Apps
 cask '1password'

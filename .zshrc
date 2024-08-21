@@ -15,14 +15,10 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="${HOME}/bin:$PATH"
 
 export ZSH=${HOME}/.oh-my-zsh
+COMPLETION_WAITING_DOTS=true
 HIST_STAMPS="yyyy-mm-dd"
 HYPHEN_INSENSITIVE="true"
-# ~/.oh-my-zsh/plugins/vi-mode/README.md
-# export VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
-# export VI_MODE_SET_CURSOR=true
-# ZSH_THEME="agnoster"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-# ZSH_THEME="bullet-train"
+zstyle ':omz:update' mode auto
 # ~/.oh-my-zsh/plugins/tmux/README.md
 export ZSH_TMUX_AUTOSTART=true
 export ZSH_TMUX_AUTOSTART_ONCE=true
@@ -33,55 +29,104 @@ export ZSH_TMUX_FIXTERM_WITH_256COLOR="screen-256color"
 export ZSH_TMUX_UNICODE=true
 # ~/.oh-my-zsh/plugins
 plugins=(
-  ag
-  aws
   colored-man-pages
-  direnv
   docker
   docker-compose
-  fzf
   gh
   golang
   helm
-  zsh-vi-mode
-  zsh-syntax-highlighting
 )
-#  zsh-autosuggestions
+
 # ~/.oh-my-zsh
 start_time=$(gdate +%s%3N)
-echo "Running oh-my-zsh...${start_time}ms"
 source ${ZSH}/oh-my-zsh.sh
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
-echo "Running oh-my-zsh...${end_time}ms...${time_taken}ms...Done"
-fpath+=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-completions/src
-rm -f ~/.zcompdump; compinit
+echo "Load oh-my-zsh...${time_taken}ms...Done"
+
+# powerlevel10k
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+start_time=$(gdate +%s%3N)
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+# ZSH_THEME="powerlevel10k/powerlevel10k"
+[[ ! -f ${HOME}/.p10k.zsh ]] || source ${HOME}/.p10k.zsh
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Load powerlevel10k...${time_taken}ms...Done"
+
+# compinit
+start_time=$(gdate +%s%3N)
+fpath+=$(brew --prefix)/share/zsh-completions
+rm -f ~/.zcompdump*
+autoload bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Load completion init...${time_taken}ms...Done"
 for file in ${HOME}/.{aliases,devenv,exports,extra,functions,path,tokens,abnormal}; do
+  # files
+  start_time=$(gdate +%s%3N)
   [[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
+  end_time=$(gdate +%s%3N)
+  time_taken=$((end_time - start_time))
+  echo "Loading $file...${time_taken}ms...Done"
 done
 unset file
 
 # fzf
 start_time=$(gdate +%s%3N)
-echo "Running fzf...${start_time}ms"
-zvm_after_init_commands+=("[ -f ${HOME}/.fzf.zsh ] && source ${HOME}/.fzf.zsh")
-source ${HOME}/.fzf.zsh
-eval "$(fzf --zsh)"
+zvm_after_init_commands+=("$(fzf --zsh)")
+source <(fzf --zsh)
+# Print tree structure in the preview window
+export FZF_ALT_C_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'tree -C {}'"
+# CTRL-Y to copy the command into clipboard using pbcopy
+export FZF_CTRL_R_OPTS="
+  --preview 'echo {}' 
+  --preview-window down:3:hidden:wrap 
+  --bind '?:toggle-preview'
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'"
+# Preview file content using bat (https://github.com/sharkdp/bat)
+export FZF_CTRL_T_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'bat -n --color=always {}'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
-echo "Running fzf...${end_time}ms...${time_taken}ms...Done"
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-start_time=$(gdate +%s%3N)
-echo "Running p10k...${start_time}ms"
-[[ ! -f ${HOME}/.p10k.zsh ]] || source ${HOME}/.p10k.zsh
-end_time=$(gdate +%s%3N)
-time_taken=$((end_time - start_time))
-echo "Running p10k...${end_time}ms...${time_taken}ms...Done"
+echo "Load fzf...${time_taken}ms...Done"
+
 # wezterm
 start_time=$(gdate +%s%3N)
-echo "Running wezterm...${start_time}ms"
 zsh ${HOME}/bin/wezterm.sh
 eval "$(wezterm shell-completion --shell zsh)"
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
-echo "Running wezterm...${end_time}ms...${time_taken}ms...Done"
+echo "Load wezterm...${time_taken}ms...Done"
+
+# zsh-autosuggestions
+start_time=$(gdate +%s%3N)
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Load zsh-autosuggestions...${time_taken}ms...Done"
+
+# zsh-syntax-highlighting
+start_time=$(gdate +%s%3N)
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Load zsh-syntax-highlighting...${time_taken}ms...Done"
+
+# zsh-vi-mode
+start_time=$(gdate +%s%3N)
+source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Load zsh-vi-mode...${time_taken}ms...Done"
+# Removing a key binding - fzf-git
+bindkey -r "^G"
+bindkey -r "^G"

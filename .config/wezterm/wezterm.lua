@@ -1,9 +1,11 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
+local mux = wezterm.mux
 local config = wezterm.config_builder()
 config.automatically_reload_config = true
 config.check_for_updates = false
-config.color_scheme = "Gruvbox dark, medium (base16)"
+-- config.color_scheme = 'Gruvbox dark, medium (base16)'
+config.color_scheme = "Gruvbox Material (Gogh)"
 config.color_scheme_dirs = { "$HOME/.config/wezterm/colors" }
 -- Enable the scrollbar.
 -- It will occupy the right window padding space.
@@ -17,7 +19,7 @@ config.enable_scroll_bar = true
 config.exit_behavior = "Close" -- NOTE: this is now the default, remove?
 config.exit_behavior_messaging = "None"
 config.font = wezterm.font("JetBrains Mono")
-config.font_size = 16.0
+config.font_size = 14.0
 -- Enable various OpenType features
 -- See https://docs.microsoft.com/en-us/typography/opentype/spec/featurelist
 config.harfbuzz_features = {
@@ -33,9 +35,9 @@ config.keys = {
 	-- You won't see a difference in what is on screen, you just won't
 	-- be able to scroll back until you've output more stuff on screen.
 	-- This is the default behavior.
-	-- { key = "K", mods = "CTRL|SHIFT", action = act.ClearScrollback("ScrollbackOnly") },
+	-- { key = 'K', mods = 'CTRL|SHIFT', action = act.ClearScrollback('ScrollbackOnly') },
 	-- Clears the scrollback and viewport leaving the prompt line the new first line.
-	-- { key = "K", mods = "CTRL|SHIFT", action = act.ClearScrollback("ScrollbackAndViewport") },
+	-- { key = 'K', mods = 'CTRL|SHIFT', action = act.ClearScrollback('ScrollbackAndViewport') },
 	-- Clears the scrollback and viewport, and then sends CTRL-L to ask the
 	-- shell to redraw its prompt
 	{
@@ -94,5 +96,12 @@ config.ssh_domains = {
 }
 config.use_fancy_tab_bar = true
 config.window_close_confirmation = "NeverPrompt"
+
+wezterm.on("gui-startup", function(cmd)
+	local tab, pane, window = mux.spawn_window(cmd or {})
+	pane:split({ direction = "Bottom" })
+	pane:split({ direction = "Right" })
+	window:gui_window():maximize()
+end)
 
 return config

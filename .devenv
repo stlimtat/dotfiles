@@ -3,39 +3,49 @@
 # Android NDK Home
 export ANDROID_NDK_HOME="/usr/local/share/android-ndk"
 
-# Using colima
+# aws completer
 start_time=$(gdate +%s%3N)
-echo "Running colima...${start_time}ms"
-eval "$(colima completion zsh)"
+complete -C '/opt/homebrew/bin/aws_completer' aws
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
-echo "Running colima...${end_time}ms...${time_taken}ms...Done"
+echo "Load aws completion init...${time_taken}ms...Done"
+
+# Using colima
+start_time=$(gdate +%s%3N)
+source <($(colima completion zsh))
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Load colima...${time_taken}ms...Done"
 
 # Using docker
 start_time=$(gdate +%s%3N)
-echo "Running docker...${start_time}ms"
-eval "$(docker completion zsh)"
+source <($(docker completion zsh))
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
-echo "Running docker...${end_time}ms...${time_taken}ms...Done"
+echo "Load docker...${time_taken}ms...Done"
+
+# fzf-git
+start_time=$(gdate +%s%3N)
+source ${HOME}/.config/fzf-git.sh/fzf-git.sh
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Load fzf-git...${time_taken}ms...Done"
 
 # Using kubectl 
 start_time=$(gdate +%s%3N)
-echo "Running kubectl...${start_time}ms"
 eval "$(kubectl completion zsh)"
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
-echo "Running kubectl...${end_time}ms...${time_taken}ms...Done"
+echo "Load kubectl...${time_taken}ms...Done"
 
 # Using mise 
 start_time=$(gdate +%s%3N)
-echo "Running mise...${start_time}ms"
 eval "$(mise activate zsh)"
 eval "$(mise completion zsh)"
 eval "$(mise hook-env)"
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
-echo "Running mise...${end_time}ms...${time_taken}ms...Done"
+echo "Load mise...${time_taken}ms...Done"
 
 # For jediterm - intellij terminal
 if [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]; then
@@ -46,21 +56,20 @@ fi
 
 # Using go
 start_time=$(gdate +%s%3N)
-echo "Running go...${start_time}ms"
 export GOPATH=${HOME}/go
 [[ "$(echo ${PATH} | grep ${GOPATH})" == "" ]] && \
   export PATH=${GOPATH}/bin:${PATH}
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
-echo "Running go...${end_time}ms...${time_taken}ms...Done"
+echo "Load go...${time_taken}ms...Done"
 
 # For jediterm - intellij terminal
 # Using kubectl
 export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
 
-# aws-vault completion
-eval "$(aws-vault --completion-script-zsh)"
-export AWS_SESSION_TOKEN_TTL=6h
-export AWS_ASSUME_ROLE_TTL=6h
-export AWS_MIN_TTL=6h
-
+# zsh-git-prompt
+start_time=$(gdate +%s%3N)
+source /opt/homebrew/opt/zsh-git-prompt/zshrc.sh
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Load zsh-git-prompt...${time_taken}ms...Done"
