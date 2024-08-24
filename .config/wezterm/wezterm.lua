@@ -31,13 +31,8 @@ config.harfbuzz_features = {
 -- https://wezfurlong.org/wezterm/hyperlinks.html
 config.hyperlink_rules = wezterm.default_hyperlink_rules()
 config.keys = {
-	-- Clears only the scrollback and leaves the viewport intact.
-	-- You won't see a difference in what is on screen, you just won't
-	-- be able to scroll back until you've output more stuff on screen.
-	-- This is the default behavior.
-	-- { key = 'K', mods = 'CTRL|SHIFT', action = act.ClearScrollback('ScrollbackOnly') },
-	-- Clears the scrollback and viewport leaving the prompt line the new first line.
-	-- { key = 'K', mods = 'CTRL|SHIFT', action = act.ClearScrollback('ScrollbackAndViewport') },
+	-- activate pane selection mode with the default alphabet (labels are "a", "s", "d", "f" and so on)
+	{ key = "8", mods = "CTRL", action = act.PaneSelect },
 	-- Clears the scrollback and viewport, and then sends CTRL-L to ask the
 	-- shell to redraw its prompt
 	{
@@ -98,10 +93,12 @@ config.use_fancy_tab_bar = true
 config.window_close_confirmation = "NeverPrompt"
 
 wezterm.on("gui-startup", function(cmd)
-	local tab, pane, window = mux.spawn_window(cmd or {})
-	pane:split({ direction = "Bottom" })
-	pane:split({ direction = "Right" })
+	local tab, top_left_pane, window = mux.spawn_window(cmd or {})
+	local bottom_left_pane = top_left_pane:split({ direction = "Bottom" })
+	local top_right_pane = top_left_pane:split({ direction = "Right" })
+	local bottom_right_pane = bottom_left_pane:split({ direction = "Right" })
 	window:gui_window():maximize()
+	top_left_pane:activate()
 end)
 
 return config

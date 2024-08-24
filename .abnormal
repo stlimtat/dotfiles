@@ -2,20 +2,6 @@
 # .abnormal
 export SOURCE=${HOME}/dev/source
 
-# For astrovim or lazyvim
-if [[ -f "${HOME}/.config/nvim/config.ld" || -f "${HOME}/.config/nvim/lazy-lock.json" ]]; then
-  alias vim="PYTHONPATH=${SOURCE}/src/py:${SOURCE}/src/pytests:${SOURCE}/src/pytests/abnormal/test $(brew --prefix )/bin/nvim"
-fi
-
-# # Some abnormal security stuff
-alias airflow_worker_ips="aws ec2 describe-instances --filters Name=tag:Name,Values=airflow-worker-prod | jq -r '.Reservations[].Instances[].PrivateIpAddress' | sort "
-alias airflow_onboarding_worker_ips="aws ec2 describe-instances --filters Name=tag:Name,Values=airflow-worker-onboarding | jq -r '.Reservations[].Instances[].PrivateIpAddress' | sort"
-# change absec
-alias absec_legacy="export ABSEC_CLOUD=aws; export ABSEC_ENV=prod; export ABSEC_PART=management; export ABSEC_REGION=us-east-1"
-alias absec_test="export ABSEC_CLOUD=aws; export ABSEC_ENV=test; export ABSEC_PART=test; export ABSEC_REGION=us-east-2"
-alias absec_none="unset ABSEC_CLOUD ABSEC_ENV ABSEC_PART ABSEC_REGION"
-alias unset_absec="unset ABSEC_CLOUD ABSEC_ENV ABSEC_IDENTITY ABSEC_PART ABSEC_REGION"
-
 # Abnormal
 export ABNORMAL_USER=slim
 export ABSEC_CLOUD=aws
@@ -33,23 +19,39 @@ export STORAGE_ACCOUNT_URL="https://abnormaldataneu.blob.core.windows.net"
 export TERRAGRUNT_SOURCE_MAP="git::ssh://git@github.com/abnormal-security/infrastructure-modules.git=${HOME}/dev/infrastructure-modules"
 export TERRAGRUNT_SOURCE_UPDATE=true
 export VENV=${HOME}/dev/venv-next
+
+# copilot
 start_time=$(gdate +%s%3N)
-echo "Load copilot..."
 eval "$(gh copilot alias -- zsh)"
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load copilot...${time_taken}ms...Done"
+
+# abnormal/tools/bash/prelude
 start_time=$(gdate +%s%3N)
-echo "Load abnormal/tools/bash/prelude..."
 source ${SOURCE}/tools/bash/prelude.sh
+if [[ "$(python -c 'import sys;print(sys.version_info[:2])')" == "(3, 11)" ]]
+then 
+  echo "Load spark_home..."
+  export SPARK_HOME=${VENV}/lib/python3.11/site-packages/pyspark
+  export PATH=${SPARK_HOME}/bin:${PATH}
+fi
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load abnormal/tools/bash/prelude...${time_taken}ms...Done"
+
+# venv-activate
 start_time=$(gdate +%s%3N)
-echo "Load venv-activate......deactivate" && \
-  deactivate() 2>&1
-echo "Load venv-activate......activate" && \
+if [[ "$VIRTUAL_ENV" != "" ]]
+then
+  echo "Load venv-activate......deactivate"
+  deactivate 2>&1
+fi
+if [[ "$VIRTUAL_ENV" == "" ]]
+then
+  echo "Load venv-activate......activate"
   source ${SOURCE}/tools/dev/venv-activate 2>&1
+fi
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load venv-activate...${time_taken}ms...Done"
@@ -65,120 +67,3 @@ LD_LIBRARY_PATH=/usr/local/opt/openssl/lib:${LD_LIBRARY_PATH}
 CPATH=/usr/local/opt/openssl/include:${CPATH}
 PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig:${PKG_CONFIG_PATH}
 export LD_LIBRARY_PATH CPATH PKG_CONFIG_PATH
-
-
-function run_prod_proxy() {
-  declare -A ENV_MAP=( ["pmmt"]="pm" ["prod"]="p" ["test"]="t" ["tmmt"]="tm" )
-  declare -A ENV_PROFILE_MAP=( ["pmmt"]="absec-mgmt-dbadmin" ["prod"]="absec-prod-dbadmin" ["test"]="absec-test-dbadmin" ["tmmt"]="absec-mgmt-dbadmin" )
-  declare -A REGION_MAP=( ["usea1"]="us-east-1" ["usea2"]="us-east-2" ["euwe1"]="eu-west-1" )
-  ################################################################################
-  export CONTEXT=$(kubectl config view -o jsonpath='{range .contexts[*]}{.name}{"\n"}{end}' | fzf --header="Choose the correct kubecontext for the environment you are trying to access.")
-  MY_ENV=$(echo $CONTEXT | cut -f2 -d-)
-  MY_PRODUCT=$(ls $SOURCE/config/app | xargs basename | grep "^[a-z]" | sort | fzf --header="Pick the product")
-  MY_APP=$(ls $SOURCE/config/app/$MY_PRODUCT | xargs basename | grep "^[a-z]" | sort | fzf --header="Pick the app")
-  ################################################################################
-  export AWS_PROFILE=$ENV_PROFILE_MAP[$MY_ENV]
-  ENV_URL=$ENV_MAP[$MY_ENV]
-  NAMESPACE=${MY_PRODUCT}--${MY_APP}
-  REGION_SHORT=$(echo $CONTEXT | cut -f3 -d-)
-  export REGION=$REGION_MAP[$REGION_SHORT]
-  export RUN_MODE=inline
-  ################################################################################
-  ARN_ID=AbsecDBAdmin 
-  if [[ "$AWS_PROFILE" == "absec-mgmt-dbadmin" ]]
-  then 
-    echo "absec-mgmt-dbadmin"
-    export AWS_PROFILE=absec-mgmt-ops
-    ARN_ID=AbsecMgmtEngineerOps
-  fi
-  CALLER_IDENTITY=$(aws sts get-caller-identity)
-  LOGGED_IN_ARN=$( echo $CALLER_IDENTITY | grep $ARN_ID)
-  if [[ "$LOGGED_IN_ARN" == "" ]]; then 
-    aws sso login
-  fi
-  CALLER_IDENTITY=$(aws sts get-caller-identity)
-  CALLER_IDENTITY_ARN=$( echo $CALLER_IDENTITY | jq '.Arn')
-  echo $CALLER_IDENTITY_ARN
-  ################################################################################
-  AWS_RDS_DESCRIBE=$(aws rds --region $REGION describe-db-instances | jq -r ".DBInstances | .[] | select(.TagList.[].Value==\"$MY_PRODUCT\" and .TagList.[].Value==\"$MY_APP\")")
-  # echo "AWS_RDS_DESCRIBE=$AWS_RDS_DESCRIBE"
-  export TARGET=$(echo $AWS_RDS_DESCRIBE | jq -r "\"\(.Endpoint.Address):\(.Endpoint.Port)\"" | uniq | sort | fzf --header="Pick the RDS Host you want to connect to")
-  echo "TARGET=$TARGET"
-  export PGHOST=$(echo $TARGET | gawk -F: '{ print $1 }')
-  export PGPORT=$(echo $TARGET | gawk -F: '{ print $2 }')
-  export LOCAL_PORT=$PGPORT
-  echo "127.0.0.1 ro.db.${MY_APP}.${MY_PRODUCT}.${REGION_SHORT}.${ENV_URL}.abnml.io" | sudo tee -a /etc/hosts
-  echo "127.0.0.1 rw.db.${MY_APP}.${MY_PRODUCT}.${REGION_SHORT}.${ENV_URL}.abnml.io" | sudo tee -a /etc/hosts
-  prod-proxy start
-  sudo gsed '/r.\.db.*\.abnml\.io/d' -i /etc/hosts
-}
-
-alias pmmt_gmr_proxy='aws sso login -p absec-mgmt-dbadmin;sudo AWS_PROFILE=absec-mgmt-dbadmin CONTEXT=aw-pmmt-usea1-pmmt USER=operator prod-proxy inline rw.db.graymail-reports.email.usea1.pm.abnml.io:54320'
-alias prod_gmr_eu_proxy='aws sso login -p absec-prod-dbadmin;sudo AWS_PROFILE=absec-prod-dbadmin CONTEXT=aw-prod-euwe1-main USER=operator prod-proxy inline rw.db.graymail-reports.email.euwe1.p.abnml.io:54320'
-alias test_gmr_proxy='aws sso login -p absec-test-dbadmin;sudo AWS_PROFILE=absec-test-dbadmin CONTEXT=aw-test-usea2-main USER=operator prod-proxy inline rw.db.graymail-reports.email.usea2.t.abnml.io:54320'
-alias tmmt_gmr_proxy='aws sso login -p absec-mgmt-dbadmin;sudo AWS_PROFILE=absec-mgmt-dbadmin CONTEXT=aw-tmmt-usea1-tmmt USER=operator prod-proxy inline rw.db.graymail-reports.email.usea1.tm.abnml.io:54320'
-
-function connect_pgdb() {
-  declare -A ENV_MAP=( ["pmmt"]="pm" ["prod"]="p" ["test"]="t" ["tmmt"]="tm" )
-  declare -A ENV_PROFILE_MAP=( ["pmmt"]="absec-mgmt-dbadmin" ["prod"]="absec-prod-dbadmin" ["test"]="absec-test-dbadmin" ["tmmt"]="absec-mgmt-dbadmin" )
-  declare -A REGION_MAP=( ["usea1"]="us-east-1" ["usea2"]="us-east-2" ["euwe1"]="eu-west-1" )
-  ################################################################################
-  export CONTEXT=$(kubectl config view -o jsonpath='{range .contexts[*]}{.name}{"\n"}{end}' | fzf --header="Choose the correct kubecontext for the environment you are trying to access.")
-  MY_ENV=$(echo $CONTEXT | cut -f2 -d-)
-  MY_PRODUCT=$(ls $SOURCE/config/app | xargs basename | grep "^[a-z]" | sort | fzf --header="Pick the product")
-  MY_APP=$(ls $SOURCE/config/app/$MY_PRODUCT | xargs basename | grep "^[a-z]" | sort | fzf --header="Pick the app")
-  ################################################################################
-  export AWS_PROFILE=$ENV_PROFILE_MAP[$MY_ENV]
-  ENV_URL=$ENV_MAP[$MY_ENV]
-  NAMESPACE=${MY_PRODUCT}--${MY_APP}
-  export PGSSLMODE=verify-ca
-  export PGSSLROOTCERT=$HOME/.postgresql/root.crt
-  # export PGUSER=$(echo "operator\nplatformadmin\nadmin\nrw\nro" | fzf  --header="Pick a user.")
-  export PGUSER=operator
-  REGION_SHORT=$(echo $CONTEXT | cut -f3 -d-)
-  export REGION=$REGION_MAP[$REGION_SHORT]
-  ################################################################################
-  # Assumes that you are logged in as db admin on sso if there is something in ~/.aws/cli/cache/
-  ARN_ID=AbsecDBAdmin 
-  if [[ "$AWS_PROFILE" == "absec-mgmt-dbadmin" ]]
-  then 
-    echo "absec-mgmt-dbadmin"
-    export AWS_PROFILE=absec-mgmt-ops
-    ARN_ID=AbsecMgmtEngineerOps
-  fi
-  CALLER_IDENTITY=$(aws sts get-caller-identity)
-  LOGGED_IN_ARN=$( echo $CALLER_IDENTITY | grep $ARN_ID)
-  if [[ "$LOGGED_IN_ARN" == "" ]]; then 
-    aws sso login
-  fi
-  CALLER_IDENTITY=$(aws sts get-caller-identity)
-  ABNORMAL_USER=$(echo $CALLER_IDENTITY | jq -r '.UserId' | cut -f2 -d ':' | cut -f1 -d '@')
-  export ABSEC_IDENTITY=aid://user/$ABNORMAL_USER
-  AWS_RDS_DESCRIBE=$(aws rds --region $REGION describe-db-instances | jq -r ".DBInstances | .[] | select(.TagList.[].Value==\"$MY_PRODUCT\" and .TagList.[].Value==\"$MY_APP\")")
-  # echo "AWS_RDS_DESCRIBE=$AWS_RDS_DESCRIBE"
-  TARGET=$(echo $AWS_RDS_DESCRIBE | jq -r "\"\(.Endpoint.Address):\(.Endpoint.Port)\"" | uniq | sort | fzf --header="Pick the RDS Host you want to connect to")
-  echo "TARGET=$TARGET"
-  export PGHOST=$(echo $TARGET | gawk -F: '{ print $1 }')
-  export PGPORT=$(echo $TARGET | gawk -F: '{ print $2 }')
-  export PGDATABASE=$(echo $AWS_RDS_DESCRIBE | jq -r '.DBName' | uniq | sort | fzf --header "Pick the database name. (This information was picked out from the application name. Please contact #pi-data-platform if this doesnt correspond.")
-  ABDJANGO_ENV=$( if [[ "$MY_ENV" == "tmmt" ]]; then echo "test"; elif [[ "$MY_ENV" == "pmmt" ]]; then echo "prod"; else echo $MY_ENV; fi)
-  ABDJANGO_USER=$( if [[ "$PGUSER" == "rw" ]]; then echo "writer"; elif [[ "$PGUSER" == "operator" ]]; then echo "operator"; else echo "reader"; fi)
-  unset ABSEC_CLOUD ABSEC_ENV ABSEC_PART ABSEC_REGION
-  if [[ "$MY_ENV" == "tmmt" || "$MY_ENV" == "pmmt" ]]; then 
-    echo abdjango showconnectioninfo --env $ABDJANGO_ENV --cloud aws --region $REGION --partition management --product $MY_PRODUCT --application $MY_APP --component db --user $ABDJANGO_USER
-    abdjango showconnectioninfo --env $ABDJANGO_ENV --cloud aws --region $REGION --partition management --product $MY_PRODUCT --application $MY_APP --component db --user $ABDJANGO_USER
-  else
-    echo abdjango showconnectioninfo --env $ABDJANGO_ENV --cloud aws --region $REGION --product $MY_PRODUCT --application $MY_APP --component db --user $ABDJANGO_USER
-    abdjango showconnectioninfo --env $ABDJANGO_ENV --cloud aws --region $REGION --product $MY_PRODUCT --application $MY_APP --component db --user $ABDJANGO_USER
-  fi
-  export PGPASSWORD="$(aws rds generate-db-auth-token --hostname $PGHOST --port $PGPORT --region $REGION --username $PGUSER)"
-  export DATABASE_URL="postgres://$PGUSER:$(python -c 'import urllib.parse; import os; print(urllib.parse.quote_plus(os.environ["PGPASSWORD"]));')@$PGHOST:$PGPORT/$PGDATABASE"
-  read
-  psql
-}
-
-function connect_kafka() {
-  export MSK_ARN=$(aws kafka list-clusters | jq --raw-output ".ClusterInfoList | .[] | .ClusterArn" | fzf)
-  export KAFKA_BOOTSTRAP_BROKER=$(aws kafka get-bootstrap-brokers --cluster-arn $MSK_ARN --query BootstrapBrokerStringTls --output text | cut -d, -f1)
-  export KAFKA_CLUSTER=(--command-config "${HOME}/.config/kafka/client.properties" --bootstrap-server "${KAFKA_BOOTSTRAP_BROKER}")
-}

@@ -19,26 +19,32 @@ COMPLETION_WAITING_DOTS=true
 HIST_STAMPS="yyyy-mm-dd"
 HYPHEN_INSENSITIVE="true"
 zstyle ':omz:update' mode auto
-# ~/.oh-my-zsh/plugins/tmux/README.md
-export ZSH_TMUX_AUTOSTART=true
-export ZSH_TMUX_AUTOSTART_ONCE=true
-export ZSH_TMUX_AUTOCONNECT=true
-export ZSH_TMUX_AUTOQUIT=ZSH_TMUX_AUTOSTART
-export ZSH_TMUX_ITERM2=true
-export ZSH_TMUX_FIXTERM_WITH_256COLOR="screen-256color"
-export ZSH_TMUX_UNICODE=true
+# ~/.oh-my-zsh/plugins/docker/README.md
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
+# ~/.oh-my-zsh/plugins/eza/README.md
+zstyle ':omz:plugins:eza' 'dirs-first' yes
+zstyle ':omz:plugins:eza' 'git-status' yes
+zstyle ':omz:plugins:eza' 'header' yes
+zstyle ':omz:plugins:eza' 'hyperlink' yes
+zstyle ':omz:plugins:eza' 'icons' yes
+# ~/.oh-my-zsh/plugins/fzf/README.md
+export FZF=$(brew --prefix)/bin/fzf
 # ~/.oh-my-zsh/plugins
 plugins=(
   colored-man-pages
   docker
-  docker-compose
-  gh
-  golang
-  helm
+  eza
+  fzf
 )
 
 # ~/.oh-my-zsh
 start_time=$(gdate +%s%3N)
+FPATH=/usr/share/zsh/$(zsh --version | awk '{ print $2 }')/functions
+FPATH=/usr/share/zsh/site-functions:${FPATH}
+FPATH=/usr/local/share/zsh/site-functions:${FPATH}
+FPATH=$(brew --prefix)/share/zsh/site-functions:${FPATH}
+FPATH=$(brew --prefix)/share/zsh-completions:${FPATH}
 source ${ZSH}/oh-my-zsh.sh
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
@@ -47,7 +53,7 @@ echo "Load oh-my-zsh...${time_taken}ms...Done"
 # powerlevel10k
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 start_time=$(gdate +%s%3N)
-source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 # ZSH_THEME="powerlevel10k/powerlevel10k"
 [[ ! -f ${HOME}/.p10k.zsh ]] || source ${HOME}/.p10k.zsh
 end_time=$(gdate +%s%3N)
@@ -56,20 +62,19 @@ echo "Load powerlevel10k...${time_taken}ms...Done"
 
 # compinit
 start_time=$(gdate +%s%3N)
-fpath+=$(brew --prefix)/share/zsh-completions
 rm -f ~/.zcompdump*
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load completion init...${time_taken}ms...Done"
-for file in ${HOME}/.{aliases,devenv,exports,extra,functions,path,tokens,abnormal}; do
+for file in ${HOME}/.{aliases,devenv,exports,extra,functions,path,tokens,abnormal,ab-alias,ab-fn}; do
   # files
   start_time=$(gdate +%s%3N)
   [[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
   end_time=$(gdate +%s%3N)
   time_taken=$((end_time - start_time))
-  echo "Loading $file...${time_taken}ms...Done"
+  echo "Load $file...${time_taken}ms...Done"
 done
 unset file
 
@@ -108,25 +113,22 @@ echo "Load wezterm...${time_taken}ms...Done"
 
 # zsh-autosuggestions
 start_time=$(gdate +%s%3N)
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load zsh-autosuggestions...${time_taken}ms...Done"
 
 # zsh-syntax-highlighting
 start_time=$(gdate +%s%3N)
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=$(brew --prefix)/share/zsh-syntax-highlighting/highlighters
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load zsh-syntax-highlighting...${time_taken}ms...Done"
 
 # zsh-vi-mode
 start_time=$(gdate +%s%3N)
-source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load zsh-vi-mode...${time_taken}ms...Done"
-# Removing a key binding - fzf-git
-bindkey -r "^G"
-bindkey -r "^G"

@@ -16,6 +16,7 @@ brew 'eza' # Replaces ls - so much better
 brew 'findutils'
 brew 'fzf'
 brew 'git'
+brew 'git-lfed'
 brew 'git-lfs'
 brew 'gnu-sed'
 brew 'grep'
@@ -26,8 +27,11 @@ brew 'nmap'
 brew 'mas' # Mac App Store manager
 brew 'p7zip'
 brew 'powerlevel10k'
+brew 'ripgrep'
 brew 'ssh-copy-id'
 brew 'the_silver_searcher' # Needed for fzf for vim
+brew 'tree'
+brew 'usage'
 brew 'zsh-autosuggestions'
 brew 'zsh-completions'
 brew 'zsh-syntax-highlighting'
@@ -36,6 +40,7 @@ brew 'zsh-vi-mode'
 # Apps
 cask '1password'
 cask '1password-cli'
+cask 'bit-slicer'
 cask 'brave-browser'
 cask 'caldigit-docking-utility'
 cask 'caldigit-thunderbolt-charging'
@@ -85,3 +90,49 @@ cask 'font-microsoft-office'
 # Mac App Store
 mas 'Keynote', id: 409183694
 mas 'Numbers', id: 409203825
+
+
+yq
+z3
+zbar
+zookeeper
+zsh-autosuggestions
+zsh-completions
+zsh-syntax-highlighting
+zsh-vi-mode
+zstd
+1password
+1password-cli
+amazon-chime
+bit-slicer
+brave-browser
+caldigit-docking-utility
+caldigit-thunderbolt-charging
+chromedriver
+ferdium
+font-arial
+font-jetbrains-mono-nerd-font
+font-meslo-lg-nerd-font
+font-microsoft-office
+freetube
+gimp
+goland
+imhex
+karabiner-elements
+keka
+kekaexternalhelper
+keycastr
+logitech-camera-settings
+porting-kit
+qmk-toolbox
+rar
+rectangle
+retroarch
+stats
+temurin8
+temurin@8
+vial
+visual-studio-code
+vlc
+wezterm
+zoom
