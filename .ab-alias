@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+# # Some abnormal security stuff
+alias airflow_worker_ips="aws ec2 describe-instances --filters Name=tag:Name,Values=airflow-worker-prod | jq -r '.Reservations[].Instances[].PrivateIpAddress' | sort "
+alias airflow_onboarding_worker_ips="aws ec2 describe-instances --filters Name=tag:Name,Values=airflow-worker-onboarding | jq -r '.Reservations[].Instances[].PrivateIpAddress' | sort"
+# change absec
+alias absec_legacy="export ABSEC_CLOUD=aws; export ABSEC_ENV=prod; export ABSEC_PART=management; export ABSEC_REGION=us-east-1"
+alias absec_test="export ABSEC_CLOUD=aws; export ABSEC_ENV=test; export ABSEC_PART=test; export ABSEC_REGION=us-east-2"
+alias absec_none="unset ABSEC_CLOUD ABSEC_ENV ABSEC_PART ABSEC_REGION"
+alias unset_absec="unset ABSEC_CLOUD ABSEC_ENV ABSEC_IDENTITY ABSEC_PART ABSEC_REGION"
+# Unwanted Mail env
+export UNWANTEDMAIL_SERVICE_ENV=staging
+export HOSTING_DOMAIN=aws
+export KAFKA_CACERT_PATH=$VENV/lib/python3.8/site-packages/certifi/cacert.pem
+
+alias pmmt_gmr_proxy='aws sso login -p absec-mgmt-dbadmin;sudo AWS_PROFILE=absec-mgmt-dbadmin CONTEXT=aw-pmmt-usea1-pmmt USER=operator prod-proxy inline rw.db.graymail-reports.email.usea1.pm.abnml.io:54320'
+alias prod_gmr_eu_proxy='aws sso login -p absec-prod-dbadmin;sudo AWS_PROFILE=absec-prod-dbadmin CONTEXT=aw-prod-euwe1-main USER=operator prod-proxy inline rw.db.graymail-reports.email.euwe1.p.abnml.io:54320'
+alias test_gmr_proxy='aws sso login -p absec-test-dbadmin;sudo AWS_PROFILE=absec-test-dbadmin CONTEXT=aw-test-usea2-main USER=operator prod-proxy inline rw.db.graymail-reports.email.usea2.t.abnml.io:54320'
+alias tmmt_gmr_proxy='aws sso login -p absec-mgmt-dbadmin;sudo AWS_PROFILE=absec-mgmt-dbadmin CONTEXT=aw-tmmt-usea1-tmmt USER=operator prod-proxy inline rw.db.graymail-reports.email.usea1.tm.abnml.io:54320'
+
