@@ -28,8 +28,16 @@ set relativenumber
 set ideajoin
 set ideastatusicon=gray
 set idearefactormode=keep
+" let g:EasyMotion_override_acejump = 0
 
 """ Mappings --------------------------------
+" " Press `f` to activate AceJump
+" map f <Action>(AceAction)
+" " Press `F` to activate Target Mode
+" map F <Action>(AceTargetAction)
+" " Press `g` to activate Line Mode
+" map g <Action>(AceLineAction)
+
 map <leader>f <Plug>(easymotion-s)
 map <leader>e <Plug>(easymotion-f)
 

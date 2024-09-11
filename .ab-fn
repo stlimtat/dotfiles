@@ -9,6 +9,7 @@ function run_prod_proxy() {
   MY_ENV=$(echo $CONTEXT | cut -f2 -d-)
   MY_PRODUCT=$(ls $SOURCE/config/app | xargs basename | grep "^[a-z]" | sort | fzf --header="Pick the product")
   MY_APP=$(ls $SOURCE/config/app/$MY_PRODUCT | xargs basename | grep "^[a-z]" | sort | fzf --header="Pick the app")
+  # DB_COMPONENT=$(cat $SOURCE/config/app/$MY_PRODUCT/$MY_APP/manifest.yaml | yq '(.components.[] | select(.component == "rdb") | key)' | sort | fzf --header="Pick the db")
   ################################################################################
   export AWS_PROFILE=$ENV_PROFILE_MAP[$MY_ENV]
   ENV_URL=$ENV_MAP[$MY_ENV]
@@ -46,7 +47,7 @@ function run_prod_proxy() {
   sudo gsed '/r.\.db.*\.abnml\.io/d' -i /etc/hosts
 }
 
-function connect_pgdb() {
+function abpsql() {
   declare -A ENV_MAP=( ["pmmt"]="pm" ["prod"]="p" ["test"]="t" ["tmmt"]="tm" )
   declare -A ENV_PROFILE_MAP=( ["pmmt"]="absec-mgmt-dbadmin" ["prod"]="absec-prod-dbadmin" ["test"]="absec-test-dbadmin" ["tmmt"]="absec-mgmt-dbadmin" )
   declare -A REGION_MAP=( ["usea1"]="us-east-1" ["usea2"]="us-east-2" ["euwe1"]="eu-west-1" )
@@ -55,6 +56,7 @@ function connect_pgdb() {
   MY_ENV=$(echo $CONTEXT | cut -f2 -d-)
   MY_PRODUCT=$(ls $SOURCE/config/app | xargs basename | grep "^[a-z]" | sort | fzf --header="Pick the product")
   MY_APP=$(ls $SOURCE/config/app/$MY_PRODUCT | xargs basename | grep "^[a-z]" | sort | fzf --header="Pick the app")
+  # DB_COMPONENTS=$(cat $SOURCE/config/app/$MY_PRODUCT/$MY_APP/manifest.yaml | yq '(.components.[] | select(.component == "rdb") | key)' | sort | fzf --header="Pick the db")
   ################################################################################
   export AWS_PROFILE=$ENV_PROFILE_MAP[$MY_ENV]
   ENV_URL=$ENV_MAP[$MY_ENV]
@@ -105,8 +107,46 @@ function connect_pgdb() {
   psql
 }
 
-function connect_kafka() {
+function abkafka() {
   export MSK_ARN=$(aws kafka list-clusters | jq --raw-output ".ClusterInfoList | .[] | .ClusterArn" | fzf)
   export KAFKA_BOOTSTRAP_BROKER=$(aws kafka get-bootstrap-brokers --cluster-arn $MSK_ARN --query BootstrapBrokerStringTls --output text | cut -d, -f1)
   export KAFKA_CLUSTER=(--command-config "${HOME}/.config/kafka/client.properties" --bootstrap-server "${KAFKA_BOOTSTRAP_BROKER}")
 }
+
+function ab_apps() {
+  set -o shwordsplit
+  result=""
+  for product in "email"; do
+    MY_APPS=$(ls $SOURCE/config/app/$product | xargs basename | grep "^[a-z]" | grep "graymail" | sort)
+    for app in ${MY_APPS[@]}; do
+      MY_COMPONENTS=$(cat $SOURCE/config/app/$product/$app/manifest.yaml | yq '(.services.[] | key), (.components.[] | key)')
+      for component in ${MY_COMPONENTS[@]}; do
+        echo "$product.$app.$component"
+        result="$result $product.$app.$component"
+      done
+    done
+  done
+}
+
+function ab_cost_components() {
+  set -o shwordsplit
+  result=""
+  for product in "email"; do
+    MY_APPS=$(ls $SOURCE/config/app/$product | xargs basename | grep "^[a-z]" | grep "graymail" | sort)
+    for app in ${MY_APPS[@]}; do
+      MY_COMPONENTS=$(cat $SOURCE/config/app/$product/$app/manifest.yaml | yq '(.services.[] | key), (.components.[] | key)')
+      for component in ${MY_COMPONENTS[@]}; do
+        result="$result%22%2C%22$product.$app.$component"
+      done
+    done
+  done
+  result="$result%22%2C%22graymail"
+  result="$result%22%2C%22graymail-dev"
+  result="$result%22%2C%22graymail-prod"
+  result="$result%22%2C%22unwanted-mail"
+  result="$result%22%2C%22unwanted-mail-prod"
+  result="$result%22%2C%22unwanted-mail-staging"
+  result="%5B%22$result%22%5D"
+  echo $result
+}
+

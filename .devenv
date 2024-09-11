@@ -1,4 +1,12 @@
 #!/bin/zsh
+# mise
+start_time=$(gdate +%s%3N)
+eval "$(mise activate zsh)"
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Load mise...${time_taken}ms...Done"
+
+
 # For jediterm - intellij terminal
 if [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]; then
   export ZSH_TMUX_AUTOSTART=true
