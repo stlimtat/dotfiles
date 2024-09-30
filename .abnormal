@@ -18,7 +18,8 @@ export PKG_CONFIG_PATH=$(brew --prefix openssl@1.1)/lib/pkgconfig
 export STORAGE_ACCOUNT_URL="https://abnormaldataneu.blob.core.windows.net"
 export TERRAGRUNT_SOURCE_MAP="git::ssh://git@github.com/abnormal-security/infrastructure-modules.git=${HOME}/dev/infrastructure-modules"
 export TERRAGRUNT_SOURCE_UPDATE=true
-export VENV=${HOME}/dev/venv-next
+export VENV=${HOME}/dev/venv-3.11
+export PYSPARK_PYTHON=${VENV}
 
 # copilot
 start_time=$(gdate +%s%3N)

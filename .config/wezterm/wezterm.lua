@@ -29,7 +29,62 @@ config.harfbuzz_features = {
 	"clig", -- (default) contextual ligatures
 }
 -- https://wezfurlong.org/wezterm/hyperlinks.html
-config.hyperlink_rules = wezterm.default_hyperlink_rules()
+-- config.hyperlink_rules = wezterm.default_hyperlink_rules()
+config.hyperlink_rules = {
+	-- Matches: a URL in parens: (URL)
+	{
+		regex = "\\((\\w+://\\S+)\\)",
+		format = "$1",
+		highlight = 1,
+	},
+	-- Matches: a URL in brackets: [URL]
+	{
+		regex = "\\[(\\w+://\\S+)\\]",
+		format = "$1",
+		highlight = 1,
+	},
+	-- Matches: a URL in curly braces: {URL}
+	{
+		regex = "\\{(\\w+://\\S+)\\}",
+		format = "$1",
+		highlight = 1,
+	},
+	-- Matches: a URL in angle brackets: <URL>
+	{
+		regex = "<(\\w+://\\S+)>",
+		format = "$1",
+		highlight = 1,
+	},
+	-- Then handle URLs not wrapped in brackets
+	{
+		regex = "\\b\\w+://\\S+[)/a-zA-Z0-9-]+",
+		format = "$0",
+	},
+	-- make username/pr/xxx paths clickable
+	-- {
+	-- 	regex = "(assweet/pr/){1}([-\\w\\d\\.]+)",
+	-- 	format = "https://github.com/abnormal-security/source/tree/$0",
+	-- },
+	-- implicit mailto link
+	-- {
+	--   regex = '\\b\\w+@[\\w-]+(\\.[\\w-]+)+\\b',
+	--   format = 'mailto:$0',
+	-- },
+	-- make username/project paths clickable. this implies paths like the following are for github.
+	-- ( "nvim-treesitter/nvim-treesitter" | wbthomason/packer.nvim | wez/wezterm | "wez/wezterm.git" )
+	-- as long as a full url hyperlink regex exists above this it should not match a full url to
+	-- github or gitlab / bitbucket (i.e. https://gitlab.com/user/project.git is still a whole clickable url)
+	-- {
+	-- 	regex = [[["]?([\w\d]{1}[-\w\d]+)(/){1}([-\w\d\.]+)["]?]],
+	-- 	format = "https://www.github.com/$1/$3",
+	-- },
+	-- make task numbers clickable
+	-- the first matched regex group is captured in $1.
+	{
+		regex = "\\b(ARN|GRML)-\\d+\\b",
+		format = "https://abnormalsecurity.atlassian.net/browse/$0",
+	},
+}
 config.keys = {
 	-- activate pane selection mode with the default alphabet (labels are "a", "s", "d", "f" and so on)
 	{ key = "8", mods = "CTRL", action = act.PaneSelect },

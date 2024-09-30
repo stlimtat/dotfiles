@@ -47,7 +47,7 @@ function run_prod_proxy() {
   sudo gsed '/r.\.db.*\.abnml\.io/d' -i /etc/hosts
 }
 
-function abpsql() {
+function ab_connect() {
   declare -A ENV_MAP=( ["pmmt"]="pm" ["prod"]="p" ["test"]="t" ["tmmt"]="tm" )
   declare -A ENV_PROFILE_MAP=( ["pmmt"]="absec-mgmt-dbadmin" ["prod"]="absec-prod-dbadmin" ["test"]="absec-test-dbadmin" ["tmmt"]="absec-mgmt-dbadmin" )
   declare -A REGION_MAP=( ["usea1"]="us-east-1" ["usea2"]="us-east-2" ["euwe1"]="eu-west-1" )
@@ -103,8 +103,16 @@ function abpsql() {
   fi
   export PGPASSWORD="$(aws rds generate-db-auth-token --hostname $PGHOST --port $PGPORT --region $REGION --username $PGUSER)"
   export DATABASE_URL="postgres://$PGUSER:$(python -c 'import urllib.parse; import os; print(urllib.parse.quote_plus(os.environ["PGPASSWORD"]));')@$PGHOST:$PGPORT/$PGDATABASE"
-  read
+}
+
+function abpsql() {
+  ab_connect
   psql
+}
+
+function abdbui() {
+  ab_connect
+  vim +DBUI
 }
 
 function abkafka() {
