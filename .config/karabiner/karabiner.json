@@ -3,7 +3,7 @@
         {
             "complex_modifications": {
                 "parameters": {
-                    "basic.simultaneous_threshold_milliseconds": 100,
+                    "basic.simultaneous_threshold_milliseconds": 200,
                     "basic.to_delayed_action_delay_milliseconds": 100,
                     "basic.to_if_alone_timeout_milliseconds": 150,
                     "basic.to_if_held_down_threshold_milliseconds": 100
@@ -1320,7 +1320,10 @@
             "name": "Default profile",
             "parameters": { "delay_milliseconds_before_open_device": 1500 },
             "selected": true,
-            "virtual_hid_keyboard": { "mouse_key_xy_scale": 150 }
+            "virtual_hid_keyboard": {
+                "keyboard_type_v2": "ansi",
+                "mouse_key_xy_scale": 150
+            }
         }
     ]
 }

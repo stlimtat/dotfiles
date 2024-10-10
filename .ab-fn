@@ -63,8 +63,8 @@ function ab_connect() {
   NAMESPACE=${MY_PRODUCT}--${MY_APP}
   export PGSSLMODE=verify-ca
   export PGSSLROOTCERT=$HOME/.postgresql/root.crt
-  # export PGUSER=$(echo "operator\nplatformadmin\nadmin\nrw\nro" | fzf  --header="Pick a user.")
-  export PGUSER=operator
+  export PGUSER=$(echo "operator\nplatformadmin\nadmin\nrw\nro" | fzf  --header="Pick a user.")
+  # export PGUSER=operator
   REGION_SHORT=$(echo $CONTEXT | cut -f3 -d-)
   export REGION=$REGION_MAP[$REGION_SHORT]
   ################################################################################
