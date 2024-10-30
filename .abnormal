@@ -14,6 +14,12 @@ export GOFLAGS="-tags=dynamic"
 # Stop Terraform from barfing on ARM Macbooks
 export GODEBUG=asyncpreemptoff=1
 export MTLS_HOME=${HOME}/.mtls/user
+export PGDATABASE=graymail
+export PGHOST=127.0.0.1
+export PGPASSWORD=password
+export PGPORT=5432
+unset PGSSLMODE
+export PGUSER=postgres
 export PKG_CONFIG_PATH=$(brew --prefix openssl@1.1)/lib/pkgconfig
 export STORAGE_ACCOUNT_URL="https://abnormaldataneu.blob.core.windows.net"
 export TERRAGRUNT_SOURCE_MAP="git::ssh://git@github.com/abnormal-security/infrastructure-modules.git=${HOME}/dev/infrastructure-modules"
