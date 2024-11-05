@@ -2,15 +2,13 @@
 tap 'adoptopenjdk/openjdk'
 tap 'aws/tap'
 tap 'golangci/tap'
-tap 'homebrew/cask-versions'
 tap 'mongodb/brew'
 tap 'neovim/neovim'
 tap 'nicoverbruggen/homebrew-cask'
-tap 'syncdk/aws-session-manager-plugin'
 
 # Binaries
-brew 'aws-session-manager-plugin'
 brew 'awscli'
+brew 'bat'
 brew 'gnupg'
 brew 'mise'
 brew 'neovim'
@@ -24,7 +22,6 @@ brew 'usage'
 
 # Development
 brew 'bazelisk'
-brew 'cargo'
 brew 'colima' # docker replacement
 brew 'composer'
 brew 'docker' # docker replacement
@@ -43,7 +40,6 @@ brew 'imagemagick'
 brew 'jq'
 brew 'k9s'
 brew 'kcat'
-brew 'keycastr'
 brew 'lazygit'
 brew 'luarocks' # for lua on vim
 brew 'markdownlint-cli' # for markdown for vim
@@ -57,7 +53,7 @@ brew 'yq'
 # cask 'firefox'
 # cask 'google-chrome'
 # cask 'postman'
-cask 'temurin8'
+# cask 'temurin8'
 cask 'goland'
 # cask 'pycharm-ce'
 cask 'visual-studio-code'

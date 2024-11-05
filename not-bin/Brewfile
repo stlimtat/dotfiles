@@ -1,10 +1,6 @@
 #kekaexternalhelper Taps
 tap 'colindean/fonts-nonfree'
 tap 'homebrew/bundle'
-tap 'homebrew/cask'
-tap 'homebrew/cask-drivers'
-tap 'homebrew/cask-fonts'
-tap 'homebrew/core'
 tap 'homebrew/services'
 
 # Binaries
@@ -16,7 +12,6 @@ brew 'eza' # Replaces ls - so much better
 brew 'findutils'
 brew 'fzf'
 brew 'git'
-brew 'git-lfed'
 brew 'git-lfs'
 brew 'gnu-sed'
 brew 'grep'
@@ -42,16 +37,12 @@ cask '1password'
 cask '1password-cli'
 cask 'bit-slicer'
 cask 'brave-browser'
-cask 'caldigit-docking-utility'
-cask 'caldigit-thunderbolt-charging'
 cask 'ferdium'
 cask 'freetube'
 cask 'gimp'
-cask 'karabiner-elements'
 cask 'keka'
 cask 'kekaexternalhelper'
 cask 'keycastr'
-cask 'logitech-camera-settings'
 # cask 'onyx'
 cask 'rar'
 cask 'rectangle'
@@ -61,6 +52,11 @@ cask 'tunnelblick'
 cask 'vial'
 cask 'vlc'
 cask 'wezterm'
+# Apps that need passwords
+cask 'caldigit-docking-utility'
+cask 'caldigit-thunderbolt-charging'
+cask 'karabiner-elements'
+cask 'logitech-camera-settings'
 cask 'zoom'
 
 # Games
@@ -90,49 +86,3 @@ cask 'font-microsoft-office'
 # Mac App Store
 mas 'Keynote', id: 409183694
 mas 'Numbers', id: 409203825
-
-
-yq
-z3
-zbar
-zookeeper
-zsh-autosuggestions
-zsh-completions
-zsh-syntax-highlighting
-zsh-vi-mode
-zstd
-1password
-1password-cli
-amazon-chime
-bit-slicer
-brave-browser
-caldigit-docking-utility
-caldigit-thunderbolt-charging
-chromedriver
-ferdium
-font-arial
-font-jetbrains-mono-nerd-font
-font-meslo-lg-nerd-font
-font-microsoft-office
-freetube
-gimp
-goland
-imhex
-karabiner-elements
-keka
-kekaexternalhelper
-keycastr
-logitech-camera-settings
-porting-kit
-qmk-toolbox
-rar
-rectangle
-retroarch
-stats
-temurin8
-temurin@8
-vial
-visual-studio-code
-vlc
-wezterm
-zoom
