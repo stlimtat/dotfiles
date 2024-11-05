@@ -49,9 +49,7 @@
   # outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)043k43k
   ui = auto
 [commit]
-  # https://help.github.com/articles/signing-commits-using-gpg/
-  gpgsign = false
-  # template = /Users/st_lim/.gitmsg.txt
+  gpgsign = true
 [delta]
   features = mellow-barbet
   hyperlinks = true
@@ -67,6 +65,10 @@
 [diff "bin"]
   # Use `hexdump` to diff binary files
   textconv = hexdump -v -C
+[gpg]
+  format = ssh
+[gpg "ssh"]
+  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 [help]
   # Automatically correct and execute mistyped commands
   autocorrect = 1
@@ -86,7 +88,6 @@
   autoSetupRemote = true
 # URL shorthands
 [url "git@github.com:"]
-    # Personal Access Token - ff400df05163d1969c39696cc5caf1b852cb64e9
   insteadOf = "gh:"
   pushInsteadOf = "github:"
   pushInsteadOf = "git://github.com/"
@@ -100,16 +101,13 @@
   insteadOf = "gist:"
 [user]
 	name = Lim Swee Tat
-	email = slim@abnormalsecurity.com
-	signingkey = EE1EF39C32152053
+	email = st_lim@stlim.net
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICctnX6mOVCS+cXO2KdPDqgck1bUv4zEekbcDrxOzD9q
 [credential]
   helper = osxkeychain
 [pull]
   # ff = true
   rebase = true
-[gpg]
-  program = smimesign
-  format = x509
 [filter "lfs"]
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
