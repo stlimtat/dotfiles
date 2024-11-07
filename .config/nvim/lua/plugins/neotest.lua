@@ -1,5 +1,6 @@
 -- Additional Plugins
 return {
+  { "nvim-neotest/nvim-nio" },
   { "nvim-neotest/neotest-go" },
   { "nvim-neotest/neotest-jest" },
   { "nvim-neotest/neotest-python" },

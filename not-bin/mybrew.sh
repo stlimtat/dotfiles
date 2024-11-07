@@ -88,27 +88,10 @@ pushd ${DOTFILES_DIR}
     #
     # Install fzf
     [[ -f "$(brew --prefix)/opt/fzf/install" ]] && $(brew --prefix)/opt/fzf/install
-    if [[ -f "${HOMEBREW_DIR}/bin/rtx" ]]; then
+    if [[ -f "${HOMEBREW_DIR}/bin/mise" ]]; then
       #
-      # rtx is a tool for managing runtime versions. https://github.com/jdxcode/rtx
-      rtx plugin add golang
-      rtx plugin add nodejs 
-      rtx plugin add terraform
-      rtx plugin add terragrunt
-      #
-      # nodejs
-      # https://github.com/pyenv/pyenv
-      rtx install nodejs@latest
-      rtx global nodejs@latest
-      mkdir ${HOME}/.npm-global
-      npm config set prefix "${HOME}/.npm-global"
-      export PATH=${HOME}/.npm-global/bin:$PATH
-      #
-      # python
-      # https://github.com/pyenv/pyenv
-      rtx install python@3.8.10
-      rtx install python@3.11
-      rtx global python latest
+      # mise is a replacement for asdf
+      mise add golang
     fi
     #
     # Lazyvim
@@ -120,16 +103,6 @@ pushd ${DOTFILES_DIR}
       fi
       git clone https://github.com/LazyVim/starter ${HOME}/.config/nvim
       rsync -ar --progress --partial ${DOTFILES_DIR}/.config/nvim/ ${HOME}/.config/nvim/
-    fi
-    #
-    # Abnormal
-    # Ssm
-    if [[ ! -d /usr/local/sessionmanagerplugin ]]; then
-      curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/mac_arm64/sessionmanager-bundle.zip" -o "sessionmanager-bundle.zip"
-      unzip sessionmanager-bundle.zip
-      pushd sessionmanager-bundle
-        sudo ./install -i /usr/local/sessionmanagerplugin -b /opt/homebrew/bin/session-manager-plugin
-      popd
     fi
     #
     # Abnormal
@@ -145,19 +118,6 @@ pushd ${DOTFILES_DIR}
         echo "We need to already have a valid ssh key installed in ssh"
         cat ${HOME}/id_ed25519.pub
         read
-        brew tap \
-          abnormal-security/abnormal \
-          git@github.com:abnormal-security/homebrew-abnormal.git
-        brew install \
-          abnormal-security/abnormal/{mupdf,rocksdb} \
-          cmake \
-          freetype \
-          libpng \
-          hdf5 \
-          pkg-config \
-          snappy \
-          swig \
-          virtualenv
         mkdir ~/.matplotlib
         cat > ~/.matplotlib/matplotlibrc <<EOF
 backend: TkAgg

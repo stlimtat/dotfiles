@@ -101,8 +101,8 @@
   insteadOf = "gist:"
 [user]
 	name = Lim Swee Tat
-	email = st_lim@stlim.net
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICctnX6mOVCS+cXO2KdPDqgck1bUv4zEekbcDrxOzD9q
+  email = st_lim@stlim.net
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICctnX6mOVCS+cXO2KdPDqgck1bUv4zEekbcDrxOzD9q
 [credential]
   helper = osxkeychain
 [pull]

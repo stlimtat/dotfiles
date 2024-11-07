@@ -68,7 +68,7 @@ autoload -Uz compinit && compinit
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load completion init...${time_taken}ms...Done"
-for file in ${HOME}/.{aliases,devenv,exports,extra,functions,path,tokens,abnormal,ab-alias,ab-fn}; do
+for file in ${HOME}/.{aliases,devenv,exports,extra,functions,path,tokens,}; do
   # files
   start_time=$(gdate +%s%3N)
   [[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
@@ -77,6 +77,14 @@ for file in ${HOME}/.{aliases,devenv,exports,extra,functions,path,tokens,abnorma
   echo "Load $file...${time_taken}ms...Done"
 done
 unset file
+
+# batman
+start_time=$(gdate +%s%3N)
+eval "$(batman --export-env)"
+eval "$(batpipe)"
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Load batman...${time_taken}ms...Done"
 
 # fzf
 start_time=$(gdate +%s%3N)
@@ -104,12 +112,12 @@ time_taken=$((end_time - start_time))
 echo "Load fzf...${time_taken}ms...Done"
 
 # wezterm
-start_time=$(gdate +%s%3N)
-zsh ${HOME}/bin/wezterm.sh
-eval "$(wezterm shell-completion --shell zsh)"
-end_time=$(gdate +%s%3N)
-time_taken=$((end_time - start_time))
-echo "Load wezterm...${time_taken}ms...Done"
+# start_time=$(gdate +%s%3N)
+# zsh ${HOME}/bin/wezterm.sh
+# eval "$(wezterm shell-completion --shell zsh)"
+# end_time=$(gdate +%s%3N)
+# time_taken=$((end_time - start_time))
+# echo "Load wezterm...${time_taken}ms...Done"
 
 # zsh-autosuggestions
 start_time=$(gdate +%s%3N)
