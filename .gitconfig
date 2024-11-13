@@ -46,11 +46,13 @@
   ui = auto
 [commit]
   gpgsign = true
+[credential]
+  helper = osxkeychain
 [delta]
   features = mellow-barbet
-  hyperlinks = true
+  # hyperlinks = true
   # hyperlinks-file-link-format = "idea://open?file={path}&line={line}"
-  hyperlinks-file-link-format = "goland://open?file={path}&line={line}"
+  # hyperlinks-file-link-format = "goland://open?file={path}&line={line}"
   line-numbers = true
   navigate = true    # use n and N to move between diff sections
   side-by-side = true
@@ -61,6 +63,11 @@
 [diff "bin"]
   # Use `hexdump` to diff binary files
   textconv = hexdump -v -C
+[filter "lfs"]
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
 [gpg]
   format = ssh
 [gpg "ssh"]
@@ -76,6 +83,9 @@
   conflictstyle = diff3
   # Include summaries of merged commits in newly created merge commit messages
   log = true
+[pull]
+  # ff = true
+  rebase = true
 [push]
   # https://git-scm.com/docs/git-config#git-config-pushdefault
   default = simple
@@ -99,13 +109,3 @@
 	name = Lim Swee Tat
 	email = st_lim@stlim.net
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICctnX6mOVCS+cXO2KdPDqgck1bUv4zEekbcDrxOzD9q
-[credential]
-  helper = osxkeychain
-[pull]
-  # ff = true
-  rebase = true
-[filter "lfs"]
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
-  required = true
-  clean = git-lfs clean -- %f
