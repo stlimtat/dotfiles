@@ -9,7 +9,7 @@ tap 'nicoverbruggen/homebrew-cask'
 # Binaries
 brew 'awscli'
 brew 'bat'
-brew 'gnupg'
+# brew 'gnupg'
 brew 'mise'
 brew 'neovim'
 brew 'python'
