@@ -151,13 +151,18 @@ config.use_fancy_tab_bar = true
 config.use_ime = false
 config.window_close_confirmation = "NeverPrompt"
 
+function wait(time)
+	local duration = os.time() + time
+	while os.time() < duration do
+	end
+end
+
 wezterm.on("gui-startup", function(cmd)
-	local tab, top_left_pane, window = mux.spawn_window(cmd or {})
-	-- local bottom_left_pane = top_left_pane:split({ direction = "Bottom" })
-	local top_right_pane = top_left_pane:split({ direction = "Right" })
-	-- local bottom_right_pane = bottom_left_pane:split({ direction = "Right" })
+	local top_pane, window = mux.spawn_window(cmd or {})
+	local bottom_pane = top_pane:split({ direction = "Bottom" })
 	window:gui_window():maximize()
-	top_left_pane:activate()
+	wait(10)
+	top_pane:activate()
 end)
 
 return config

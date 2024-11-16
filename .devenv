@@ -2,9 +2,19 @@
 # mise
 start_time=$(gdate +%s%3N)
 eval "$(mise activate zsh)"
+eval "$(mise completion zsh)"
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load mise...${time_taken}ms...Done"
+# cobra mise
+start_time=$(gdate +%s%3N)
+if [[ "$(mise which cobra-cli 2> /dev/null)" == "" ]]; then
+  mise install go:github.com/spf13/cobra-cli
+fi
+eval "$(mise exec go:github.com/spf13/cobra-cli@latest -- cobra-cli completion zsh)"
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Load cobra mise...${time_taken}ms...Done"
 
 
 # For jediterm - intellij terminal

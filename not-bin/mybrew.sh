@@ -105,8 +105,6 @@ pushd ${DOTFILES_DIR}
       rsync -ar --progress --partial ${DOTFILES_DIR}/.config/nvim/ ${HOME}/.config/nvim/
     fi
     #
-    # Abnormal
-    # Adding abnormal-security brew tap
     # Before doing this, you need to add ssh key to github account
     if [[ ! -f "${HOME}/.ssh/id_ed25519.pub" ]]; then
       mkdir ${HOME}/.ssh
@@ -114,18 +112,19 @@ pushd ${DOTFILES_DIR}
       ssh-add -K
       echo "Please login with a valid id on github"
       [[ -e "/Applications/Brave Browser.app" ]] && open -a /Applications/Brave Browser.app https://github.com/
-      if [[ "$(brew tap | grep abnormal-security)" == "" ]]; then
-        echo "We need to already have a valid ssh key installed in ssh"
-        cat ${HOME}/id_ed25519.pub
-        read
-        mkdir ~/.matplotlib
-        cat > ~/.matplotlib/matplotlibrc <<EOF
+      echo "We need to already have a valid ssh key installed in ssh"
+      cat ${HOME}/id_ed25519.pub
+      read
+    fi
+    mkdir ~/.matplotlib
+    cat > ~/.matplotlib/matplotlibrc <<EOF
 backend: TkAgg
 EOF
-        if [[ "$(uname -m)" != "x86_64" ]]; then
-          #
-          # hdf5
-          cat > /opt/homebrew/lib/pkgconfig/hdf5.pc <<EOF
+    if [[ "$(uname -m)" != "x86_64" ]]; then
+      #
+      # hdf5
+      # cat > /opt/homebrew/lib/pkgconfig/hdf5.pc <<EOF
+      cat > /usr/local/lib/pkgconfig/hdf5.pc <<EOF
 prefix=/opt/homebrew/opt/hdf5
 libdir=${prefix}/lib
 includedir=${prefix}/include
@@ -136,8 +135,6 @@ Version: 1.12.1
 Libs: -L${libdir}
 Cflags: -I${includedir}
 EOF
-       fi
-      fi
     fi
   fi
   [[ -f ${HOME}/.zshrc.pre* ]] && rm ${HOME}/.zshrc.pre* && cp ${DOTFILES_DIR}/.zshrc ${HOME}/.zshrc

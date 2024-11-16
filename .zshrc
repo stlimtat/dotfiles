@@ -45,6 +45,7 @@ FPATH=/usr/share/zsh/site-functions:${FPATH}
 FPATH=/usr/local/share/zsh/site-functions:${FPATH}
 FPATH=$(brew --prefix)/share/zsh/site-functions:${FPATH}
 FPATH=$(brew --prefix)/share/zsh-completions:${FPATH}
+FPATH=${HOME}/.config/zsh:${FPATH}
 source ${ZSH}/oh-my-zsh.sh
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
@@ -68,7 +69,7 @@ autoload -Uz compinit && compinit
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load completion init...${time_taken}ms...Done"
-for file in ${HOME}/.{aliases,devenv,exports,extra,functions,path,tokens,}; do
+for file in ${HOME}/.{aliases,devenv,exports,extra,functions,path,tokens}; do
   # files
   start_time=$(gdate +%s%3N)
   [[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
@@ -89,7 +90,6 @@ echo "Load batman...${time_taken}ms...Done"
 # fzf
 start_time=$(gdate +%s%3N)
 zvm_after_init_commands+=("$(fzf --zsh)")
-source <(fzf --zsh)
 # Print tree structure in the preview window
 export FZF_ALT_C_OPTS="
   --walker-skip .git,node_modules,target
@@ -111,14 +111,6 @@ end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load fzf...${time_taken}ms...Done"
 
-# wezterm
-# start_time=$(gdate +%s%3N)
-# zsh ${HOME}/bin/wezterm.sh
-# eval "$(wezterm shell-completion --shell zsh)"
-# end_time=$(gdate +%s%3N)
-# time_taken=$((end_time - start_time))
-# echo "Load wezterm...${time_taken}ms...Done"
-
 # zsh-autosuggestions
 start_time=$(gdate +%s%3N)
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -126,13 +118,19 @@ end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load zsh-autosuggestions...${time_taken}ms...Done"
 
-# zsh-syntax-highlighting
+# zsh-fast-syntax-highlighting
 start_time=$(gdate +%s%3N)
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=$(brew --prefix)/share/zsh-syntax-highlighting/highlighters
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $(brew --prefix)/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
-echo "Load zsh-syntax-highlighting...${time_taken}ms...Done"
+echo "Load zsh-fast-syntax-highlighting...${time_taken}ms...Done"
+
+# zsh-system-clipboard
+start_time=$(gdate +%s%3N)
+source $(brew --prefix)/share/zsh-system-clipboard/zsh-system-clipboard.zsh
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Load zsh-system-clipboard...${time_taken}ms...Done"
 
 # zsh-vi-mode
 start_time=$(gdate +%s%3N)
