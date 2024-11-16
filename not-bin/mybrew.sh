@@ -72,7 +72,8 @@ pushd ${DOTFILES_DIR}
   # https://github.com/ohmyzsh/ohmyzsh
   if [[ ! -d ${HOME}/.oh-my-zsh ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-    source ~/.devenv
+    [[ -f "${HOME}/.zshrc.pre*" ]] && rm ${HOME}/.zshrc.pre* && cp ${DOTFILES_DIR}/.zshrc ${HOME}/.zshrc
+    source ${HOME}/.zshrc
   fi
   if [[ "${DEV_SETUP}" != "" ]]; then
     #
@@ -116,6 +117,17 @@ pushd ${DOTFILES_DIR}
       cat ${HOME}/id_ed25519.pub
       read
     fi
+    if [[ ! -d "${HOME}/go/src/github.com" ]]; then
+      mkdir -p ${HOME}/go/src/github.com/lysyi3m
+      pushd ${HOME}/go/src/github.com/lysyi3m
+        git clone https://github.com/lysyi3m/macos-terminal-themes
+        open macos-terminal-themes/themes/gruvbox.terminal
+      popd
+    fi
+    # Adding keka
+    # https://github.com/aonez/Keka/wiki/Finder-Extension-on-macOS-15-Sequoia
+    pluginkit -m CFBundleIdentifier=com.aone.keka.KekaFinderIntegration -vv | grep UUID | awk '{ print $3 }' | pluginkit -e "use" -u -                                                                        ─╯
+    # matplotlib
     mkdir ~/.matplotlib
     cat > ~/.matplotlib/matplotlibrc <<EOF
 backend: TkAgg
