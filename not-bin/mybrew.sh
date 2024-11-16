@@ -66,6 +66,10 @@ pushd ${DOTFILES_DIR}
   #
   # Source for jenv from ~/.extra
   source ${HOME}/.zshrc
+  # sudo touchid
+  # https://apple.stackexchange.com/questions/259093/can-touch-id-on-mac-authenticate-sudo-in-terminal
+  sed "s/^#auth/auth/" /etc/pam.d/sudo_local.template | sudo tee /etc/pam.d/sudo_local
+  # nfs.conf
   sudo cp ${DOTFILES_DIR}/etc/nfs.conf /etc/nfs.conf
   #
   # oh-my-zsh
