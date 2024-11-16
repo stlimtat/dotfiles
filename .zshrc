@@ -111,11 +111,25 @@ end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load fzf...${time_taken}ms...Done"
 
+# 1password
+start_time=$(gdate +%s%3N)
+source ${HOME}/.config/op/plugins.sh
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Load 1password...${time_taken}ms...Done"
+
+# zsh-autopair
+start_time=$(gdate +%s%3N)
+source $(brew --prefix)/share/zsh-autopair/autopair.zsh
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Load zsh-autopair...${time_taken}ms...Done"
+
 # zsh-autosuggestions
 start_time=$(gdate +%s%3N)
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 end_time=$(gdate +%s%3N)
-time_taken=$((end_time - start_time))
+time_taken=$((end_time - start_time)
 echo "Load zsh-autosuggestions...${time_taken}ms...Done"
 
 # zsh-fast-syntax-highlighting
