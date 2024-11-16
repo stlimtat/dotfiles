@@ -129,7 +129,7 @@ echo "Load zsh-autopair...${time_taken}ms...Done"
 start_time=$(gdate +%s%3N)
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 end_time=$(gdate +%s%3N)
-time_taken=$((end_time - start_time)
+time_taken=$((end_time - start_time))
 echo "Load zsh-autosuggestions...${time_taken}ms...Done"
 
 # zsh-fast-syntax-highlighting
@@ -148,7 +148,8 @@ echo "Load zsh-system-clipboard...${time_taken}ms...Done"
 
 # zsh-vi-mode
 start_time=$(gdate +%s%3N)
-source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source $(brew --prefix)/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load zsh-vi-mode...${time_taken}ms...Done"
+
