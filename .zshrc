@@ -11,7 +11,7 @@ hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x70
 tabs -2
 
 # Set PATH, MANPATH, etc., for Homebrew.
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(/usr/local/bin/brew shellenv)"
 export PATH="${HOME}/bin:$PATH"
 
 export ZSH=${HOME}/.oh-my-zsh
