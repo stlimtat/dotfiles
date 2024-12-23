@@ -149,9 +149,10 @@ config.ssh_domains = {
 config.use_dead_keys = false
 config.use_fancy_tab_bar = true
 config.use_ime = false
+config.window_decorations = "RESIZE"
 config.window_close_confirmation = "NeverPrompt"
 
-function wait(time)
+local function wait(time)
 	local duration = os.time() + time
 	while os.time() < duration do
 	end

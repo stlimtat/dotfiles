@@ -103,6 +103,10 @@
   pushInsteadOf = "git://gist.github.com/"
 [url "git://gist.github.com/"]
   insteadOf = "gist:"
+[url "git@gitlab.com:"]
+  insteadOf = "gl:"
+  pushInsteadOf = "gitlab:"
+  pushInsteadOf = "git://gitlab.com/"
 [user]
 	name = Lim Swee Tat
 	email = st_lim@stlim.net
