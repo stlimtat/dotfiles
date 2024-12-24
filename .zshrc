@@ -36,6 +36,7 @@ plugins=(
   docker
   eza
   fzf
+  poetry
 )
 
 # ~/.oh-my-zsh

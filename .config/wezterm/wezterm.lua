@@ -11,6 +11,7 @@ config.check_for_updates = false
 -- config.color_scheme = 'Gruvbox dark, medium (base16)'
 config.color_scheme = "Gruvbox Material (Gogh)"
 config.color_scheme_dirs = { "$HOME/.config/wezterm/colors" }
+config.default_cwd = "$HOME/go/src/github.com/stlimtat"
 -- Enable the scrollbar.
 -- It will occupy the right window padding space.
 -- If right padding is set to 0 then it will be increased
@@ -35,6 +36,7 @@ config.harfbuzz_features = {
 	"liga", -- (default) ligatures
 	"clig", -- (default) contextual ligatures
 }
+config.hide_tab_bar_if_only_one_tab = true
 -- https://wezfurlong.org/wezterm/hyperlinks.html
 -- config.hyperlink_rules = wezterm.default_hyperlink_rules()
 config.hyperlink_rules = {
@@ -87,10 +89,6 @@ config.hyperlink_rules = {
 	-- },
 	-- make task numbers clickable
 	-- the first matched regex group is captured in $1.
-	{
-		regex = "\\b(ARN|GRML)-\\d+\\b",
-		format = "https://abnormalsecurity.atlassian.net/browse/$0",
-	},
 }
 config.keys = {
 	-- activate pane selection mode with the default alphabet (labels are "a", "s", "d", "f" and so on)
@@ -119,7 +117,9 @@ config.keys = {
 	{ key = "_", mods = "ALT|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ key = "w", mods = "CMD", action = act.CloseCurrentPane({ confirm = true }) },
 }
+config.macos_window_background_blur = 10
 config.native_macos_fullscreen_mode = true
+config.pane_focus_follows_mouse = true
 config.quit_when_all_windows_are_closed = true
 -- How many lines of scrollback you want to retain per tab
 config.scrollback_lines = 3500
@@ -149,8 +149,9 @@ config.ssh_domains = {
 config.use_dead_keys = false
 config.use_fancy_tab_bar = true
 config.use_ime = false
-config.window_decorations = "RESIZE"
+config.window_background_opacity = 0.8
 config.window_close_confirmation = "NeverPrompt"
+config.window_decorations = "RESIZE"
 
 local function wait(time)
 	local duration = os.time() + time
@@ -159,11 +160,20 @@ local function wait(time)
 end
 
 wezterm.on("gui-startup", function(cmd)
-	local top_pane, window = mux.spawn_window(cmd or {})
-	local bottom_pane = top_pane:split({ direction = "Bottom" })
+	-- allow `wezterm start -- something` to affect what we spawn
+	-- in our initial window
+	local args = {}
+	if cmd then
+		args = cmd.args
+	end
+
+	local src_dir = wezterm.home_dir .. "/go/src/github.com/stlimtat"
+
+	local tab, pane, window = mux.spawn_window(cmd or {})
 	window:gui_window():maximize()
 	wait(10)
-	top_pane:activate()
+	local bottom_pane = pane:split({ direction = "Bottom" })
+	pane:activate()
 end)
 
 return config

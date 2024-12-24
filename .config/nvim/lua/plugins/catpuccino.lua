@@ -95,7 +95,7 @@ return {
           crust = "#1b1b1b",
         },
       },
-      transparent_background = false,
+      transparent_background = true,
       show_end_of_buffer = false,
       integration_default = false,
       integrations = {
