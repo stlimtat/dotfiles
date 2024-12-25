@@ -2,6 +2,7 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local mux = wezterm.mux
 local config = {}
+local src_dir = wezterm.home_dir .. "/go/src/github.com/stlimtat"
 if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
@@ -11,7 +12,7 @@ config.check_for_updates = false
 -- config.color_scheme = 'Gruvbox dark, medium (base16)'
 config.color_scheme = "Gruvbox Material (Gogh)"
 config.color_scheme_dirs = { "$HOME/.config/wezterm/colors" }
-config.default_cwd = "$HOME/go/src/github.com/stlimtat"
+config.default_cwd = src_dir
 -- Enable the scrollbar.
 -- It will occupy the right window padding space.
 -- If right padding is set to 0 then it will be increased
@@ -167,12 +168,15 @@ wezterm.on("gui-startup", function(cmd)
 		args = cmd.args
 	end
 
-	local src_dir = wezterm.home_dir .. "/go/src/github.com/stlimtat"
-
-	local tab, pane, window = mux.spawn_window(cmd or {})
+	local tab, pane, window = mux.spawn_window(cmd or {
+		cwd = src_dir,
+	})
 	window:gui_window():maximize()
-	wait(10)
-	local bottom_pane = pane:split({ direction = "Bottom" })
+	wait(5)
+	local bottom_pane = pane:split({
+		cwd = src_dir,
+		direction = "Bottom",
+	})
 	pane:activate()
 end)
 

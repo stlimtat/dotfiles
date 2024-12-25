@@ -1,11 +1,27 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
+# mise 
+start_time=$(gdate +%s%3N)
+eval "$(/usr/local/bin/mise activate zsh)"
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Load mise...${time_taken}ms...Done"
+
+# Enable persistent REPL history for `node`.
+export NODE_REPL_HISTORY=~/.node_history;
+# Allow 32³ entries; the default is 1000.
+export NODE_REPL_HISTORY_SIZE='32768';
+# Use sloppy mode by default, matching web browsers.
+export NODE_REPL_MODE='sloppy';
+
+# Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
+export PYTHONIOENCODING='UTF-8';
+
 # For jediterm - intellij terminal
 if [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]; then
   export ZSH_TMUX_AUTOSTART=true
 else
   export PROMPT_COMMAND="resize &>/dev/null ; $PROMPT_COMMAND"
 fi
-
 
 # For jediterm - intellij terminal
 # Using kubectl

@@ -11,7 +11,7 @@ brew 'awscli'
 brew 'bat'
 # brew 'gnupg'
 brew 'mise'
-brew 'neovim'
+# brew 'neovim'
 brew 'python'
 brew 'ripgrep' # Needed for telescope-fzf for vim
 brew 'shfmt' # Needed for LSP bash for vim

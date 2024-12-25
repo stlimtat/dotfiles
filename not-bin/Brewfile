@@ -1,4 +1,6 @@
-#kekaexternalhelper Taps
+# Taps
+tap 'beeftornado/rmtree'
+tap 'benjiwolff/neovim-nightly'
 tap 'colindean/fonts-nonfree'
 tap 'homebrew/bundle'
 tap 'homebrew/services'
@@ -8,16 +10,16 @@ tap 'homebrew/services'
 brew 'bat' # bat is not cat
 brew 'coreutils' # Those that come with macOS are outdated
 brew 'eza' # Replaces ls - so much better
-# brew 'fd' # Alternate find for lunarvim
+brew 'fd' # Alternate find for lunarvim
 brew 'findutils'
 brew 'fzf'
 brew 'git'
 brew 'git-lfs'
 brew 'gnu-sed'
 brew 'grep'
-brew 'java'
+# brew 'java'
 brew 'moreutils'
-brew 'neovim'
+# brew 'neovim'
 brew 'nmap'
 brew 'mas' # Mac App Store manager
 brew 'p7zip'
@@ -45,6 +47,7 @@ cask 'keka'
 cask 'kekaexternalhelper'
 cask 'keycastr'
 # cask 'onyx'
+cask 'neovim-nightly'
 cask 'rar'
 cask 'rectangle'
 cask 'stats'
