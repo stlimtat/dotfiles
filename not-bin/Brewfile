@@ -7,12 +7,12 @@ tap 'homebrew/services'
 
 # Binaries
 # brew 'bash' # Latest Bash version
-brew 'bat' # bat is not cat
+# brew 'bat' # bat is not cat
 brew 'coreutils' # Those that come with macOS are outdated
-brew 'eza' # Replaces ls - so much better
-brew 'fd' # Alternate find for lunarvim
+# brew 'eza' # Replaces ls - so much better
+# brew 'fd' # Alternate find for lunarvim
 brew 'findutils'
-brew 'fzf'
+# brew 'fzf'
 brew 'git'
 brew 'git-lfs'
 brew 'gnu-sed'
@@ -24,7 +24,7 @@ brew 'nmap'
 brew 'mas' # Mac App Store manager
 brew 'p7zip'
 brew 'powerlevel10k'
-brew 'ripgrep'
+# brew 'ripgrep'
 brew 'ssh-copy-id'
 brew 'the_silver_searcher' # Needed for fzf for vim
 brew 'tree'
@@ -53,7 +53,7 @@ cask 'rectangle'
 cask 'stats'
 cask 'transmission'
 cask 'tunnelblick'
-cask 'vial'
+# cask 'vial'
 cask 'vlc'
 cask 'wezterm'
 # Apps that need passwords

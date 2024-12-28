@@ -96,7 +96,8 @@ pushd ${DOTFILES_DIR}
     if [[ -f "${HOMEBREW_DIR}/bin/mise" ]]; then
       #
       # mise is a replacement for asdf
-      mise add golang
+      eval "$(mise activate zsh)"
+      mise use -g $(cat ${DOTFILES_DIR}/not-bin/mise_list)
     fi
     #
     # Lazyvim
