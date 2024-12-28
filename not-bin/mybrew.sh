@@ -97,7 +97,7 @@ pushd ${DOTFILES_DIR}
       #
       # mise is a replacement for asdf
       eval "$(mise activate zsh)"
-      mise use -g $(cat ${DOTFILES_DIR}/not-bin/mise_list)
+      mise use -g $(cat ${DOTFILES_DIR}/not-bin/mise.list)
     fi
     #
     # Lazyvim
