@@ -31,6 +31,9 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.serve
 # sudo nvram SystemAudioVolume=" "
 #
 # Disable Creation of Metadata Files on Network Volumes
+defaults write com.apple.desktopservices "DSDontWriteNetworkStores" -bool "true"
+
+
 #
 # Disable Creation of Metadata Files on USB Volumes
 

@@ -12,6 +12,9 @@ golangci-lint
 hadolint
 helm
 jq
+lazydocker
+lazygit
+lima
 lua
 markdownlint-cli2
 node
@@ -24,6 +27,7 @@ python
 ripgrep
 ruff
 shfmt
+tmux
 tree-sitter
 vale
 yarn
