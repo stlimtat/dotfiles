@@ -14,6 +14,18 @@ tabs -2
 eval "$(/usr/local/bin/brew shellenv)"
 export PATH="${HOME}/bin:$PATH"
 
+# files
+for file in ${HOME}/.{aliases,devenv,exports,extra,evals,functions,path,tokens}; do
+  # files
+  start_time=$(gdate +%s%3N)
+  [[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
+  end_time=$(gdate +%s%3N)
+  time_taken=$((end_time - start_time))
+  echo "Load $file...${time_taken}ms...Done"
+done
+unset file
+
+# oh-my-zsh
 export ZSH=${HOME}/.oh-my-zsh
 COMPLETION_WAITING_DOTS=true
 HIST_STAMPS="yyyy-mm-dd"
@@ -71,12 +83,4 @@ autoload -Uz compinit && compinit
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load completion init...${time_taken}ms...Done"
-for file in ${HOME}/.{evals,aliases,devenv,exports,extra,functions,path,tokens}; do
-  # files
-  start_time=$(gdate +%s%3N)
-  [[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
-  end_time=$(gdate +%s%3N)
-  time_taken=$((end_time - start_time))
-  echo "Load $file...${time_taken}ms...Done"
-done
-unset file
+
