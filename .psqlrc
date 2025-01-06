@@ -1,0 +1,259 @@
+--------------------------------------------------------------------------------
+--
+-- psql configuration file example.
+-- Date: 07/08/2018
+-- Author: e7e6
+-- Compatible with PostgreSQL 10
+-- When values are set, they are psql's default.
+--
+-- Please refer to the documentation for more information:
+-- https://www.postgresql.org/docs/current/static/app-psql.html
+--
+--------------------------------------------------------------------------------
+
+\set QUIET 1
+
+--------------------------------------------------------------------------------
+-- Prompts
+-- Prompt1 / Prompt2 / Prompt3
+-- %M : server
+-- %m : host name
+-- %> : port
+-- %n : user
+-- %/ : current database
+-- %~ : like %/ but ~ for default database
+-- %# : '#' if superuser, '>' otherwise
+-- %R
+-- %x
+-- %[...%] : terminal control characters
+-- Examples
+
+-- \set PROMPT1 '%n@%/ %# '
+-- \set PROMPT2 '%# '
+-- \set PROMPT3 ''
+-- Customize prompt
+-- http://i-dba.blogspot.se/2014/02/colorizing-psql-prompt-guide.html
+-- %m -> short hostname; %M -> full hostname
+\set PROMPT1 '\n%[%033[1;31m%]➤ %[%033[2;37m%]%`\! date "+%F %I:%M %p %Z"`%[%033[0m%] %[%033[1;36m%]%n%[%033[34m%]@%[%033[1;36m%]%M:%>%[%033[1;33m%]/%/ %[%033[1;31m%]%x %[%033[K%]%[%033[0m%]\n%[%033[1;33m%]%R%#%[%033[0m%] '
+\set PROMPT2 '%[%033[1;33m%]%R%#%[%033[0m%] '
+-- Consider: http://petereisentraut.blogspot.com/2009/09/how-to-set-xterm-titles-in-psql.html
+
+
+--------------------------------------------------------------------------------
+-- Options to change the output of query result tables.
+
+-- border: number of borders and lines for the tables
+-- Values: number
+\pset border 2
+
+-- columns: target width for wrapped format
+-- Values: number
+\pset columns 0
+
+-- expanded: extended display
+-- Values: auto, on, off
+\x auto
+
+-- fieldsep: field separator for unaligned output format.
+-- Values: string
+\pset fieldsep '|'
+
+-- fieldsep_zero: set field separator to a zero byte.
+--Values: no value.
+--\pset fieldsep_zero 
+
+-- format: output format.
+-- Values: unaligned, aligned, wrapped, html, asciidoc, latex, latex-longtable, 
+--         troff-ms
+\pset format aligned
+
+-- linestyle: border drawing style.
+-- Values: ascii, old-ascii, unicode
+\pset linestyle ascii
+
+-- nulls: how to display null values.
+-- Values: string
+\pset null 'NULL'
+
+-- numericlocale: display local-specific character to separate digits.
+-- values: on, off. Without values, will toggle.
+\pset numericlocale off
+
+-- pager: use of a pager program.
+-- Values: on, off, always, name_of_pager. Without value, will toggle.
+\pset pager always
+
+-- pager_min_lines: is set to greater number than page height, pager will
+-- not be called. 
+-- Values: number
+\pset pager_min_lines 0
+
+-- recordsep: line separator in unaligned output format.
+-- Values: string
+\pset recordsep '\n'
+
+-- recordsep_zero: set the line separator in unaligned output format to 
+-- zero byte.
+-- Values: no values.
+--\pset recordsep_zero
+
+-- tableattr: attributes in the table tag for HTML format.
+-- Values: string. Without value, will unset attributes.
+--\pset tableattr TODO
+
+-- title: table title for printed tables.
+-- Values: string. Without value, title is unset.
+
+-- tuples_only: can also be abreviated with \t
+-- Values: on, off. Without value, will toggle.
+\pset tuples_only off
+
+-- unicode_border_linestyle: border drawing style for unicode style.
+-- Values: single, double.
+\pset unicode_border_linestyle single
+
+-- unicode_column_linestyle: column drawing style for unicode style.
+-- Values: single, double.
+\pset unicode_column_linestyle single
+
+-- unicode_header_linestyle: header drawing style for unicode style.
+-- Values: single, double.
+\pset unicode_header_linestyle single
+
+--------------------------------------------------------------------------------
+-- Specially treated variables
+
+-- AUTOCOMMIT: whether or not to automatically commit commands upon completion.
+-- Values: on, off
+\set AUTOCOMMIT on
+
+-- COMP_KEYWORD_CASE: choosing the letter cas for SQL keywords.
+-- Values: lower,upper,preserve-lower,preserve-upper
+\set COMP_KEYWORD_CASE upper
+
+-- DBNAME: name of the database connected to.
+-- Values: string
+
+-- ECHO:
+-- Values: all, queries, errors
+
+-- ECHO_HIDDEN: show executed query for meta commands
+-- Values: on, off, noexec
+\set ECHO_HIDDEN off
+
+-- ENCODING: current client character set encoding.
+-- Values: 
+
+-- FETCH_COUNT: display results in groups of that many rows.
+-- Values: number
+\pset FETCH_COUNT 50
+
+-- HISTCONTROL: what to do with empty or duplicate lines in the history.
+-- Values: ignorespace, ignoredups, ignoreboth, none
+\set HISTCONTROL ignoreboth
+
+-- HISTFILE: file used to store history list
+-- Values: 
+--\set HISTFILE ~/.psql_history- :DBNAME
+
+-- HISTSIZE: maximum number of commands to store in history.
+-- Values: number
+\set HISTSIZE 500
+
+-- HOST: name of the server currently connected to.
+-- Values: string
+
+-- IGNOREEOF: number of EOF (ctrl-D) to ignore before terminating
+-- Values: number
+\set IGNOREEOF 0
+
+-- LASTOID: value of the last affected OID
+-- Values: 
+
+-- ON_ERROR_ROLLBACK: whether or not to continue the transaction in case of 
+-- an error.
+-- Values: on, interactive, off
+\set ON_ERROR_ROLLBACK off
+
+-- ON_ERROR_STOP: stop processing immediately after an error.
+-- Values: on, off 
+\set ON_ERROR_STOP off
+
+-- PORT: current port connected to.
+-- Values: number
+
+-- PROMPT[123]: see above
+
+-- QUIET: same as launching psql -q. "Probably not too useful in interactive mode."
+-- Values: on, off
+
+-- SERVER_VERSION_NAME
+-- Values: string, like 9.6.2
+
+-- SERVER_VERSION_NUM
+-- Values: number, like 90602
+
+-- SHOW_CONTEXT: display context fields in messages from the server.
+-- Values: never, errors, always
+\set SHOW_CONTEXT errors
+
+-- SINGLELINE: newline terminates an SQL command
+-- Values: on, off 
+\set SINGLELINE off
+
+-- SINGLESTEP: single step mode: to debug scripts
+-- Values: on, off 
+\set SINGLESTEP off
+
+-- USER: name of the user connected to the database.
+-- Values: string
+
+-- VERBOSITY: for error reports
+-- Values: default,verbose,terse
+\set VERBOSITY default
+
+-- VERSION: psql's version as a verbose string
+-- VERSION_NAME: psql's version as a short string (9.6.2)
+-- VERSION_NUM: psql's version as a number (90602)
+
+--------------------------------------------------------------------------------
+-- Other settings
+
+-- timing: print the time each query took
+-- Values: on, off. Without values, will toggle.
+\timing on
+
+--------------------------------------------------------------------------------
+-- Custom variables and shortcuts
+
+\set eav 'EXPLAIN ANALYZE VERBOSE'
+
+--------------------------------------------------------------------------------
+-- Custom queries examples
+
+-- number of connected backends
+\set backends 'SELECT datname, numbackends FROM pg_catalog.pg_stat_database;'
+
+-- buffer cache hit ratio
+\set buffer_cache_hit_ratio 'select datname, blks_hit::float/(blks_hit+blks_read) as hit_ratio from pg_stat_database where blks_read+blks_hit <> 0;'
+
+-- kill transactions that have been "idle in transaction" for more than 10 minutes
+\set kill_old_transactions 'select count(pg_terminate_backend(pid)) as nb_killed_proc from pg_stat_activity where query = \'<IDLE> in transaction\' and current_timestamp - query_start > \'10 min\';'
+
+-- running queries
+\set queries  'select current_timestamp - query_start as runtime,pid,datname,usename,query from pg_stat_activity where query != \'<IDLE>\' order by 1 desc; '
+
+-- server uptime
+\set uptime   'select date_trunc(\'second\',current_timestamp - pg_postmaster_start_time()) as uptime;'
+
+--------------------------------------------------------------------------------
+\set QUIET 0
+
+\echo '--------------------------------------'
+\echo 'Custom queries:'
+\echo '\t' ':backends'
+\echo '\t' ':buffer_cache_hit_ratio'
+\echo '\t' ':kill_old_transactions'
+\echo '\t' ':queries'
+\echo '\t' ':uptime'
+\echo '--------------------------------------\n'
