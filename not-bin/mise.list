@@ -1,4 +1,5 @@
 bazelisk
+chromedriver
 colima
 eza
 fd
@@ -20,12 +21,14 @@ markdownlint-cli2
 node
 npm:neovim
 pipx:debugpy
+pipx:poetry
 pipx:yt-dlp
 poetry
 pre-commit
 python
 ripgrep
 ruff
+rust
 shfmt
 tmux
 tree-sitter
