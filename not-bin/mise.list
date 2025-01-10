@@ -1,13 +1,16 @@
-bazelisk
+bazel
 chromedriver
-colima
+chromedriver
 eza
 fd
 fzf
 gh
+gh
 go
 go:github.com/go-delve/delve/cmd/dlv
+go:github.com/playwright-community/playwright-go/cmd/playwright
 go:go.uber.org/mock/mockgen
+go:golang.org/x/tools/gopls
 go:gotest.tools/gotestsum
 golangci-lint
 hadolint
@@ -23,7 +26,6 @@ npm:neovim
 pipx:debugpy
 pipx:poetry
 pipx:yt-dlp
-poetry
 pre-commit
 python
 ripgrep
