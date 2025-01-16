@@ -1,9 +1,12 @@
 # Taps
+tap 'apple/apple'
 tap 'beeftornado/rmtree'
 tap 'benjiwolff/neovim-nightly'
 tap 'colindean/fonts-nonfree'
 tap 'homebrew/bundle'
 tap 'homebrew/services'
+tap 'homebrew-ffmpeg/ffmpeg'
+tap 'lifepillar/appleii'
 
 # Binaries
 # brew 'bash' # Latest Bash version
