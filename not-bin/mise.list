@@ -2,6 +2,7 @@ bazel
 chromedriver
 chromedriver
 eza
+eza
 fd
 fzf
 gh

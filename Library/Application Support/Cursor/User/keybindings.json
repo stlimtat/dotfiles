@@ -14,5 +14,10 @@
         "key": "shift+ctrl+up",
         "command": "workbench.action.focusActiveEditorGroup",
         "when": "terminalFocus"
+    },
+    {
+        "key": "shift+f5",
+        "command": "testing.debugAtCursor",
+        "when": "editorTextFocus"
     }
 ]

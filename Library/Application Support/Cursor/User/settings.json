@@ -30,4 +30,8 @@
     "mise.binPath": "/usr/local/bin/mise",
     "application.shellEnvironmentResolutionTimeout": 20,
     "editor.wordWrapColumn": 120,
+    "go.lintTool": "golangci-lint",
+    "cursor.general.gitGraphIndexing": "enabled",
+    "editor.guides.bracketPairs": true,
+    "files.trimTrailingWhitespace": true,
 }
