@@ -1,0 +1,23 @@
+// Place your key bindings in this file to override the defaults
+// https://code.visualstudio.com/docs/getstarted/keybindings#_advanced-customization
+[
+    {
+        "key": "shift+ctrl+alt+t",
+        "command": "workbench.action.terminal.toggleTerminal",
+    },
+    // Toggle between terminal and editor focus
+    {
+        "key": "shift+ctrl+down",
+        "command": "workbench.action.terminal.focus"
+    },
+    {
+        "key": "shift+ctrl+up",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "shift+f5",
+        "command": "testing.debugAtCursor",
+        "when": "editorTextFocus"
+    }
+]
