@@ -10,24 +10,27 @@ tap 'lifepillar/appleii'
 
 # Binaries
 # brew 'bash' # Latest Bash version
-# brew 'bat' # bat is not cat
+brew 'bat' # bat is not cat
+brew 'bat-extra' # bat is not cat
 brew 'coreutils' # Those that come with macOS are outdated
-# brew 'eza' # Replaces ls - so much better
-# brew 'fd' # Alternate find for lunarvim
+brew 'eza' # Replaces ls - so much better
+brew 'fd' # Alternate find for lunarvim
 brew 'findutils'
-# brew 'fzf'
+brew 'fzf'
 brew 'git'
 brew 'git-lfs'
 brew 'gnu-sed'
-brew 'grep'
+# brew 'grep'
+brew 'homebrew-ffmpeg/ffmpeg/ffmpeg'
 # brew 'java'
+brew 'lazygit'
 brew 'moreutils'
 # brew 'neovim'
 brew 'nmap'
 brew 'mas' # Mac App Store manager
 brew 'p7zip'
 brew 'powerlevel10k'
-# brew 'ripgrep'
+brew 'ripgrep'
 brew 'ssh-copy-id'
 brew 'the_silver_searcher' # Needed for fzf for vim
 brew 'tree'

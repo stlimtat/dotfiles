@@ -24,7 +24,14 @@ alias egrep='egrep --color=auto'
 alias week='date +%V'
 
 # Get macOS Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
-alias update='sudo softwareupdate -i -a; mas upgrade; brew update; brew upgrade --greedy; brew cleanup -s; rm -rf $(brew --cache); npm install npm -g; npm update -g; mise upgrade; nvim --headless "+Lazy! sync" +qa;'
+update_cmd() {
+	sudo softwareupdate -i -a &
+	mas upgrade &
+	(mise upgrade && npm install npm -g && npm update -g) &
+	(nvim --headless "+Lazy! sync" +qa) &
+	(brew update && brew upgrade --greedy && brew cleanup -s && rm -rf $(brew --cache))
+}
+alias update='update_cmd'
 
 # Google Chrome
 alias brave='/Applications/Brave Browser.app/Contents/MacOS/Brave Browser'
@@ -101,3 +108,6 @@ alias zsh_path="pwd"
 
 # For nvim - normal
 alias vim="$(brew --prefix)/bin/nvim"
+
+# For replacing existing signature
+alias resign='f() { xattr -cr $1 && codesign --force --deep --sign - $1 };f'
