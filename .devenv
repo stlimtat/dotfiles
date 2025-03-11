@@ -26,3 +26,6 @@ fi
 # For jediterm - intellij terminal
 # Using kubectl
 export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
+
+# Environment for bazel goprivate
+export GOPRIVATE="github.com/syber-ai-corp/*"

@@ -28,7 +28,7 @@ config.font = wezterm.font_with_fallback({
 	"MesloLGS Nerd Font Mono",
 	"JetBrains Mono",
 })
-config.font_size = 14.0
+config.font_size = 16.0
 -- Enable various OpenType features
 -- See https://docs.microsoft.com/en-us/typography/opentype/spec/featurelist
 config.harfbuzz_features = {

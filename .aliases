@@ -20,6 +20,11 @@ alias grep='ggrep --color=auto'
 alias fgrep='rg --color'
 alias egrep='egrep --color=auto'
 
+rg_fn() {
+	command rg --color=always --json -C 2 "$@" | delta
+}
+alias rg='rg_fn'
+
 # Get week number
 alias week='date +%V'
 
