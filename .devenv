@@ -29,3 +29,8 @@ export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
 
 # Environment for bazel goprivate
 export GOPRIVATE="github.com/syber-ai-corp/*"
+
+# POETRY SETTINGS
+export POETRY_CACHE_DIR=${HOME}/go/pypoetry/cache
+export POETRY_CONFIG_DIR=${HOME}/go/pypoetry/config
+export POETRY_HOME=${HOME}/go/pypoetry/data

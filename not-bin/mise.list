@@ -1,5 +1,3 @@
-bazel
-bazelisk
 go
 go:github.com/cweill/gotests/gotests
 go:github.com/fatih/gomodifytags
@@ -15,7 +13,6 @@ golangci-lint
 node
 npm:neovim
 pipx:huggingface_hub
-pipx:poetry
 pipx:pyright
 pipx:yt-dlp
 pre-commit
