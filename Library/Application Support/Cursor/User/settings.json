@@ -36,4 +36,6 @@
     "extensions.ignoreRecommendations": true,
     "go.alternateTools": {},
     "go.delveConfig": {},
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false,
 }

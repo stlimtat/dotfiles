@@ -77,6 +77,7 @@ pushd ${DOTFILES_DIR}
   if [[ ! -d ${HOME}/.oh-my-zsh ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     [[ -f "${HOME}/.zshrc.pre*" ]] && rm ${HOME}/.zshrc.pre* && cp ${DOTFILES_DIR}/.zshrc ${HOME}/.zshrc
+    rsync -ar --progress --partial ${DOTFILES_DIR}/.config/zsh/ ${HOME}/.oh-my-zsh/custom/completions/
     source ${HOME}/.zshrc
   fi
   if [[ "${DEV_SETUP}" != "" ]]; then

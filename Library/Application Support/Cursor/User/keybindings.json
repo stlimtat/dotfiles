@@ -19,5 +19,9 @@
         "key": "shift+f5",
         "command": "testing.debugAtCursor",
         "when": "editorTextFocus"
+    },
+    {
+      "key": "cmd+i",
+      "command": "composerMode.agent"
     }
 ]

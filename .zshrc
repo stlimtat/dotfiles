@@ -59,7 +59,6 @@ FPATH=/usr/share/zsh/site-functions:${FPATH}
 FPATH=/usr/local/share/zsh/site-functions:${FPATH}
 FPATH=$(brew --prefix)/share/zsh/site-functions:${FPATH}
 FPATH=$(brew --prefix)/share/zsh-completions:${FPATH}
-FPATH=${HOME}/.config/zsh:${FPATH}
 source ${ZSH}/oh-my-zsh.sh
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))

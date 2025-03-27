@@ -1,3 +1,4 @@
+gcloud
 go
 go:github.com/cweill/gotests/gotests
 go:github.com/fatih/gomodifytags
