@@ -56,7 +56,6 @@ plugins=(
 start_time=$(gdate +%s%3N)
 FPATH=/usr/share/zsh/$(zsh --version | awk '{ print $2 }')/functions
 FPATH=/usr/share/zsh/site-functions:${FPATH}
-FPATH=/usr/local/share/zsh/site-functions:${FPATH}
 FPATH=$(brew --prefix)/share/zsh/site-functions:${FPATH}
 FPATH=$(brew --prefix)/share/zsh-completions:${FPATH}
 source ${ZSH}/oh-my-zsh.sh
