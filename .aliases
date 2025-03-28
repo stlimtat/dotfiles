@@ -112,7 +112,7 @@ alias path='echo -e ${PATH//:/\\n}'
 alias zsh_path="pwd"
 
 # For nvim - normal
-alias vim="$(brew --prefix)/bin/nvim"
+alias vim=nvim
 
 # For replacing existing signature
 alias resign='f() { xattr -cr $1 && codesign --force --deep --sign - $1 };f'

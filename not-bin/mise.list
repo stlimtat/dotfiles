@@ -1,5 +1,5 @@
-gcloud
 go
+go:github.com/bazelbuild/bazel-gazelle/cmd/gazelle
 go:github.com/cweill/gotests/gotests
 go:github.com/fatih/gomodifytags
 go:github.com/go-delve/delve/cmd/dlv
@@ -9,13 +9,15 @@ go:github.com/rhysd/actionlint/cmd/actionlint
 go:github.com/spf13/cobra-cli
 go:go.uber.org/mock/mockgen
 go:golang.org/x/tools/gopls
+go:golang.org/x/vuln/cmd/govulncheck
 go:gotest.tools/gotestsum
+go:honnef.co/go/tools/cmd/staticcheck
 golangci-lint
+neovim
 node
 npm:neovim
 pipx:huggingface_hub
 pipx:pyright
-pipx:yt-dlp
 pre-commit
 python
 ruff
