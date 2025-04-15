@@ -4,62 +4,78 @@
   fallthrough true
 )
 
-;; lmet -> cmd
-;; lalt -> option
-;; fn   -> fn
-
-
-;; Below, I use `around' to compose `layer-toggle' with `fn' (instead
-;; of using `layer-toggle' directly) so that the `fn' keypress
-;; actually gets emitted. This matters when using an application that
-;; can use `fn' as a modifier (like Emacs).
-
 (defalias
-    ;; fn    (around (layer-toggle function) fn)
-    ctl_a (tap-hold-next-release 200 a lctl)
-    alt_s (tap-hold-next-release 200 s lalt)
-    met_d (tap-hold-next-release 200 d lmet)
-    sft_f (tap-hold-next-release 200 f lsft)
+    s_lb (tap-hold-next-release 200 \( lsft)
+    s_rb (tap-hold-next-release 200 \) rsft)
 
-    sft_j (tap-hold-next-release 200 j rsft)
-    met_k (tap-hold-next-release 200 k rmet)
-    alt_l (tap-hold-next-release 200 l ralt)
-    ctl_; (tap-hold-next-release 200 ; rctl)
+    c_a (tap-hold-next-release 200 a lctl)
+    a_s (tap-hold-next-release 200 s lalt)
+    m_d (tap-hold-next-release 200 d lmet)
+    s_f (tap-hold-next-release 200 f lsft)
 
-    m_q (around lmet q)
-    m_w (around lmet w)
-    m_e (around lmet e)
-    m_r (around lmet r)
-    m_t (around lmet t)
-    m_a (around lmet a)
-    m_s (around lmet s)
-    m_d (around lmet d)
-    m_f (around lmet f)
-    m_g (around lmet g)
-    m_z (around lmet z)
-    m_x (around lmet x)
-    m_c (around lmet c)
-    m_v (around lmet v)
-    m_sp (around lmet space)
+    s_j (tap-hold-next-release 200 j rsft)
+    m_k (tap-hold-next-release 200 k rmet)
+    a_l (tap-hold-next-release 200 l ralt)
+    c_; (tap-hold-next-release 200 ; rctl)
 
-    ;; sub (layer-toggle sublime)
-    ;; sm_sp (around lmet P)
+    ca_q (tap-hold-next-release 200 q C-lalt)
+    cm_w (tap-hold-next-release 200 w C-lmet)
+    am_e (tap-hold-next-release 200 e A-lmet)
+    cam_r (tap-hold-next-release 200 r C-A-lmet)
+
+    sc_z (tap-hold-next-release 200 z S-lctl)
+    sa_x (tap-hold-next-release 200 x S-lalt)
+    sm_c (tap-hold-next-release 200 c S-lmet)
+    sca_v (tap-hold-next-release 200 v S-C-lalt)
+
+    ca_p (tap-hold-next-release 200 p RC-ralt)
+    cm_o (tap-hold-next-release 200 o RC-rmet)
+    am_i (tap-hold-next-release 200 i RA-rmet)
+    cam_u (tap-hold-next-release 200 u RC-RA-rmet)
+
+    sc_/ (tap-hold-next-release 200 / RS-rctl)
+    sa_. (tap-hold-next-release 200 . RS-ralt)
+    sm_, (tap-hold-next-release 200 , RS-rmet)
+    sca_m (tap-hold-next-release 200 m RS-RC-ralt)
+
+    num (layer-toggle numbers)
+    sym (layer-toggle symbols)
+
+    tn_t (tap-hold-next-release 200 t @num)
+    tn_y (tap-hold-next-release 200 y @num)
+    ts_g (tap-hold-next-release 200 g @num)
+    ts_h (tap-hold-next-release 200 h @num)
 )
 
 (defsrc
   esc  
-  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  caps a    s    d    f    g    h    j    k    l    ;    '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft up
-  fn   lctl lalt lmet           spc            rmet ralt left down rght
+  grv    1      2      3      4      5      6      7      8      9      0      -      =      bspc
+  tab    q      w      e      r      t      y      u      i      o      p      [      ]      \
+  caps   a      s      d      f      g      h      j      k      l      ;      '      ret
+  lsft   z      x      c      v      b      n      m      ,      .      /      rsft   up
+  fn     lctl   lalt   lmet          spc                  rmet   ralt   left   down   rght
 )
-
 (deflayer default
   _ 
-  _    _      _      _      _      _    _    _      _      _      _      _    _    _
-  _    _      _      _      _      _    _    _      _      _      _      _    _    _
-  _    @ctl_a @alt_s @met_d @sft_f _    _    @sft_j @met_k @alt_l @ctl_; _    _
-  _    _      _      _      _      _    _    _      _      _      _      _    _
-  _    _      _      _              _                      _      _      _    _    _   
+  _      _      _      _      _      _      _      _      _      _      _      _      _      _
+  _      @ca_q  @cm_w  @am_e  @cam_r @tn_t  @tn_y  @cam_u @am_i  @cm_o  @ca_p  _      _      _
+  bspc   @c_a   @a_s   @m_d   @s_f   @ts_g  @ts_h  @s_j   @m_k   @a_l   @c_;   _      _
+  @s_lb  @sc_z  @sa_x  @sm_c  @sca_v _      _      @sca_m @sm_,  @sa_.  @sc_/  @s_rb  _
+  _      _      _      _             _                    _      _      _      _      _   
+)
+(deflayer numbers
+  _ 
+  _      f1     f2     f3     f4     f5     f6     f7     f8     f9     f10    f11    _      _
+  _      grv    &      *      \(     -      +      kp7    kp8    kp9    kp/    f12    _      _
+  _      ~      $      %      ^      \_     =      kp4    kp5    kp6    kp*    f13    _
+  _      _      !      @      #      \)     kp0    kp1    kp2    kp3    _      _      _
+  _      _      _      _             _                    _      _      _      _      _   
+)
+(deflayer symbols
+  _ 
+  _      _      _      _      _      _      _      _      _      _      _      _      _      _
+  _      _      home   up     pgup   -      +      home   up     pgup   _      _      _      _
+  _      {      left   down   rght   \_     =      left   down   rght   }      _      _
+  _      [      end    _      pgdn   [      ]      end    _      pgdn   ]      _      _
+  _      _      _      _             _                    _      _      _      _      _   
 )
