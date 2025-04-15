@@ -1,6 +1,6 @@
 #!/bin/zsh
 DOTFILES_DIR=${HOME}/go/src/github.com/stlimtat/dotfiles
-rsync -ar --progress ${HOME}/.{aliases,bash_profile,bash_prompt,bashrc,curlrc,default-python-packages,devenv,exports,extra,functions,gitconfig,ideavimrc,psqlrc,wgetrc,zshrc} ${DOTFILES_DIR}/
+rsync -ar --progress ${HOME}/.{aliases,bash_profile,bash_prompt,bashrc,curlrc,default-python-packages,devenv,exports,extra,functions,gitconfig,ideavimrc,kmonad.kbd,psqlrc,wgetrc,zshrc} ${DOTFILES_DIR}/
 rsync -ar --progress ${HOME}/bin/*.zsh ${DOTFILES_DIR}/bin/
 for s in Code Cursor; do
   rsync -ar --progress \

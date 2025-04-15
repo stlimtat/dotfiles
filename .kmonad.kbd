@@ -1,0 +1,65 @@
+(defcfg 
+  input (iokit-name "Apple Internal Keyboard / Trackpad")
+  output (kext) 
+  fallthrough true
+)
+
+;; lmet -> cmd
+;; lalt -> option
+;; fn   -> fn
+
+
+;; Below, I use `around' to compose `layer-toggle' with `fn' (instead
+;; of using `layer-toggle' directly) so that the `fn' keypress
+;; actually gets emitted. This matters when using an application that
+;; can use `fn' as a modifier (like Emacs).
+
+(defalias
+    ;; fn    (around (layer-toggle function) fn)
+    ctl_a (tap-hold-next-release 200 a lctl)
+    alt_s (tap-hold-next-release 200 s lalt)
+    met_d (tap-hold-next-release 200 d lmet)
+    sft_f (tap-hold-next-release 200 f lsft)
+
+    sft_j (tap-hold-next-release 200 j rsft)
+    met_k (tap-hold-next-release 200 k rmet)
+    alt_l (tap-hold-next-release 200 l ralt)
+    ctl_; (tap-hold-next-release 200 ; rctl)
+
+    m_q (around lmet q)
+    m_w (around lmet w)
+    m_e (around lmet e)
+    m_r (around lmet r)
+    m_t (around lmet t)
+    m_a (around lmet a)
+    m_s (around lmet s)
+    m_d (around lmet d)
+    m_f (around lmet f)
+    m_g (around lmet g)
+    m_z (around lmet z)
+    m_x (around lmet x)
+    m_c (around lmet c)
+    m_v (around lmet v)
+    m_sp (around lmet space)
+
+    ;; sub (layer-toggle sublime)
+    ;; sm_sp (around lmet P)
+)
+
+(defsrc
+  esc  
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft up
+  fn   lctl lalt lmet           spc            rmet ralt left down rght
+)
+
+(deflayer default
+  _ 
+  _    _      _      _      _      _    _    _      _      _      _      _    _    _
+  _    _      _      _      _      _    _    _      _      _      _      _    _    _
+  _    @ctl_a @alt_s @met_d @sft_f _    _    @sft_j @met_k @alt_l @ctl_; _    _
+  _    _      _      _      _      _    _    _      _      _      _      _    _
+  _    _      _      _              _                      _      _      _    _    _   
+)

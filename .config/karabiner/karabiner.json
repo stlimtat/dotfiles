@@ -11,6 +11,7 @@
                 "rules": [
                     {
                         "description": "Change zx to command z",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -419,6 +420,7 @@
                     },
                     {
                         "description": "home mods with CAGS",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -664,6 +666,7 @@
                     },
                     {
                         "description": "complex mods with CAGS",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -1299,6 +1302,7 @@
                     },
                     {
                         "description": "caps_lock to delete",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -1317,6 +1321,16 @@
                     }
                 ]
             },
+            "devices": [
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 34304,
+                        "vendor_id": 1452
+                    },
+                    "ignore": true
+                }
+            ],
             "name": "Default profile",
             "parameters": { "delay_milliseconds_before_open_device": 1500 },
             "selected": true,
