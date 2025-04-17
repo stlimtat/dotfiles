@@ -1,5 +1,4 @@
 go
-go:github.com/bazelbuild/bazel-gazelle/cmd/gazelle
 go:github.com/cweill/gotests/gotests
 go:github.com/fatih/gomodifytags
 go:github.com/go-delve/delve/cmd/dlv

@@ -43,8 +43,8 @@
 
     tn_t (tap-hold-next-release 200 t @num)
     tn_y (tap-hold-next-release 200 y @num)
-    ts_g (tap-hold-next-release 200 g @num)
-    ts_h (tap-hold-next-release 200 h @num)
+    ts_g (tap-hold-next-release 200 g @sym)
+    ts_h (tap-hold-next-release 200 h @sym)
 )
 
 (defsrc
