@@ -3,6 +3,7 @@ tap 'adoptopenjdk/openjdk'
 tap 'aws/tap'
 tap 'go-task/tap'
 tap 'golangci/tap'
+tap 'goreleaser/tap'
 tap 'mongodb/brew'
 tap 'neovim/neovim'
 tap 'nicoverbruggen/homebrew-cask'
@@ -35,7 +36,6 @@ brew 'gh'
 # brew 'gitui'
 brew 'git-delta'
 brew 'git-lfs'
-# brew 'golangci-lint'
 brew 'hadolint' # dockerfile lint
 brew 'helm'
 # brew 'imagemagick'
@@ -51,8 +51,12 @@ brew 'markdownlint-cli2' # for markdown for vim
 brew 'vale' # for markdown for vim
 brew 'yq'
 
+# golangci-lint
+brew 'golangci/tap/golangci-lint'
 # go-task
 brew 'go-task/tap/go-task'
+# go-releaser
+brew 'goreleaser/tap/goreleaser'
 
 # Apps
 cask 'cursor'

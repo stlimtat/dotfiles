@@ -24,6 +24,19 @@
     "github.gitProtocol": "ssh",
     "github.codespaces.allowUnsafeConnections": true,
     "go.diagnostic.vulncheck": "Imports",
+    "go.lintTool": "golangci-lint",
+    "go.lintFlags": [
+      "--path-mode=abs",
+      "--fast-only"
+    ],
+    "go.formatTool": "custom",
+    "go.alternateTools": {
+      "customFormatter": "golangci-lint"
+    },
+    "go.formatFlags": [
+      "fmt",
+      "--stdin"
+    ],
     "go.testFlags": ["-count=1"],
     "go.toolsManagement.checkForUpdates": "off",
     "gopls": { "ui.semanticTokens": true },
