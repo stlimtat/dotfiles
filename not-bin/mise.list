@@ -20,5 +20,4 @@ pipx:pyright
 pre-commit
 python
 ruff
-rust
 yarn

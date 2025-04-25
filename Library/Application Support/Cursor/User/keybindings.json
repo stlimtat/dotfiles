@@ -16,9 +16,14 @@
         "when": "terminalFocus"
     },
     {
-        "key": "shift+f5",
+        "key": "f5",
+        "command": "go.debug.previous",
+        "when": "debugState != 'stopped' && !editorFocus"
+    },
+    {
+        "key": "f5",
         "command": "testing.debugAtCursor",
-        "when": "editorTextFocus"
+        "when": "debugState != 'stopped' && editorTextFocus"
     },
     {
       "key": "cmd+i",

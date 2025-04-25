@@ -1,6 +1,7 @@
 # Taps
 tap 'adoptopenjdk/openjdk'
 tap 'aws/tap'
+tap 'go-task/tap'
 tap 'golangci/tap'
 tap 'mongodb/brew'
 tap 'neovim/neovim'
@@ -49,6 +50,9 @@ brew 'markdownlint-cli2' # for markdown for vim
 # brew 'rust'
 brew 'vale' # for markdown for vim
 brew 'yq'
+
+# go-task
+brew 'go-task/tap/go-task'
 
 # Apps
 cask 'cursor'

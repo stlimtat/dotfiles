@@ -34,3 +34,6 @@ export GOPRIVATE="github.com/syber-ai-corp/*"
 export POETRY_CACHE_DIR=${HOME}/go/pypoetry/cache
 export POETRY_CONFIG_DIR=${HOME}/go/pypoetry/config
 export POETRY_HOME=${HOME}/go/pypoetry/data
+
+# PATH extension
+export PATH=${HOME}/.cargo/bin:${PATH}
