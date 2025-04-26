@@ -49,7 +49,9 @@ plugins=(
   docker
   eza
   fzf
-  poetry
+  gcloud
+  myfzf
+  plz
 )
 
 # ~/.oh-my-zsh

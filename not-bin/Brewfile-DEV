@@ -7,6 +7,7 @@ tap 'goreleaser/tap'
 tap 'mongodb/brew'
 tap 'neovim/neovim'
 tap 'nicoverbruggen/homebrew-cask'
+tap 'thought-machine/please'
 
 # Binaries
 # brew 'awscli'
@@ -24,7 +25,7 @@ brew 'tmux'
 brew 'usage'
 
 # Development
-brew 'bazelisk'
+# brew 'bazelisk'
 brew 'colima' # docker replacement
 brew 'composer'
 brew 'docker' # docker replacement
@@ -57,6 +58,8 @@ brew 'golangci/tap/golangci-lint'
 brew 'go-task/tap/go-task'
 # go-releaser
 brew 'goreleaser/tap/goreleaser'
+# please
+brew 'thought-machine/please/please'
 
 # Apps
 cask 'cursor'
