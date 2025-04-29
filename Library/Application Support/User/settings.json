@@ -7,6 +7,10 @@
     "debug.console.fontSize": 14,
     "diffEditor.codeLens": true,
     "editor.accessibilitySupport": "off",
+    // "editor.codeActionsOnSave": {
+    //   "source.organizeImports": "explicit",
+    //   "source.fixAll": "explicit"
+    // },
     "editor.detectIndentation": false,
     "editor.fontFamily": "'JetBrainsMonoNL Nerd Font',Menlo, Monaco, 'Courier New', monospace ",
     "editor.fontLigatures": true,
@@ -24,22 +28,25 @@
     "github.gitProtocol": "ssh",
     "github.codespaces.allowUnsafeConnections": true,
     "go.diagnostic.vulncheck": "Imports",
-    "go.lintTool": "golangci-lint",
-    "go.lintFlags": [
-      "--path-mode=abs",
-      "--fast-only"
+    // "go.lintTool": "golangci-lint",
+    // "go.lintFlags": [
+    //   "--path-mode=abs",
+    //   "--fast-only"
+    // ],
+    // "go.formatTool": "custom",
+    // "go.alternateTools": {
+    //   "customFormatter": "golangci-lint"
+    // },
+    // "go.formatFlags": [
+    //   "fmt",
+    //   "--stdin"
+    // ],
+    "go.testFlags": [
+      "-short",
+      "-count=1",
     ],
-    "go.formatTool": "custom",
-    "go.alternateTools": {
-      "customFormatter": "golangci-lint"
-    },
-    "go.formatFlags": [
-      "fmt",
-      "--stdin"
-    ],
-    "go.testFlags": ["-count=1"],
-    "go.toolsManagement.checkForUpdates": "off",
-    "gopls": { "ui.semanticTokens": true },
+    // "go.toolsManagement.checkForUpdates": "off",
+    // "gopls": { "ui.semanticTokens": true },
     "microsoft-authentication.implementation": "msal",
     "notebook.lineNumbers": "on",
     "python.testing.pytestEnabled": true,
