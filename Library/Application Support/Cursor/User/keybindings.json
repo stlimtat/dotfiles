@@ -1,6 +1,9 @@
 // Place your key bindings in this file to override the defaults
-// https://code.visualstudio.com/docs/getstarted/keybindings#_advanced-customization
 [
+    {
+        "key": "cmd+i",
+        "command": "composerMode.agent"
+    },
     {
         "key": "shift+ctrl+alt+t",
         "command": "workbench.action.terminal.toggleTerminal",
@@ -25,8 +28,4 @@
         "command": "testing.debugAtCursor",
         "when": "debugState != 'stopped' && editorTextFocus"
     },
-    {
-      "key": "cmd+i",
-      "command": "composerMode.agent"
-    }
 ]

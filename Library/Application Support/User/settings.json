@@ -1,66 +1,58 @@
 {
-    "application.shellEnvironmentResolutionTimeout": 20,
-    "chat.editor.fontSize": 14,
-    "cursor.cmdk.useThemedDiffBackground": true,
-    "cursor.composer.shouldChimeAfterChatFinishes": true,
-    "cursor.general.gitGraphIndexing": "enabled",
-    "debug.console.fontSize": 14,
-    "diffEditor.codeLens": true,
-    "editor.accessibilitySupport": "off",
-    // "editor.codeActionsOnSave": {
-    //   "source.organizeImports": "explicit",
-    //   "source.fixAll": "explicit"
-    // },
-    "editor.detectIndentation": false,
-    "editor.fontFamily": "'JetBrainsMonoNL Nerd Font',Menlo, Monaco, 'Courier New', monospace ",
-    "editor.fontLigatures": true,
-    "editor.fontSize": 14,
-    "editor.guides.bracketPairs": true,
-    "editor.lineNumbers": "relative",
-    "editor.tabSize": 2,
-    "editor.wordWrap": "on",
-    "editor.wordWrapColumn": 120,
-    "extensions.experimental.affinity": {
-        "asvetliakov.vscode-neovim": 1
-    },
-    "extensions.ignoreRecommendations": true,
-    "files.trimTrailingWhitespace": true,
-    "github.gitProtocol": "ssh",
-    "github.codespaces.allowUnsafeConnections": true,
-    "go.diagnostic.vulncheck": "Imports",
-    // "go.lintTool": "golangci-lint",
-    // "go.lintFlags": [
-    //   "--path-mode=abs",
-    //   "--fast-only"
-    // ],
-    // "go.formatTool": "custom",
-    // "go.alternateTools": {
-    //   "customFormatter": "golangci-lint"
-    // },
-    // "go.formatFlags": [
-    //   "fmt",
-    //   "--stdin"
-    // ],
-    "go.testFlags": [
-      "-short",
-      "-count=1",
-    ],
-    // "go.toolsManagement.checkForUpdates": "off",
-    // "gopls": { "ui.semanticTokens": true },
-    "microsoft-authentication.implementation": "msal",
-    "notebook.lineNumbers": "on",
-    "python.testing.pytestEnabled": true,
-    "search.showLineNumbers": true,
-    "scm.inputFontSize": 14,
-    "terminal.external.osxExec": "WezTerm.app",
-    "terminal.integrated.defaultProfile.osx": "zsh",
-    "terminal.integrated.fontSize": 14,
-    "vscode-neovim.neovimInitVimPaths.darwin": "/Users/st_lim/.config/nvim/init.lua",
-    "vscode-neovim.revealCursorScrollLine": true,
-    "window.commandCenter": true,
-    "workbench.colorTheme": "Gruvbox Dark Hard",
-    "workbench.preferredDarkColorTheme": "Gruvbox Dark Hard",
-    "workbench.preferredHighContrastColorTheme": "Gruvbox Dark Hard",
-    "workbench.preferredHighContrastLightColorTheme": "Gruvbox Dark Hard",
-    "workbench.preferredLightColorTheme": "Gruvbox Light Hard",
+  "editor.accessibilitySupport": "off",
+  "editor.fontFamily": "JetBrainsMonoNL Nerd Font, monospace",
+  "editor.fontLigatures": true,
+  "editor.fontWeight": "normal",
+  "editor.fontSize": 14,
+  "editor.insertSpaces": true,
+  "editor.formatOnSave": true,
+  "editor.lineHeight": 20,
+  "editor.lineNumbers": "relative",
+  "editor.tabSize": 2,
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "github.gitProtocol": "ssh",
+  "[go]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always"
+    }
+  },
+  "go.addTags": {
+    "tags": "json,bson,koanf",
+    "options": "json=omitempty,bson=omitempty,koanf=omitempty"
+  },
+  "go.alternateTools": {
+    "customFormatter": "golangci-lint"
+  },
+  "go.coverShowCounts": true,
+  "go.diagnostic.vulncheck": "Imports",
+  "go.formatTool": "custom",
+  "go.formatFlags": [
+    "fmt",
+    "--stdin"
+  ],
+  "go.lintTool": "golangci-lint",
+  "go.lintFlags": [
+    "--path-mode=abs",
+    "--fast-only"
+  ],
+  "go.testEnvFile": "${workspaceFolder}/.env",
+  "go.testEnvVars": {
+    "HTTP_PROXY": "http://127.0.0.1:8080",
+    "HTTPS_PROXY": "http://127.0.0.1:8080",
+  },
+  "go.testExplorer.packageDisplayMode": "nested",
+  "gopls": {
+    "ui.semanticTokens": true
+  },
+  "redhat.telemetry.enabled": true,
+  "testing.followRunningTest": true,
+  "workbench.colorTheme": "Gruvbox Dark Hard",
+  "window.commandCenter": true,
+  "extensions.ignoreRecommendations": true,
+  "go.addTags": {
+    "tags": "json,bson,koanf",
+    "options": "json=omitempty,bson=omitempty,koanf=omitempty"
+  },
 }
