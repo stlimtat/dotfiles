@@ -32,7 +32,8 @@ alias week='date +%V'
 update_cmd() {
 	sudo softwareupdate -i -a &
 	mas upgrade &
-	(mise upgrade && npm install npm -g && npm update -g) &
+	mise upgrade &
+	(npm install npm -g && npm update -g) &
 	(nvim --headless "+Lazy! sync" +qa) &
 	(brew update && brew upgrade --greedy && brew cleanup -s && rm -rf $(brew --cache))
 }
