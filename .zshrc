@@ -51,7 +51,6 @@ plugins=(
   fzf
   gcloud
   myfzf
-  plz
 )
 
 # ~/.oh-my-zsh
