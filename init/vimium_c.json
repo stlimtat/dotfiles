@@ -1,0 +1,47 @@
+{
+	"name": "Vimium C",
+	"@time": "25/05/2025, 18:54:59",
+	"time": 1748170499149,
+	"environment": {
+		"extension": "2.12.2",
+		"platform": "mac",
+		"chromium": 136
+	},
+	"allBrowserUrls": true,
+	"exclusionRules": [
+		{
+			"passKeys": "",
+			"pattern": ":https://mail.google.com/"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://en.key-test.ru/"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://en.key-test.ru/"
+		},
+		{
+			"passKeys": "* ",
+			"pattern": ":https://first20hours.github.io/"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://first20hours.github.io/"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://wsa.wallet.airpay.sg/"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://abnormalsecurity-prod.cloud.databricks.com/"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://.*.abnml.io"
+		}
+	],
+	"keyLayout": 2,
+	"vimSync": true
+}
