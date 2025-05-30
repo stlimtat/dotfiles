@@ -104,7 +104,7 @@
       "int" : 0
     },
     "landscapeSnapAreas" : {
-      "string" : "null"
+
     },
     "launchOnLogin" : {
       "bool" : true
@@ -128,7 +128,7 @@
       "int" : 0
     },
     "moveCursorAcrossDisplays" : {
-      "int" : 1
+      "int" : 0
     },
     "notifiedOfProblemApps" : {
       "bool" : false
@@ -137,7 +137,7 @@
       "int" : 0
     },
     "portraitSnapAreas" : {
-      "string" : "null"
+
     },
     "relaunchOpensMenu" : {
       "bool" : false
@@ -249,32 +249,8 @@
       "keyCode" : 40,
       "modifierFlags" : 786432
     },
-    "center" : {
-      "keyCode" : 8,
-      "modifierFlags" : 786432
-    },
-    "centerThird" : {
+    "centerHalf" : {
       "keyCode" : 3,
-      "modifierFlags" : 786432
-    },
-    "firstThird" : {
-      "keyCode" : 2,
-      "modifierFlags" : 786432
-    },
-    "firstTwoThirds" : {
-      "keyCode" : 14,
-      "modifierFlags" : 786432
-    },
-    "larger" : {
-      "keyCode" : 24,
-      "modifierFlags" : 786432
-    },
-    "lastThird" : {
-      "keyCode" : 5,
-      "modifierFlags" : 786432
-    },
-    "lastTwoThirds" : {
-      "keyCode" : 17,
       "modifierFlags" : 786432
     },
     "leftHalf" : {
@@ -285,32 +261,16 @@
       "keyCode" : 36,
       "modifierFlags" : 786432
     },
-    "maximizeHeight" : {
-      "keyCode" : 126,
-      "modifierFlags" : 917504
-    },
     "nextDisplay" : {
       "keyCode" : 124,
-      "modifierFlags" : 1835008
-    },
-    "previousDisplay" : {
-      "keyCode" : 123,
       "modifierFlags" : 1835008
     },
     "reflowTodo" : {
       "keyCode" : 45,
       "modifierFlags" : 786432
     },
-    "restore" : {
-      "keyCode" : 51,
-      "modifierFlags" : 786432
-    },
     "rightHalf" : {
       "keyCode" : 124,
-      "modifierFlags" : 786432
-    },
-    "smaller" : {
-      "keyCode" : 27,
       "modifierFlags" : 786432
     },
     "toggleTodo" : {
@@ -330,5 +290,5 @@
       "modifierFlags" : 786432
     }
   },
-  "version" : "90"
+  "version" : "93"
 }

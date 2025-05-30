@@ -40,11 +40,15 @@
 
     num (layer-toggle numbers)
     sym (layer-toggle symbols)
+    def (layer-switch default)
+    qwe (layer-switch qwerty)
 
     tn_t (tap-hold-next-release 200 t @num)
     tn_y (tap-hold-next-release 200 y @num)
     ts_g (tap-hold-next-release 200 g @sym)
     ts_h (tap-hold-next-release 200 h @sym)
+    td_rm (tap-hold-next-release 200 rmet @def)
+    tq_rm (tap-hold-next-release 200 rmet @qwe)
 )
 
 (defsrc
@@ -63,13 +67,21 @@
   @s_lb  @sc_z  @sa_x  @sm_c  @sca_v _      _      @sca_m @sm_,  @sa_.  @sc_/  @s_rb  _
   _      _      _      _             _                    _      _      _      _      _   
 )
+(deflayer qwerty
+  esc  
+  grv    1      2      3      4      5      6      7      8      9      0      -      =      bspc
+  tab    q      w      e      r      @tn_t  @tn_y  u      i      o      p      [      ]      \
+  caps   a      s      d      f      @ts_g  @ts_h  j      k      l      ;      '      ret
+  lsft   z      x      c      v      b      n      m      ,      .      /      rsft   up
+  fn     lctl   lalt   lmet          spc                  @td_rm ralt   left   down   rght
+)
 (deflayer numbers
   _ 
   _      f1     f2     f3     f4     f5     f6     f7     f8     f9     f10    f11    _      _
   _      grv    &      *      \(     -      +      kp7    kp8    kp9    kp/    f12    _      _
   _      ~      $      %      ^      \_     =      kp4    kp5    kp6    kp*    f13    _
   _      _      !      @      #      \)     kp0    kp1    kp2    kp3    _      _      _
-  _      _      _      _             _                    _      _      _      _      _   
+  _      _      _      _             _                    @tq_rm _      _      _      _   
 )
 (deflayer symbols
   _ 
@@ -77,5 +89,5 @@
   _      _      home   up     pgup   -      +      home   up     pgup   _      _      _      _
   _      {      left   down   rght   \_     =      left   down   rght   }      _      _
   _      [      end    _      pgdn   [      ]      end    _      pgdn   ]      _      _
-  _      _      _      _             _                    _      _      _      _      _   
+  _      _      _      _             _                    @tq_rm _      _      _      _   
 )
