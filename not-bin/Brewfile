@@ -9,9 +9,11 @@ tap 'homebrew-ffmpeg/ffmpeg'
 tap 'lifepillar/appleii'
 
 # Binaries
+brew 'alt-tab'
 # brew 'bash' # Latest Bash version
 brew 'bat' # bat is not cat
 brew 'bat-extra' # bat is not cat
+brew 'clipy' # bat is not cat
 brew 'coreutils' # Those that come with macOS are outdated
 brew 'eza' # Replaces ls - so much better
 brew 'fd' # Alternate find for lunarvim
@@ -23,7 +25,9 @@ brew 'gnu-sed'
 # brew 'grep'
 brew 'homebrew-ffmpeg/ffmpeg/ffmpeg'
 # brew 'java'
+brew 'jordanbaird-ice'
 brew 'lazygit'
+brew 'luluyy'
 brew 'moreutils'
 # brew 'neovim'
 brew 'nmap'
