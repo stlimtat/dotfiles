@@ -12,7 +12,7 @@ tap 'thought-machine/please'
 # Binaries
 # brew 'awscli'
 # brew 'bat'
-# brew 'bat-extra'
+# brew 'bat-extras'
 # brew 'gnupg'
 brew 'mise'
 # brew 'neovim'
@@ -50,6 +50,7 @@ brew 'markdownlint-cli2' # for markdown for vim
 # brew 'ruff'
 # brew 'rust'
 brew 'vale' # for markdown for vim
+brew 'uv' # fast python package installer and resolver
 brew 'yq'
 
 # golangci-lint
@@ -69,6 +70,7 @@ cask 'cursor'
 # cask 'postman'
 # cask 'temurin8'
 # cask 'goland'
+cask 'goreleaser'
 # cask 'pycharm-ce'
 # cask 'visual-studio-code'
 # cask 'zsa-wally' # For my ergodox keyboard

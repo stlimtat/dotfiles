@@ -12,7 +12,7 @@ tap 'lifepillar/appleii'
 brew 'alt-tab'
 # brew 'bash' # Latest Bash version
 brew 'bat' # bat is not cat
-brew 'bat-extra' # bat is not cat
+brew 'bat-extras' # bat is not cat
 brew 'clipy' # bat is not cat
 brew 'coreutils' # Those that come with macOS are outdated
 brew 'eza' # Replaces ls - so much better
@@ -25,9 +25,7 @@ brew 'gnu-sed'
 # brew 'grep'
 brew 'homebrew-ffmpeg/ffmpeg/ffmpeg'
 # brew 'java'
-brew 'jordanbaird-ice'
 brew 'lazygit'
-brew 'luluyy'
 brew 'moreutils'
 # brew 'neovim'
 brew 'nmap'
@@ -53,9 +51,11 @@ cask 'brave-browser'
 cask 'ferdium'
 cask 'freetube'
 cask 'gimp'
+cask 'jordanbaird-ice'
 cask 'keka'
 cask 'kekaexternalhelper'
 cask 'keycastr'
+cask 'lulu'
 # cask 'onyx'
 cask 'neovim-nightly'
 cask 'rar'
@@ -74,6 +74,7 @@ cask 'logitech-camera-settings'
 cask 'zoom'
 
 # Games
+cask 'crossover'
 brew 'dosbox-staging'
 cask 'porting-kit'
 cask 'steam'

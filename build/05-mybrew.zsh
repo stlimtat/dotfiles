@@ -14,11 +14,11 @@ pushd ${DOTFILES_DIR}
   #
   # Using brew bundle to install from Brewfile
   # https://github.com/Homebrew/homebrew-bundle
-  brew bundle --file ${DOTFILES_DIR}/not-bin/Brewfile
+  brew bundle --file ${DOTFILES_DIR}/build/Brewfile
   #
   # Install dev only bundles
   if [[ "${DEV_SETUP}" != "" ]]; then
-    brew bundle --file ${DOTFILES_DIR}/not-bin/Brewfile-DEV
+    brew bundle --file ${DOTFILES_DIR}/build/Brewfile-DEV
   fi
 popd
 #

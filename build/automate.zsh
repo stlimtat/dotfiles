@@ -21,7 +21,7 @@ if [[ "$(uname -m)" != "x86_64" ]]; then
 fi
 export HOMEBREW_DIR
 
-for file in ${DOTFILES_DIR}/not-bin/[0-9][0-9]-*.zsh; do
+for file in ${DOTFILES_DIR}/build/[0-9][0-9]-*.zsh; do
   # Skip the script itself
   if [[ "${file}" == "${0}" ]]; then
     continue

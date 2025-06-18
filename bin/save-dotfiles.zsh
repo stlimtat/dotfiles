@@ -15,7 +15,7 @@ done
 rsync -ar --progress \
   ${HOME}/Library/Application\ Support/{Code,Cursor}/User/{settings.json,keybindings.json} \
   ${DOTFILES_DIR}/Library/Application\ Support/User/
-mise list | cut -d' ' -f1 > ${DOTFILES_DIR}/not-bin/mise.list
+mise list | cut -d' ' -f1 > ${DOTFILES_DIR}/build/mise.list
 for s in .config/gh .config/nvim/after .config/nvim/lua .config/karabiner/karabiner.json .config/wezterm .config/zsh .ssh/config; do
   if [[ -d "${HOME}/${s}" ]]; then
     rsync -ar --progress --exclude="plugin" \

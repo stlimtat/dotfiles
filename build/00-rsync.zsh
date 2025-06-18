@@ -18,6 +18,7 @@ pushd ${DOTFILES_DIR}
       --exclude ".macos" \
       --exclude ".tokens" \
       --exclude "*.plist" \
+      --exclude "build/" \
       --exclude "etc/" \
       --exclude "init/" \
       --exclude "not-bin/" \
