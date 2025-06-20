@@ -47,8 +47,12 @@
     tn_y (tap-hold-next-release 200 y @num)
     ts_g (tap-hold-next-release 200 g @sym)
     ts_h (tap-hold-next-release 200 h @sym)
-    td_rm (tap-hold-next-release 200 rmet @def)
-    tq_rm (tap-hold-next-release 200 rmet @qwe)
+    td_fn (tap-hold-next-release 200 @def fn)
+    tq_fn (tap-hold-next-release 200 @qwe fn)
+    td_lm (tap-hold-next-release 200 @def lmet)
+    tq_lm (tap-hold-next-release 200 @qwe lmet)
+    td_rm (tap-hold-next-release 200 @def rmet)
+    tq_rm (tap-hold-next-release 200 @qwe rmet)
 )
 
 (defsrc
@@ -65,7 +69,7 @@
   tab    @ca_q  @cm_w  @am_e  @cam_r @tn_t  @tn_y  @cam_u @am_i  @cm_o  @ca_p  _      _      _
   bspc   @c_a   @a_s   @m_d   @s_f   @ts_g  @ts_h  @s_j   @m_k   @a_l   @c_;   _      _
   @s_lb  @sc_z  @sa_x  @sm_c  @sca_v _      _      @sca_m @sm_,  @sa_.  @sc_/  @s_rb  _
-  fn     lctl   lalt   lmet          spc                  @td_rm ralt   left   down   rght
+  fn     lctl   lalt   lmet          spc                  rmet   ralt   left   down   rght
 )
 (deflayer qwerty
   esc  
@@ -73,7 +77,7 @@
   tab    q      w      e      r      @tn_t  @tn_y  u      i      o      p      [      ]      \
   caps   a      s      d      f      @ts_g  @ts_h  j      k      l      ;      '      ret
   lsft   z      x      c      v      b      n      m      ,      .      /      rsft   up
-  fn     lctl   lalt   lmet          spc                  @td_rm ralt   left   down   rght
+  @td_fn lctl   lalt   lmet          spc                  rmet   ralt   left   down   rght
 )
 (deflayer numbers
   _ 
@@ -81,7 +85,7 @@
   _      grv    &      *      \(     -      +      kp7    kp8    kp9    kp/    f12    _      _
   _      ~      $      %      ^      \_     =      kp4    kp5    kp6    kp*    f13    _
   _      _      !      @      #      \)     kp0    kp1    kp2    kp3    _      _      _
-  _      _      _      _             _                    @tq_rm _      _      _      _   
+  @tq_fn _      _      _             _                    @tq_rm _      _      _      _   
 )
 (deflayer symbols
   _ 
@@ -89,5 +93,6 @@
   _      _      home   up     pgup   -      +      home   up     pgup   _      _      _      _
   _      {      left   down   rght   \_     =      left   down   rght   }      _      _
   _      [      end    _      pgdn   [      ]      end    _      pgdn   ]      _      _
-  _      _      _      _             _                    @tq_rm _      _      _      _   
+  @td_fn _      _      _             _                    @td_rm _      _      _      _   
 )
+
