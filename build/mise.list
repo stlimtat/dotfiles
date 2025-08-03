@@ -17,6 +17,9 @@ pipx:huggingface_hub
 pipx:pyright
 pre-commit
 python
+python
 ruff
 rust
+uv
+v
 yarn

@@ -48,11 +48,15 @@
   },
   "redhat.telemetry.enabled": true,
   "testing.followRunningTest": true,
-  "workbench.colorTheme": "Gruvbox Dark Hard",
+  "workbench.colorTheme": "Gruvbox Material Dark",
   "window.commandCenter": true,
   "extensions.ignoreRecommendations": true,
   "go.addTags": {
     "tags": "json,bson,koanf",
     "options": "json=omitempty,bson=omitempty,koanf=omitempty"
   },
+  "notebook.defaultFormatter": "anysphere.cursorpyright",
+  "jupyter.askForKernelRestart": false,
+  "notebook.lineNumbers": "on",
+  "terminal.integrated.defaultProfile.osx": "zsh",
 }
