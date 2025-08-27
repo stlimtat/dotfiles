@@ -59,4 +59,8 @@
   "jupyter.askForKernelRestart": false,
   "notebook.lineNumbers": "on",
   "terminal.integrated.defaultProfile.osx": "zsh",
+  "notebook.diff.overviewRuler": true,
+  "notebook.formatOnSave.enabled": true,
+  "notebook.insertToolbarLocation": "notebookToolbar",
+  "notebook.output.wordWrap": true,
 }
