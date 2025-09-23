@@ -1,66 +1,71 @@
 {
-  "editor.accessibilitySupport": "off",
-  "editor.fontFamily": "JetBrainsMonoNL Nerd Font, monospace",
-  "editor.fontLigatures": true,
-  "editor.fontWeight": "normal",
-  "editor.fontSize": 14,
-  "editor.insertSpaces": true,
-  "editor.formatOnSave": true,
-  "editor.lineHeight": 20,
-  "editor.lineNumbers": "relative",
-  "editor.tabSize": 2,
-  "extensions.experimental.affinity": {
-    "asvetliakov.vscode-neovim": 1
-  },
-  "github.gitProtocol": "ssh",
   "[go]": {
     "editor.codeActionsOnSave": {
       "source.organizeImports": "always"
     }
   },
+  "containers.composeCommand": "nerdctl compose",
+  "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
+  "containers.containerCommand": "nerdctl",
+  "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.dockercompose",
+  "editor.accessibilitySupport": "off",
+  "editor.fontFamily": "JetBrainsMonoNL Nerd Font, monospace",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 14,
+  "editor.fontWeight": "normal",
+  "editor.formatOnSave": true,
+  "editor.insertSpaces": true,
+  "editor.lineHeight": 20,
+  "editor.lineNumbers": "relative",
+  "editor.minimap.enabled": true,
+  "editor.tabSize": 2,
+  "extensions.ignoreRecommendations": true,
+  "github.gitProtocol": "ssh",
   "go.addTags": {
-    "tags": "json,bson,koanf",
-    "options": "json=omitempty,bson=omitempty,koanf=omitempty"
+    "options": "json=omitempty,bson=omitempty,koanf=omitempty",
+    "tags": "json,bson,koanf"
+  },
+  "go.addTags": {
+    "options": "json=omitempty,bson=omitempty,koanf=omitempty",
+    "tags": "json,bson,koanf"
   },
   "go.alternateTools": {
     "customFormatter": "golangci-lint"
   },
   "go.coverShowCounts": true,
   "go.diagnostic.vulncheck": "Imports",
-  "go.formatTool": "custom",
   "go.formatFlags": [
     "fmt",
     "--stdin"
   ],
-  "go.lintTool": "golangci-lint",
+  "go.formatTool": "gofumpt",
   "go.lintFlags": [
     "--path-mode=abs",
     "--fast-only"
   ],
+  "go.lintTool": "golangci-lint",
   "go.testEnvFile": "${workspaceFolder}/.env",
   "go.testEnvVars": {
     "HTTP_PROXY": "http://127.0.0.1:8080",
-    "HTTPS_PROXY": "http://127.0.0.1:8080",
+    "HTTPS_PROXY": "http://127.0.0.1:8080"
   },
   "go.testExplorer.packageDisplayMode": "nested",
   "gopls": {
     "ui.semanticTokens": true
   },
-  "redhat.telemetry.enabled": true,
-  "testing.followRunningTest": true,
-  "workbench.colorTheme": "Gruvbox Material Dark",
-  "window.commandCenter": true,
-  "extensions.ignoreRecommendations": true,
-  "go.addTags": {
-    "tags": "json,bson,koanf",
-    "options": "json=omitempty,bson=omitempty,koanf=omitempty"
-  },
-  "notebook.defaultFormatter": "anysphere.cursorpyright",
   "jupyter.askForKernelRestart": false,
-  "notebook.lineNumbers": "on",
-  "terminal.integrated.defaultProfile.osx": "zsh",
+  "notebook.defaultFormatter": "anysphere.cursorpyright",
   "notebook.diff.overviewRuler": true,
   "notebook.formatOnSave.enabled": true,
   "notebook.insertToolbarLocation": "notebookToolbar",
+  "notebook.lineNumbers": "on",
   "notebook.output.wordWrap": true,
+  "redhat.telemetry.enabled": true,
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "#terminal.integrated.profiles.osx#": "zsh",
+  "testing.followRunningTest": true,
+  "window.commandCenter": true,
+  "workbench.colorTheme": "Gruvbox Material Dark",
+  "cursor.composer.shouldChimeAfterChatFinishes": true,
+  "cursor.enable_agent_window_setting": true
 }

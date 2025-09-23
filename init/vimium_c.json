@@ -1,11 +1,11 @@
 {
 	"name": "Vimium C",
-	"@time": "25/05/2025, 18:54:59",
-	"time": 1748170499149,
+	"@time": "23/09/2025, 13:02:34",
+	"time": 1758603754199,
 	"environment": {
 		"extension": "2.12.2",
 		"platform": "mac",
-		"chromium": 136
+		"chromium": 140
 	},
 	"allBrowserUrls": true,
 	"exclusionRules": [
@@ -19,15 +19,7 @@
 		},
 		{
 			"passKeys": "",
-			"pattern": ":https://en.key-test.ru/"
-		},
-		{
-			"passKeys": "* ",
-			"pattern": ":https://first20hours.github.io/"
-		},
-		{
-			"passKeys": "",
-			"pattern": ":https://first20hours.github.io/"
+			"pattern": ":https://.*github.io/"
 		},
 		{
 			"passKeys": "",
@@ -40,6 +32,18 @@
 		{
 			"passKeys": "",
 			"pattern": ":https://.*.abnml.io"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://www.duolingo.com/"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://app.codility.com/"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://.*.github.com/"
 		}
 	],
 	"keyLayout": 2,

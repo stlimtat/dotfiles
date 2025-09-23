@@ -13,8 +13,6 @@ go:gotest.tools/gotestsum
 go:honnef.co/go/tools/cmd/staticcheck
 node
 npm:neovim
-pipx:huggingface_hub
-pipx:pyright
 pre-commit
 python
 python
