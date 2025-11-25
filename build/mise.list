@@ -16,6 +16,7 @@ npm:neovim
 pre-commit
 python
 python
+python
 ruff
 rust
 uv

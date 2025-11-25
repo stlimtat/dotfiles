@@ -37,3 +37,8 @@ export POETRY_HOME=${HOME}/go/pypoetry/data
 
 # PATH extension
 export PATH=${HOME}/.cargo/bin:${PATH}
+
+# openvinotoolkit
+# https://github.com/openvinotoolkit/stable-diffusion-webui/wiki/Installation-on-Intel-Silicon
+export PYTORCH_TRACING_MODE=TORCHFX
+export COMMANDLINE_ARGS="--skip-torch-cuda-test --precision full --no-half"

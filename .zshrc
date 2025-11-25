@@ -83,3 +83,6 @@ end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load completion init...${time_taken}ms...Done"
 
+
+# Added by Antigravity
+export PATH="/Users/st_lim/.antigravity/antigravity/bin:$PATH"

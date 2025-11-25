@@ -67,5 +67,8 @@
   "window.commandCenter": true,
   "workbench.colorTheme": "Gruvbox Material Dark",
   "cursor.composer.shouldChimeAfterChatFinishes": true,
-  "cursor.enable_agent_window_setting": true
+  "cursor.enable_agent_window_setting": true,
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  }
 }
