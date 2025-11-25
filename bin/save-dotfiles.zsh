@@ -7,14 +7,15 @@ rsync -ar --progress \
   ${HOME}/.oh-my-zsh/custom/ \
   ${DOTFILES_DIR}/omz/
 rsync -ar --progress ${HOME}/bin/*.zsh ${DOTFILES_DIR}/bin/
-for s in Code Cursor; do
+# Sync the settings for vscode and cursor and antigravity
+for s in Antigravity Code Cursor; do
   rsync -ar --progress \
     ${HOME}/Library/Application\ Support/${s}/User/{settings.json,keybindings.json} \
     ${DOTFILES_DIR}/Library/Application\ Support/${s}/User/
 done
-rsync -ar --progress \
-  ${HOME}/Library/Application\ Support/{Code,Cursor}/User/{settings.json,keybindings.json} \
-  ${DOTFILES_DIR}/Library/Application\ Support/User/
+# rsync -ar --progress \
+#   ${HOME}/Library/Application\ Support/{antigravity,Code,Cursor}/User/{settings.json,keybindings.json} \
+#   ${DOTFILES_DIR}/Library/Application\ Support/User/
 mise list | cut -d' ' -f1 > ${DOTFILES_DIR}/build/mise.list
 for s in .config/gh .config/nvim/after .config/nvim/lua .config/karabiner/karabiner.json .config/wezterm .config/zsh .ssh/config; do
   if [[ -d "${HOME}/${s}" ]]; then
