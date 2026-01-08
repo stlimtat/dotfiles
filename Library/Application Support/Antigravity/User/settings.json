@@ -69,5 +69,15 @@
   },
   "debug.console.fontSize": 14,
   "scm.inputFontSize": 14,
-  "terminal.integrated.fontSize": 14
+  "terminal.integrated.fontSize": 14,
+  "python.languageServer": "Default",
+  "antigravity.marketplaceGalleryItemURL": "https://marketplace.visualstudio.com/items",
+  "antigravity.marketplaceExtensionGalleryServiceURL": "https://marketplace.visualstudio.com/_apis/public/gallery",
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-21",
+      "path": "/Users/st_lim/.local/share/mise/installs/java/21.0.2",
+      "default": true
+    }
+  ]
 }

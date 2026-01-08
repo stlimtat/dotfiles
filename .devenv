@@ -23,6 +23,9 @@ else
   export PROMPT_COMMAND="resize &>/dev/null ; $PROMPT_COMMAND"
 fi
 
+# openjdk
+# export JAVA_HOME=/usr/local/opt/openjdk
+
 # For jediterm - intellij terminal
 # Using kubectl
 export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
@@ -36,7 +39,9 @@ export POETRY_CONFIG_DIR=${HOME}/go/pypoetry/config
 export POETRY_HOME=${HOME}/go/pypoetry/data
 
 # PATH extension
-export PATH=${HOME}/.cargo/bin:${PATH}
+PATH=${HOME}/.cargo/bin:${PATH}
+# PATH=${JAVA_HOME}/bin:${PATH}
+export PATH 
 
 # openvinotoolkit
 # https://github.com/openvinotoolkit/stable-diffusion-webui/wiki/Installation-on-Intel-Silicon
