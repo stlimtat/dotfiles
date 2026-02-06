@@ -27,3 +27,7 @@ export PATH=.$(printf ":%s" "${PATH_LIST[@]}")
 export PYTHONSTARTUP=/Users/st_lim/.py-prompts/themes/time.py
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/st_lim/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)

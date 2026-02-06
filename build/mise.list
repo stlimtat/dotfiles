@@ -1,4 +1,6 @@
 go
+go
+go:github.com/AlekSi/gocov-xml
 go:github.com/cweill/gotests/gotests
 go:github.com/fatih/gomodifytags
 go:github.com/go-delve/delve/cmd/dlv
@@ -11,7 +13,9 @@ go:golang.org/x/tools/gopls
 go:golang.org/x/vuln/cmd/govulncheck
 go:gotest.tools/gotestsum
 go:honnef.co/go/tools/cmd/staticcheck
+go:mvdan.cc/gofumpt
 gradle
+helm
 java
 node
 npm:neovim

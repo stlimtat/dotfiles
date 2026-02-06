@@ -86,3 +86,7 @@ echo "Load completion init...${time_taken}ms...Done"
 
 # Added by Antigravity
 export PATH="/Users/st_lim/.antigravity/antigravity/bin:$PATH"
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/st_lim/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
