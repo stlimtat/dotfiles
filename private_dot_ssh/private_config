@@ -1,0 +1,29 @@
+# Added by OrbStack: 'orb' SSH host for Linux machines
+# This only works if it's at the top of ssh_config (before any Host blocks).
+# This won't be added again if you remove it.
+Include ~/.orbstack/ssh/config
+
+
+Include /Users/st_lim/.ssh/1Password/config
+Host *
+	IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+Include /Users/st_lim/.colima/ssh_config
+Host 192.168.25.100 omv
+  Port 8022
+  User st_lim
+
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/gh-stlimtat.pub
+  IdentitiesOnly yes
+Host gh-stlimtat
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/gh-stlimtat.pub
+  IdentitiesOnly yes
+# Host gh-syberai
+#   HostName github.com
+#   User git
+#   IdentityFile ~/.ssh/gh-syberai.pub
+#   IdentitiesOnly yes
