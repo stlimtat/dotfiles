@@ -21,6 +21,7 @@ brewdefault:
     - "powerlevel10k"
     - "ripgrep"
     - "ssh-copy-id"
+    - "television"
     - "the_silver_searcher"
     - "tree"
     - "usage"
@@ -34,6 +35,7 @@ brewdefault:
   casks:
     - "1password"
     - "1password-cli"
+    - "nikitabobko/tap/aerospace"
     - "alt-tab"
     - "bit-slicer"
     - "brave-browser"
