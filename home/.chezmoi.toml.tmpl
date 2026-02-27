@@ -1,16 +1,22 @@
 {{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $brewPath := "/opt/homebrew" -}}
+{{- $dateCmd := "gdate" -}}
 {{- $computerName := output "scutil" "--get" "ComputerName" | trim }}
 {{- $cpuCores := 1 }}
 {{- $cpuThreads := 1 }}
 {{- if eq .chezmoi.os "darwin" }}
 {{-   $cpuCores = (output "sysctl" "-n" "hw.physicalcpu_max") | trim | atoi }}
 {{-   $cpuThreads = (output "sysctl" "-n" "hw.logicalcpu_max") | trim | atoi }}
+{{-   if eq .chezmoi.arch "amd64" }}
+{{-     $brewPath = "/usr/local" }}
+{{-   end }}
 {{- else if eq .chezmoi.os "linux" }}
 {{-   $cpuCores = (output "sh" "-c" "lscpu --online --parse | grep --invert-match '^#' | sort --field-separator=',' --key='2,4' --unique | wc --lines") | trim | atoi }}
 {{-   $cpuThreads = (output "sh" "-c" "lscpu --online --parse | grep --invert-match '^#' | wc --lines") | trim | atoi }}
 {{- end }}
 # MacOS build version: {{ output "sw_vers" "--buildVersion" }}
 [data]
+    brewPath = {{ $brewPath | quote }}
     email = {{ $email | quote }}
 
 [data.cpu]
