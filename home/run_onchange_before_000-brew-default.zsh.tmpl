@@ -1,0 +1,18 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/zsh
+
+brew bundle --file=/dev/stdin <<EOF
+{{ range .brewdefault.taps -}}
+tap {{ . | quote }}
+{{ end -}}
+{{ range .brewdefault.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+{{ range .brewdefault.casks -}}
+cask {{ . | quote }}
+{{ end -}}
+{{ range .brewdefault.mas -}}
+mas {{ .keyname | quote }}, id={{ .keyid | quote }}
+{{ end -}}
+EOF
+{{ end -}}

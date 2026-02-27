@@ -1,0 +1,15 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/zsh
+
+brew bundle --file=/dev/stdin <<EOF
+{{ range .brewdev.taps -}}
+tap {{ . | quote }}
+{{ end -}}
+{{ range .brewdev.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+{{ range .brewdev.casks -}}
+cask {{ . | quote }}
+{{ end -}}
+EOF
+{{ end -}}

@@ -1,0 +1,14 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/zsh
+
+TO_IGNORE=(curl)
+
+for file in {{ .chezmoi.homeDir }}/.oh-my-zsh/custom/completions/_*
+do
+  completion_cmd=$(basename $file)
+  if [[ ${TO_IGNORE[(ie)completion_cmd]} -gt ${#TO_IGNORE} ]]; then
+    echo "Running ${completion_cmd} completion zsh"
+    ${completion_cmd} completion zsh > ${file}
+  fi
+done
+{{ end -}}
