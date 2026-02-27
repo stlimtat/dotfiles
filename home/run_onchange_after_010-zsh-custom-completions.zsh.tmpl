@@ -1,14 +1,16 @@
 {{- if eq .chezmoi.os "darwin" -}}
 #!/bin/zsh
 
-TO_IGNORE=(curl)
+TO_IGNORE=(cobra-cli curl pytest)
 
 for file in {{ .chezmoi.homeDir }}/.oh-my-zsh/custom/completions/_*
 do
-  completion_cmd=$(basename $file)
-  if [[ ${TO_IGNORE[(ie)completion_cmd]} -gt ${#TO_IGNORE} ]]; then
-    echo "Running ${completion_cmd} completion zsh"
-    ${completion_cmd} completion zsh > ${file}
+  completion_cmd=$(basename $file | cut -c2- )
+  if command -v ${completion_cmd} &> /dev/null; then
+    if [[ ${TO_IGNORE[(ie)$completion_cmd]} -gt ${#TO_IGNORE} ]]; then
+      echo "Running ${completion_cmd} completion zsh"
+      ${completion_cmd} completion zsh > ${file}
+    fi
   fi
 done
 {{ end -}}
