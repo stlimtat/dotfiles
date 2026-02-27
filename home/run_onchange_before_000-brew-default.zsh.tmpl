@@ -12,7 +12,7 @@ brew {{ . | quote }}
 cask {{ . | quote }}
 {{ end -}}
 {{ range .brewdefault.mas -}}
-mas {{ .keyname | quote }}, id={{ .keyid | quote }}
+mas {{ .keyname | quote }}, id: {{- .keyid }}
 {{ end -}}
 EOF
 {{ end -}}
