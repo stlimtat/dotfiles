@@ -1,4 +1,5 @@
 {{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $hostname := promptStringOnce . "hostname" "Hostname" -}}
 {{- $brewPath := "/opt/homebrew" -}}
 {{- $dateCmd := "gdate" -}}
 {{- $computerName := output "scutil" "--get" "ComputerName" | trim }}
@@ -14,10 +15,14 @@
 {{-   $cpuCores = (output "sh" "-c" "lscpu --online --parse | grep --invert-match '^#' | sort --field-separator=',' --key='2,4' --unique | wc --lines") | trim | atoi }}
 {{-   $cpuThreads = (output "sh" "-c" "lscpu --online --parse | grep --invert-match '^#' | wc --lines") | trim | atoi }}
 {{- end }}
+{{- if not (eq $hostname $computerName) }}
+# Brand new computer ({{ $hostname | quote }}) vs ({{ $computerName | quote }})
+{{- end }}
 # MacOS build version: {{ output "sw_vers" "--buildVersion" }}
 [data]
     brewPath = {{ $brewPath | quote }}
     email = {{ $email | quote }}
+    hostname = {{ $hostname | quote }}
 
 [data.cpu]
     cores = {{ $cpuCores }}
