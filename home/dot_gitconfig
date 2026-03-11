@@ -91,21 +91,21 @@
   followTags = true
   autoSetupRemote = true
 # URL shorthands
-; [url "gh-syberai:syber-ai-corp/"]
-;   insteadOf = "https://github.com/syber-ai-corp/"
-[url "gh-stlimtat:stlimtat/"]
-  insteadOf = "https://github.com/stlimtat/"
-  insteadOf = "gh-st:"
-  insteadOf = "stlimtat:"
+[url "gh-pl:protoslabs-sg"]
+  insteadOf = "https://github.com/protoslabs-sg"
+[url "gh-st:stlimtat"]
+  insteadOf = "https://github.com/stlimtat"
+[url "gh-syberai:syber-ai-corp/"]
+  insteadOf = "https://github.com/syber-ai-corp/"
 [url "git@github.com:"]
   insteadOf = "gh:"
   insteadOf = "https://github.com/"
   pushInsteadOf = "github:"
   pushInsteadOf = "git://github.com/"
-; [url "git@gitlab.com:"]
-;   insteadOf = "gl:"
-;   pushInsteadOf = "gitlab:"
-;   pushInsteadOf = "git://gitlab.com/"
+[url "gitlab.com:"]
+  insteadOf = "gl:"
+  pushInsteadOf = "gitlab:"
+  pushInsteadOf = "git://gitlab.com/"
 [user]
 	name = Swee Tat Lim
 	email = st_lim+github@stlim.net
