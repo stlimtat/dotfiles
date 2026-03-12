@@ -47,7 +47,7 @@ brewdefault:
     - "font-arial"
     - "font-jetbrains-mono-nerd-font"
     - "font-meslo-lg-nerd-font"
-    - "font-microsoft-office"
+    # - "font-microsoft-office"
     - "freetube"
     - "gimp"
     - "jordanbaird-ice"

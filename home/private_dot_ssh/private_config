@@ -4,7 +4,7 @@
 Include ~/.orbstack/ssh/config
 Include /Users/st_lim/.ssh/1Password/config
 Host *
-	IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 Include /Users/st_lim/.colima/ssh_config
 Host 192.168.25.100 omv
   Port 8022
@@ -27,5 +27,5 @@ Host gh-syberai
 Host gitlab.com
   HostName gitlab.com
   User git
-  IdentityFile ~/.ssh/gitlab.pub
+  IdentityFile ~/.ssh/gl-st_lim.pub
   IdentitiesOnly yes
