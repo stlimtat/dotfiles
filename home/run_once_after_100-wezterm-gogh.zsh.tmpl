@@ -1,0 +1,24 @@
+{{- if eq .chezmoi.os "Darwin" }}
+#!/usr/bin/env zsh
+
+TERMINAL=wezterm
+THEMES=(gruvbox-material-dark)
+TMPDIR=/tmp
+
+GOGH_APPLY_SCRIPT=${TMPDIR}/apply-colors.sh
+# Download apply script
+curl -o ${GOGH_APPLY_SCRIPT} https://github.com/Gogh-Co/Gogh/raw/master/apply-colors.sh
+
+
+for theme in $THEMES; do
+# Download desired themes from ./installs/ like this:
+  curl -o ${TMPDIR}/color.sh https://github.com/Gogh-Co/Gogh/raw/master/installs/${theme}.sh
+
+# Control Gogh behavior with the following:
+  TERMINAL=wezterm
+  GOGH_NONINTERACTIVE=
+  GOGH_USE_NEW_THEME=1
+  # Apply downloaded theme (apply script must be in the same folder)
+  bash ${TMPDIR}/color.sh
+done
+{{- end }}
