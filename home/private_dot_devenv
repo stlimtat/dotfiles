@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # mise 
 start_time=$(gdate +%s%3N)
-eval "$(/usr/local/bin/mise activate zsh)"
+eval "$($(brew --prefix)/bin/mise activate zsh)"
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load mise...${time_taken}ms...Done"
@@ -15,23 +15,6 @@ export NODE_REPL_MODE='sloppy';
 
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8';
-
-# For jediterm - intellij terminal
-if [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]; then
-  export ZSH_TMUX_AUTOSTART=true
-else
-  export PROMPT_COMMAND="resize &>/dev/null ; $PROMPT_COMMAND"
-fi
-
-# openjdk
-# export JAVA_HOME=/usr/local/opt/openjdk
-
-# For jediterm - intellij terminal
-# Using kubectl
-export KUBECTL_EXTERNAL_DIFF="colordiff -N -u"
-
-# Environment for bazel goprivate
-export GOPRIVATE="github.com/syber-ai-corp/*"
 
 # POETRY SETTINGS
 export POETRY_CACHE_DIR=${HOME}/go/pypoetry/cache

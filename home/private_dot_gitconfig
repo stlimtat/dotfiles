@@ -17,7 +17,6 @@
   p = pull --recurse-submodules
   # Push to remote
   # po = push --force --set-upstream origin $(git branch | grep \\* | cut -d ' ' -f2)
-
 [apply]
   # Detect whitespace errors when applying a patch
   whitespace = fix

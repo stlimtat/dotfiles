@@ -39,6 +39,7 @@ brewdev:
     - "antigravity"
     - "claude-code"
     - "github"
+    - "orbstack"
   taps:
     - "adoptopenjdk/openjdk"
     - "aws/tap"

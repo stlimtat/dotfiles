@@ -4,10 +4,20 @@
       "source.organizeImports": "always"
     }
   },
-  "containers.composeCommand": "nerdctl compose",
+  "antigravity.marketplaceGalleryItemURL": "https://marketplace.visualstudio.com/items",
+  "antigravity.marketplaceExtensionGalleryServiceURL": "https://marketplace.visualstudio.com/_apis/public/gallery",
   "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
-  "containers.containerCommand": "nerdctl",
   "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.dockercompose",
+  "coverage-gutters.coverageFileNames": [
+    "lcov.info",
+    "cov.xml",
+    "coverage.xml",
+    "cobertura.xml",
+    "jacoco.xml",
+    "coverage.cobertura.xml"
+  ],
+  "coverage-gutters.showLineCoverage": true
+  "debug.console.fontSize": 14,
   "editor.accessibilitySupport": "off",
   "editor.fontFamily": "JetBrainsMonoNL Nerd Font, monospace",
   "editor.fontLigatures": true,
@@ -19,6 +29,9 @@
   "editor.lineNumbers": "relative",
   "editor.minimap.enabled": true,
   "editor.tabSize": 2,
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
   "extensions.ignoreRecommendations": true,
   "github.gitProtocol": "ssh",
   "go.addTags": {
@@ -50,36 +63,6 @@
     "ui.semanticTokens": true
   },
   "jupyter.askForKernelRestart": false,
-  "notebook.defaultFormatter": "anysphere.cursorpyright",
-  "notebook.diff.overviewRuler": true,
-  "notebook.formatOnSave.enabled": true,
-  "notebook.insertToolbarLocation": "notebookToolbar",
-  "notebook.lineNumbers": "on",
-  "notebook.output.wordWrap": true,
-  "redhat.telemetry.enabled": true,
-  "terminal.integrated.defaultProfile.osx": "zsh",
-  "#terminal.integrated.profiles.osx#": "zsh",
-  "testing.followRunningTest": true,
-  "window.commandCenter": true,
-  "workbench.colorTheme": "Gruvbox Dark Medium",
-  "cursor.composer.shouldChimeAfterChatFinishes": true,
-  "cursor.enable_agent_window_setting": true,
-  "extensions.experimental.affinity": {
-    "asvetliakov.vscode-neovim": 1
-  },
-  "debug.console.fontSize": 14,
-  "scm.inputFontSize": 14,
-  "terminal.integrated.fontSize": 14,
-  "python.languageServer": "Default",
-  "antigravity.marketplaceGalleryItemURL": "https://marketplace.visualstudio.com/items",
-  "antigravity.marketplaceExtensionGalleryServiceURL": "https://marketplace.visualstudio.com/_apis/public/gallery",
-  "java.configuration.runtimes": [
-    {
-      "name": "JavaSE-21",
-      "path": "/Users/st_lim/.local/share/mise/installs/java/21.0.2",
-      "default": true
-    }
-  ],
   "koverage.coverageFileNames": [
     "lcov.info",
     "cov.xml",
@@ -87,13 +70,19 @@
     "coverage.xml",
     "jacoco.xml",
   ],
-  "coverage-gutters.coverageFileNames": [
-    "lcov.info",
-    "cov.xml",
-    "coverage.xml",
-    "cobertura.xml",
-    "jacoco.xml",
-    "coverage.cobertura.xml"
-  ],
-  "coverage-gutters.showLineCoverage": true
+  "notebook.defaultFormatter": "anysphere.cursorpyright",
+  "notebook.diff.overviewRuler": true,
+  "notebook.formatOnSave.enabled": true,
+  "notebook.insertToolbarLocation": "notebookToolbar",
+  "notebook.lineNumbers": "on",
+  "notebook.output.wordWrap": true,
+  "python.languageServer": "Default",
+  "redhat.telemetry.enabled": true,
+  "scm.inputFontSize": 14,
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.fontSize": 14,
+  "#terminal.integrated.profiles.osx#": "zsh",
+  "testing.followRunningTest": true,
+  "window.commandCenter": true,
+  "workbench.colorTheme": "Gruvbox Dark Medium",
 }
