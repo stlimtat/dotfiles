@@ -1,6 +1,5 @@
 brewdev:
   brews:
-    - "colima"
     - "docker"
     - "docker-buildx"
     - "docker-completion"
