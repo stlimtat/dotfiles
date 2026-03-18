@@ -1,0 +1,30 @@
+{
+  "env": {
+    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
+    "SSH_AUTH_SOCK": "/Users/st_lim/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+  },
+  "enabledPlugins": {
+    "code-review@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "hookify@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true,
+    "semgrep@claude-plugins-official": true,
+    "sonatype-guide@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "code-review-graph": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/tirth8205/code-review-graph.git"
+      }
+    },
+    "thedotmack": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/thedotmack/claude-mem.git"
+      }
+    }
+  }
+}
