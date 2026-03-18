@@ -1,4 +1,8 @@
 {
+  "attribution": {
+    "commit": "Generated with AI\n\nCo-Authored-By: Swee Tat Lim <swee_tat_lim@protoslabs.io>",
+    "pr": "Generated with AI\n\nCo-Authored-By: Swee Tat Lim <swee_tat_lim@protoslabs.io>"
+  },
   "env": {
     "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
     "SSH_AUTH_SOCK": "/Users/st_lim/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
@@ -11,20 +15,55 @@
     "hookify@claude-plugins-official": true,
     "pr-review-toolkit@claude-plugins-official": true,
     "semgrep@claude-plugins-official": true,
-    "sonatype-guide@claude-plugins-official": true
+    "sonatype-guide@claude-plugins-official": true,
+    "code-review-graph@code-review-graph": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "code-review-graph": {
       "source": {
-        "source": "git",
-        "url": "https://github.com/tirth8205/code-review-graph.git"
+        "source": "github",
+        "repo": "tirth8205/code-review-graph"
+      }
+    },
+    "superpowers": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers"
       }
     },
     "thedotmack": {
       "source": {
-        "source": "git",
-        "url": "https://github.com/thedotmack/claude-mem.git"
+        "source": "github",
+        "repo": "thedotmack/claude-mem"
       }
+    }
+  },
+  "permissions": {
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Read(./config/credentials.json)",
+      "Read(./build)"
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "excludedCommands": ["docker"],
+    "filesystem": {
+      "allowWrite": ["//tmp/build", "~/.kube"],
+      "denyRead": ["~/.aws/credentials"]
+    },
+    "network": {
+      "allowedDomains": ["github.com", "*.npmjs.org", "registry.yarnpkg.com"],
+      "allowUnixSockets": [
+        "/var/run/docker.sock"
+      ],
+      "allowLocalBinding": true
     }
   }
 }
