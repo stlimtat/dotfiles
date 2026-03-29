@@ -3,10 +3,7 @@
     "commit": "Generated with AI\n\nCo-Authored-By: Swee Tat Lim <swee_tat_lim@protoslabs.io>",
     "pr": "Generated with AI\n\nCo-Authored-By: Swee Tat Lim <swee_tat_lim@protoslabs.io>"
   },
-  "env": {
-    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
-    "SSH_AUTH_SOCK": "/Users/st_lim/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-  },
+  "effortLevel" : "high",
   "enabledPlugins": {
     "code-review@claude-plugins-official": true,
     "commit-commands@claude-plugins-official": true,
@@ -20,6 +17,12 @@
     "pyright-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
     "playwright@claude-plugins-official": true
+  },
+  "env": {
+    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "SSH_AUTH_SOCK": "/Users/st_lim/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
   },
   "extraKnownMarketplaces": {
     "code-review-graph": {
@@ -50,6 +53,8 @@
       "Read(./build)"
     ]
   },
+  "prefersReducedMotion" : true,
+  "promptSuggestionEnabled": false,
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
@@ -65,5 +70,6 @@
       ],
       "allowLocalBinding": true
     }
-  }
+  },
+  "terminalProgressBarEnabled" : false
 }
