@@ -1,0 +1,4 @@
+--trim-filenames 80
+--write-automatic-subs
+--sub-langs "en.*,zh.*"
+--progress

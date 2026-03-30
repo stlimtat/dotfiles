@@ -1,11 +1,23 @@
-(defcfg 
+;; See keymap/tutorial.kbd for a more complete tutorial
+(defcfg
   input (iokit-name "Apple Internal Keyboard / Trackpad")
-  output (kext) 
+  output (kext)
   fallthrough true
 )
-
+(defsrc
+  esc    f1     f2     f3     f4     f5     f6     f7     f8     f9     f10    f11    f12
+  grv    1      2      3      4      5      6      7      8      9      0      -      =      bspc
+  tab    q      w      e      r      t      y      u      i      o      p      [      ]      \
+  caps   a      s      d      f      g      h      j      k      l      ;      '      ret
+  lsft   z      x      c      v      b      n      m      ,      .      /      rsft   up
+  fn     lctl   lalt   lmet          spc                  rmet   ralt   left   down   rght
+)
+;; Below, I use `around' to compose `layer-toggle' with `fn' (instead
+;; of using `layer-toggle' directly) so that the `fn' keypress
+;; actually gets emitted. This matters when using an application that
+;; can use `fn' as a modifier (like Emacs).
 (defalias
-    fnt (around (layer-toggle function) fn)
+    fnt (around (layer-toggle numbers) fn)
     s_lb (tap-hold-next-release 200 \( lsft)
     s_rb (tap-hold-next-release 200 \) rsft)
 
@@ -14,7 +26,7 @@
     m_d (tap-hold-next-release 200 d lmet)
     s_f (tap-hold-next-release 200 f lsft)
   
-    lf (tap-hold-next-release 200 down fn)
+    lf (tap-hold-next-release 200 down @fnt)
     lc (tap-hold-next-release 200 up lctl)
     la (tap-hold-next-release 200 down lalt)
     lm (tap-hold-next-release 200 up lmet)
@@ -65,15 +77,6 @@
     trm_d (tap-hold-next-release 200 @def rmet)
     trm_q (tap-hold-next-release 200 @qwe rmet)
 )
-
-(defsrc
-  esc    brdn   brup   lp     mctl   bldn   blup   prev   pp     next   mute   vold   volu
-  grv    1      2      3      4      5      6      7      8      9      0      -      =      bspc
-  tab    q      w      e      r      t      y      u      i      o      p      [      ]      \
-  caps   a      s      d      f      g      h      j      k      l      ;      '      ret
-  lsft   z      x      c      v      b      n      m      ,      .      /      rsft   up
-  fn     lctl   lalt   lmet          spc                  rmet   ralt   left   down   rght
-)
 (deflayer default
   esc    brdn   brup   lp     mctl   bldn   blup   prev   pp     next   mute   vold   volu
   grv    1      2      3      4      5      6      7      8      9      0      -      =      bspc
@@ -91,18 +94,19 @@
   @lf    @lc    @la    @lm           spc                  @rm    @ra    left   down   rght
 )
 (deflayer numbers
-  -      f1     f2     f3     f4     f5     f6     f7     f8     f9     f10    f11    f12
+  _      f1     f2     f3     f4     f5     f6     f7     f8     f9     f10    f11    f12
   _      f1     f2     f3     f4     f5     f6     f7     f8     f9     f10    f11    _      _
   _      grv    &      *      \(     -      +      kp7    kp8    kp9    kp/    f12    _      _
   _      ~      $      %      ^      \_     =      kp4    kp5    kp6    kp*    f13    _
   _      _      !      @      #      \)     kp0    kp1    kp2    kp3    _      _      _
-  @lf    @lc    @la    @lm           spc                  @rm    @ra    left   down   rght
+  _      _      _      _             _                    _      _      _      _      _
 )
 (deflayer symbols
-  -      f1     f2     f3     f4     f5     f6     f7     f8     f9     f10    f11    f12
+  _      f1     f2     f3     f4     f5     f6     f7     f8     f9     f10    f11    f12
   _      _      _      _      _      _      _      _      _      _      _      _      _      _
   _      _      home   up     pgup   -      +      home   up     pgup   _      _      _      _
   _      {      left   down   rght   \_     =      left   down   rght   }      _      _
   _      [      end    _      pgdn   [      ]      end    _      pgdn   ]      _      _
-  @lf    @lc    @la    @lm           spc                  @rm    @ra    left   down   rght
+  _      _      _      _             _                    _      _      _      _      _
 )
+
