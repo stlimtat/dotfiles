@@ -18,6 +18,6 @@ export PATH
 export PATH="/Users/st_lim/.antigravity/antigravity/bin:$PATH"
 
 # bun
-export BUN_INSTALL="$HOME/.bun"
+export BUN_INSTALL=$(mise where bun)
 export PATH="$BUN_INSTALL/bin:$PATH"
-alias claude-mem='/Users/st_lim/.bun/bin/bun "/Users/st_lim/.claude/plugins/cache/thedotmack/claude-mem/10.6.0/scripts/worker-service.cjs"'                                      │    │
+alias claude-mem='${BUN_INSTALL}/bin/bun "${HOME}/.claude/plugins/cache/thedotmack/claude-mem/10.6.0/scripts/worker-service.cjs"'                                      │    │
