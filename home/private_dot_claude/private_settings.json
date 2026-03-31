@@ -84,5 +84,18 @@
   "promptSuggestionEnabled": false,
   "prefersReducedMotion": true,
   "autoMemoryEnabled": true,
-  "terminalProgressBarEnabled": false
+  "terminalProgressBarEnabled": false,
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/st_lim/.claude/hooks/rtk-rewrite.sh"
+          }
+        ]
+      }
+    ]
+  }
 }
