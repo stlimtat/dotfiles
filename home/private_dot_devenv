@@ -6,27 +6,18 @@ end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load mise...${time_taken}ms...Done"
 
-# Enable persistent REPL history for `node`.
-export NODE_REPL_HISTORY=~/.node_history;
-# Allow 32³ entries; the default is 1000.
-export NODE_REPL_HISTORY_SIZE='32768';
-# Use sloppy mode by default, matching web browsers.
-export NODE_REPL_MODE='sloppy';
-
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8';
-
-# POETRY SETTINGS
-export POETRY_CACHE_DIR=${HOME}/go/pypoetry/cache
-export POETRY_CONFIG_DIR=${HOME}/go/pypoetry/config
-export POETRY_HOME=${HOME}/go/pypoetry/data
 
 # PATH extension
 PATH=${HOME}/.cargo/bin:${PATH}
 # PATH=${JAVA_HOME}/bin:${PATH}
 export PATH 
 
-# openvinotoolkit
-# https://github.com/openvinotoolkit/stable-diffusion-webui/wiki/Installation-on-Intel-Silicon
-export PYTORCH_TRACING_MODE=TORCHFX
-export COMMANDLINE_ARGS="--skip-torch-cuda-test --precision full --no-half"
+# Added by Antigravity
+export PATH="/Users/st_lim/.antigravity/antigravity/bin:$PATH"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+alias claude-mem='/Users/st_lim/.bun/bin/bun "/Users/st_lim/.claude/plugins/cache/thedotmack/claude-mem/10.6.0/scripts/worker-service.cjs"'                                      │    │
