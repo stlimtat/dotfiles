@@ -27,7 +27,7 @@ sudo scutil --set ComputerName {{ .chezmoi.hostname }}
 sudo scutil --set HostName {{ .chezmoi.hostname }}
 sudo scutil --set LocalHostName {{ .chezmoi.hostname }} 
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string {{ .chezmoi.hostname }}
-sudo systemsetup -setcomputername {{ .chezmoi.hostname }} >/dev/null
+## sudo systemsetup -setcomputername {{ .chezmoi.hostname }} >/dev/null
 {{ end -}}
  
 # Disable the sound effects on boot
