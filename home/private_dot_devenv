@@ -21,3 +21,5 @@ export PATH="/Users/st_lim/.antigravity/antigravity/bin:$PATH"
 export BUN_INSTALL=$(mise where bun)
 export PATH="$BUN_INSTALL/bin:$PATH"
 alias claude-mem='${BUN_INSTALL}/bin/bun "${HOME}/.claude/plugins/cache/thedotmack/claude-mem/10.6.0/scripts/worker-service.cjs"'                                      │    │
+
+export GITHUB_PERSONAL_ACCESS_TOKEN=$(op read "op://Employee/protoslabs-sg - plsweetat/token")

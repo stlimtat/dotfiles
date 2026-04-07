@@ -1,2 +1,15 @@
-{}
-
+{
+	"account_id": "TE6XPPQEUZD5TCALKOJ5Q2L2XA",
+	"entrypoint": [
+		"gh"
+	],
+	"credentials": [
+		{
+			"plugin": "github",
+			"credential_type": "personal_access_token",
+			"usage_id": "personal_access_token",
+			"vault_id": "zhb2htpfllyby3cabuodsnhfom",
+			"item_id": "spo4noar4xqjixp3lwbxjig5bm"
+		}
+	]
+}

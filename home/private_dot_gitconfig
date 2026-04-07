@@ -107,5 +107,5 @@
   pushInsteadOf = "git://gitlab.com/"
 [user]
 	name = Swee Tat Lim
-	email = st_lim+github@stlim.net
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILg+u5/3Re9HcED8Cd5fWsg/1skz0I6IqhjFDcq1nIQN
+	email = swee_tat_lim@protoslabs.io
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIITdxdx+GQbI8npYIh4J4QGaXPBpSvvPr6rMP6LGLySH

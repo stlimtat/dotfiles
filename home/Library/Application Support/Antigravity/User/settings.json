@@ -1,8 +1,8 @@
 {
   "[go]": {
     "editor.codeActionsOnSave": {
-      "source.organizeImports": "always"
-    }
+      "source.organizeImports": "always",
+    },
   },
   "antigravity.marketplaceGalleryItemURL": "https://marketplace.visualstudio.com/items",
   "antigravity.marketplaceExtensionGalleryServiceURL": "https://marketplace.visualstudio.com/_apis/public/gallery",
@@ -14,9 +14,9 @@
     "coverage.xml",
     "cobertura.xml",
     "jacoco.xml",
-    "coverage.cobertura.xml"
+    "coverage.cobertura.xml",
   ],
-  "coverage-gutters.showLineCoverage": true
+  "coverage-gutters.showLineCoverage": true,
   "debug.console.fontSize": 14,
   "editor.accessibilitySupport": "off",
   "editor.fontFamily": "JetBrainsMonoNL Nerd Font, monospace",
@@ -30,37 +30,31 @@
   "editor.minimap.enabled": true,
   "editor.tabSize": 2,
   "extensions.experimental.affinity": {
-    "asvetliakov.vscode-neovim": 1
+    "asvetliakov.vscode-neovim": 1,
   },
   "extensions.ignoreRecommendations": true,
   "github.gitProtocol": "ssh",
   "go.addTags": {
     "options": "json=omitempty,bson=omitempty,koanf=omitempty",
-    "tags": "json,bson,koanf"
+    "tags": "json,bson,koanf",
   },
   "go.alternateTools": {
-    "customFormatter": "golangci-lint"
+    "customFormatter": "golangci-lint",
   },
   "go.coverShowCounts": true,
   "go.diagnostic.vulncheck": "Imports",
-  "go.formatFlags": [
-    "fmt",
-    "--stdin"
-  ],
+  "go.formatFlags": ["fmt", "--stdin"],
   "go.formatTool": "gofumpt",
-  "go.lintFlags": [
-    "--path-mode=abs",
-    "--fast-only"
-  ],
+  "go.lintFlags": ["--path-mode=abs", "--fast-only"],
   "go.lintTool": "golangci-lint",
   "go.testEnvFile": "${workspaceFolder}/.env",
   "go.testEnvVars": {
     "HTTP_PROXY": "http://127.0.0.1:8080",
-    "HTTPS_PROXY": "http://127.0.0.1:8080"
+    "HTTPS_PROXY": "http://127.0.0.1:8080",
   },
   "go.testExplorer.packageDisplayMode": "nested",
   "gopls": {
-    "ui.semanticTokens": true
+    "ui.semanticTokens": true,
   },
   "jupyter.askForKernelRestart": false,
   "koverage.coverageFileNames": [
@@ -85,4 +79,9 @@
   "testing.followRunningTest": true,
   "window.commandCenter": true,
   "workbench.colorTheme": "Gruvbox Dark Medium",
+  "azureTerraform.survey": {
+    "surveyPromptDate": "2026-04-11T07:25:00.103Z",
+    "surveyPromptIgnoredCount": 0,
+  },
+  "application.shellEnvironmentResolutionTimeout": 60,
 }
