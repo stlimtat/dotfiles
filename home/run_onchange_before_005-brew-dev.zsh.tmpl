@@ -1,14 +1,14 @@
-{{- if eq .chezmoi.os "darwin" -}}
+{{- if and ( eq .chezmoi.os "darwin" ) ( eq .chezmoi.username "st_lim" ) -}}
 #!/bin/zsh
 
 brew bundle --file=/dev/stdin <<EOF
-{{ range .brewdev.taps -}}
+{{ range .brew.dev.taps -}}
 tap {{ . | quote }}
 {{ end -}}
-{{ range .brewdev.brews -}}
+{{ range .brew.dev.brews -}}
 brew {{ . | quote }}
 {{ end -}}
-{{ range .brewdev.casks -}}
+{{ range .brew.dev.casks -}}
 cask {{ . | quote }}
 {{ end -}}
 EOF

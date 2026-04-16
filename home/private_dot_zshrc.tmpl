@@ -11,15 +11,15 @@ hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x70
 tabs -2
 
 # Set PATH, MANPATH, etc., for Homebrew.
-eval "$({{ .brewPath }}/bin/brew shellenv)"
+eval "$({{ .chezmoi.brewPath }}/bin/brew shellenv)"
 export PATH="${HOME}/bin:$PATH"
 
 # files
 for file in ${HOME}/.{aliases,devenv,exports,extra,evals,functions,path,tokens}; do
   # files
-  start_time=$(gdate +%s%3N)
+  start_time=$({{- .chezmoi.dateCmd }} +%s%3N)
   [[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
-  end_time=$(gdate +%s%3N)
+  end_time=$({{- .chezmoi.dateCmd }} +%s%3N)
   time_taken=$((end_time - start_time))
   echo "Load $file...${time_taken}ms...Done"
 done
@@ -54,34 +54,34 @@ plugins=(
 )
 
 # ~/.oh-my-zsh
-start_time=$(gdate +%s%3N)
+start_time=$({{- .chezmoi.dateCmd }} +%s%3N)
 FPATH=/usr/share/zsh/$(zsh --version | awk '{ print $2 }')/functions
 FPATH=/usr/share/zsh/site-functions:${FPATH}
 FPATH=$(brew --prefix)/share/zsh/site-functions:${FPATH}
 FPATH=$(brew --prefix)/share/zsh-completions:${FPATH}
 source ${ZSH}/oh-my-zsh.sh
-end_time=$(gdate +%s%3N)
+end_time=$({{- .chezmoi.dateCmd }} +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load oh-my-zsh...${time_taken}ms...Done"
 
 # powerlevel10k
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-start_time=$(gdate +%s%3N)
+start_time=$({{- .chezmoi.dateCmd }} +%s%3N)
 source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 # ZSH_THEME="powerlevel10k/powerlevel10k"
 [[ ! -f ${HOME}/.p10k.zsh ]] || source ${HOME}/.p10k.zsh
-end_time=$(gdate +%s%3N)
+end_time=$({{- .chezmoi.dateCmd }} +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load powerlevel10k...${time_taken}ms...Done"
 
 # compinit
-start_time=$(gdate +%s%3N)
+start_time=$({{- .chezmoi.dateCmd }} +%s%3N)
 rm -f ~/.zcompdump*
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
-end_time=$(gdate +%s%3N)
+end_time=$({{- .chezmoi.dateCmd }} +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load completion init...${time_taken}ms...Done"
 
 # Added by Antigravity
-export PATH="/Users/st_lim/.antigravity/antigravity/bin:$PATH"
+export PATH="${HOME}/.antigravity/antigravity/bin:$PATH"

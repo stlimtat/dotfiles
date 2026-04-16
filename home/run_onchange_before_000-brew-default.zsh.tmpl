@@ -2,16 +2,16 @@
 #!/bin/zsh
 
 brew bundle --file=/dev/stdin <<EOF
-{{ range .brewdefault.taps -}}
+{{ range .brew.default.taps -}}
 tap {{ . | quote }}
 {{ end -}}
-{{ range .brewdefault.brews -}}
+{{ range .brew.default.brews -}}
 brew {{ . | quote }}
 {{ end -}}
-{{ range .brewdefault.casks -}}
+{{ range .brew.default.casks -}}
 cask {{ . | quote }}
 {{ end -}}
-{{ range .brewdefault.mas -}}
+{{ range .brew.default.mas -}}
 mas {{ .keyname | quote }}, id: {{- .keyid }}
 {{ end -}}
 EOF

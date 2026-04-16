@@ -1,4 +1,5 @@
 {{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $name := promptStringOnce . "name" "Name" -}}
 {{- $hostname := promptStringOnce . "hostname" "Hostname" -}}
 {{- $brewPath := "/opt/homebrew" -}}
 {{- $dateCmd := "gdate" -}}
@@ -14,19 +15,21 @@
 {{- else if eq .chezmoi.os "linux" }}
 {{-   $cpuCores = (output "sh" "-c" "lscpu --online --parse | grep --invert-match '^#' | sort --field-separator=',' --key='2,4' --unique | wc --lines") | trim | atoi }}
 {{-   $cpuThreads = (output "sh" "-c" "lscpu --online --parse | grep --invert-match '^#' | wc --lines") | trim | atoi }}
+{{-   $dateCmd := "date" -}}
 {{- end }}
 {{- if not (eq $hostname $computerName) }}
-# Brand new computer ({{ $hostname | quote }}) vs ({{ $computerName | quote }})
+# Brand new computer ({{- $hostname | lower | quote -}}) vs ({{- $computerName | lower | quote -}})
 {{- end }}
-# MacOS build version: {{ output "sw_vers" "--buildVersion" }}
-[data]
-    brewPath = {{ $brewPath | quote }}
-    email = {{ $email | quote }}
-    hostname = {{ $hostname | quote }}
-
+# MacOS build version: {{- output "sw_vers" "--buildVersion" -}}
+[data.chezmoi]
+  brewPath = {{ $brewPath | quote }}
+  dateCmd = {{ $dateCmd | quote }}
+  email = {{ $email | lower | quote }}
+  hostname = {{ $hostname | lower | quote }}
+  name = {{ $name | quote }}
 [data.cpu]
-    cores = {{ $cpuCores }}
-    threads = {{ $cpuThreads }}
+  cores = {{ $cpuCores }}
+  threads = {{ $cpuThreads }}
 
 [diff]
     pager = "delta"

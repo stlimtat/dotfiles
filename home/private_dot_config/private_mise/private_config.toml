@@ -2,6 +2,7 @@
 bun = "latest"
 node = "22"
 pipx = "latest"
+"pipx:mempalace" = "latest"
 pnpm = "latest"
 python = ["latest", "3.13"]
 terraform = "latest"
@@ -11,17 +12,12 @@ uv = "latest"
 [prepare.uv]
 auto = true
 
-[env] 
-_.python.venv = {
-  create = false,
-  path = ".venv",
-  uv_create_args = ["--seed", "--system-site-packages"]
-  }
+[env]
+_.python.venv = { create = false, path = ".venv", uv_create_args = [
+  "--seed",
+  "--system-site-packages",
+] }
 UV_PYTHON = { value = "{{ tools.python[1].path }}", tools = true }
 
 [settings]
 python.uv_venv_auto = "source"
-
-
-
-

@@ -75,7 +75,7 @@
   # Automatically correct and execute mistyped commands
   autocorrect = 1
 [include]
-  path = /Users/st_lim/.config/git-delta/themes.gitconfig
+  path = {{ .chezmoi.homeDir }}/.config/git-delta/themes.gitconfig
 [interactive]
   diffFilter = delta --color-only
 [merge]
@@ -89,13 +89,17 @@
   # Make `git push` push relevant annotated tags when pushing branches out.
   followTags = true
   autoSetupRemote = true
+{{ if eq .chezmoi.username "st_lim" -}}
 # URL shorthands
+{{ if contains "protoslabs" .chezmoi.email -}}
 [url "gh-pl:protoslabs-sg"]
   insteadOf = "https://github.com/protoslabs-sg"
+{{ end -}}
 [url "gh-st:stlimtat"]
   insteadOf = "https://github.com/stlimtat"
 [url "gh-syberai:syber-ai-corp/"]
   insteadOf = "https://github.com/syber-ai-corp/"
+{{ end -}}
 [url "git@github.com:"]
   insteadOf = "gh:"
   insteadOf = "https://github.com/"
@@ -106,6 +110,12 @@
   pushInsteadOf = "gitlab:"
   pushInsteadOf = "git://gitlab.com/"
 [user]
-	name = Swee Tat Lim
-	email = swee_tat_lim@protoslabs.io
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIITdxdx+GQbI8npYIh4J4QGaXPBpSvvPr6rMP6LGLySH
+  email = {{ .chezmoi.email | lower }}
+{{- if eq .chezmoi.username "st_lim" }}
+  name = Swee Tat Lim
+{{ if contains "protoslabs" .chezmoi.email -}}
+  signingkey = {{- (index (onepassword "sr3veeq3lawaqad4rdk2q7yz5u" "zhb2htpfllyby3cabuodsnhfom" "MCLAFZWCRFBZ3BTFVBOOQ4NKDM").fields 0).value }}
+{{ else -}}
+  signingkey = {{- (index (onepassword "vhz2umqol7of3qy3mlogdna2ni" "bxgujuns5jkybbn7fdnxepi34i" "ZIHBVUAYI5HSHAR46C5HVWCUOQ").fields 0).value }}
+{{- end }}
+{{- end -}}

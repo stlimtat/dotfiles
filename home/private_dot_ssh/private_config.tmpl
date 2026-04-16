@@ -2,27 +2,26 @@
 # This only works if it's at the top of ssh_config (before any Host blocks).
 # This won't be added again if you remove it.
 Include ~/.orbstack/ssh/config
-Include /Users/st_lim/.ssh/1Password/config
+Include ~/.colima/ssh_config
+Include ~/.ssh/1Password/config
 Host *
   IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-Include /Users/st_lim/.colima/ssh_config
+{{- if eq .chezmoi.username "st_lim" -}}
 Host 192.168.25.100 omv
   Port 8022
-  User st_lim
-Host nvidia 192.168.0.9
-  User nvidia
-  IdentityFile ~/.ssh/nvidia.pub
-  IdentitiesOnly yes
+  User {{ .chezmoi.username }}
 Host gh-st github.com
   HostName github.com
   User git
   IdentityFile ~/.ssh/gh-stlimtat.pub
   IdentitiesOnly yes
+{{- if contains "protoslabs" .chezmoi.email -}}
 Host gh-pl
   HostName github.com
   User git
   IdentityFile ~/.ssh/gh-protoslabs.pub
   IdentitiesOnly yes
+{{- end -}}
 Host gh-syberai
   HostName github.com
   User git
@@ -33,3 +32,8 @@ Host gitlab.com
   User git
   IdentityFile ~/.ssh/gl-st_lim.pub
   IdentitiesOnly yes
+Host nvidia 192.168.0.9
+  User nvidia
+  IdentityFile ~/.ssh/nvidia.pub
+  IdentitiesOnly yes
+{{- end -}}
