@@ -6,7 +6,7 @@ Include ~/.colima/ssh_config
 Include ~/.ssh/1Password/config
 Host *
   IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-{{- if eq .chezmoi.username "st_lim" -}}
+{{ if eq .chezmoi.username "st_lim" -}}
 Host 192.168.25.100 omv
   Port 8022
   User {{ .chezmoi.username }}
@@ -15,13 +15,13 @@ Host gh-st github.com
   User git
   IdentityFile ~/.ssh/gh-stlimtat.pub
   IdentitiesOnly yes
-{{- if contains "protoslabs" .chezmoi.email -}}
+{{ if contains "protoslabs" .chezmoi.email -}}
 Host gh-pl
   HostName github.com
   User git
   IdentityFile ~/.ssh/gh-protoslabs.pub
   IdentitiesOnly yes
-{{- end -}}
+{{ end -}}
 Host gh-syberai
   HostName github.com
   User git
@@ -36,4 +36,4 @@ Host nvidia 192.168.0.9
   User nvidia
   IdentityFile ~/.ssh/nvidia.pub
   IdentitiesOnly yes
-{{- end -}}
+{{ end -}}
