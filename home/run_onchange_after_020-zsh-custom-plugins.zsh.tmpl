@@ -1,0 +1,5 @@
+{{- if eq .chezmoi.os "darwin" -}}
+git clone https://github.com/wbingli/zsh-claudecode-completion.git \
+  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-claudecode-completion
+{{ end -}}
+
