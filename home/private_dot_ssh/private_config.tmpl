@@ -6,6 +6,13 @@ Include ~/.colima/ssh_config
 Include ~/.ssh/1Password/config
 Host *
   IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+{{ if eq .chezmoi.username "spteo" -}}
+Host gh github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/gh-spteo.pub
+  IdentitiesOnly yes
+{{ end -}}
 {{ if eq .chezmoi.username "st_lim" -}}
 Host 192.168.25.100 omv
   Port 8022

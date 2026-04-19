@@ -15,6 +15,7 @@
     "lazyvim.plugins.extras.editor.refactoring",
     "lazyvim.plugins.extras.lang.git",
     "lazyvim.plugins.extras.lang.go",
+    "lazyvim.plugins.extras.lang.json",
     "lazyvim.plugins.extras.lang.markdown",
     "lazyvim.plugins.extras.lang.python",
     "lazyvim.plugins.extras.lang.toml",
@@ -23,6 +24,8 @@
     "lazyvim.plugins.extras.ui.indent-blankline",
     "lazyvim.plugins.extras.ui.mini-indentscope",
     "lazyvim.plugins.extras.ui.treesitter-context",
+    "lazyvim.plugins.extras.util.chezmoi",
+    "lazyvim.plugins.extras.util.gh",
     "lazyvim.plugins.extras.vscode"
   ],
   "install_version": 7,
