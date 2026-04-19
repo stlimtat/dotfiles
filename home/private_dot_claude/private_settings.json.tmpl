@@ -7,12 +7,12 @@
     "SSH_AUTH_SOCK": "{{- .chezmoi.homeDir -}}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock",
     "GITHUB_PERSONAL_ACCESS_TOKEN": {{ (index (onepassword "y7tzojaudcjmkud7ceglyrrxpi" "zhb2htpfllyby3cabuodsnhfom" "MCLAFZWCRFBZ3BTFVBOOQ4NKDM").fields 5).value | quote }}
   },
-  {{- if eq .chezmoi.username "st_lim" -}}
+  {{ if eq .chezmoi.username "st_lim" -}}
   "attribution": {
     "commit": "Generated with AI\n\nCo-Authored-By: {{ .chezmoi.name }} <{{- .chezmoi.email -}}>",
     "pr": "Generated with AI\n\nCo-Authored-By: {{ .chezmoi.name }} <{{- .chezmoi.email -}}>"
   },
-  {{- end -}}
+  {{ end -}}
   "permissions": {
     "allow": [
       "Bash(git add:*)",
@@ -20,20 +20,27 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "Bash(git merge:*)",
+      "Bash(git rebase *)",
       "Bash(git reset:*)",
       "Bash(gh auth:*)",
       "Bash(gh repo:*)",
       "Bash(gh pr:*)",
+      "Bash(rtk git:*)",
+      "Bash(rtk gh:*)",
+      "Bash(rtk grep:*)",
+      "Bash(rtk ls *)",
+      "Bash(rtk python:*)",
+      "Bash(rtk python3:*)",
+      "Bash(rtk rg:*)",
       "Bash(pip3 install:*)",
       "Bash(pnpm add:*)",
+      "Bash(python3)",
       "Bash(python3 -c ':*)",
       "Bash(python -c ':*)",
-      "Bash(rtk git:*)",
       "Edit(/.claude/**)",
       "Read(/{{- .chezmoi.homeDir -}}/.ssh/**)",
       "Read(//tmp/claude/**)",
       "Read(//private/tmp/claude/**)",
-      "mcp__github__create_pull_request",
       "WebFetch(domain:**)",
       "WebSearch",
       "mcp__atlassian__searchConfluenceUsingCql",
@@ -41,28 +48,37 @@
       "mcp__atlassian__getAccessibleAtlassianResources",
       "mcp__atlassian__getJiraProjectIssueTypesMetadata",
       "mcp__atlassian__getConfluenceSpaces",
+      "mcp__atlassian__createConfluencePage",
       "mcp__atlassian__getConfluencePage",
-      "mcp__atlassian__getJiraIssue",
-      "mcp__atlassian__createJiraIssue",
-      "mcp__atlassian__getVisibleJiraProjects",
       "mcp__atlassian__updateConfluencePage",
+      "mcp__atlassian__createJiraIssue",
+      "mcp__atlassian__editJiraIssue",
+      "mcp__atlassian__getJiraIssue",
+      "mcp__atlassian__getVisibleJiraProjects",
       "mcp__atlassian__createConfluencePage",
       "mcp__atlassian__searchJiraIssuesUsingJql",
-      "mcp__atlassian__editJiraIssue",
       "mcp__claude_ai_Atlassian__getAccessibleAtlassianResources",
-      "mcp__claude_ai_Atlassian__getJiraIssue",
-      "mcp__claude_ai_Atlassian__searchConfluenceUsingCql",
+      "mcp__claude_ai_Atlassian__createConfluencePage",
+      "mcp__claude_ai_Atlassian__getConfluencePage"
+      "mcp__claude_ai_Atlassian__updateConfluencePage"
       "mcp__claude_ai_Atlassian__getConfluencePageDescendants",
       "mcp__claude_ai_Atlassian__getConfluenceSpaces",
-      "mcp__claude_ai_Atlassian__createConfluencePage",
+      "mcp__claude_ai_Atlassian__createJiraIssue",
+      "mcp__claude_ai_Atlassian__editJiraIssue",
+      "mcp__claude_ai_Atlassian__getJiraIssue",
+      "mcp__claude_ai_Atlassian__searchConfluenceUsingCql",
+      "mcp__github__create_pull_request",
+      "mcp__github__edit_pull_request",
       "mcp__github__get_pull_request",
-      "mcp__plugin_github_github__update_pull_request",
+      "mcp__github__update_pull_request",
+      "mcp__plugin_github_github__update_pull_request"
     ],
     "deny": [
       "Read(./secrets/**)",
-      "Read(./config/credentials.json)",
+      "Read(./config/credentials.json)"
     ],
     "additionalDirectories": [
+      "{{- .chezmoi.homeDir -}}/src/github.com/protoslabs-sg/Workspace/.claude/worktrees"
     ]
   },
   "enableAllProjectMcpServers": true,
