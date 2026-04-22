@@ -1,13 +1,28 @@
 {
   "[go]": {
     "editor.codeActionsOnSave": {
-      "source.organizeImports": "always"
-    }
+      "source.organizeImports": "always",
+    },
   },
-  "containers.composeCommand": "nerdctl compose",
+  "antigravity.marketplaceGalleryItemURL": "https://marketplace.visualstudio.com/items",
+  "antigravity.marketplaceExtensionGalleryServiceURL": "https://marketplace.visualstudio.com/_apis/public/gallery",
+  "application.shellEnvironmentResolutionTimeout": 60,
+  "azureTerraform.survey": {
+    "surveyPromptDate": "2026-04-11T07:25:00.103Z",
+    "surveyPromptIgnoredCount": 0,
+  },
   "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
-  "containers.containerCommand": "nerdctl",
   "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.dockercompose",
+  "coverage-gutters.coverageFileNames": [
+    "lcov.info",
+    "cov.xml",
+    "coverage.xml",
+    "cobertura.xml",
+    "jacoco.xml",
+    "coverage.cobertura.xml",
+  ],
+  "coverage-gutters.showLineCoverage": true,
+  "debug.console.fontSize": 14,
   "editor.accessibilitySupport": "off",
   "editor.fontFamily": "JetBrainsMonoNL Nerd Font, monospace",
   "editor.fontLigatures": true,
@@ -19,56 +34,54 @@
   "editor.lineNumbers": "relative",
   "editor.minimap.enabled": true,
   "editor.tabSize": 2,
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1,
+  },
   "extensions.ignoreRecommendations": true,
   "github.gitProtocol": "ssh",
   "go.addTags": {
     "options": "json=omitempty,bson=omitempty,koanf=omitempty",
-    "tags": "json,bson,koanf"
-  },
-  "go.addTags": {
-    "options": "json=omitempty,bson=omitempty,koanf=omitempty",
-    "tags": "json,bson,koanf"
+    "tags": "json,bson,koanf",
   },
   "go.alternateTools": {
-    "customFormatter": "golangci-lint"
+    "customFormatter": "golangci-lint",
   },
   "go.coverShowCounts": true,
   "go.diagnostic.vulncheck": "Imports",
-  "go.formatFlags": [
-    "fmt",
-    "--stdin"
-  ],
+  "go.formatFlags": ["fmt", "--stdin"],
   "go.formatTool": "gofumpt",
-  "go.lintFlags": [
-    "--path-mode=abs",
-    "--fast-only"
-  ],
+  "go.lintFlags": ["--path-mode=abs", "--fast-only"],
   "go.lintTool": "golangci-lint",
   "go.testEnvFile": "${workspaceFolder}/.env",
   "go.testEnvVars": {
     "HTTP_PROXY": "http://127.0.0.1:8080",
-    "HTTPS_PROXY": "http://127.0.0.1:8080"
+    "HTTPS_PROXY": "http://127.0.0.1:8080",
   },
   "go.testExplorer.packageDisplayMode": "nested",
   "gopls": {
-    "ui.semanticTokens": true
+    "ui.semanticTokens": true,
   },
   "jupyter.askForKernelRestart": false,
+  "koverage.coverageFileNames": [
+    "lcov.info",
+    "cov.xml",
+    "clover.xml",
+    "coverage.xml",
+    "jacoco.xml",
+  ],
   "notebook.defaultFormatter": "anysphere.cursorpyright",
   "notebook.diff.overviewRuler": true,
   "notebook.formatOnSave.enabled": true,
   "notebook.insertToolbarLocation": "notebookToolbar",
   "notebook.lineNumbers": "on",
   "notebook.output.wordWrap": true,
+  "python.languageServer": "Default",
   "redhat.telemetry.enabled": true,
+  "scm.inputFontSize": 14,
   "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.fontSize": 14,
   "#terminal.integrated.profiles.osx#": "zsh",
   "testing.followRunningTest": true,
   "window.commandCenter": true,
-  "workbench.colorTheme": "Gruvbox Material Dark",
-  "cursor.composer.shouldChimeAfterChatFinishes": true,
-  "cursor.enable_agent_window_setting": true,
-  "extensions.experimental.affinity": {
-    "asvetliakov.vscode-neovim": 1
-  }
+  "workbench.colorTheme": "Gruvbox Dark Medium"
 }

@@ -4,10 +4,8 @@
       "source.organizeImports": "always",
     },
   },
-  "antigravity.marketplaceGalleryItemURL": "https://marketplace.visualstudio.com/items",
-  "antigravity.marketplaceExtensionGalleryServiceURL": "https://marketplace.visualstudio.com/_apis/public/gallery",
-  "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
-  "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.dockercompose",
+  "application.shellEnvironmentResolutionTimeout": 60,
+  "claudeCode.preferredLocation": "panel",
   "coverage-gutters.coverageFileNames": [
     "lcov.info",
     "cov.xml",
@@ -43,9 +41,15 @@
   },
   "go.coverShowCounts": true,
   "go.diagnostic.vulncheck": "Imports",
-  "go.formatFlags": ["fmt", "--stdin"],
+  "go.formatFlags": [
+    "fmt",
+    "--stdin"
+  ],
   "go.formatTool": "gofumpt",
-  "go.lintFlags": ["--path-mode=abs", "--fast-only"],
+  "go.lintFlags": [
+    "--path-mode=abs",
+    "--fast-only"
+  ],
   "go.lintTool": "golangci-lint",
   "go.testEnvFile": "${workspaceFolder}/.env",
   "go.testEnvVars": {
@@ -70,6 +74,41 @@
   "notebook.insertToolbarLocation": "notebookToolbar",
   "notebook.lineNumbers": "on",
   "notebook.output.wordWrap": true,
+  "pgsql.serverGroups": [
+    {
+      "name": "Servers",
+      "id": "B99F497B-DB25-4AC4-A207-3C4A70D167DE",
+      "isDefault": true
+    }
+  ],
+  "pgsql.connections": [
+    {
+      "id": "9EB20F48-764F-4B21-963A-262D83D44556",
+      "groupId": "B99F497B-DB25-4AC4-A207-3C4A70D167DE",
+      "authenticationType": "AzureMFA",
+      "connectTimeout": 15,
+      "applicationName": "vscode-pgsql",
+      "clientEncoding": "utf8",
+      "sslmode": "require",
+      "sshSavePassword": true,
+      "savePassword": true,
+      "sslRootCertMode": "none",
+      "server": "staging-db-nexus.postgres.database.azure.com",
+      "port": "5432",
+      "password": "",
+      "sshPassword": "",
+      "displayName": "staging-db-nexus.postgres.database.azure.com, <default> (undefined)",
+      "azureAccountToken": "",
+      "expiresOn": 0,
+      "accountId": "7ecfe2be-5b93-45e5-9271-ba2ddb580299.78df1cd4-d519-4614-8b9b-9c747b9a7eb1",
+      "tenantId": "78df1cd4-d519-4614-8b9b-9c747b9a7eb1",
+      "entraUserName": "swee_tat_lim@protoslabs.io",
+      "database": "postgres",
+      "profileName": "staging-db-nexus",
+      "user": "Swee Tat Lim - swee_tat_lim@protoslabs.io",
+      "email": "swee_tat_lim@protoslabs.io"
+    }
+  ],
   "python.languageServer": "Default",
   "redhat.telemetry.enabled": true,
   "scm.inputFontSize": 14,
@@ -78,10 +117,6 @@
   "#terminal.integrated.profiles.osx#": "zsh",
   "testing.followRunningTest": true,
   "window.commandCenter": true,
-  "workbench.colorTheme": "Gruvbox Dark Medium",
-  "azureTerraform.survey": {
-    "surveyPromptDate": "2026-04-11T07:25:00.103Z",
-    "surveyPromptIgnoredCount": 0,
-  },
-  "application.shellEnvironmentResolutionTimeout": 60,
+  "workbench.colorTheme": "Gruvbox Dark (Medium)",
+  "workbench.startupEditor": "none"
 }

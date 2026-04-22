@@ -1,5 +1,15 @@
 {{- if eq .chezmoi.os "darwin" -}}
-git clone https://github.com/wbingli/zsh-claudecode-completion.git \
-  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-claudecode-completion
+#!/bin/zsh
+
+if [ ! -d "{{- .chezmoi.homeDir -}}/.oh-my-zsh/custom/plugins/zsh-claudecode-completion" ]; then
+  git clone \
+    https://github.com/wbingli/zsh-claudecode-completion.git \
+    {{ .chezmoi.homeDir -}}/.oh-my-zsh/custom/plugins/zsh-claudecode-completion
+else
+  pushd {{ .chezmoi.homeDir -}}/.oh-my-zsh/custom/plugins/zsh-claudecode-completion
+    echo "zsh-claudecode-completion"
+    git pull
+  popd
+fi
 {{ end -}}
 

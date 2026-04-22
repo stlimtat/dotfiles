@@ -1,4 +1,9 @@
 #!/usr/bin/env zsh
+# bun
+export BUN_INSTALL=$(mise where bun)
+export PATH="$BUN_INSTALL/bin:$PATH"
+alias claude-mem='${BUN_INSTALL}/bin/bun "${HOME}/.claude/plugins/cache/thedotmack/claude-mem/10.6.0/scripts/worker-service.cjs"'
+
 # mise 
 start_time=$({{- .chezmoi.dateCmd }} +%s%3N)
 eval "$($(brew --prefix)/bin/mise activate zsh)"
@@ -12,11 +17,14 @@ export PYTHONIOENCODING='UTF-8';
 # PATH extension
 PATH=${HOME}/.cargo/bin:${PATH}
 # PATH=${JAVA_HOME}/bin:${PATH}
-export PATH 
+export PATH
 
-# bun
-export BUN_INSTALL=$(mise where bun)
-export PATH="$BUN_INSTALL/bin:$PATH"
-alias claude-mem='${BUN_INSTALL}/bin/bun "${HOME}/.claude/plugins/cache/thedotmack/claude-mem/10.6.0/scripts/worker-service.cjs"'                                      │    │
+# pnpm
+export PNPM_HOME="${HOME}/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 
 export GITHUB_PERSONAL_ACCESS_TOKEN=$(op read "op://Employee/protoslabs-sg - plsweetat/token")

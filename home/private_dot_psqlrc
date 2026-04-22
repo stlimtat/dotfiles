@@ -81,7 +81,7 @@
 
 -- pager: use of a pager program.
 -- Values: on, off, always, name_of_pager. Without value, will toggle.
-\pset pager always
+\pset pager off
 
 -- pager_min_lines: is set to greater number than page height, pager will
 -- not be called. 
