@@ -15,91 +15,92 @@
   {{ end -}}
   "permissions": {
     "allow": [
-      "Bash(git *)",
-      "Bash(git add:*)",
-      "Bash(git checkout:*)",
-      "Bash(git config *)",
-      "Bash(git commit:*)",
-      "Bash(git ls-tree *)",
-      "Bash(git push:*)",
-      "Bash(git merge:*)",
-      "Bash(git rebase *)",
-      "Bash(git remote *)",
-      "Bash(git reset:*)",
-      "Bash(git rm *)",
-      "Bash(gh *)",
-      "Bash(gh auth:*)",
-      "Bash(gh repo:*)",
-      "Bash(gh pr:*)",
-      "Bash(op run *)",
-      "Bash(rtk docker *)",
-      "Bash(rtk proxy *)",
-      "Bash(rtk curl *)",
-      "Bash(rtk read *)",
-      "Bash(rtk git:*)",
-      "Bash(rtk gh:*)",
-      "Bash(rtk grep:*)",
-      "Bash(rtk ls *)",
-      "Bash(rtk python:*)",
-      "Bash(rtk python3:*)",
-      "Bash(rtk rg:*)",
-      "Bash(rtk wc *)",
-      "Bash(pip3 install:*)",
-      "Bash(pnpm add:*)",
+      "Bash(echo \"Exit: $?\")",
+      "Bash(echo \"---EXIT $?\")",
+      "Bash(mkdir -p /tmp/claude)",
       "Bash(python3)",
-      "Bash(python3 -c ':*)",
-      "Bash(python -c ':*)",
+      "Bash(python3 -c ' *)",
+      "Bash(rtk bun:*)",
+      "Bash(rtk cat *)",
+      "Bash(rtk diff *)",
+      "Bash(rtk docker *)",
+      "Bash(rtk find *)",
+      "Bash(rtk git:*)",
+      "Bash(rtk gh pr comment *)",
+      "Bash(rtk gh pr create *)",
+      "Bash(rtk gh pr list *)",
+      "Bash(rtk gh pr view *)",
+      "Bash(rtk gh run list *)",
+      "Bash(rtk gh run view *)",
+      "Bash(rtk gh api --method GET *)",
+      "Bash(rtk grep:*)",
+      "Bash(rtk jq *)",
+      "Bash(rtk ls *)",
+      "Bash(rtk npm:*)",
+      "Bash(rtk pnpm:*)",
+      "Bash(rtk proxy *)",
+      "Bash(rtk pytest *)",
+      "Bash(rtk read *)",
+      "Bash(rtk ruff *)",
+      "Bash(rtk tail *)",
+      "Bash(rtk uv *)",
+      "Bash(rtk wc *)",
+      "Bash(rtk which *)",
+      "Bash(rtk yarn:*)",
       "Edit(/.claude/**)",
-      "Read(/{{- .chezmoi.homeDir -}}/.ssh/**)",
-      "Read(//tmp/claude/**)",
-      "Read(//private/tmp/claude/**)",
-      "WebFetch(domain:benjamincongdon.me)",
-      "WebFetch(domain:echobind.com)",
-      "WebFetch(domain:raw.githubusercontent.com)",
-      "WebSearch",
-      "mcp__atlassian__searchConfluenceUsingCql",
-      "mcp__atlassian__lookupJiraAccountId",
-      "mcp__atlassian__getAccessibleAtlassianResources",
-      "mcp__atlassian__getJiraProjectIssueTypesMetadata",
-      "mcp__atlassian__getConfluenceSpaces",
-      "mcp__atlassian__createConfluencePage",
-      "mcp__atlassian__getConfluencePage",
-      "mcp__atlassian__updateConfluencePage",
-      "mcp__atlassian__createJiraIssue",
-      "mcp__atlassian__editJiraIssue",
-      "mcp__atlassian__getJiraIssue",
-      "mcp__atlassian__getVisibleJiraProjects",
-      "mcp__atlassian__createConfluencePage",
-      "mcp__atlassian__searchJiraIssuesUsingJql",
-      "mcp__claude_ai_Atlassian__getAccessibleAtlassianResources",
       "mcp__claude_ai_Atlassian__createConfluencePage",
-      "mcp__claude_ai_Atlassian__getConfluencePage",
-      "mcp__claude_ai_Atlassian__updateConfluencePage",
-      "mcp__claude_ai_Atlassian__getConfluencePageDescendants",
-      "mcp__claude_ai_Atlassian__getConfluenceSpaces",
       "mcp__claude_ai_Atlassian__createJiraIssue",
       "mcp__claude_ai_Atlassian__editJiraIssue",
+      "mcp__claude_ai_Atlassian__getAccessibleAtlassianResources",
+      "mcp__claude_ai_Atlassian__getConfluencePage",
+      "mcp__claude_ai_Atlassian__getConfluencePageDescendants",
       "mcp__claude_ai_Atlassian__getJiraIssue",
+      "mcp__claude_ai_Atlassian__lookupJiraAccountId",
       "mcp__claude_ai_Atlassian__searchConfluenceUsingCql",
-      "mcp__github__create_pull_request",
-      "mcp__github__edit_pull_request",
-      "mcp__github__get_pull_request",
-      "mcp__github__update_pull_request",
-      "mcp__plugin_github_github__update_pull_request"
+      "mcp__claude_ai_Atlassian__searchJiraIssuesUsingJql",
+      "mcp__claude_ai_Atlassian__updateConfluencePage",
+      "mcp__claude_ai_Microsoft_365__chat_message_search",
+      "mcp__claude_ai_Microsoft_365__read_resource",
+      "mcp__claude_ai_Microsoft_365__sharepoint_search",
+      "mcp__claude_ai_Microsoft_365__sharepoint_folder_search",
+      "mcp__plugin_github_github__issue_read",
+      "mcp__plugin_github_github__pull_request_read",
+      "mcp__plugin_playwright_playwright__browser_console_messages",
+      "mcp__plugin_playwright_playwright__browser_snapshot",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "mcp__claude_ai_Microsoft_365__outlook_calendar_search",
+      "Read(//private/tmp/claude/**)",
+      "Skill(raise-pr)",
+      "Skill(raise-pr:*)",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:benjamincongdon.me)",
+      "WebFetch(domain:docs.astral.sh)",
+      "WebFetch(domain:docs.celeryq.dev)",
+      "WebFetch(domain:docs.pydantic.dev)",
+      "WebFetch(domain:docs.sqlalchemy.org)",
+      "WebFetch(domain:echobind.com)",
+      "WebFetch(domain:files.pythonhosted.org)",
+      "WebFetch(domain:peps.python.org)",
+      "WebFetch(domain:pypi.org)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:www.structlog.org)",
+      "WebSearch"
     ],
     "deny": [
-      "Read(./secrets/**)",
-      "Read(./config/credentials.json)"
+      "Bash(rtk git branch *-D *)",
+      "Bash(rtk git branch *--delete --force*)",
+      "Bash(rtk git checkout *-- *)",
+      "Bash(rtk git checkout *.)",
+      "Bash(rtk git push *--delete*)",
+      "Bash(rtk git push * :*)"
     ],
     "additionalDirectories": [
-      "{{- .chezmoi.homeDir -}}/src/github.com/protoslabs-sg/Workspace/.claude/worktrees"
-    ]
+      "/Users/st_lim/src/github.com/protoslabs-sg/Workspace/.claude/worktrees",
+      "/tmp/claude",
+      "/private/tmp/claude",
+    ],
+    "defaultMode": "auto"
   },
-  "enableAllProjectMcpServers": true,
-  "enabledMcpjsonServers": [
-    "claude-flow",
-    "github"
-  ],
   "hooks": {
     "PreToolUse": [
       {
@@ -107,42 +108,60 @@
         "hooks": [
           {
             "type": "command",
-            "command": "{{- .chezmoi.homeDir -}}/.claude/hooks/rtk-rewrite.sh"
+            "command": "bash ~/bin/claude-block-dangerous.sh"
+          },
+          {
+            "type": "command",
+            "command": "rtk hook claude"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "code-review-graph update --skip-flows",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "code-review-graph status",
+            "timeout": 10
           }
         ]
       }
     ]
   },
   "enabledPlugins": {
+    "andrej-karpathy-skills@karpathy-skills": true,
     "atlassian@claude-plugins-official": true,
-    "chrome-devtools-mcp@claude-plugins-official": true,
+    "caveman@caveman": true,
     "claude-mem@thedotmack": true,
     "code-review@claude-plugins-official": true,
-    "commit-commands@claude-plugins-official": true,
-    "feature-dev@claude-plugins-official": true,
-    "github@claude-plugins-official": true,
-    "hookify@claude-plugins-official": true,
-    "mempalace@mempalace": true,
-    "playwright@claude-plugins-official": true,
     "pr-review-toolkit@claude-plugins-official": true,
-    "pyright-lsp@claude-plugins-official": true,
-    "semgrep@claude-plugins-official": true,
-    "sonatype-guide@claude-plugins-official": true,
-    "terraform@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true,
-    "ui-ux-pro-max@ui-ux-pro-max-skill": true
+    "superpowers@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
-    "code-review-graph": {
+    "andrej-karpathy-skills": {
       "source": {
         "source": "github",
-        "repo": "tirth8205/code-review-graph"
+        "repo": "forrestchang/andrej-karpathy-skills"
       }
     },
-    "superpowers": {
+    "caveman": {
       "source": {
         "source": "github",
-        "repo": "obra/superpowers"
+        "repo": "juliusbrussee/caveman"
       }
     },
     "thedotmack": {
@@ -150,11 +169,17 @@
         "source": "github",
         "repo": "thedotmack/claude-mem"
       }
+    },
+    "superpowers": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers"
+      }
     }
   },
   "sandbox": {
     "enabled": true,
-    "autoAllowBashIfSandboxed": true,
+    "autoAllowBashIfSandboxed": false,
     "network": {
       "allowedDomains": [
         "github.com",
@@ -164,22 +189,50 @@
       "allowUnixSockets": [
         "/var/run/docker.sock",
         "~/.orbstack/run/docker.sock",
+        "~/.ssh/agent.sock",
         "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
       ],
-      "allowLocalBinding": true
+      "allowLocalBinding": false
     },
     "filesystem": {
+      "allowRead": [
+        "~/.ssh/known_hosts",
+        "~/.ssh/config"
+      ],
       "allowWrite": [
+        "~/.bun/install",
+        "~/.kube",
+        "~/.local/share/pnpm",
+        "~/.npm",
+        "/tmp",
         "//tmp/build",
-        "~/.kube"
+        "~/.yarn"
       ],
       "denyRead": [
-        "~/.aws/credentials"
+        "~/.aws/credentials",
+        "~/.ssh"
+      ],
+      "denyWrite": [
+        "~/.bashrc",
+        "~/.profile",
+        "~/.ssh",
+        "~/.zshrc"
       ]
-    }
+    },
+    "excludedCommands": [
+      "rtk gtk clone",
+      "rtk gtk fetch",
+      "rtk gtk pull",
+      "rtk gtk push"
+    ]
   },
-  "promptSuggestionEnabled": false,
+  "statusLine": {
+    "type": "command",
+    "command": "bunx -y ccstatusline@latest",
+    "padding": 0
+  },
+  "promptSuggestionEnabled": true,
   "prefersReducedMotion": true,
-  "autoMemoryEnabled": true,
-  "terminalProgressBarEnabled": false
+  "autoMemoryEnabled": false,
+  "terminalProgressBarEnabled": true
 }

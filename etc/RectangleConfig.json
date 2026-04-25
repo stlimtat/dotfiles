@@ -261,7 +261,7 @@
       "modifierFlags" : 786432
     },
     "centerHalf" : {
-      "keyCode" : 3,
+      "keyCode" : 17,
       "modifierFlags" : 786432
     },
     "leftHalf" : {
@@ -274,6 +274,10 @@
     },
     "nextDisplay" : {
       "keyCode" : 124,
+      "modifierFlags" : 1835008
+    },
+    "previousDisplay" : {
+      "keyCode" : 123,
       "modifierFlags" : 1835008
     },
     "reflowTodo" : {

@@ -1,18 +1,19 @@
 {
   "[go]": {
     "editor.codeActionsOnSave": {
-      "source.organizeImports": "always",
-    },
+      "source.organizeImports": "always"
+    }
   },
   "application.shellEnvironmentResolutionTimeout": 60,
   "claudeCode.preferredLocation": "panel",
+  "claudeCode.initialPermissionMode": "bypassPermissions",
   "coverage-gutters.coverageFileNames": [
     "lcov.info",
     "cov.xml",
     "coverage.xml",
     "cobertura.xml",
     "jacoco.xml",
-    "coverage.cobertura.xml",
+    "coverage.cobertura.xml"
   ],
   "coverage-gutters.showLineCoverage": true,
   "debug.console.fontSize": 14,
@@ -28,16 +29,16 @@
   "editor.minimap.enabled": true,
   "editor.tabSize": 2,
   "extensions.experimental.affinity": {
-    "asvetliakov.vscode-neovim": 1,
+    "asvetliakov.vscode-neovim": 1
   },
   "extensions.ignoreRecommendations": true,
   "github.gitProtocol": "ssh",
   "go.addTags": {
     "options": "json=omitempty,bson=omitempty,koanf=omitempty",
-    "tags": "json,bson,koanf",
+    "tags": "json,bson,koanf"
   },
   "go.alternateTools": {
-    "customFormatter": "golangci-lint",
+    "customFormatter": "golangci-lint"
   },
   "go.coverShowCounts": true,
   "go.diagnostic.vulncheck": "Imports",
@@ -54,11 +55,11 @@
   "go.testEnvFile": "${workspaceFolder}/.env",
   "go.testEnvVars": {
     "HTTP_PROXY": "http://127.0.0.1:8080",
-    "HTTPS_PROXY": "http://127.0.0.1:8080",
+    "HTTPS_PROXY": "http://127.0.0.1:8080"
   },
   "go.testExplorer.packageDisplayMode": "nested",
   "gopls": {
-    "ui.semanticTokens": true,
+    "ui.semanticTokens": true
   },
   "jupyter.askForKernelRestart": false,
   "koverage.coverageFileNames": [
@@ -66,7 +67,7 @@
     "cov.xml",
     "clover.xml",
     "coverage.xml",
-    "jacoco.xml",
+    "jacoco.xml"
   ],
   "notebook.defaultFormatter": "anysphere.cursorpyright",
   "notebook.diff.overviewRuler": true,

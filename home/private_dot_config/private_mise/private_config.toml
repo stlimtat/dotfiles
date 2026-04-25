@@ -1,7 +1,9 @@
 [tools]
 bun = "latest"
 node = "22"
+"npm:ccstatusline" = "latest"
 pipx = "latest"
+"pipx:code-review-graph" = "latest"
 "pipx:mempalace" = "latest"
 pnpm = "latest"
 python = "3.12"
