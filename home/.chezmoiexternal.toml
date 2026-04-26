@@ -2,7 +2,7 @@
 type = "archive"
 url = "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"
 exact = false
-private = true
+exclude = ["**/custom/**"]
 refreshPeriod = "168h"
 stripComponents = 1
 [".config/macos-terminal-themes"]
@@ -10,8 +10,9 @@ type = "git-repo"
 url = "https://github.com/lysyi3m/macos-terminal-themes.git"
 refreshPeriod = "168h"
 [".config/nvim"]
+# type = "git-repo"
+# url = "https://github.com/LazyVim/starter"
 type = "archive"
 url = "https://github.com/LazyVim/starter/archive/refs/heads/main.tar.gz"
 exact = false
-private = true
-stripComponents = 1
+refreshPeriod = "168h"

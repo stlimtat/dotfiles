@@ -114,8 +114,8 @@
 {{- if eq .chezmoi.username "st_lim" }}
   name = Swee Tat Lim
 {{ if contains "protoslabs" .chezmoi.email -}}
-  signingkey = {{- (index (onepassword "sr3veeq3lawaqad4rdk2q7yz5u" "zhb2htpfllyby3cabuodsnhfom" "MCLAFZWCRFBZ3BTFVBOOQ4NKDM").fields 0).value }}
+  signingkey = {{ (index (onepassword "sr3veeq3lawaqad4rdk2q7yz5u" "zhb2htpfllyby3cabuodsnhfom" "MCLAFZWCRFBZ3BTFVBOOQ4NKDM").fields 0).value }}
 {{ else -}}
-  signingkey = {{- (index (onepassword "vhz2umqol7of3qy3mlogdna2ni" "bxgujuns5jkybbn7fdnxepi34i" "ZIHBVUAYI5HSHAR46C5HVWCUOQ").fields 0).value }}
+  signingkey = {{ (index (onepassword "vhz2umqol7of3qy3mlogdna2ni" "bxgujuns5jkybbn7fdnxepi34i" "ZIHBVUAYI5HSHAR46C5HVWCUOQ").fields 0).value }}
 {{- end }}
 {{- end -}}
