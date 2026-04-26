@@ -27,12 +27,17 @@
   email = {{ $email | lower | quote }}
   hostname = {{ $hostname | lower | quote }}
   name = {{ $name | quote }}
+
 [data.cpu]
   cores = {{ $cpuCores }}
   threads = {{ $cpuThreads }}
 
 [diff]
     pager = "delta"
+
+[git]
+    autoCommit = true
+    autoPush = true
 
 [onepassword]
     mode = "account"

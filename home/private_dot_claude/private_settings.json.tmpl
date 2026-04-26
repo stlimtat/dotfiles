@@ -4,8 +4,10 @@
     "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
     "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "128000",
-    "SSH_AUTH_SOCK": "{{- .chezmoi.homeDir -}}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock",
-    "GITHUB_PERSONAL_ACCESS_TOKEN": {{ (index (onepassword "y7tzojaudcjmkud7ceglyrrxpi" "zhb2htpfllyby3cabuodsnhfom" "MCLAFZWCRFBZ3BTFVBOOQ4NKDM").fields 5).value | quote }}
+    {{ if contains "protoslabs" .chezmoi.email -}}
+    "GITHUB_PERSONAL_ACCESS_TOKEN": {{ (index (onepassword "y7tzojaudcjmkud7ceglyrrxpi" "zhb2htpfllyby3cabuodsnhfom" "MCLAFZWCRFBZ3BTFVBOOQ4NKDM").fields 5).value | quote }},
+    {{ end -}}
+    "SSH_AUTH_SOCK": "{{- .chezmoi.homeDir -}}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
   },
   {{ if eq .chezmoi.username "st_lim" -}}
   "attribution": {

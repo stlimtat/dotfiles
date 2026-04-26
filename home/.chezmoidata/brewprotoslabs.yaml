@@ -1,0 +1,10 @@
+brew:
+  protoslabs:
+    brew:
+      - "azure-cli"
+    casks:
+      - "intune-company-portal"
+      - "microsoft-excel"
+      - "microsoft-outlook"
+      - "microsoft-teams"
+      - "microsoft-word"

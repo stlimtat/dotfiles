@@ -1,4 +1,4 @@
-{{- if and ( eq .chezmoi.os "darwin" ) ( eq .chezmoi.username "st_lim" ) -}}
+{{- if and (eq .chezmoi.os "darwin") (eq .chezmoi.username "st_lim") -}}
 #!/bin/zsh
 
 brew bundle --file=/dev/stdin <<EOF
@@ -12,4 +12,14 @@ brew {{ . | quote }}
 cask {{ . | quote }}
 {{ end -}}
 EOF
+{{- if (contains "protoslabs" .chezmoi.email) -}}
+brew bundle --file=/dev/stdin <<EOF
+{{ range .brew.protoslabs.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+{{ range .brew.protoslabs.casks -}}
+cask {{ . | quote }}
+{{ end -}}
+EOF
+{{ end -}}
 {{ end -}}
