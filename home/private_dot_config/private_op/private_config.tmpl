@@ -1,0 +1,10 @@
+{
+	"latest_signin": "",
+	"device": "bzpj642ijnulbhnkh2uqbqrui4",
+	"accounts": null,
+  {{- if (contains "protoslabs" .chezmoi.email) }}
+	"system_auth_latest_signin": "MCLAFZWCRFBZ3BTFVBOOQ4NKDM"
+  {{- else if eq .chezmoi.username "st_lim" }}
+	"system_auth_latest_signin": "ZIHBVUAYI5HSHAR46C5HVWCUOQ"
+  {{ end -}}
+}
