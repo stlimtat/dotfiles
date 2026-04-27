@@ -1,6 +1,6 @@
 [tools]
 bun = "latest"
-node = "22"
+node = "lts"
 "npm:ccstatusline" = "latest"
 pipx = "latest"
 "pipx:code-review-graph" = "latest"
@@ -20,3 +20,6 @@ UV_PYTHON = { value = "{{ tools.python.path }}", tools = true }
 
 [settings]
 python.uv_venv_auto = "source"
+
+[settings.npm]
+package_manager = "bun"
