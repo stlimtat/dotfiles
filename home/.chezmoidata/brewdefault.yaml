@@ -13,7 +13,7 @@ brew:
       - "git"
       - "git-lfs"
       - "gnu-sed"
-      - "homebrew-ffmpeg/ffmpeg/ffmpeg"
+      # - "homebrew-ffmpeg/ffmpeg/ffmpeg"
       - "mas"
       - "moreutils"
       - "neovim"

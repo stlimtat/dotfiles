@@ -5,7 +5,7 @@ exact = false
 exclude = ["**/custom/**"]
 refreshPeriod = "168h"
 stripComponents = 1
-[".config/macos-terminal-themes"]
+[".config/wezterm/colors"]
 type = "git-repo"
 url = "https://github.com/lysyi3m/macos-terminal-themes.git"
 refreshPeriod = "168h"

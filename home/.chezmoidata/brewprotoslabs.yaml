@@ -1,6 +1,6 @@
 brew:
   protoslabs:
-    brew:
+    brews:
       - "azure-cli"
     casks:
       - "intune-company-portal"

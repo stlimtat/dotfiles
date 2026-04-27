@@ -12,7 +12,8 @@ brew {{ . | quote }}
 cask {{ . | quote }}
 {{ end -}}
 EOF
-{{- if (contains "protoslabs" .chezmoi.email) -}}
+
+{{ if (contains "protoslabs" .chezmoi.email) -}}
 brew bundle --file=/dev/stdin <<EOF
 {{ range .brew.protoslabs.brews -}}
 brew {{ . | quote }}
