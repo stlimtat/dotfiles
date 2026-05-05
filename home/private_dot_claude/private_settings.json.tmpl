@@ -5,7 +5,7 @@
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
     "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "128000",
     {{ if contains "protoslabs" .chezmoi.email -}}
-    "GITHUB_PERSONAL_ACCESS_TOKEN": {{ (index (onepassword "y7tzojaudcjmkud7ceglyrrxpi" "zhb2htpfllyby3cabuodsnhfom" "MCLAFZWCRFBZ3BTFVBOOQ4NKDM").fields 5).value | quote }},
+    "GITHUB_PERSONAL_ACCESS_TOKEN": {{ onepasswordRead "op://Employee/protoslabs-sg - plsweetat/token" | quote -}},
     {{ end -}}
     "SSH_AUTH_SOCK": "{{- .chezmoi.homeDir -}}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
   },
@@ -28,17 +28,13 @@
       "Bash(rtk docker *)",
       "Bash(rtk find *)",
       "Bash(rtk git:*)",
-      "Bash(rtk gh pr comment *)",
-      "Bash(rtk gh pr create *)",
-      "Bash(rtk gh pr list *)",
-      "Bash(rtk gh pr view *)",
-      "Bash(rtk gh run list *)",
-      "Bash(rtk gh run view *)",
-      "Bash(rtk gh api --method GET *)",
+      "Bash(rtk gh *)",
       "Bash(rtk grep:*)",
       "Bash(rtk jq *)",
+      "Bash(rtk lint *)",
       "Bash(rtk ls *)",
       "Bash(rtk npm:*)",
+      "Bash(rtk playwright *)",
       "Bash(rtk pnpm:*)",
       "Bash(rtk proxy *)",
       "Bash(rtk pytest *)",
@@ -46,6 +42,7 @@
       "Bash(rtk ruff *)",
       "Bash(rtk tail *)",
       "Bash(rtk uv *)",
+      "Bash(rtk vitest *)",
       "Bash(rtk wc *)",
       "Bash(rtk which *)",
       "Bash(rtk yarn:*)",
@@ -74,7 +71,8 @@
       "mcp__plugin_playwright_playwright__browser_snapshot",
       "mcp__plugin_playwright_playwright__browser_take_screenshot",
       "mcp__claude_ai_Microsoft_365__outlook_calendar_search",
-      "Read(//private/tmp/claude/**)",
+      "Read(//tmp/claude*/**)",
+      "Read(//private/tmp/claude*/**)",
       "Skill(pr-review-toolkit:review-pr)",
       "Skill(pr-review-toolkit:review-pr:*)",
       "Skill(raise-pr)",
@@ -106,7 +104,7 @@
       "/tmp/claude",
       "/private/tmp/claude",
     ],
-    "defaultMode": "auto"
+    "defaultMode": "acceptEdits"
   },
   "hooks": {
     "PreToolUse": [
@@ -204,7 +202,8 @@
     "filesystem": {
       "allowRead": [
         "~/.ssh/known_hosts",
-        "~/.ssh/config"
+        "~/.ssh/config",
+        "~/.ssh"
       ],
       "allowWrite": [
         "~/.bun/install",
@@ -217,7 +216,6 @@
       ],
       "denyRead": [
         "~/.aws/credentials",
-        "~/.ssh"
       ],
       "denyWrite": [
         "~/.bashrc",
@@ -241,7 +239,15 @@
   "promptSuggestionEnabled": true,
   "prefersReducedMotion": true,
   "autoMemoryEnabled": false,
-  "disableAutoMode": "disable",
   "terminalProgressBarEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "autoMode": {
+    "environment": [
+      "$defaults",
+      "Organization: Protoslabs. Primary use: Software Development",
+      "Source control: github.com/protoslabs-sg/Workspace",
+      "Cloud provider(s): Azure",
+      "Trusted internal domains: *.protoslabs.io, protoslabs.atlassian.net",
+      "Additional context: Cybersecurity, DevOps, Cloud, Software Development, Python, JavaScript/TypeScript, Git, Atlassian suite (Jira, Confluence), Microsoft 365 suite (Outlook, SharePoint)"
+    ]
 }

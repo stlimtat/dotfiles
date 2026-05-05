@@ -1,5 +1,13 @@
 {{- if eq .chezmoi.os "darwin" -}}
 #!/bin/zsh
 
-NONINTERACTIVE=1 curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+HOMEBREW_HOME=/opt/homebrew
+{{- if not (eq .chezmoi.arch "arm64") }}
+HOMEBREW_HOME=/usr/local
+{{ end }}
+if [[ ! -d "${HOMEBREW_HOME}/Caskroom" ]]; then
+  NONINTERACTIVE=1 \
+    bash -c \
+    "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 {{ end -}}

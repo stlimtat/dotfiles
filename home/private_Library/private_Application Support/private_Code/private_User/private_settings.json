@@ -5,8 +5,8 @@
     }
   },
   "application.shellEnvironmentResolutionTimeout": 60,
-  "claudeCode.preferredLocation": "panel",
   "claudeCode.initialPermissionMode": "bypassPermissions",
+  "claudeCode.preferredLocation": "panel",
   "coverage-gutters.coverageFileNames": [
     "lcov.info",
     "cov.xml",

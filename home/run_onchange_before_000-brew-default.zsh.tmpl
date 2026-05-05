@@ -1,7 +1,7 @@
 {{- if eq .chezmoi.os "darwin" -}}
 #!/bin/zsh
 
-brew bundle --file=/dev/stdin <<EOF
+NONINTERACTIVE=1 brew bundle --file=/dev/stdin <<EOF
 {{ range .brew.default.taps -}}
 tap {{ . | quote }}
 {{ end -}}
