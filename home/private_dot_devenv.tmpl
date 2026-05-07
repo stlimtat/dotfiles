@@ -28,5 +28,10 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+{{ if contains "protoslabs" .chezmoi.email -}}
+export OP_ACCOUNT=MCLAFZWCRFBZ3BTFVBOOQ4NKDM
+{{ else -}}
+export OP_ACCOUNT=ZIHBVUAYI5HSHAR46C5HVWCUOQ
+{{ end -}}
 export GITHUB_PERSONAL_ACCESS_TOKEN={{- onepasswordRead "op://Employee/protoslabs-sg - plsweetat/token" }}
 {{ end -}}
