@@ -15,8 +15,10 @@ Host gh github.com
 {{ end -}}
 {{ if eq .chezmoi.username "st_lim" -}}
 Host 192.168.25.100 omv
-  Port 8022
+  Port 22
   User {{ .chezmoi.username }}
+  IdentityFile ~/.ssh/omv-stlim.pub
+  IdentitiesOnly yes
 Host gh-st github.com
   HostName github.com
   User git
