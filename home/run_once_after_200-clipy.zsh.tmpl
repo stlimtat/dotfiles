@@ -1,0 +1,9 @@
+{{- if eq .chezmoi.os "Darwin" }}
+#!/usr/bin/env zsh
+
+[ ! -d /Applications/Clipy.app  ] && exit 0
+  
+launchctl unload {{ .chezmoi.homeDir -}}/Library/LaunchAgents/com.github.clipy.plist
+sleep 5
+launchctl load {{ .chezmoi.homeDir -}}/Library/LaunchAgents/com.github.clipy.plist
+{{- end }}

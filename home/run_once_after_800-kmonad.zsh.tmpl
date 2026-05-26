@@ -16,11 +16,4 @@ popd
 /Applications/.Karabiner-VirtualHIDDevice-Manager.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Manager activate
 sudo cp ../org.pqrs.service.daemon.Karabiner-VirtualHIDDevice-Daemon.plist /Library/LaunchDaemons/org.pqrs.service.daemon.Karabiner-VirtualHIDDevice-Daemon.plist
 sudo cp ../local.kmonad.plist /Library/LaunchDaemons/local.kmonad.plist
-
-sudo launchctl enable system/org.pqrs.service.daemon.Karabiner-VirtualHIDDevice-Daemon
-sudo launchctl enable system/local.kmonad
-
-sudo launchctl bootstrap system /Library/LaunchDaemons/org.pqrs.service.daemon.Karabiner-VirtualHIDDevice-Daemon.plist
-sudo launchctl bootstrap system /Library/LaunchDaemons/local.kmonad.plist
-
 {{- end }}
