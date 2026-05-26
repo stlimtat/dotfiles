@@ -99,7 +99,6 @@
   insteadOf = "https://github.com/stlimtat"
 [url "gh-syberai:syber-ai-corp/"]
   insteadOf = "https://github.com/syber-ai-corp/"
-{{ end -}}
 [url "git@github.com:"]
   insteadOf = "gh:"
   insteadOf = "https://github.com/"
@@ -109,6 +108,7 @@
   insteadOf = "gl:"
   pushInsteadOf = "gitlab:"
   pushInsteadOf = "git://gitlab.com/"
+{{ end -}}
 [user]
   email = {{ .chezmoi.email | lower }}
 {{- if eq .chezmoi.username "st_lim" }}

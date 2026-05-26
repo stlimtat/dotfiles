@@ -17,11 +17,15 @@
   {{ end -}}
   "permissions": {
     "allow": [
-      "Bash(echo \"Exit: $?\")",
-      "Bash(echo \"---EXIT $?\")",
-      "Bash(mkdir -p /tmp/claude)",
-      "Bash(python3)",
-      "Bash(python3 -c ' *)",
+      "Bash(curl *)",
+      "Bash(docker compose *)",
+      "Bash(docker exec *)",
+      "Bash(docker network *)",
+      "Bash(git checkout *)",
+      "Bash(git config *)",
+      "Bash(git rebase *)",
+      "Bash(git log *)",
+      "Bash(python3 *)",
       "Bash(rtk bun:*)",
       "Bash(rtk cat *)",
       "Bash(rtk diff *)",
@@ -38,6 +42,7 @@
       "Bash(rtk pnpm:*)",
       "Bash(rtk proxy *)",
       "Bash(rtk pytest *)",
+      "Bash(rtk python3 *)",
       "Bash(rtk read *)",
       "Bash(rtk ruff *)",
       "Bash(rtk tail *)",
@@ -46,6 +51,8 @@
       "Bash(rtk wc *)",
       "Bash(rtk which *)",
       "Bash(rtk yarn:*)",
+      "Bash(uv run *)",
+      "Bash(uv add *)",
       "Edit(/.claude/**)",
       "Edit(/.claude/skills/**)",
       "mcp__claude_ai_Atlassian__createConfluencePage",
@@ -59,12 +66,29 @@
       "mcp__claude_ai_Atlassian__searchConfluenceUsingCql",
       "mcp__claude_ai_Atlassian__searchJiraIssuesUsingJql",
       "mcp__claude_ai_Atlassian__updateConfluencePage",
+      "mcp__claude_ai_Atlassian_Rovo__createJiraIssue",
       "mcp__claude_ai_Microsoft_365__chat_message_search",
       "mcp__claude_ai_Microsoft_365__read_resource",
       "mcp__claude_ai_Microsoft_365__sharepoint_search",
       "mcp__claude_ai_Microsoft_365__sharepoint_folder_search",
-      "mcp__plugin_claude-mem_mcp-search__get_observations",
-      "mcp__plugin_claude-mem_mcp-search__search",
+      "mcp__code-review-graph__get_architecture_overview_tool",
+      "mcp__code-review-graph__list_communities_tool",
+      "mcp__code-review-graph__query_graph_tool",
+      "mcp__code-review-graph__semantic_search_nodes_tool",
+      "mcp__plugin_atlassian_atlassian__addCommentToJiraIssue",
+      "mcp__plugin_atlassian_atlassian__createConfluenceInlineComment",
+      "mcp__plugin_atlassian_atlassian__createJiraIssue",
+      "mcp__plugin_atlassian_atlassian__editJiraIssue",
+      "mcp__plugin_atlassian_atlassian__getAccessibleAtlassianResources",
+      "mcp__plugin_atlassian_atlassian__getConfluencePage",
+      "mcp__plugin_atlassian_atlassian__getConfluencePageDescendants",
+      "mcp__plugin_atlassian_atlassian__getJiraIssue",
+      "mcp__plugin_atlassian_atlassian__getTransitionsForJiraIssue",
+      "mcp__plugin_atlassian_atlassian__getVisibleJiraProjects",
+      "mcp__plugin_atlassian_atlassian__searchConfluenceUsingCql",
+      "mcp__plugin_atlassian_atlassian__searchJiraIssuesUsingJql",
+      "mcp__plugin_atlassian_atlassian__transitionJiraIssue",
+      "mcp__plugin_atlassian_atlassian__updateConfluencePage",
       "mcp__plugin_github_github__issue_read",
       "mcp__plugin_github_github__pull_request_read",
       "mcp__plugin_playwright_playwright__browser_console_messages",
@@ -73,22 +97,25 @@
       "mcp__claude_ai_Microsoft_365__outlook_calendar_search",
       "Read(//tmp/claude*/**)",
       "Read(//private/tmp/claude*/**)",
+      "Skill(fix-pr)",
+      "Skill(git-worktree)",
+      "Skill(implement-story)",
+      "Skill(plan-tests)",
       "Skill(pr-review-toolkit:review-pr)",
       "Skill(pr-review-toolkit:review-pr:*)",
       "Skill(raise-pr)",
       "Skill(raise-pr:*)",
       "WebFetch(domain:api.github.com)",
-      "WebFetch(domain:benjamincongdon.me)",
-      "WebFetch(domain:docs.astral.sh)",
-      "WebFetch(domain:docs.celeryq.dev)",
-      "WebFetch(domain:docs.pydantic.dev)",
-      "WebFetch(domain:docs.sqlalchemy.org)",
+      "WebFetch(domain:*.astral.sh)",
+      "WebFetch(domain:*.celeryq.dev)",
+      "WebFetch(domain:*.pydantic.dev)",
+      "WebFetch(domain:*.sqlalchemy.org)",
       "WebFetch(domain:echobind.com)",
       "WebFetch(domain:files.pythonhosted.org)",
       "WebFetch(domain:peps.python.org)",
       "WebFetch(domain:pypi.org)",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "WebFetch(domain:www.structlog.org)",
+      "WebFetch(domain:*.structlog.org)",
       "WebSearch"
     ],
     "deny": [
@@ -106,6 +133,7 @@
     ],
     "defaultMode": "acceptEdits"
   },
+  "model": "sonnet",
   "hooks": {
     "PreToolUse": [
       {
@@ -128,7 +156,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "code-review-graph update --skip-flows",
+            "command": "git rev-parse --git-dir >/dev/null 2>&1 && code-review-graph update --skip-flows --repo \"/Users/st_lim/src/github.com/protoslabs-sg/Workspace\" || true",
             "timeout": 30
           }
         ]
@@ -140,19 +168,25 @@
         "hooks": [
           {
             "type": "command",
-            "command": "code-review-graph status",
+            "command": "git rev-parse --git-dir >/dev/null 2>&1 && code-review-graph status --repo \"/Users/st_lim/src/github.com/protoslabs-sg/Workspace\" || echo 'Not a git repo, skipping'",
             "timeout": 10
           }
         ]
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "npx -y @owloops/claude-powerline@latest",
+    "padding": 0
+  },
   "enabledPlugins": {
     "andrej-karpathy-skills@karpathy-skills": true,
     "atlassian@claude-plugins-official": true,
     "caveman@caveman": true,
-    "claude-mem@thedotmack": true,
-    "code-review@claude-plugins-official": true,
+    "claude-mem@thedotmack": false,
+    "claude-powerline@claude-powerline": false,
+    "code-review@claude-plugins-official": false,
     "pr-review-toolkit@claude-plugins-official": true,
     "superpowers@claude-plugins-official": true
   },
@@ -173,6 +207,12 @@
       "source": {
         "source": "github",
         "repo": "thedotmack/claude-mem"
+      }
+    },
+    "claude-powerline": {
+      "source": {
+        "source": "github",
+        "repo": "Owloops/claude-powerline"
       }
     },
     "superpowers": {
@@ -200,11 +240,6 @@
       "allowLocalBinding": false
     },
     "filesystem": {
-      "allowRead": [
-        "~/.ssh/known_hosts",
-        "~/.ssh/config",
-        "~/.ssh"
-      ],
       "allowWrite": [
         "~/.bun/install",
         "~/.kube",
@@ -214,14 +249,19 @@
         "//tmp/build",
         "~/.yarn"
       ],
-      "denyRead": [
-        "~/.aws/credentials"
-      ],
       "denyWrite": [
         "~/.bashrc",
         "~/.profile",
         "~/.ssh",
         "~/.zshrc"
+      ],
+      "denyRead": [
+        "~/.aws/credentials"
+      ],
+      "allowRead": [
+        "~/.ssh/known_hosts",
+        "~/.ssh/config",
+        "~/.ssh"
       ]
     },
     "excludedCommands": [
@@ -231,16 +271,17 @@
       "rtk gtk push"
     ]
   },
-  "statusLine": {
-    "type": "command",
-    "command": "bunx -y ccstatusline@latest",
-    "padding": 0
-  },
+  "effortLevel": "medium",
   "promptSuggestionEnabled": true,
   "prefersReducedMotion": true,
   "autoMemoryEnabled": true,
+  "autoAcceptEdits": true,
   "terminalProgressBarEnabled": true,
   "skipAutoPermissionPrompt": true,
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "code-review-graph"
+  ],
   "autoMode": {
     "environment": [
       "$defaults",
