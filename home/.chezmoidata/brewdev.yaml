@@ -51,7 +51,6 @@ brew:
       - "adoptopenjdk/openjdk"
       - "atlassian/homebrew-acli"
       - "aws/tap"
-      - "felippelias/tap"
       - "go-task/tap"
       - "golangci/tap"
       - "mongodb/brew"
