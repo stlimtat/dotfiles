@@ -24,13 +24,6 @@ Host gh-st github.com
   User git
   IdentityFile ~/.ssh/gh-stlimtat.pub
   IdentitiesOnly yes
-{{ if contains "protoslabs" .chezmoi.email -}}
-Host gh-pl
-  HostName github.com
-  User git
-  IdentityFile ~/.ssh/gh-protoslabs.pub
-  IdentitiesOnly yes
-{{ end -}}
 Host gh-syberai
   HostName github.com
   User git

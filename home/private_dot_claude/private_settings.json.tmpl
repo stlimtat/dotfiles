@@ -4,9 +4,6 @@
     "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
     "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "128000",
-    {{ if contains "protoslabs" .chezmoi.email -}}
-    "GITHUB_PERSONAL_ACCESS_TOKEN": {{ onepasswordRead "op://Employee/protoslabs-sg - plsweetat/token" | quote -}},
-    {{ end -}}
     "SSH_AUTH_SOCK": "{{- .chezmoi.homeDir -}}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
   },
   {{ if eq .chezmoi.username "st_lim" -}}
@@ -127,7 +124,7 @@
       "Bash(rtk git push * :*)"
     ],
     "additionalDirectories": [
-      "/Users/st_lim/src/github.com/protoslabs-sg/Workspace/.claude/worktrees",
+      "/Users/st_lim/src/github.com",
       "/tmp/claude",
       "/private/tmp/claude"
     ],
@@ -156,7 +153,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "git rev-parse --git-dir >/dev/null 2>&1 && code-review-graph update --skip-flows --repo \"/Users/st_lim/src/github.com/protoslabs-sg/Workspace\" || true",
+            "command": "git rev-parse --git-dir >/dev/null 2>&1 && code-review-graph update --skip-flows || true",
             "timeout": 30
           }
         ]
@@ -168,7 +165,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "git rev-parse --git-dir >/dev/null 2>&1 && code-review-graph status --repo \"/Users/st_lim/src/github.com/protoslabs-sg/Workspace\" || echo 'Not a git repo, skipping'",
+            "command": "git rev-parse --git-dir >/dev/null 2>&1 && code-review-graph status || echo 'Not a git repo, skipping'",
             "timeout": 10
           }
         ]
@@ -285,10 +282,10 @@
   "autoMode": {
     "environment": [
       "$defaults",
-      "Organization: Protoslabs. Primary use: Software Development",
-      "Source control: github.com/protoslabs-sg/Workspace",
-      "Cloud provider(s): Azure",
-      "Trusted internal domains: *.protoslabs.io, protoslabs.atlassian.net",
+      "Organization: Syber AI. Primary use: Software Development",
+      "Source control: github.com/syber-ai/Workspace",
+      //"Cloud provider(s): Azure",
+      "Trusted internal domains: *.github.io",
       "Additional context: Cybersecurity, DevOps, Cloud, Software Development, Python, JavaScript/TypeScript, Git, Atlassian suite (Jira, Confluence), Microsoft 365 suite (Outlook, SharePoint)"
     ]
   }

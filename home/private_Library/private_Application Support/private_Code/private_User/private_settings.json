@@ -87,35 +87,6 @@
       "description": ""
     }
   ],
-  "pgsql.connections": [
-    {
-      "id": "9EB20F48-764F-4B21-963A-262D83D44556",
-      "groupId": "B99F497B-DB25-4AC4-A207-3C4A70D167DE",
-      "authenticationType": "AzureMFA",
-      "connectTimeout": 15,
-      "applicationName": "vscode-pgsql",
-      "clientEncoding": "utf8",
-      "sslmode": "require",
-      "sshSavePassword": true,
-      "savePassword": true,
-      "sslRootCertMode": "none",
-      "server": "staging-db-nexus.postgres.database.azure.com",
-      "port": "5432",
-      "password": "",
-      "sshPassword": "",
-      "displayName": "staging-db-nexus.postgres.database.azure.com, <default> (undefined)",
-      "azureAccountToken": "",
-      "expiresOn": 0,
-      "accountId": "7ecfe2be-5b93-45e5-9271-ba2ddb580299.78df1cd4-d519-4614-8b9b-9c747b9a7eb1",
-      "tenantId": "78df1cd4-d519-4614-8b9b-9c747b9a7eb1",
-      "entraUserName": "swee_tat_lim@protoslabs.io",
-      "database": "postgres",
-      "profileName": "staging-db-nexus",
-      "user": "swee_tat_lim@protoslabs.io",
-      "email": "swee_tat_lim@protoslabs.io",
-      "profileSource": 0
-    }
-  ],
   "python.languageServer": "Default",
   "redhat.telemetry.enabled": true,
   "scm.inputFontSize": 14,
