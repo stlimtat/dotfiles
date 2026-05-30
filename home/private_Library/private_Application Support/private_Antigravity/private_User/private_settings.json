@@ -2,15 +2,13 @@
   "[go]": {
     "editor.codeActionsOnSave": {
       "source.organizeImports": "always"
-    }
+    },
   },
   "antigravity.marketplaceGalleryItemURL": "https://marketplace.visualstudio.com/items",
   "antigravity.marketplaceExtensionGalleryServiceURL": "https://marketplace.visualstudio.com/_apis/public/gallery",
   "application.shellEnvironmentResolutionTimeout": 60,
-  "azureTerraform.survey": {
-    "surveyPromptDate": "2026-04-11T07:25:00.103Z",
-    "surveyPromptIgnoredCount": 0
-  },
+  "claudeCode.initialPermissionMode": "bypassPermissions",
+  "claudeCode.preferredLocation": "panel",
   "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
   "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.dockercompose",
   "coverage-gutters.coverageFileNames": [
@@ -75,7 +73,6 @@
     "coverage.xml",
     "jacoco.xml"
   ],
-  "mise.binPath": "/opt/homebrew/bin/mise",
   "notebook.defaultFormatter": "anysphere.cursorpyright",
   "notebook.diff.overviewRuler": true,
   "notebook.formatOnSave.enabled": true,
