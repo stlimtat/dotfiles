@@ -1,0 +1,49 @@
+{
+  "model": "Gemini 3.5 Flash (Low)",
+  "permissions": {
+    "allow": [
+      "command(curl *)",
+      "command(docker compose *)",
+      "command(docker exec *)",
+      "command(docker network *)",
+      "command(git checkout *)",
+      "command(git config *)",
+      "command(git rebase *)",
+      "command(git log *)",
+      "command(python3 *)",
+      "command(rtk bun:*)",
+      "command(rtk cat *)",
+      "command(rtk chezmoi)",
+      "command(rtk curl *)",
+      "command(rtk diff *)",
+      "command(rtk docker *)",
+      "command(rtk find *)",
+      "command(rtk git:*)",
+      "command(rtk gh *)",
+      "command(rtk grep:*)",
+      "command(rtk head *)",
+      "command(rtk jq *)",
+      "command(rtk lint *)",
+      "command(rtk ls *)",
+      "command(rtk npm:*)",
+      "command(rtk playwright *)",
+      "command(rtk pnpm:*)",
+      "command(rtk proxy *)",
+      "command(rtk pytest *)",
+      "command(rtk python3 *)",
+      "command(rtk read *)",
+      "command(rtk ruff *)",
+      "command(rtk tail *)",
+      "command(rtk uv *)",
+      "command(rtk vitest *)",
+      "command(rtk wc *)",
+      "command(rtk which *)",
+      "command(rtk yarn:*)",
+      "command(uv run *)",
+      "command(uv add *)"
+    ]
+  },
+  "trustedWorkspaces": [
+    "/Users/st_lim"
+  ]
+}
