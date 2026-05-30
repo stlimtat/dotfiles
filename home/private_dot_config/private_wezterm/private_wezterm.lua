@@ -175,7 +175,7 @@ wezterm.on("gui-startup", function(cmd)
 	wait(5)
 	local bottom_pane = pane:split({
 		cwd = src_dir,
-		direction = "right",
+		direction = "Right",
 	})
 	pane:activate()
 end)
