@@ -173,7 +173,7 @@ wezterm.on("gui-startup", function(cmd)
 	})
 	window:gui_window():maximize()
 	wait(5)
-	local bottom_pane = pane:split({
+	local right_pane = pane:split({
 		cwd = src_dir,
 		direction = "Right",
 	})
