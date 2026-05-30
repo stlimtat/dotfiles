@@ -1,0 +1,18 @@
+# Custom zsh completions paths
+# This file is loaded before oh-my-zsh is sourced so that its compinit picks up these directories.
+
+# Keep only unique paths in fpath
+start_time=$(gdate +%s%3N)
+typeset -U fpath
+
+fpath=(
+  "/usr/local/share/zsh/site-functions"
+  "/usr/local/share/zsh-completions"
+  "/usr/share/zsh/site-functions"
+  "/usr/share/zsh/$(zsh --version | awk '{ print $2 }')/functions"
+  "${HOME}/.oh-my-zsh/custom/completions"
+  $fpath
+)
+end_time=$(gdate +%s%3N)
+time_taken=$((end_time - start_time))
+echo "Load zsh completions...${time_taken}ms...Done"

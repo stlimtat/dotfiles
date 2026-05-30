@@ -55,10 +55,7 @@ plugins=(
 
 # ~/.oh-my-zsh
 start_time=$({{- .chezmoi.dateCmd }} +%s%3N)
-FPATH=/usr/share/zsh/$(zsh --version | awk '{ print $2 }')/functions
-FPATH=/usr/share/zsh/site-functions:${FPATH}
-FPATH=$(brew --prefix)/share/zsh/site-functions:${FPATH}
-FPATH=$(brew --prefix)/share/zsh-completions:${FPATH}
+[[ -r "${HOME}/.zsh_completions" ]] && source "${HOME}/.zsh_completions"
 source ${ZSH}/oh-my-zsh.sh
 end_time=$({{- .chezmoi.dateCmd }} +%s%3N)
 time_taken=$((end_time - start_time))
@@ -74,14 +71,12 @@ end_time=$({{- .chezmoi.dateCmd }} +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load powerlevel10k...${time_taken}ms...Done"
 
-# compinit
+# bashcompinit
 start_time=$({{- .chezmoi.dateCmd }} +%s%3N)
-rm -f ~/.zcompdump*
-autoload bashcompinit && bashcompinit
-autoload -Uz compinit && compinit
+autoload -Uz bashcompinit && bashcompinit
 end_time=$({{- .chezmoi.dateCmd }} +%s%3N)
 time_taken=$((end_time - start_time))
-echo "Load completion init...${time_taken}ms...Done"
+echo "Load bashcompinit...${time_taken}ms...Done"
 
 # Added by Antigravity
 export PATH="${HOME}/.antigravity/antigravity/bin:$PATH"

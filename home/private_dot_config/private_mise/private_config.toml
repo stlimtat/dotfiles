@@ -1,16 +1,7 @@
 [tools]
 bun = "latest"
-node = "22"
-"npm:@agentmemory/agentmemory" = "latest"
-"npm:ccstatusline" = "latest"
-pipx = "latest"
-"pipx:code-review-graph" = "latest"
-"pipx:mempalace" = "latest"
-pnpm = "latest"
+node = "lts"
 python = "3.12"
-rust = "latest"
-terraform = "latest"
-terragrunt = "latest"
 uv = "latest"
 
 [env]

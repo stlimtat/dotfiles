@@ -1,7 +1,7 @@
 {{- if eq .chezmoi.os "darwin" -}}
 #!/bin/zsh
 
-TO_IGNORE=(cobra-cli curl pytest)
+TO_IGNORE=(cobra-cli curl op pytest)
 
 for file in {{ .chezmoi.homeDir }}/.oh-my-zsh/custom/completions/_*
 do
