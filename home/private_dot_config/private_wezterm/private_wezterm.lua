@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local mux = wezterm.mux
 local config = {}
-local src_dir = wezterm.home_dir .. "/go/src/github.com/stlimtat"
+local src_dir = wezterm.home_dir .. "/src/github.com/stlimtat"
 if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
@@ -175,7 +175,7 @@ wezterm.on("gui-startup", function(cmd)
 	wait(5)
 	local bottom_pane = pane:split({
 		cwd = src_dir,
-		direction = "Bottom",
+		direction = "right",
 	})
 	pane:activate()
 end)
