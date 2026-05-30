@@ -3,7 +3,6 @@
 
 # Keep only unique paths in fpath
 start_time=$(gdate +%s%3N)
-typeset -U fpath
 
 fpath=(
   "/usr/local/share/zsh/site-functions"
@@ -12,6 +11,7 @@ fpath=(
   "/usr/share/zsh/$(zsh --version | awk '{ print $2 }')/functions"
   $fpath
 )
+typeset -U fpath
 end_time=$(gdate +%s%3N)
 time_taken=$((end_time - start_time))
 echo "Load zsh completions...${time_taken}ms...Done"
