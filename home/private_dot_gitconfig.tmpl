@@ -68,14 +68,15 @@
   required = true
   clean = git-lfs clean -- %f
 [gpg]
-  format = ssh
+	format = ssh
 [gpg "ssh"]
   program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+	allowedSignersFile = /Users/st_lim/.ssh/allowed_signers
 [help]
   # Automatically correct and execute mistyped commands
   autocorrect = 1
 [include]
-  path = {{ .chezmoi.homeDir }}/.config/git-delta/themes.gitconfig
+  path = /Users/st_lim/.config/git-delta/themes.gitconfig
 [interactive]
   diffFilter = delta --color-only
 [merge]
