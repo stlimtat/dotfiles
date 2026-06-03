@@ -222,6 +222,7 @@
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
+    "enableWeakerNetworkIsolation": true,
     "network": {
       "allowedDomains": [
         "github.com",
@@ -256,6 +257,7 @@
         "~/.aws/credentials"
       ],
       "allowRead": [
+        "~/.config/gh"
         "~/.ssh/known_hosts",
         "~/.ssh/config",
         "~/.ssh"
