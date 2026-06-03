@@ -71,7 +71,7 @@
 	format = ssh
 [gpg "ssh"]
   program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
-	allowedSignersFile = /Users/st_lim/.ssh/allowed_signers
+	allowedSignersFile = {{ .chezmoi.homeDir -}}/.ssh/allowed_signers
 [help]
   # Automatically correct and execute mistyped commands
   autocorrect = 1
