@@ -1,1 +1,3 @@
-st_lim@stlim.net namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILg+u5/3Re9HcED8Cd5fWsg/1skz0I6IqhjFDcq1nIQN
+{{- if eq .chezmoi.username "st_lim" }}
+{{- .chezmoi.email }} namespaces="git" {{ (index (onepassword "vhz2umqol7of3qy3mlogdna2ni" "bxgujuns5jkybbn7fdnxepi34i" "ZIHBVUAYI5HSHAR46C5HVWCUOQ").fields 0).value -}}
+{{ end -}}
