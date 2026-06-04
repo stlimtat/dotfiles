@@ -2,3 +2,8 @@ export OP_PLUGIN_ALIASES_SOURCED=1
 if [[ -z "$CLAUDE_SESSION" ]]; then
   alias gh="op plugin run -- gh"
 fi
+{{ if eq .chezmoi.username "st_lim" -}}
+alias claude="CLAUDE_SESSION=1 \
+GH_TOKEN=$(op read 'op://Private/pevygosah7vk5oblzt3o5fobm4/add more/token') \
+command $(brew --prefix)/bin/claude"
+{{- end }}
