@@ -1,0 +1,5 @@
+{{ if eq .chezmoi.username "st_lim" -}}
+GH_TOKEN=op://Private/pevygosah7vk5oblzt3o5fobm4/add more/token
+GITHUB_ACCESS_TOKEN=op://Private/pevygosah7vk5oblzt3o5fobm4/add more/token
+OPENAI_API_KEY=op://Private/OpenAI/token
+{{- end }}

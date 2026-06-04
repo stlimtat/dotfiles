@@ -110,5 +110,5 @@
   email = {{ .chezmoi.email | lower }}
 {{- if eq .chezmoi.username "st_lim" }}
   name = Swee Tat Lim
-  signingkey = {{ (index (onepassword "vhz2umqol7of3qy3mlogdna2ni" "bxgujuns5jkybbn7fdnxepi34i" "ZIHBVUAYI5HSHAR46C5HVWCUOQ").fields 0).value }}
+	signingkey = /Users/st_lim/.ssh/gh-stlimtat.pub
 {{- end -}}

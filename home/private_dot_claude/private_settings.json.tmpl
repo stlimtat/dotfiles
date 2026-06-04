@@ -4,6 +4,10 @@
     "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
     "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "128000",
+    {{ if eq .chezmoi.username "st_lim" -}}
+      GH_TOKEN: {{- (index (onepassword "pevygosah7vk5oblzt3o5fobm4" "bxgujuns5jkybbn7fdnxepi34i" "ZIHBVUAYI5HSHAR46C5HVWCUOQ").fields 4).value -}}
+      GITHUB_ACCESS_TOKEN: {{- (index (onepassword "pevygosah7vk5oblzt3o5fobm4" "bxgujuns5jkybbn7fdnxepi34i" "ZIHBVUAYI5HSHAR46C5HVWCUOQ").fields 4).value -}}
+    {{- end }}
     "SSH_AUTH_SOCK": "{{- .chezmoi.homeDir -}}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
   },
   {{ if eq .chezmoi.username "st_lim" -}}
@@ -179,10 +183,11 @@
   },
   "enabledPlugins": {
     "andrej-karpathy-skills@karpathy-skills": true,
-    "atlassian@claude-plugins-official": true,
+    "atlassian@claude-plugins-official": false,
     "caveman@caveman": true,
+    "cc-skills-golang@samber": true,
     "claude-mem@thedotmack": false,
-    "claude-powerline@claude-powerline": false,
+    "claude-powerline@claude-powerline": true,
     "code-review@claude-plugins-official": false,
     "pr-review-toolkit@claude-plugins-official": true,
     "superpowers@claude-plugins-official": true
@@ -210,6 +215,12 @@
       "source": {
         "source": "github",
         "repo": "Owloops/claude-powerline"
+      }
+    },
+    "samber": {
+      "source": {
+        "source": "github",
+        "repo": "samber/cc"
       }
     },
     "superpowers": {
@@ -257,7 +268,7 @@
         "~/.aws/credentials"
       ],
       "allowRead": [
-        "~/.config/gh"
+        "~/.config/gh",
         "~/.ssh/known_hosts",
         "~/.ssh/config",
         "~/.ssh"
@@ -286,7 +297,6 @@
       "$defaults",
       "Organization: Syber AI. Primary use: Software Development",
       "Source control: github.com/syber-ai/Workspace",
-      //"Cloud provider(s): Azure",
       "Trusted internal domains: *.github.io",
       "Additional context: Cybersecurity, DevOps, Cloud, Software Development, Python, JavaScript/TypeScript, Git, Atlassian suite (Jira, Confluence), Microsoft 365 suite (Outlook, SharePoint)"
     ]

@@ -1,5 +1,6 @@
 {
-  "model": "Gemini 3.5 Flash (Low)",
+  "allowNonWorkspaceAccess": true,
+  "model": "Gemini 3.5 Flash (Medium)",
   "permissions": {
     "allow": [
       "command(curl *)",
@@ -40,10 +41,24 @@
       "command(rtk which *)",
       "command(rtk yarn:*)",
       "command(uv run *)",
-      "command(uv add *)"
+      "command(uv add *)",
+      "command(which)",
+      "command(pdftotext)",
+      "command(cd)",
+      "command(git remote)",
+      "command(git log)",
+      "command(find)",
+      "command(git init)",
+      "command(mv)",
+      "command(git add)",
+      "command(git commit)",
+      "command(git config)",
+      "command(gh)",
+      "command(cp)"
     ]
   },
   "trustedWorkspaces": [
-    "/Users/st_lim"
+    "{{- .chezmoi.homeDir -}}",
+    "{{- .chezmoi.homeDir -}}/src"
   ]
 }

@@ -1,5 +1,6 @@
 [tools]
 bun = "latest"
+go = "latest"
 node = "lts"
 python = "3.12"
 uv = "latest"
