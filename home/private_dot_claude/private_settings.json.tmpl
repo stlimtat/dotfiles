@@ -4,9 +4,9 @@
     "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
     "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "128000",
-    {{ if eq .chezmoi.username "st_lim" -}}
-      GH_TOKEN: {{ (index (onepassword "pevygosah7vk5oblzt3o5fobm4" "bxgujuns5jkybbn7fdnxepi34i" "ZIHBVUAYI5HSHAR46C5HVWCUOQ").fields 4).value | quote }}
-      GITHUB_ACCESS_TOKEN: {{ (index (onepassword "pevygosah7vk5oblzt3o5fobm4" "bxgujuns5jkybbn7fdnxepi34i" "ZIHBVUAYI5HSHAR46C5HVWCUOQ").fields 4).value | quote}}
+    {{- if eq .chezmoi.username "st_lim" }}
+    GH_TOKEN: {{ (index (onepassword "pevygosah7vk5oblzt3o5fobm4" "bxgujuns5jkybbn7fdnxepi34i" "ZIHBVUAYI5HSHAR46C5HVWCUOQ").fields 4).value | quote }},
+    GITHUB_ACCESS_TOKEN: {{ (index (onepassword "pevygosah7vk5oblzt3o5fobm4" "bxgujuns5jkybbn7fdnxepi34i" "ZIHBVUAYI5HSHAR46C5HVWCUOQ").fields 4).value | quote}},
     {{- end }}
     "SSH_AUTH_SOCK": "{{- .chezmoi.homeDir -}}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
   },
