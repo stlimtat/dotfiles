@@ -13,7 +13,6 @@ brew:
       - "git"
       - "git-lfs"
       - "gnu-sed"
-      # - "homebrew-ffmpeg/ffmpeg/ffmpeg"
       - "mas"
       - "moreutils"
       - "neovim"
@@ -67,8 +66,5 @@ brew:
       # - keyname: "Numbers: Make Spreadsheets"
       #   keyid: "361304891"
     taps:
-      - "apple/apple"
-      - "beeftornado/rmtree"
       - "colindean/fonts-nonfree"
       - "homebrew-ffmpeg/ffmpeg"
-      - "lifepillar/appleii"
