@@ -1,7 +1,11 @@
 [tools]
 bun = "latest"
 go = "latest"
+"go:github.com/kunchenguid/treehouse" = "latest"
 node = "lts"
+"npm:chrome-devtools-axi" = "latest"
+"npm:gh-axi" = "latest"
+"npm:gnhf" = "latest"
 python = "3.12"
 uv = "latest"
 
