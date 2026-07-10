@@ -185,12 +185,12 @@
       "Bash(rtk git push *--delete*)",
       "Bash(rtk git push * :*)"
     ],
+    "defaultMode": "acceptEdits",
     "additionalDirectories": [
       "/Users/st_lim/src/github.com",
       "/tmp/claude",
       "/private/tmp/claude"
-    ],
-    "defaultMode": "acceptEdits"
+    ]
   },
   "model": "sonnet",
   "hooks": {
@@ -200,7 +200,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash ~/bin/claude-block-dangerous.sh"
+            "command": "bash ~/.claude/hooks/block-dangerous-git.sh"
           },
           {
             "type": "command",
@@ -247,8 +247,10 @@
     "claude-mem@thedotmack": false,
     "claude-powerline@claude-powerline": true,
     "code-review@claude-plugins-official": false,
+    "ponytail@ponytail": true,
     "pr-review-toolkit@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true
+    "superpowers@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "andrej-karpathy-skills": {
@@ -275,6 +277,12 @@
         "repo": "Owloops/claude-powerline"
       }
     },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    },
     "samber": {
       "source": {
         "source": "github",
@@ -291,7 +299,6 @@
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
-    "enableWeakerNetworkIsolation": true,
     "network": {
       "allowedDomains": [
         "github.com",
@@ -332,6 +339,7 @@
         "~/.ssh"
       ]
     },
+    "enableWeakerNetworkIsolation": true,
     "excludedCommands": [
       "rtk gtk clone",
       "rtk gtk fetch",
@@ -343,13 +351,9 @@
   "promptSuggestionEnabled": true,
   "prefersReducedMotion": true,
   "autoMemoryEnabled": true,
-  "autoAcceptEdits": true,
+  "skipDangerousModePermissionPrompt": true,
   "terminalProgressBarEnabled": true,
   "skipAutoPermissionPrompt": true,
-  "enableAllProjectMcpServers": true,
-  "enabledMcpjsonServers": [
-    "code-review-graph"
-  ],
   "autoMode": {
     "environment": [
       "$defaults",
@@ -358,5 +362,6 @@
       "Trusted internal domains: *.github.io",
       "Additional context: Cybersecurity, DevOps, Cloud, Software Development, Python, JavaScript/TypeScript, Git, Atlassian suite (Jira, Confluence), Microsoft 365 suite (Outlook, SharePoint)"
     ]
-  }
+  },
+  "autoAcceptEdits": true
 }
