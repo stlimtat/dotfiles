@@ -110,5 +110,8 @@
   email = {{ .chezmoi.email | lower }}
 {{- if eq .chezmoi.username "st_lim" }}
   name = Swee Tat Lim
-	signingkey = /Users/st_lim/.ssh/gh-stlimtat.pub
+  signingkey = /Users/st_lim/.ssh/gh-stlimtat.pub
+{{- else if eq .chezmoi.username "spteo" }}
+  name = Soo Pheng Teo
+  signingkey = /Users/spteo/.ssh/gh-spteo.pub
 {{- end -}}
