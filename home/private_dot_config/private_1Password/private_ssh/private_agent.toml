@@ -2,4 +2,4 @@
 vault = "Private"
 
 [[ssh-keys]]
-vault = "Employee"
+vault = "Shared"
