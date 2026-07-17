@@ -8,7 +8,6 @@ brew:
       - "docker-completion"
       - "docker-compose"
       - "docker-credential-helper"
-      - "gemini-cli"
       - "gh"
       - "git-delta"
       - "git-lfs"
@@ -46,6 +45,7 @@ brew:
       - "claude-code"
       - "codex"
       - "github"
+      - "google-gemini"
       - "orbstack"
     taps:
       - "aws/tap"
