@@ -14,6 +14,16 @@ Host gh github.com
   IdentitiesOnly yes
 {{ end -}}
 {{ if eq .chezmoi.username "st_lim" -}}
+Host 192.168.25.1 gw
+  Port 22
+  User root
+  IdentityFile ~/.ssh/omv-stlim.pub
+  IdentitiesOnly yes
+Host 192.168.25.254 clearwater1601b
+  Port 22
+  User root
+  IdentityFile ~/.ssh/omv-stlim.pub
+  IdentitiesOnly yes
 Host 192.168.25.100 omv
   Port 22
   User {{ .chezmoi.username }}
@@ -33,9 +43,5 @@ Host gitlab.com
   HostName gitlab.com
   User git
   IdentityFile ~/.ssh/gl-st_lim.pub
-  IdentitiesOnly yes
-Host nvidia 192.168.0.9
-  User nvidia
-  IdentityFile ~/.ssh/nvidia.pub
   IdentitiesOnly yes
 {{ end -}}
