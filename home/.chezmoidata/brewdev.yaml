@@ -46,7 +46,9 @@ brew:
       - "codex"
       - "github"
       - "google-gemini"
+      - "kimi-code"
       - "orbstack"
+      - "qwen-code"
     taps:
       - "aws/tap"
       - "go-task/tap"
