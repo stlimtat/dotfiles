@@ -6,6 +6,18 @@ Include ~/.colima/ssh_config
 Include ~/.ssh/1Password/config
 Host *
   IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+{{ if or (eq .chezmoi.username "spteo") (eq .chezmoi.username "st_lim") -}}
+Host 192.168.25.1 gw
+  Port 8022
+  User admin 
+  IdentityFile ~/.ssh/omv-stlim.pub
+  IdentitiesOnly yes
+Host 192.168.25.254 clearwater1601b
+  Port 8022
+  User admin
+  IdentityFile ~/.ssh/omv-stlim.pub
+  IdentitiesOnly yes
+{{ end -}}
 {{ if eq .chezmoi.username "spteo" -}}
 Host gh github.com
   HostName github.com
@@ -14,16 +26,6 @@ Host gh github.com
   IdentitiesOnly yes
 {{ end -}}
 {{ if eq .chezmoi.username "st_lim" -}}
-Host 192.168.25.1 gw
-  Port 22
-  User root
-  IdentityFile ~/.ssh/omv-stlim.pub
-  IdentitiesOnly yes
-Host 192.168.25.254 clearwater1601b
-  Port 22
-  User root
-  IdentityFile ~/.ssh/omv-stlim.pub
-  IdentitiesOnly yes
 Host 192.168.25.100 omv
   Port 22
   User {{ .chezmoi.username }}
